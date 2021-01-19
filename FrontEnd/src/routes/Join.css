@@ -1,0 +1,87 @@
+.joinContainer {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.joinContainer .tit {
+    text-align: center;
+    height: 150px;
+    padding-top: 60px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.joinContainer .formcenter {
+    width: 800px;
+    margin: 0 auto;
+    padding-left: 100px;
+}
+
+#inputId,
+#inputNickName {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#checkId,
+#checkNickName {
+    display: inline-block;
+    background-color: #008ce8;
+    color: white;
+}
+
+#checkId:hover,
+#checkNickName:hover {
+    background-color: #0473bc;
+}
+
+#auth {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#sendtoken {
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: #008ce8;
+}
+
+#sendtoken:hover {
+    background-color: #0473bc;
+}
+
+#checktoken {
+    display: none;
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: hsl(350, 100%, 63%);
+}
+
+#checktoken :hover {
+    background-color: rgb(255, 46, 81);
+}
+
+#labelId,
+#labelPw,
+#labelCPw,
+#labelName,
+#labelNickName,
+#labelEmail,
+#labelPhone {
+    display: block;
+}
+
+#validateId,
+#validatePw,
+#validateCPw,
+#validateName,
+#validateNickName,
+#validatePhone,
+#validateDomain {
+    display: block;
+    padding-left: 15px;
+    color: #ff3535;
+    font-weight: 600;
+}

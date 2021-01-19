@@ -1,0 +1,74 @@
+.shortcut {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.shortcut>ul {
+    text-align: center;
+}
+
+.shortcut>ul>li {
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+.shortcut>ul>li>a>img {
+    width: 150px;
+    height: 150px;
+}
+
+.favoritetit {
+    position: relative;
+    width: 1200px;
+    margin: 20px auto;
+}
+
+.favoritetit>h2 {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.favoritetit .all {
+    position: absolute;
+    top: 12px;
+    right: 0;
+}
+
+.favoriteleet {
+    width: 1200px;
+    margin: 20px auto;
+}
+
+.favorite {
+    display: inline-block;
+    margin: 0 25px;
+}
+
+.favorite:first-child {
+    margin-left: 0px;
+}
+
+.favorite:last-child {
+    margin-right: 0px;
+}
+
+.favorite .favimg>a>img {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.favorite .favtit .subtit {
+    font-size: 16px;
+    color: gray;
+}
+
+.favorite .favtit .maintit {
+    font-size: 22px;
+    color: black;
+    font-weight: bold;
+}

@@ -1,0 +1,164 @@
+#header {
+    min-height: 170px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    background: #fff;
+}
+
+.dvwrap {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#header a.logo {
+    background: url(../img/pclogo.png) no-repeat 0 0;
+    width: 242px;
+    height: 58px;
+    display: inline-block;
+    transition: all .5s;
+    text-indent: -9999px;
+    margin-top: 20px;
+}
+
+#header .gtop {
+    height: 95px;
+    border-bottom: 1px solid #ccc;
+}
+
+#header .gtop .topsearch {
+    width: 410px;
+    border-radius: 50px;
+    border: 2px solid #4d88b7;
+    height: 44px;
+    position: absolute;
+    top: 25px;
+    left: 450px;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    overflow: hidden;
+}
+
+#header .gtop .topsearch input[type="text"] {
+    height: 40px;
+    border: none;
+    width: 290px;
+}
+
+#header .gtop .topsearch a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 40px;
+    color: #fff;
+    padding: 0 20px 2px 35px;
+    background: #4d88b7 url(../img/topsearch_icon.png) no-repeat 15px 50%;
+}
+
+#header #login {
+    display: none;
+}
+
+#header .gtop #login ul,
+#header .gtop #nologin ul {
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+#header .gtop #login ul li,
+#header .gtop #nologin ul li {
+    float: left;
+    font-size: 14px;
+    color: #424242;
+    cursor: pointer;
+}
+
+#header .gtop #login ul li::after,
+#header .gtop #nologin ul li::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #ccc;
+    margin: 0 10px;
+}
+
+#header .gtop #login ul li:last-child::after,
+#header .gtop #nologin ul li:last-child::after {
+    display: none;
+}
+
+#header .headerWrap {
+    position: relative;
+    width: 100%;
+    z-index: 600;
+    background: url(../img/mbg.jpg) repeat-x 0 0;
+}
+
+#gnb {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#gnb>ul {
+    position: relative;
+}
+
+#gnb>ul>li:first-child {
+    margin-left: 0px;
+}
+
+#gnb>ul>li {
+    float: left;
+    width: 25%;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#gnb>ul>li.lnb1>a {
+    padding: 27px 20px 0px 55px;
+    /*background: url(/_res/westudy/kor/img/common/m01.png) no-repeat 50px 50%;*/
+    text-align: center;
+}
+
+#gnb>ul>li.lnb2>a {
+    padding: 27px 20px 0px 55px;
+    /*background: url(/_res/westudy/kor/img/common/m01.png) no-repeat 50px 50%;*/
+    text-align: center;
+}
+
+#gnb>ul>li.lnb3>a {
+    padding: 27px 20px 0px 55px;
+    /*background: url(/_res/westudy/kor/img/common/m01.png) no-repeat 50px 50%;*/
+    text-align: center;
+}
+
+#gnb>ul>li.lnb4>a {
+    padding: 27px 20px 0px 55px;
+    /*background: url(/_res/westudy/kor/img/common/m01.png) no-repeat 50px 50%;*/
+    text-align: center;
+}
+
+#gnb>ul>li>a {
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    height: 75px;
+    line-height: 20px;
+    transition: all .5s;
+    position: relative;
+    box-sizing: border-box;
+    font-weight: 500;
+}
+
+.cB:after {
+    content: '';
+    display: block;
+    clear: both;
+}

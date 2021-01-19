@@ -1,0 +1,148 @@
+#leeting_content {
+    width: 100%;
+}
+
+#leeting_content #tit1 {
+    height: 500px;
+    background: url(../img/leeting1.png);
+    background-size: cover;
+}
+
+#leeting_content #tit1 .title {
+    padding-top: 150px;
+    width: 800px;
+    margin: 0 auto;
+
+    font-size: 50px;
+    font-weight: 1000;
+    line-height: 40px;
+}
+
+#leeting_content #tit1 .title span {
+    color: blue;
+}
+
+#leeting_content #tit1 .subtit {
+    width: 800px;
+    margin: 20px auto;
+
+    font-size: 45px;
+    line-height: 60px;
+}
+
+#leeting_content #tit1 .highlight {
+    color: hsl(203, 100%, 43%);
+    font-weight: 800;
+    font-size: 18px;
+
+    width: 800px;
+    margin: 20px auto;
+}
+
+#leeting_content #tit2 {
+    position: relative;
+    height: 500px;
+    background-color: #f2f2f2;
+}
+
+#leeting_content #tit2 .title {
+    padding-top: 120px;
+    width: 800px;
+    margin: 0 auto;
+
+    font-size: 50px;
+    line-height: 70px;
+}
+
+#leeting_content #tit2 .title span {
+    font-weight: 800;
+}
+
+#leeting_content #tit2 .subtit {
+    padding-top: 50px;
+    width: 800px;
+    margin: 0 auto;
+
+    font-size: 20px;
+    line-height: 40px;
+}
+
+#leeting_content #tit2 .subtit span {
+    font-weight: 700;
+}
+
+#leeting_content #tit2 img {
+    position: absolute;
+    top: 150px;
+    right: 250px;
+    width: 250px;
+    height: 500px;
+}
+
+#leeting_content #tit3 {
+    height: 500px;
+    background: linear-gradient(to bottom, white, #f7f7f7);
+}
+
+#leeting_content #tit3 .title {
+    padding-top: 150px;
+    width: 800px;
+    margin: 0 auto;
+
+    font-size: 50px;
+    line-height: 70px;
+}
+
+#leeting_content #tit3 .title span {
+    font-weight: 800;
+}
+
+#leeting_content #tit3 .subtit {
+    padding-top: 50px;
+    width: 800px;
+    margin: 0 auto;
+
+    font-size: 20px;
+    line-height: 40px;
+}
+
+#leeting_content #tit3 .subtit span {
+    font-weight: 700;
+}
+
+#leeting_content #tit4 {
+    position: relative;
+    height: 500px;
+}
+
+#leeting_content #tit4 .title {
+    padding-top: 80px;
+    width: 800px;
+    margin: 0 auto;
+
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+}
+
+#leeting_content #tit4 .title span {
+    font-weight: 700;
+}
+
+#leeting_content #tit4 .subtit {
+    padding-top: 30px;
+    width: 800px;
+    margin: 0 auto;
+
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+#leeting_content #tit4 img {
+    position: absolute;
+    width: 300px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

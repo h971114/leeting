@@ -1,0 +1,96 @@
+#footer {
+    width: 100%;
+    height: 170px;
+    background-color: #f5f5f5;
+}
+
+.footerdiv {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.footerdiv .fnb {
+    position: absolute;
+    top: 20px;
+}
+
+.footerdiv .fnb li {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.footerdiv .fnb li:first-child {
+    margin-left: 0px;
+    font-weight: 500;
+}
+
+.footerdiv .fnb li::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #ccc;
+    margin: 0 20px;
+}
+
+.footerdiv .fnb li:last-child::after {
+    display: none;
+}
+
+.footerdiv .ftsns {
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.footerdiv .ftsns li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.footerdiv .ftsns li:last-child {
+    margin-right: 0px;
+}
+
+.insta {
+    letter-spacing: -1px;
+    padding-left: 34px;
+    width: auto;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    color: #666666;
+    background: url(../img/insta.png) no-repeat;
+    background-size: auto;
+}
+
+.youtube {
+    letter-spacing: -1px;
+    padding-left: 34px;
+    width: auto;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    color: #666666;
+    background: url(../img/youtube.png) no-repeat;
+    background-size: auto;
+}
+
+.kakao {
+    letter-spacing: -1px;
+    padding-left: 34px;
+    width: auto;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    color: #666666;
+    background: url(../img/kakao.png) no-repeat;
+    background-size: auto;
+}
+
+.footerdiv .fttxt {
+    position: absolute;
+    top: 60px;
+}

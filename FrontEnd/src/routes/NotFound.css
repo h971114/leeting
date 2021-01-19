@@ -1,0 +1,68 @@
+.notFoundCon {
+    width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.notFoundCon img {
+    margin-top: 150px;
+}
+
+.notFoundCon .tit {
+    margin: 30px 0;
+    font-size: 35px;
+    line-height: 40px;
+}
+
+.notFoundCon .tit span {
+    font-weight: bold;
+    color: #008be6;
+}
+
+.notFoundCon .subtit {
+    font-size: 20px;
+}
+
+.notFoundCon .btndiv {
+    text-align: center;
+    padding: 0px;
+}
+
+.notFoundCon .btndiv a {
+    display: inline-block;
+
+    width: 140px;
+    height: 50px;
+    border-radius: 5px;
+
+    margin: 0 10px;
+
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.notFoundCon .btndiv .goBack {
+    background-color: #d3d3d3;
+    text-decoration: none;
+}
+
+.notFoundCon .btndiv .goBack:hover {
+    background-color: #f5f5f5;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.notFoundCon .btndiv .goHome {
+    background-color: #008ae5;
+    text-decoration: none;
+    color: white;
+}
+
+.notFoundCon .btndiv .goHome:hover {
+    background-color: #0075c2;
+    text-decoration: none;
+    font-weight: bold;
+
+}

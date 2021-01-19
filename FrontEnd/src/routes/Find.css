@@ -1,0 +1,165 @@
+.findcontainer {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.titles {
+    height: 200px;
+    padding-top: 60px;
+    cursor: default;
+}
+
+.tit {
+    margin-bottom: 10px;
+}
+
+.findcontainer .tit,
+.findcontainer .subtit {
+    text-align: center;
+}
+
+.formcenter {
+    width: 800px;
+    margin: 0 auto;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.forradio {
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+
+.forradio:hover {
+    color: #2e9cdf;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked+label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solild #2e9cdf;
+    border-bottom: 1px solid #ffffff;
+}
+
+.formcenter>#findids {
+    display: none;
+    height: 450px;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+    padding-left: 100px;
+    padding-top: 70px;
+}
+
+.formcenter>#findpws {
+    display: none;
+    height: 500px;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+    padding-left: 100px;
+    padding-top: 70px;
+
+}
+
+#tab1:checked~#findids,
+#tab2:checked~#findpws {
+    display: block;
+}
+
+#findids>label,
+#findpws>label {
+    font-size: 18px;
+}
+
+#idname,
+#pwname,
+#pwid {
+    margin-bottom: 10px;
+}
+
+#labelemail {
+    display: block;
+}
+
+#idemail,
+#idwritedomain,
+#iddomain,
+#pwemail,
+#pwwritedomain,
+#pwdomain {
+    display: inline-block;
+}
+
+
+#idauth,
+#pwauth {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#idsendtoken,
+#pwsendtoken {
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: #008ce8;
+}
+
+#idsendtoken:hover,
+#pwsendtoken:hover {
+    background-color: #0473bc;
+}
+
+#idchecktoken,
+#pwchecktoken {
+    display: none;
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: hsl(350, 100%, 63%);
+}
+
+#idchecktoken :hover,
+#pwchecktoken :hover {
+    background-color: rgb(255, 46, 81);
+}
+
+#findids>label#at,
+#findpws>label#at {
+    font-size: 21px;
+}
+
+.btndiv {
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 85px;
+}
+
+.goback {
+    color: black;
+    background-color: lightgray;
+    margin-right: 20px;
+}
+
+.goback:hover {
+    color: white;
+    background-color: gray;
+}
+
+.find {
+    color: #fff;
+    background-color: #1D2087;
+    border-color: #1D2087;
+}
+
+.find:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}

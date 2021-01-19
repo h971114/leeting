@@ -1,0 +1,128 @@
+.logincontainer {
+    width: 1200px;
+    height: 780px;
+    margin: 0 auto;
+}
+
+.logincontainer .tit {
+    text-align: center;
+    height: 150px;
+    padding-top: 60px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.logincontainer .formcenter {
+    width: 600px;
+    margin: 0 auto;
+    padding-left: 130px;
+}
+
+.id {
+    margin-bottom: 20px;
+}
+
+.password {
+    margin-bottom: 10px;
+}
+
+.id>p,
+.password>p {
+    font-size: 18px;
+    display: inline-block;
+    cursor: default;
+}
+
+.logininput,
+.passinput {
+    height: 35px;
+}
+
+.chkbox {
+    text-align: right;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.idstore {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.autologin {
+    display: inline-block;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]+label {
+    color: black;
+}
+
+input[type="checkbox"]+label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url(../img/noncheck.png) left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked+label span {
+    background: url(../img/check.png) left top no-repeat;
+}
+
+.loginset div {
+    text-align: center;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+    background-size: cover;
+    border-radius: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    border: none;
+}
+
+.defaultlogin {
+    background-color: #1bb1e7;
+    color: white;
+}
+
+.naverlogin {
+    background: url(../img/naverlogin.png);
+    color: white;
+}
+
+.googlelogin {
+    background: url(../img/googlelogin.png);
+    border: #d4d4d4 1px solid;
+}
+
+.kakaologin {
+    background: url(../img/kakaologin.png);
+    color: #3c1e1e;
+}
+
+.usermenu {
+    margin-top: 20px;
+    padding: 0px;
+    text-align: center;
+}
+
+.usermenu ul li {
+    display: inline-block;
+    margin: 0 7px;
+}
+
+.usermenu ul li:first-child {
+    margin-left: 0px;
+}
+
+.usermenu ul li a img {
+    width: 100px;
+}
