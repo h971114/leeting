@@ -1,0 +1,77 @@
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (2, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (3, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (4, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (5, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (6, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (7, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (8, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (9, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 1, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (10, 'admin', '테스트3', '#테스트3', 2021-01-19, '테스트3', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (11, 'admin', '테스트4', '#테스트4', 2021-01-19, '테스트4', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (12, 'admin', '테스트5', '#테스트5', 2021-01-19, '테스트5', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (13, 'admin', '테스트6', '#테스트6', 2021-01-19, '테스트6', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (14, 'admin', '테스트7', '#테스트7', 2021-01-19, '테스트7', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (15, 'admin', '테스트8', '#테스트8', 2021-01-19, '테스트8', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (16, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (17, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (18, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (19, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (20, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (21, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (22, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (23, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (24, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (25, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (26, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (27, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (28, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (29, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (30, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (31, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (32, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (33, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (34, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (35, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 2, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (36, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 3, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (37, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 4, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (38, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 5, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');
+insert into meeting (no, hostid, maintitle, subtitle, date, detail, categoryno, file)
+values (39, 'admin', '테스트9', '#테스트9', 2021-01-19, '테스트9', 6, 'https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png');

@@ -235,6 +235,9 @@ class Find extends React.Component {
                     alert("찾으시는 정보가 없습니다.");
                     window.location.replace("/find");
                 }
+                else {
+                    alert("찾으시는 아이디는 : "+ res.data+" 입니다.");
+                }
             })
         }
         else {
@@ -242,12 +245,9 @@ class Find extends React.Component {
         }
     }
 
-
-
     findPw = (e) => {
         e.preventDefault();
 
-        
         if (this.state.checkPwEmail === true) {
             axios.get('http://127.0.0.1:8080/myapp/member/findpw', {
                 params: {
@@ -261,6 +261,9 @@ class Find extends React.Component {
                 if (res.data === "FAIL") {
                     alert("찾으시는 정보가 없습니다.");
                     window.location.replace("/find");
+                }
+                else {
+                    alert("찾으시는 비밀번호는 : "+ res.data+" 입니다.");
                 }
             })
         }

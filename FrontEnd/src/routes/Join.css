@@ -63,6 +63,12 @@
     background-color: rgb(255, 46, 81);
 }
 
+#email,
+#writedomain,
+#domain {
+    display: inline-block;
+}
+
 #labelId,
 #labelPw,
 #labelCPw,
