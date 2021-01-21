@@ -299,6 +299,7 @@ class Join extends React.Component {
     e.preventDefault();
     console.log(this.state.email + "@" + this.state.domain);
     axios.post('http://127.0.0.1:8080/myapp/member/email', {
+      samecheck:"",
         email: this.state.email + "@" + this.state.domain,
       }).then(res => {
         console.log(res);
@@ -306,9 +307,14 @@ class Join extends React.Component {
         this.setState({
           token: res.data
         })
-        document.getElementById('auth').disabled = false;
-        // document.getElementById('sendtoken').setAttribute('style', 'display:none');
-        document.getElementById('checktoken').setAttribute('style', 'display:inline-block');
+        if (res.data === "FAIL") {
+          document.getElementById('validateDomain').textContent = "이미 가입된 이메일입니다.";
+          document.getElementById('validateDomain').setAttribute('style', 'color: #ff3535');
+        } else {
+          document.getElementById('auth').disabled = false;
+          // document.getElementById('sendtoken').setAttribute('style', 'display:none');
+          document.getElementById('checktoken').setAttribute('style', 'display:inline-block'); 
+        }
       })
   };
 

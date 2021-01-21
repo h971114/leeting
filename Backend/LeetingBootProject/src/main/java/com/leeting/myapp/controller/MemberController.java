@@ -2,6 +2,7 @@ package com.leeting.myapp.controller;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,14 +38,13 @@ import io.swagger.annotations.ApiOperation;
 public class MemberController {
 
   // service
-  private  MemberService memberService;
+  private final MemberService memberService;
 
 
   @Autowired
   public MemberController(MemberService memberService) {
     this.memberService = memberService;
   }
-
   @Autowired
   private JwtService jwtService;
   @Autowired
@@ -184,20 +184,27 @@ public class MemberController {
     HttpStatus status = HttpStatus.ACCEPTED;
     System.out.println("post to /member/email done");
     System.out.println("이메일 인증");
-    SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(memberbody.get("email"));
-    message.setFrom("Leeting@naver.com");
-    message.setSubject("이메일인증입니다");
-    StringBuilder sb = new StringBuilder();
-    String tmp = getTempAuth();
-    sb.append("인증번호는 ");
-    sb.append(tmp);
-    sb.append(" 입니다");
-    message.setText(tmp);
-    javaMailSender.send(message);
-    String token = jwtService.create("email", tmp, "email");
-    System.out.println(token);
-    System.out.println(jwtService.get("email", token));
+    String token = "";
+    System.out.println(memberbody);
+    System.out.println(memberbody.containsKey("samecheck"));
+    System.out.println(memberService.sameEmail(memberbody.get("email")));
+    if(memberbody.containsKey("samecheck") && !memberService.sameEmail(memberbody.get("email"))) {
+    	token = "FAIL";
+    }
+    else {
+	    SimpleMailMessage message = new SimpleMailMessage();
+	    message.setTo(memberbody.get("email"));
+	    message.setFrom("Leeting@naver.com");
+	    message.setSubject("이메일인증입니다");
+	    StringBuilder sb = new StringBuilder();
+	    String tmp = getTempAuth();
+	    sb.append("인증번호는 ");
+	    sb.append(tmp);
+	    sb.append(" 입니다");
+	    message.setText(tmp);
+	    javaMailSender.send(message);
+	    token = jwtService.create("email", tmp, "email");
+    }
     return new ResponseEntity<String>(token, status);
   }
   @ApiOperation(value = "토큰인증", notes = "토큰인증", response = Map.class)
@@ -229,6 +236,7 @@ public class MemberController {
     memberbody.setEmail(memberemail);
     System.out.println(memberbody);
     conclusion = memberService.findid(memberbody);
+    System.out.println(conclusion);
     if(conclusion == null) {
     	conclusion = "FAIL";
     }
@@ -251,6 +259,16 @@ public class MemberController {
     	conclusion = "FAIL";
     }
     return new ResponseEntity<String>(conclusion, status);
+  }
+  @ApiOperation(value = "참여미팅", notes = "참여미팅메인", response = Map.class)
+  @GetMapping("/usermeet")
+  public ResponseEntity<List<Object>> usermeet(@RequestParam("id") String memberid, HttpServletRequest req) throws SQLException {
+    System.out.println(req);
+    HttpStatus status = HttpStatus.ACCEPTED;
+    System.out.println("get to /member/usermeet done");
+    System.out.println("참여미팅");
+    List<Object> meetlist = memberService.userMeet(memberid);
+    return new ResponseEntity<List<Object>>(meetlist, status);
   }
   public String getTempAuth(){
       char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',

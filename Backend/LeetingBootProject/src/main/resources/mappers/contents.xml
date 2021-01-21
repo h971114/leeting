@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="contents">
+    <insert id="enrollcontents" parameterType="contents">
+       INSERT INTO contents (writer, date, detail, file, category)
+       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno})
+    </insert>
+    <select id="listcontents" resultType="contents">
+        SELECT no, writer, date, detail, file, category
+        FROM contents
+    </select>
+    <select id="findcontents" resultType="contents">
+        SELECT no, writer, date, detail, file, category
+        FROM contents
+    </select>
+    <delete id="deletecontents" parameterType="int">
+        DELETE
+        FROM contents
+        WHERE no = #{contentsno}
+    </delete>
+    <update id="updatecontents" parameterType="contents">
+        UPDATE contents
+        SET date = #{date},
+            detail = #{detail},
+            file = #{file},
+            category = #{categoryno}
+        WHERE no = #{contentsno}
+    </update>
+</mapper>

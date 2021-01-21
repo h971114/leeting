@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.leeting.myapp.dao.MeetingDao;
 import com.leeting.myapp.model.MeetingDto;
+import com.leeting.myapp.model.MemberDto;
 
 @Service
 public class MeetingServiceImpl implements MeetingService{
@@ -32,10 +33,38 @@ public class MeetingServiceImpl implements MeetingService{
     }
 	
 	@Override
-    public List<MeetingDto> listMeeting() throws SQLException {
+    public List<MeetingDto> listMeeting(int categoryno) throws SQLException {
 		System.out.println("확인");
-	    	return meetingDao.listMeeting();
+	    	return meetingDao.listMeeting(categoryno);
 
     }
 	
+    @Override
+    public MeetingDto getMeetingInfo(int meetingno) {
+    	MeetingDto meetingDto = null;
+        try {
+            meetingDto = meetingDao.meetinginfo(meetingno);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return meetingDto;
+    }
+    
+    @Override
+    public void delete(int meetingno) {
+        try {
+            meetingDao.delete(meetingno);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(MeetingDto meeting) {
+        try {
+            meetingDao.update(meeting);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

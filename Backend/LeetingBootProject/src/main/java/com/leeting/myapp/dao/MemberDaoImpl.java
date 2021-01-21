@@ -2,6 +2,7 @@ package com.leeting.myapp.dao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -63,5 +64,13 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("email", member.getEmail());
 		map.put("id", member.getId());
 		return sqlSession.selectOne("member.findpw", map);
+	}
+	@Override
+	public int sameEmail(String email)  throws SQLException{
+		return sqlSession.selectOne("member.sameEmail",email);
+	}
+	@Override
+	public List<Object> userMeetingFive(String userid)  throws SQLException{
+		return sqlSession.selectList("member.usermeet",userid);
 	}
 }
