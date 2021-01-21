@@ -16,6 +16,7 @@ public class MemberServiceImpl implements MemberService{
 	private final MemberDao memberDao;
 	public MemberServiceImpl(MemberDao memberDao){
 	    this.memberDao = memberDao;
+	    memberDao.start();
     }
 
     // DB 필요

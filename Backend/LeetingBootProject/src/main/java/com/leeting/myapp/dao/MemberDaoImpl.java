@@ -73,4 +73,8 @@ public class MemberDaoImpl implements MemberDao{
 	public List<Object> userMeetingFive(String userid)  throws SQLException{
 		return sqlSession.selectList("member.usermeet",userid);
 	}
+	@Override
+	public void start () {
+		sqlSession.getConnection();
+	}
 }

@@ -17,4 +17,5 @@ public interface MemberDao {
 	public String findpw(MemberDto member) throws SQLException;
 	int sameEmail(String email) throws SQLException;
 	List<Object> userMeetingFive(String userid) throws SQLException;
+	void start();
 }
