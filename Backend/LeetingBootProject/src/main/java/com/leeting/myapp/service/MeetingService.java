@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.leeting.myapp.model.MeetingDto;
+import com.leeting.myapp.model.ParticipationDto;
 
 public interface MeetingService {
 
@@ -13,4 +14,5 @@ public interface MeetingService {
     MeetingDto getMeetingInfo(int meetingno);
     void delete(int meetingno);
     void update(MeetingDto meeting);
+	List<ParticipationDto> listparticipants(int meetingno);
 }

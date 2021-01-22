@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leeting.myapp.model.MeetingDto;
+import com.leeting.myapp.model.ParticipationDto;
 import com.leeting.myapp.service.MeetingService;
 
 import io.swagger.annotations.ApiOperation;
@@ -108,6 +109,20 @@ public class MeetingController {
 		    System.out.println("미팅 목록");
 		    System.out.println(list.get(0).toString());
 		    return new ResponseEntity<List<MeetingDto>>(list, status);
+	  }
+	  //미팅 참여자 정보
+	  @ApiOperation(value = "미팅 참여자 정보", notes = "미팅 참여자 정보", response = List.class)
+	  @GetMapping("/{category}/{meetingno}")
+	  public ResponseEntity<List<ParticipationDto>> listMeeting(@PathVariable(value="meetingno") int meetingno,HttpServletRequest req) throws SQLException {
+		   System.out.println(req);
+		    Map<String, Object> resultMap = new HashMap<>();
+		    HttpStatus status = HttpStatus.ACCEPTED;		    
+		    List<ParticipationDto> list = new ArrayList<>();
+		    list = meetingService.listparticipants(meetingno);
+		    System.out.println("get to /participantslist done");
+		    System.out.println("미팅  참여자 목록");
+		    System.out.println(list.get(0).toString());
+		    return new ResponseEntity<List<ParticipationDto>>(list, status);
 	  }
 //	  //미팅 상세정보
 //	  @ApiOperation(value = "미팅 상세정보", notes = "미팅 상세정보", response = Map.class)

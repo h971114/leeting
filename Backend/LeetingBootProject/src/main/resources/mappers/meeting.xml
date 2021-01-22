@@ -27,4 +27,8 @@
 	<update id="meetingmodify" parameterType="meeting">
 		UPDATE meeting SET maintitle=#{maintitle},subtitle=#{subtitle},date=#{date},hostid=#{hostid},detail=#{detail},categoryno=#{categoryno},file=#{file},enddate=#{enddate} WHERE no=#{meetingno}
 	</update>
+	<!-- 미팅 참여자 정보 -->
+	<select id="listparticipants" parameterType="int" resultType="participation">
+		SELECT * FROM participation WHERE meetingno=#{meetingno}
+	</select>
 </mapper>

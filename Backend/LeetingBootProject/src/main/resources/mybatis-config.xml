@@ -5,5 +5,6 @@
  		<typeAlias type="com.leeting.myapp.model.MemberDto" alias="member"></typeAlias>
  		<typeAlias type="com.leeting.myapp.model.MeetingDto" alias="meeting"></typeAlias>
  		<typeAlias type="com.leeting.myapp.model.ContentsDto" alias="contents"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.ParticipationDto" alias="participation"></typeAlias>
  	</typeAliases>
  </configuration>

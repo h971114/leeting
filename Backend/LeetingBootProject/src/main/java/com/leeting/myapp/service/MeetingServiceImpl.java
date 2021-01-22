@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.leeting.myapp.dao.MeetingDao;
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.MemberDto;
+import com.leeting.myapp.model.ParticipationDto;
 
 @Service
 public class MeetingServiceImpl implements MeetingService{
@@ -66,5 +67,11 @@ public class MeetingServiceImpl implements MeetingService{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+    
+    @Override
+    public List<ParticipationDto> listparticipants(int meetingno){
+    	return meetingDao.listparticipants(meetingno);
+
     }
 }

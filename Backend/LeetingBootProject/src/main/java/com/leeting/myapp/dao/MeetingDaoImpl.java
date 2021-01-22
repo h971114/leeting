@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.MemberDto;
+import com.leeting.myapp.model.ParticipationDto;
 
 @Repository
 public class MeetingDaoImpl implements MeetingDao{
@@ -43,5 +44,9 @@ public class MeetingDaoImpl implements MeetingDao{
 	@Override
 	public void update(MeetingDto meeting) throws SQLException {
 		sqlSession.update("meeting.meetingmodify",meeting);
+	}
+	@Override
+	public List<ParticipationDto> listparticipants(int meetingno){
+		return sqlSession.selectList("meeting.listparticipants",meetingno);
 	}
 }
