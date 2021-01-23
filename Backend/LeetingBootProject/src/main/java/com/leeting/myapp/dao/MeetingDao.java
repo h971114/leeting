@@ -14,4 +14,7 @@ public interface MeetingDao {
 	public void delete(int meetingno) throws SQLException;
 	public void update(MeetingDto meeting) throws SQLException;
 	public List<ParticipationDto> listparticipants(int meetingno);
+	public ParticipationDto participationinfo(ParticipationDto participationDto);
+	void setlikestatus(ParticipationDto participationDto);
+	void clickmeeting(ParticipationDto participationDto);
 }

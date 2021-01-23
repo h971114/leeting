@@ -74,4 +74,20 @@ public class MeetingServiceImpl implements MeetingService{
     	return meetingDao.listparticipants(meetingno);
 
     }
+
+    @Override
+    public void setlikestatus(ParticipationDto participationDto) throws SQLException {
+        meetingDao.setlikestatus(participationDto);
+    }
+
+    @Override
+    public boolean clickmeeting(ParticipationDto participationDto) throws SQLException {
+        ParticipationDto partDto = meetingDao.participationinfo(participationDto);
+        if(partDto==null) {
+            meetingDao.clickmeeting(participationDto);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

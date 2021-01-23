@@ -162,4 +162,37 @@ public class MeetingController {
 	    meetingService.delete(meetingno);
 	    return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	  }
+
+	// 좋아요 클릭
+	@ApiOperation(value = "좋아요", notes = "좋아요", response = Map.class)
+	@PutMapping("/setlike")
+	public ResponseEntity<Map<String, Object>> setLikeStatus(@RequestBody ParticipationDto participationDto, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("update to /setlike done");
+		System.out.println("좋아요클릭");
+		System.out.println(participationDto.getUserid());
+		System.out.println(participationDto.getLikestatus());
+		meetingService.setlikestatus(participationDto);
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+
+	// 미팅 참여
+	@ApiOperation(value = "미팅참여", notes = "미팅참여", response = Map.class)
+	@PostMapping("/participation")
+	public ResponseEntity<String> clickMeeting(@RequestBody ParticipationDto participationDto, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		String conclusion = "";
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("post to /participation done");
+		if(meetingService.clickmeeting(participationDto)){
+			System.out.println("미팅참여");
+			conclusion = "SUCESS";
+		}else{
+			System.out.println("중복참여");
+			conclusion = "FAIL";
+		}
+		return new ResponseEntity<>(conclusion, status);
+	}
 }

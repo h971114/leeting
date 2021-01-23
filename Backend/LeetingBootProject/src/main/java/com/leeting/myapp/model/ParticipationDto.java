@@ -43,7 +43,7 @@ public class ParticipationDto {
 		this.userid = userid;
 	}
 
-	public boolean isLikestatus() {
+	public boolean getLikestatus() {
 		return likestatus;
 	}
 

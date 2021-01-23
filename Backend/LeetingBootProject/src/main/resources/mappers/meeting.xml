@@ -31,4 +31,21 @@
 	<select id="listparticipants" parameterType="int" resultType="participation">
 		SELECT * FROM participation WHERE meetingno=#{meetingno}
 	</select>
+	<!-- 좋아요 수정	-->
+	<update id="setlikestatus" parameterType="participation">
+		UPDATE participation
+		SEt likestatus = #{likestatus}
+		where userid = #{userid} and meetingno = #{meetingno}
+	</update>
+	<!-- 미팅 참석-->
+	<insert id="clickmeeting" parameterType="participation">
+		INSERT INTO participation (meetingno, userid, likestatus)
+		VALUES (#{meetingno}, #{userid}, 0)
+	</insert>
+	<!-- 미팅 참여자 정보: 중복 검사 -->
+	<select id="participationinfo" parameterType="participation" resultType="participation">
+		SELECT no, meetingno, userid, likestatus
+		FROM participation
+		WHERE userid = #{userid} and meetingno = #{meetingno}
+	</select>
 </mapper>

@@ -49,4 +49,20 @@ public class MeetingDaoImpl implements MeetingDao{
 	public List<ParticipationDto> listparticipants(int meetingno){
 		return sqlSession.selectList("meeting.listparticipants",meetingno);
 	}
+
+	// 미팅 참여자 중복 검사
+	@Override
+	public ParticipationDto participationinfo(ParticipationDto participationDto) {
+		return sqlSession.selectOne("meeting.participationinfo", participationDto);
+	}
+
+	@Override
+	public void setlikestatus(ParticipationDto participationDto) {
+		sqlSession.update("meeting.setlikestatus", participationDto);
+	}
+
+	@Override
+	public void clickmeeting(ParticipationDto participationDto) {
+		sqlSession.insert("meeting.clickmeeting", participationDto);
+	}
 }
