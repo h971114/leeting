@@ -20,6 +20,7 @@ class Detail extends React.Component {
         if (sId === null) {
             document.getElementById('likebtn').disabled = true;
             document.getElementById('joinBtn').disabled = true;
+            console.log('test');
         }
         else {
             document.getElementById('likebtn').disabled = false;
@@ -162,8 +163,8 @@ class Detail extends React.Component {
                             {/* <p className="likecnt">1</p> */}
                             </div>
                         <div className="joinMeeting" >
-                            <p id="joinBtn" onClick={ this.joinMeetingClick }>미팅 참여하기</p>
-                            <p id="joinOutBtn">미팅 나가기</p>
+                            <button id="joinBtn" onClick={ this.joinMeetingClick }>미팅 참여하기</button>
+                            <button id="joinOutBtn">미팅 나가기</button>
                             <p id="jointab">로그인 하시면 미팅에 참여 및 리뷰가 가능합니다.</p>
                         </div>
                             <hr className="hosthr"/>
