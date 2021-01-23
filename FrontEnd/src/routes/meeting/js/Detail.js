@@ -7,7 +7,7 @@ class Detail extends React.Component {
     constructor() {
         super();
         this.state = {
-            likes:false,
+            likes: false,
         }
     }
 
@@ -26,8 +26,9 @@ class Detail extends React.Component {
             document.getElementById('joinBtn').disabled = false;
             document.getElementById('jointab').setAttribute('style', 'display:none');
             this.checkLike();
+            this.checkJoin();
             // console.log(this.state.likes);
-         }
+        }
     }
 
     checkLike = async () => {
@@ -47,11 +48,11 @@ class Detail extends React.Component {
         else
             category = 'study';
             
-        let url = 'http://127.0.0.1:8080/myapp/meeting/'+category+'/'+location.state.id;
+        let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
         console.log(data.data);
-        for (let i = 0; i < data.data.length; i++){
-            if (sId == data.data[i].userid) {
+        for (let i = 0; i < data.data.length; i++) {
+            if (sId === data.data[i].userid) {
                 if (data.data[i].likestatus) {
                     this.setState({
                         likes: true
@@ -63,17 +64,84 @@ class Detail extends React.Component {
         // data = data.data;
         // this.setState({ data, isLoading: false });
     }
+
+    checkJoin = async () => {
+        const { location } = this.props;
+        let category;
+        let checkJoin = false;
+        let sId = sessionStorage.getItem('id');
+        if (location.state.categoryno == 1)
+            category = 'exercise';
+        else if (location.state.categoryno == 2)
+            category = 'music';
+        else if (location.state.categoryno == 3)
+            category = 'game';
+        else if (location.state.categoryno == 4)
+            category = 'diy';
+        else if (location.state.categoryno == 5)
+            category = 'lans';
+        else
+            category = 'study';
+        
+        let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
+        let data = await axios.get(url);
+        console.log(data.data);
+        for (let i = 0; i < data.data.length; i++) {
+            if (sId === data.data[i].userid) {
+                checkJoin = true;
+            }
+        }
+        if (checkJoin === true) {
+            document.getElementById('joinBtn').setAttribute("style", "display:none");
+            document.getElementById('joinOutBtn').setAttribute("style", "display:block");
+        }
+        // data = data.data;
+        // this.setState({ data, isLoading: false });
+    }
     
     likeClick = (e) => {
-        if (document.getElementById('likebtn').classList.contains('ilike') === true) {
-            document.getElementById('likebtn').classList.remove('ilike');
-        } else {
-            document.getElementById('likebtn').classList.add('ilike');
-        }
+        e.preventDefault();
+        const { location } = this.props;
+
+        let sId = sessionStorage.getItem('id');
+
+        axios.put('http://127.0.0.1:8080/myapp/meeting/setlike', {
+            likestatus: !(this.state.likes),
+            userid: sId,
+            meetingno: location.state.id
+        }).then(res => {
+            this.setState({
+                likes: !(this.state.likes)
+            })
+            if (document.getElementById('likebtn').classList.contains('ilike') === true) {
+                document.getElementById('likebtn').classList.remove('ilike');
+            } else {
+                document.getElementById('likebtn').classList.add('ilike');
+            }
+        })
     }
 
     profileClick = (e) => {
 
+    }
+
+    joinMeetingClick = (e) => {
+        e.preventDefault();
+
+        const { location } = this.props;
+        let sId = sessionStorage.getItem('id');
+        
+        axios.post('http://127.0.0.1:8080/myapp/meeting/participation', {
+            meetingno: location.state.id,
+            userid: sId
+        }).then(res => {
+            if (res.data === "SUCESS") {
+                console.log("성공");
+                window.location.replace("/meeting"+"/"+location.state.id);
+            } else {
+                console.log("실패");
+            }
+        })
     }
 
   render() {
@@ -93,8 +161,9 @@ class Detail extends React.Component {
                             <button id="likebtn" className="likebtn" onClick={this.likeClick}></button>
                             {/* <p className="likecnt">1</p> */}
                             </div>
-                        <div className="joinMeeting" onClick={ this.joinMeetingClick }>
-                            <p id="joinBtn">미팅 참여하기</p>
+                        <div className="joinMeeting" >
+                            <p id="joinBtn" onClick={ this.joinMeetingClick }>미팅 참여하기</p>
+                            <p id="joinOutBtn">미팅 나가기</p>
                             <p id="jointab">로그인 하시면 미팅에 참여 및 리뷰가 가능합니다.</p>
                         </div>
                             <hr className="hosthr"/>
