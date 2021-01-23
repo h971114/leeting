@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gallery">
+    <!-- 데이터 등록 -->
+    <insert id="insertgallery" parameterType="gallery">
+		INSERT INTO gallery (title, filepath)
+		VALUES ( #{title},  #{filepath})
+	</insert>
+
+    <!-- 경로 조회 -->
+    <select id="getpath" parameterType="String" resultType="String">
+		SELECT filepath FROM gallery where title = #{title}
+	</select>
+</mapper>
