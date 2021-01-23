@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
-function Study({ id, maintitle, subtitle, date, hostid, detail, categoryno, file }) {
+function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno, file }) {
+    
+    console.log(idx);
     return (
         <div className="itemListView">
             <Link

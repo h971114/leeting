@@ -11,16 +11,18 @@ class Login extends React.Component {
     handleClick = (e) => {
         e.preventDefault();
         
-        console.log(this.state);
         axios.post('http://127.0.0.1:8080/myapp/member/login', {
             id: this.state.id,
             pw: this.state.pw
         }).then(res => {
             // console.log(res);
+            console.log(this.state.id);
+            console.log(this.state.pw);
             console.log(res.data.message);
-            if (res.data.message == "SUCCESS") {
+            if (res.data.message === "SUCCESS") {
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("nickname", res.data.nickname);
+                sessionStorage.setItem("id", res.data.id);
                 window.location.replace("/");
             } else {
                 alert("아이디와 비밀번호를 확인해주세요.");

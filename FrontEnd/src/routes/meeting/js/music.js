@@ -10,7 +10,7 @@ class music extends React.Component {
         data:[]
     }
     getLeeting = async () => {
-        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/listmeeting');
+        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/music');
         data = data.data;
         // console.log('data is ' + JSON.stringify(data.categories));
         this.setState({ data, isLoading: false });

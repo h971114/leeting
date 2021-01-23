@@ -15,6 +15,8 @@ import DIYMeeting from "./routes/meeting/js/diy";
 import LansMeeting from "./routes/meeting/js/lans";
 import StudyMeeting from "./routes/meeting/js/study";
 
+import WriteMeeting from "./routes/meeting/js/write";
+
 import Detail from "./routes/meeting/js/Detail";
 
 import NotFound from "./routes/NotFound";
@@ -26,10 +28,10 @@ function App() {
       <div>
         <Header/>
         <Switch>
-            <Route path="/" exact={true} component={Home} />
-            <Route path="/Leeting" exact={true} component={Leeting} />
-            <Route path="/join" exact={true} component={Join} />
-            <Route path="/login" exact={true} component={Login} />
+          <Route path="/" exact={true} component={Home} />
+          <Route path="/Leeting" exact={true} component={Leeting} />
+          <Route path="/join" exact={true} component={Join} />
+          <Route path="/login" exact={true} component={Login} />
           <Route path="/find" exact={true} component={Find} />
           <Route path="/meeting/exercise" exact={true} component={ExcerciseMeeting} />
           <Route path="/meeting/music" exact={true} component={MusicMeeting} />
@@ -37,7 +39,10 @@ function App() {
           <Route path="/meeting/diy" exact={true} component={DIYMeeting} />
           <Route path="/meeting/lans" exact={true} component={LansMeeting} />
           <Route path="/meeting/study" exact={true} component={StudyMeeting} />
-          <Route path="/meeting/:id" exact={true} component={Detail}/>
+          <Route path="/meeting/write" exact={true} component={WriteMeeting} />
+          
+          <Route path="/meeting/:id" exact={true} component={Detail} />
+          
           <Route component={NotFound}/>
         </Switch>
         <Footer/>

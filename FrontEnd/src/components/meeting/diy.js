@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
@@ -9,6 +9,7 @@ function Diy({ id, maintitle, subtitle, date, hostid, detail, categoryno, file }
                 to={{
                     pathname: `/meeting/${id}`,
                     state: {
+                        id,
                         maintitle,
                         subtitle,
                         date,

@@ -1,4 +1,4 @@
-import React, {Component } from "react";
+import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
 import Study from "../../../components/meeting/study"
@@ -10,14 +10,13 @@ class study extends React.Component {
         data:[]
     }
     getLeeting = async () => {
-        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/listmeeting');
+        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/study');
         data = data.data;
-        // console.log('data is ' + JSON.stringify(data.categories));
+        console.log(data.length);
         this.setState({ data, isLoading: false });
     }
     componentDidMount() {
         this.getLeeting();
-        // console.log(this.state.data);
     }
 
     exercisePage = (e) => {
@@ -87,9 +86,10 @@ class study extends React.Component {
                     </div>
                 ) : (
                         <div className="list_view">
-                            {data.map(leeting => (
+                            {data.map((leeting, idx)=> (
                                 <Study
-                                    key={leeting.meetingno}
+                                    key={idx}
+                                    idx={idx}
                                     id={leeting.meetingno}
                                     maintitle={leeting.maintitle}
                                     subtitle={leeting.subtitle}

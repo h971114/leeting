@@ -1,4 +1,4 @@
-import React, {Component } from "react";
+import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
 import Game from "../../../components/meeting/game"
@@ -10,7 +10,7 @@ class game extends React.Component {
         data:[]
     }
     getLeeting = async () => {
-        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/listmeeting');
+        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/game');
         data = data.data;
         // console.log('data is ' + JSON.stringify(data.categories));
         this.setState({ data, isLoading: false });
