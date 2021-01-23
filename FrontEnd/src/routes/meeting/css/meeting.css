@@ -1,6 +1,5 @@
 #meeting_list {
     width: 100%;
-    height: 1300px;
     margin: 0 auto;
 }
 
@@ -147,6 +146,12 @@
     height: 60px;
 }
 
+.writeBtn {
+    height: 50px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
 #meeting_detail {
     width: 1200px;
     margin: 0 auto;
@@ -261,7 +266,7 @@
     color: white;
     font-size: 18px;
     font-weight: 700;
-    cursor: pointer;
+    border: none;
 }
 
 .joinMeeting #joinOutBtn {
@@ -277,6 +282,27 @@
     font-weight: 700;
     cursor: pointer;
     display: none;
+    border: none;
+}
+
+.joinMeeting #modifyBtn {
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto;
+
+    border-radius: 5px;
+    background-color: #008be6;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+    border: none;
+}
+
+.joinMeeting #modifyBtn a {
+    color: white;
 }
 
 .joinMeeting #jointab {

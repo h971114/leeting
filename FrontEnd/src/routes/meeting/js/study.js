@@ -16,7 +16,14 @@ class study extends React.Component {
         this.setState({ data, isLoading: false });
     }
     componentDidMount() {
+        let sId = sessionStorage.getItem('id');
+
+        if (sId === null) {
+            document.getElementById('writeBtn').setAttribute('style', 'display:none');
+        }
+
         this.getLeeting();
+        // console.log(this.state.data);
     }
 
     exercisePage = (e) => {
@@ -41,6 +48,12 @@ class study extends React.Component {
 
     studyPage = (e) => {
         this.props.history.push('/meeting/study');
+    }
+
+    writeBtn = (e) => {
+        e.preventDefault();
+        
+        this.props.history.push("/meeting/write");
     }
 
     render() {
@@ -103,6 +116,9 @@ class study extends React.Component {
                         </div>
                 )}
                 
+                <div id="writeBtn" className="writeBtn">
+                    <button onClick={this.writeBtn}>등록하기</button>
+                </div>
             </div>
         );
     }

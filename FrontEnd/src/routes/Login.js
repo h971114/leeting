@@ -9,7 +9,7 @@ class Login extends React.Component {
         pw: "",
     }
     handleClick = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
         axios.post('http://127.0.0.1:8080/myapp/member/login', {
             id: this.state.id,
@@ -39,6 +39,17 @@ class Login extends React.Component {
             pw: e.target.value,
         });
     };
+
+    handleKeyPress = (e) => {
+        // if(e.charCode === 13) { //  deprecated
+        //   this.handleClick();
+        // }
+    
+        if (e.key === "Enter") {
+          this.handleClick();
+        }
+      };
+
     render() {
 
         return (
@@ -53,7 +64,7 @@ class Login extends React.Component {
                         </div>
                         <div className="password">
                             <p>비밀번호 </p>
-                            <input type="password" className="form-control col-9 margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange}></input>
+                            <input type="password" className="form-control col-9 margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange} onKeyPress={this.handleKeyPress}></input>
                         </div>
                         <div className="col-9 chkbox">
                             <div className="idstore">

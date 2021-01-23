@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {Component, useState } from "react";
 import "../css/meeting.css"
 
 import 'codemirror/lib/codemirror.css';
@@ -13,41 +13,59 @@ import "../css/react-datepicker.css";
 import ko from 'date-fns/locale/ko'; registerLocale('ko', ko);
 
 
-class write extends React.Component {
+class Modify extends React.Component {
+    
     editorRef = React.createRef();
     dateRef = React.createRef();
     
     constructor() {
         super();
-        this.state = {
-            value: '1',
-            
-            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
-
-            checkCategory: true,
-            checkmainTit: false,
-            checksubTit: false,
-            checkcontent:false
-        };
     }    
     state = {
-        categoryno: "1",
-            mainTit: "",
-            subTit: "",
-            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
-            sDate: new Date(),
-        content: "",
-            
+        value:"1",
+        id : "1",
+        maintitle : "1",
+        subtitle : "1",
+        date : "1",
+        hostid : "1",
+        detail : "1",
+        categoryno : "1",
+        file : "1",            
         
         selectedFile: null, //썸네일 파일 첨부
     }
     
-    // handleClick = () => {
-    //     this.setState({
-    //     content: this.editorRef.current.getInstance().getHtml(),
-    //     });
-    //     console.log(this.state.content);
-    // };
+    componentDidMount() {
+        const { location, history } = this.props;
+        var subtit = location.state.subtitle;
+        var subtitarray = subtit.split("#");
+        subtit = subtitarray[1];
+        if (location.state === undefined) {
+            history.push("/");
+        }
+        this.setState({
+            id : location.state.id,
+            maintitle : location.state.maintitle,
+            subtitle : location.state.subtitle,
+            date : location.state.date,
+            hostid : location.state.hostid,
+            detail : location.state.detail,
+            categoryno : location.state.categoryno,
+            value : location.state.categoryno,
+            file : location.state.file,
+        })
+
+        document.getElementById('category').value = location.state.categoryno;
+        document.getElementById('mainTit').value = location.state.maintitle;
+        document.getElementById('subTit').value = subtit;
+        document.getElementById('datepick').value = location.state.date;
+        // this.editorRef;
+        //  = location.state.detail;
+        // console.log(this.editorRef);
+        // editor.setHtml(location.state.detail);
+        // console.log(subtit);
+        // console.log(document.getElementById('datepick').value);
+    }
 
 
     /*Change 관련 메소드*/
@@ -55,40 +73,36 @@ class write extends React.Component {
     selectChange = (event) => {
         this.setState({
             categoryno: event.target.value,
-            value:event.target.value,
-            checkCategory:true
+            value:event.target.value
         })
         document.getElementById('category').value = event.target.value;
-        console.log(this.state.categoryno);
+        // console.log(this.state.categoryno);
     }
 
     mainTitChange = (event) => {
         this.setState({
-            mainTit: event.target.value,
-            checkmainTit:true
+            maintitle: event.target.value
         })
-        console.log(this.state.mainTit);
+        // console.log(this.state.mainTit);
     }
 
     subTitChange = (event) => {
         this.setState({
-            subTit: "#"+event.target.value,
-            checksubTit:true
+            subtitle: "#"+event.target.value
         })
-        console.log(this.state.subTit);
+        // console.log(this.state.subTit);
     }
 
     setStartDate = (event) => { 
         this.setState({
-            sDate: event.target.value,
+            date: event.target.value,
         })
-        console.log(this.state.sDate);
+        // console.log(this.state.sDate);
     }
 
     editorChange = (e) => { 
         this.setState({
-            content: this.editorRef.current.getInstance().getHtml(),
-            checkcontent:true
+            detail: this.editorRef.current.getInstance().getHtml()
         })
         // console.log(this.state.content);
     }
@@ -116,21 +130,13 @@ class write extends React.Component {
             },
         }).then(res => {
             this.setState({
-                thumb: res.data
+                file: res.data
             })
             console.log(this.state.thumb);
         }).catch(err => {
             console.log(err);
         })
     }
-
-
-    // calenderCheck = (e) => {
-    //     this.setState({
-    //         startDay : e.value
-    //     })
-    //     console.log(this.state.startDay);
-    // }
 
     handlePost(){
         const formData = new FormData();
@@ -151,36 +157,26 @@ class write extends React.Component {
         this.setState({
             sDate:document.getElementById("datepick").value
         })
-        // console.log( this.state.mainTit);
-        // console.log( this.state.subTit);
-        // console.log( this.state.sDate);
-        // console.log( this.state.content);
-        // console.log(this.state.categoryno);
-        // console.log(this.state.thumb);
-        axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
-            hostid: sId,
-            maintitle: this.state.mainTit,
-            subtitle: this.state.subTit,
+        axios.put("http://127.0.0.1:8080/myapp/meeting/", {
+            meetingno : this.state.id,
+            hostid: this.state.hostid,
+            maintitle: this.state.maintitle,
+            subtitle: this.state.subtitle,
             date: document.getElementById("datepick").value,
-            detail: this.state.content,
+            detail: this.state.detail,
             categoryno: this.state.categoryno,
-            file:this.state.thumb
+            file:this.state.file
         }).then(res => {
-            if (res.data === "SUCESS") {
                 console.log("성공");
-            }
-            else {
-                console.log("실패");
-            }
         })
     }
-
     
     render() {
+        const { location } = this.props;
         return (
             <div className="writeWrap">
                 <div className="titleset">
-                    <p className="mainTit">Leeting 등록</p>
+                    <p className="mainTit">Leeting 관리</p>
                     <p className="subTit">당신이 원하는 Leeting!</p>
                 </div>
                 <div className="writeInput category">
@@ -196,15 +192,15 @@ class write extends React.Component {
                 </div>
                 <div className="writeInput">
                     <span>제 목</span>
-                    <input type="text" onChange={this.mainTitChange}></input>
+                    <input id="mainTit" type="text" onChange={this.mainTitChange}></input>
                 </div>
                 <div className="writeInput">
                     <span>부제목</span>
-                    <input type="text" onChange={this.subTitChange}></input>
+                    <input id="subTit" type="text" onChange={this.subTitChange}></input>
                 </div>
                 <div className="writeInput">
                     <span>썸네일</span>
-                    <input type="file" name="file" onChange={e => this.handleFileInput(e)}/>
+                    <input id="thumbfile" type="file" name="file" onChange={e => this.handleFileInput(e)}/>
                     <button type="button" onClick={this.uploadImage}>업로드</button>
                 </div>
                 <div className="writeInput">
@@ -213,12 +209,14 @@ class write extends React.Component {
                 </div>
                 <div className="editor">
                     <Editor
+                        id="editor"
                     previewStyle="vertical"
                     height="300px"
                     initialEditType="wysiwyg"
                     placeholder="글쓰기"
                         ref={this.editorRef}
                         onChange={this.editorChange}
+                        initialValue={location.state.detail}
                     />
                     {/* <button onClick={this.handleClick}>저장</button> */}
                 </div>
@@ -260,7 +258,6 @@ function App() {
                 dateFormat="yyyy-MM-dd"
                 selected={startDate} // 날짜 state
                 onChange={setStartDate} // 날짜 설정 콜백 함수 
-                minDate={new Date()} // 과거 날짜 disable
                 popperModifiers={{
                     // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정 
                     preventOverflow: { enabled: true, },
@@ -276,8 +273,4 @@ function App() {
     );
 }
 
-
-
-
-
-export default write;
+export default Modify;

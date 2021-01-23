@@ -9,6 +9,7 @@ function Exercise({ id, maintitle, subtitle, date, hostid, detail, categoryno, f
                 to={{
                     pathname: `/meeting/${id}`,
                     state: {
+                        id,
                         maintitle,
                         subtitle,
                         date,

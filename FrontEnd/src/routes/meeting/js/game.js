@@ -16,6 +16,12 @@ class game extends React.Component {
         this.setState({ data, isLoading: false });
     }
     componentDidMount() {
+        let sId = sessionStorage.getItem('id');
+
+        if (sId === null) {
+            document.getElementById('writeBtn').setAttribute('style', 'display:none');
+        }
+
         this.getLeeting();
         // console.log(this.state.data);
     }
@@ -42,6 +48,12 @@ class game extends React.Component {
 
     studyPage = (e) => {
         this.props.history.push('/meeting/study');
+    }
+
+    writeBtn = (e) => {
+        e.preventDefault();
+        
+        this.props.history.push("/meeting/write");
     }
 
     render() {
@@ -86,23 +98,27 @@ class game extends React.Component {
                         </div>
                     </div>
                 ) : (
-                        <div className="list_view">
-                            {data.map(leeting => (
-                                <Game
-                                    key={leeting.meetingno}
-                                    id={leeting.meetingno}
-                                    maintitle={leeting.maintitle}
-                                    subtitle={leeting.subtitle}
-                                    date={leeting.date}
-                                    hostid={leeting.hostid}
-                                    detail={leeting.detail}
-                                    categoryno={leeting.categoryno}
-                                    file={leeting.file}
-                                />
-                            ))}
-                        </div>
+                    <div className="list_view">
+                        {data.map((leeting, idx)=> (
+                            <Game
+                                key={idx}
+                                idx={idx}
+                                id={leeting.meetingno}
+                                maintitle={leeting.maintitle}
+                                subtitle={leeting.subtitle}
+                                date={leeting.date}
+                                hostid={leeting.hostid}
+                                detail={leeting.detail}
+                                categoryno={leeting.categoryno}
+                                file={leeting.file}
+                            />
+                        ))}
+                    </div>
                 )}
                 
+                <div id="writeBtn" className="writeBtn">
+                    <button onClick={this.writeBtn}>등록하기</button>
+                </div>
             </div>
         );
     }

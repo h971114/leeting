@@ -9,6 +9,7 @@ function Game({ id, maintitle, subtitle, date, hostid, detail, categoryno, file 
                 to={{
                     pathname: `/meeting/${id}`,
                     state: {
+                        id,
                         maintitle,
                         subtitle,
                         date,

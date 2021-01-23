@@ -11,6 +11,7 @@ function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno,
                 to={{
                     pathname: `/meeting/${id}`,
                     state: {
+                        id,
                         maintitle,
                         subtitle,
                         date,

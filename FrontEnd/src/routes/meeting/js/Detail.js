@@ -2,12 +2,16 @@ import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+import propTypes  from "prop-types";
+
 class Detail extends React.Component {
 
     constructor() {
         super();
         this.state = {
             likes: false,
+            checkJoin:false,
         }
     }
 
@@ -28,79 +32,96 @@ class Detail extends React.Component {
             document.getElementById('jointab').setAttribute('style', 'display:none');
             this.checkLike();
             this.checkJoin();
+            this.checkHost();
             // console.log(this.state.likes);
         }
+    }
+
+    checkHost = async () => {
+        const { location } = this.props;
+
+        let sId = sessionStorage.getItem('id');
+
+        if (location.state.hostid === sId) {
+            document.getElementById('likebtn').disabled = true;
+            document.getElementById('joinBtn').setAttribute("style", "display:none");
+            document.getElementById('joinOutBtn').setAttribute("style", "display:none");
+            document.getElementById('modifyBtn').setAttribute("style", "display:block");
+        }
+        
     }
 
     checkLike = async () => {
         const { location } = this.props;
         let category;
         let sId = sessionStorage.getItem('id');
-        if (location.state.categoryno == 1)
+        if (location.state.categoryno === 1)
             category = 'exercise';
-        else if (location.state.categoryno == 2)
+        else if (location.state.categoryno === 2)
             category = 'music';
-        else if (location.state.categoryno == 3)
+        else if (location.state.categoryno === 3)
             category = 'game';
-        else if (location.state.categoryno == 4)
+        else if (location.state.categoryno === 4)
             category = 'diy';
-        else if (location.state.categoryno == 5)
+        else if (location.state.categoryno === 5)
             category = 'lans';
         else
             category = 'study';
             
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        // console.log(data.data);
-        for (let i = 0; i < data.data.length; i++) {
-            if (sId === data.data[i].userid) {
-                if (data.data[i].likestatus) {
-                    this.setState({
-                        likes: true
-                    })
-                    document.getElementById('likebtn').classList.add('ilike');
+        if (data.data.message === "SUCCESS") {
+            for (let i = 0; i < data.data.length; i++) {
+                if (sId === data.data[i].userid) {
+                    if (data.data[i].likestatus) {
+                        this.setState({
+                            likes: true
+                        })
+                        document.getElementById('likebtn').classList.add('ilike');
+                    }
                 }
             }
+            // data = data.data;
+            // this.setState({ data, isLoading: false });    
         }
-        // data = data.data;
-        // this.setState({ data, isLoading: false });
     }
 
     checkJoin = async () => {
         const { location } = this.props;
         let category;
-        let checkJoin = false;
         let sId = sessionStorage.getItem('id');
-        if (location.state.categoryno == 1)
+        if (location.state.categoryno === 1)
             category = 'exercise';
-        else if (location.state.categoryno == 2)
+        else if (location.state.categoryno === 2)
             category = 'music';
-        else if (location.state.categoryno == 3)
+        else if (location.state.categoryno === 3)
             category = 'game';
-        else if (location.state.categoryno == 4)
+        else if (location.state.categoryno === 4)
             category = 'diy';
-        else if (location.state.categoryno == 5)
+        else if (location.state.categoryno === 5)
             category = 'lans';
         else
             category = 'study';
         
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        data = data.data.list;
-        // console.log(data);
-        for (let i = 0; i < data.length; i++) {
-            // console.log(data[i].userid);
-            if (sId === data[i].userid) {
-                checkJoin = true;
+        // console.log(data.data.message);
+        if (data.data.message === "SUCCESS") {
+            data = data.data.list;
+            for (let i = 0; i < data.length; i++) {
+                // console.log(data[i].userid);
+                if (sId === data[i].userid) {
+                    this.state.checkJoin = true;
+                }
             }
+            console.log(this.state.checkJoin);
+            if (this.state.checkJoin === true) {
+                document.getElementById('joinBtn').setAttribute("style", "display:none");
+                document.getElementById('joinOutBtn').setAttribute("style", "display:block");
+            }
+            // data = data.data;
+            // this.setState({ data, isLoading: false });
         }
-        console.log(checkJoin);
-        if (checkJoin === true) {
-            document.getElementById('joinBtn').setAttribute("style", "display:none");
-            document.getElementById('joinOutBtn').setAttribute("style", "display:block");
-        }
-        // data = data.data;
-        // this.setState({ data, isLoading: false });
     }
     
     likeClick = (e) => {
@@ -141,12 +162,26 @@ class Detail extends React.Component {
         }).then(res => {
             if (res.data === "SUCESS") {
                 console.log("성공");
-                window.location.replace("/meeting"+"/"+location.state.id);
+                document.getElementById('joinBtn').setAttribute("style", "display:none");
+                document.getElementById('joinOutBtn').setAttribute("style", "display:block");
+                this.setState({
+                    checkJoin:true
+                })
             } else {
                 console.log("실패");
             }
         })
     }
+
+    // goModify = (e) => {
+    //     e.preventDefault();
+
+    //     const { location, history } = this.props;
+
+    //     let modifyurl = '/meeting/modify/' + location.state.id;
+    //     // console.log(modifyurl);
+    //     history.push(modifyurl);
+    // }
 
   render() {
       const { location } = this.props;
@@ -168,6 +203,17 @@ class Detail extends React.Component {
                         <div className="joinMeeting" >
                             <button id="joinBtn" onClick={ this.joinMeetingClick }>미팅 참여하기</button>
                             <button id="joinOutBtn">미팅 나가기</button>
+                            <GoModify
+                                key={location.state.id}
+                                id={location.state.id}
+                                maintitle={location.state.maintitle}
+                                subtitle={location.state.subtitle}
+                                date={location.state.date}
+                                hostid={location.state.hostid}
+                                detail={location.state.detail}
+                                categoryno={location.state.categoryno}
+                                file={location.state.file}
+                            />
                             <p id="jointab">로그인 하시면 미팅에 참여 및 리뷰가 가능합니다.</p>
                         </div>
                             <hr className="hosthr"/>
@@ -191,4 +237,40 @@ class Detail extends React.Component {
     }
   }
 }
+
+function GoModify({ id, maintitle, subtitle, date, hostid, detail, categoryno, file }) {
+    return (
+        <div id="modifyBtn">
+            <Link
+                to={{
+                    pathname: `/meeting/modify/${id}`,
+                    state: {
+                        id,
+                        maintitle,
+                        subtitle,
+                        date,
+                        hostid,
+                        detail,
+                        categoryno,
+                        file
+                    }
+                }}
+            >미팅 관리하기
+                {/* <button id="modifyBtn" ></button> */}
+            </Link>
+        </div>
+    )
+}
+
+GoModify.propTypes = {
+    id: propTypes.number.isRequired,
+    maintitle: propTypes.string.isRequired,
+    subtitle: propTypes.string.isRequired,
+    date: propTypes.string.isRequired,
+    hostid: propTypes.string.isRequired,
+    detail: propTypes.string.isRequired,
+    categoryno: propTypes.number.isRequired,
+    file: propTypes.string.isRequired
+};
+    
 export default Detail;
