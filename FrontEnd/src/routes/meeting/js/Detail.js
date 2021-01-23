@@ -51,7 +51,7 @@ class Detail extends React.Component {
             
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        console.log(data.data);
+        // console.log(data.data);
         for (let i = 0; i < data.data.length; i++) {
             if (sId === data.data[i].userid) {
                 if (data.data[i].likestatus) {
@@ -86,12 +86,15 @@ class Detail extends React.Component {
         
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        console.log(data.data);
-        for (let i = 0; i < data.data.length; i++) {
-            if (sId === data.data[i].userid) {
+        data = data.data.list;
+        // console.log(data);
+        for (let i = 0; i < data.length; i++) {
+            // console.log(data[i].userid);
+            if (sId === data[i].userid) {
                 checkJoin = true;
             }
         }
+        console.log(checkJoin);
         if (checkJoin === true) {
             document.getElementById('joinBtn').setAttribute("style", "display:none");
             document.getElementById('joinOutBtn').setAttribute("style", "display:block");
