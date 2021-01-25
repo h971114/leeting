@@ -17,4 +17,6 @@ public interface MeetingDao {
 	public ParticipationDto participationinfo(ParticipationDto participationDto);
 	void setlikestatus(ParticipationDto participationDto);
 	void clickmeeting(ParticipationDto participationDto);
+	List<MeetingDto> searchbytitle(String keyword);
+	List<MeetingDto> searchbyid(String keyword);
 }

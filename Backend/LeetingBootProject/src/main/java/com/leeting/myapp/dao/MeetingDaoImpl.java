@@ -65,4 +65,14 @@ public class MeetingDaoImpl implements MeetingDao{
 	public void clickmeeting(ParticipationDto participationDto) {
 		sqlSession.insert("meeting.clickmeeting", participationDto);
 	}
+
+	@Override
+	public List<MeetingDto> searchbytitle(String keyword) {
+		return sqlSession.selectList("meeting.searchbytitle", keyword);
+	}
+
+	@Override
+	public List<MeetingDto> searchbyid(String keyword) {
+		return sqlSession.selectList("meeting.searchbyid", keyword);
+	}
 }

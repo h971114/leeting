@@ -12,15 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.ParticipationDto;
@@ -194,5 +186,32 @@ public class MeetingController {
 			conclusion = "FAIL";
 		}
 		return new ResponseEntity<>(conclusion, status);
+	}
+
+	// 미팅 검색
+	@ApiOperation(value="미팅검색", notes="키워드로 미팅 검색", response = Map.class)
+	@GetMapping("/searchmeeting")
+	public ResponseEntity<Map<String, Object>> searchMeeting( @RequestParam(value = "condition", defaultValue = "1") int num,
+															  @RequestParam(value = "keyword", defaultValue = "") String keyword,
+															  HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("get to /searchmeeting done");
+		Map<String, Object> conclusionMap = new HashMap<>();
+		List<MeetingDto> list = new ArrayList<>();
+		if(num==1){ // 제목으로 검색
+			list = meetingService.searchByTitle(keyword);
+			System.out.println("제목 검색");
+		}else { // 아이디로 검색
+			list = meetingService.searchById(keyword);
+			System.out.println("아이디 검색");
+		}
+		conclusionMap.put("list", list);
+		if(list.size() != 0) conclusionMap.put("message", "SUCCESS");
+		else conclusionMap.put("message", "FAIL");
+		System.out.println(conclusionMap.get("message"));
+		for(MeetingDto MeetingDto : list)
+			System.out.println(MeetingDto.getHostid());
+		return new ResponseEntity<>(conclusionMap, status);
 	}
 }

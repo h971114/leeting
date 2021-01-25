@@ -48,4 +48,15 @@
 		FROM participation
 		WHERE userid = #{userid} and meetingno = #{meetingno}
 	</select>
+
+	<!-- 키워드 검색: 제목(부제목), 아이디-->
+	<select id="searchbytitle" parameterType="String" resultType="meeting">
+		SELECT * FROM meeting
+		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
+		subtitle like CONCAT('%', #{keyword}, '%');
+	</select>
+	<select id="searchbyid" parameterType="String" resultType="meeting">
+		SELECT * FROM meeting
+		WHERE hostid like CONCAT('%', #{keyword}, '%')
+	</select>
 </mapper>
