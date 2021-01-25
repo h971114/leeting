@@ -32,8 +32,10 @@
 	<select id ="sameEmail" parameterType = "String" resultType="int">
 		SELECT count(*) FROM member WHERE email=#{email}
 	</select>
-	<select id = "usermeet" parameterType=  "String" resultType="String">
-		SELECT meetingno FROM participation where userid = #{id} limit 5
+	<select id = "usermeet"  resultType="meeting">
+		select t1.no as meetingno, t1.maintitle, t1.subtitle, t1.date, t1.hostid, t1.detail, t1.categoryno, t1.file, t1.enddate, t1.meetinglike, t1.participants
+from meeting t1, participation t2
+where t1.no=t2.meetingno and t2.userid=#{id} limit 5
 	</select>
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="String">

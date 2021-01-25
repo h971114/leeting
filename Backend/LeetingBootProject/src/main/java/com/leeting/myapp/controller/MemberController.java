@@ -1,18 +1,35 @@
 package com.leeting.myapp.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.ProcessBuilder.Redirect;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +41,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.net.HttpHeaders;
 import com.leeting.myapp.dao.MemberDao;
 import com.leeting.myapp.dao.MemberDaoImpl;
 import com.leeting.myapp.model.MemberDto;
 import com.leeting.myapp.service.JwtService;
 import com.leeting.myapp.service.MemberService;
+import com.sun.el.parser.ParseException;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -40,7 +59,8 @@ public class MemberController {
   // service
   private final MemberService memberService;
 
-
+  private String naver_CLIENT_ID = "9Iq4lB5v8rOAjG6u6MbW"; //애플리케이션 클라이언트 아이디값";
+  private String naver_CLI_SECRET = "txH0k0U4_k"; //애플리케이션 클라이언트 시크릿값";
   @Autowired
   public MemberController(MemberService memberService) {
     this.memberService = memberService;
@@ -262,12 +282,14 @@ public class MemberController {
   }
   @ApiOperation(value = "참여미팅", notes = "참여미팅메인", response = Map.class)
   @GetMapping("/usermeet")
-  public ResponseEntity<List<Object>> usermeet(@RequestParam("id") String memberid, HttpServletRequest req) throws SQLException {
+  public ResponseEntity<List<Object>> usermeet( HttpServletRequest req) throws SQLException {
     System.out.println(req);
     HttpStatus status = HttpStatus.ACCEPTED;
     System.out.println("get to /member/usermeet done");
     System.out.println("참여미팅");
-    List<Object> meetlist = memberService.userMeet(memberid);
+    System.out.println(memberService.userMeet("prestto").toString());
+    List<Object> meetlist = memberService.userMeet("prestto");
+//    		memberService.userMeet(memberid);
     return new ResponseEntity<List<Object>>(meetlist, status);
   }
   public String getTempAuth(){
@@ -283,4 +305,112 @@ public class MemberController {
       }
       return str;
   }
+  @RequestMapping("/naver")
+  public ResponseEntity<Object> testNaver(HttpSession session, Model model) throws IOException, URISyntaxException {
+    String redirectURI = URLEncoder.encode("http://localhost:3000/login", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += String.format("&client_id=%s&redirect_uri=%s&state=%s",
+        naver_CLIENT_ID, redirectURI, state);
+    session.setAttribute("state", state);
+    model.addAttribute("apiURL", apiURL);
+    URI redirecUri = new URI(apiURL);
+    org.springframework.http.HttpHeaders httpHeaders = new org.springframework.http.HttpHeaders();
+    System.out.println(redirecUri.toString());
+    httpHeaders.setLocation(redirecUri);
+    return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+  }
+  
+  @GetMapping("/naver/callback1")
+  public ResponseEntity<Map<String,String>> naverCallback1(@RequestParam("code") String code,@RequestParam("state") String state, HttpSession session) throws IOException, ParseException, org.apache.tomcat.util.json.ParseException, URISyntaxException {
+    session.setAttribute("state", state);
+    HttpStatus status = HttpStatus.ACCEPTED;
+    String redirectURI = URLEncoder.encode("http://localhost:3000/login", "UTF-8");
+    String apiURL;
+    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+    apiURL += "client_id=" + naver_CLIENT_ID;
+    apiURL += "&client_secret=" + naver_CLI_SECRET;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&code=" + code;
+    apiURL += "&state=" + state;
+    System.out.println("apiURL=" + apiURL);
+    String res = requestToServer(apiURL);
+    System.out.println(res);
+    if(res != null && !res.equals("")) {
+      Map<String, Object> parsedJson = new JSONParser(res).parseObject();
+      System.out.println(parsedJson);
+      session.setAttribute("currentUser", res);
+      session.setAttribute("currentAT", parsedJson.get("access_token"));
+      session.setAttribute("currentRT", parsedJson.get("refresh_token"));
+    } else {
+    }
+   String infoStr =  getProfileFromNaver(session.getAttribute("currentAT").toString());
+   Map<String, Object> infoMap = new JSONParser(infoStr).parseObject();
+   Map<String, String> conclusionmap = new HashMap<String, String>();
+   if(infoMap.get("message").equals("success")) {
+     Map<String, Object> infoResp = (Map<String, Object>) infoMap.get("response");
+     System.out.println(infoResp);
+     String uniqueid = "nav_"+ infoResp.get("id");
+     MemberDto newmember = new MemberDto(uniqueid, uniqueid, infoResp.get("name").toString(), infoResp.get("nickname").toString(), infoResp.get("mobile").toString(), infoResp.get("email").toString());
+     if(memberService.sameId(newmember.getId()) && memberService.sameEmail(newmember.getEmail())) {
+     	memberService.join(newmember);
+     }
+     else if(memberService.sameEmail(newmember.getEmail())){
+    	 conclusionmap.put("message", "FAIL_email");
+//    	 return new ResponseEntity<Map<String, String>>(conclusionmap, status);
+     }
+     String token = jwtService.create("id", newmember.getId(), "id");
+ 	conclusionmap.put("message", "SUCCESS");
+ 	conclusionmap.put("token", token);
+ 	conclusionmap.put("id", newmember.getId());
+ 	conclusionmap.put("nickname", newmember.getNickname());
+ 	conclusionmap.put("name", newmember.getName());
+   }
+   if(!conclusionmap.containsKey("message")) {
+	   conclusionmap.put("message", "FAIL");
+   }
+   return new ResponseEntity<Map<String,String>>(conclusionmap, status);
+//   return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+//    return new ResponseEntity<Map<String, String>>(conclusionmap, status);
+  }
+ 
+  private String requestToServer(String apiURL, String headerStr) throws IOException {
+	    URL url = new URL(apiURL);
+	    HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	    con.setRequestMethod("GET");
+	    System.out.println("header Str: " + headerStr);
+	    if(headerStr != null && !headerStr.equals("") ) {
+	      con.setRequestProperty("Authorization", headerStr);
+	    }
+	    int responseCode = con.getResponseCode();
+	    BufferedReader br;
+	    System.out.println("responseCode="+responseCode);
+	    if(responseCode == 200) { // 정상 호출
+	      br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	    } else {  // 에러 발생
+	      br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	    }
+	    String inputLine;
+	    StringBuffer res = new StringBuffer();
+	    while ((inputLine = br.readLine()) != null) {
+	      res.append(inputLine);
+	    }
+	    br.close();
+	    if(responseCode==200) {
+	      return res.toString();
+	    } else {
+	      return null;
+	    }
+	  }
+  private String requestToServer(String apiURL) throws IOException {
+	    return requestToServer(apiURL, "");
+	  }
+  public String getProfileFromNaver(String accessToken) throws IOException {
+	    // 네이버 로그인 접근 토큰;
+	    String apiURL = "https://openapi.naver.com/v1/nid/me";
+	    String headerStr = "Bearer " + accessToken; // Bearer 다음에 공백 추가
+	    String res = requestToServer(apiURL, headerStr);
+	    return res;
+	  }
 }

@@ -8,19 +8,53 @@ class Login extends React.Component {
         id: "",
         pw: "",
     }
+
+    Naver = () => {
+        var location = this.state.currentLocation;
+            var link = 'http://127.0.0.1:8080/myapp/member/naver'
+            window.location.assign(link);
+        };
+    componentDidMount() {
+        const search = this.props.location.search;
+        const params = new URLSearchParams(search);
+        const code = params.get('code');
+        const state = params.get('state');
+        console.log(code);
+        console.log(state);
+        if (code != null && state != null) {
+            axios.get('http://127.0.0.1:8080/myapp/member/naver/callback1', {
+                params: {
+                    code: code,
+                    state : state
+                }
+            }).then(res => {
+                console.log(res.data);
+                if (res.data.message === "SUCCESS") {
+                    sessionStorage.setItem("token", res.data.token);
+                    sessionStorage.setItem("nickname", res.data.nickname);
+                    sessionStorage.setItem("id", res.data.id);
+                    window.location.replace("/");
+                } else {
+                    alert("아이디와 비밀번호를 확인해주세요.");
+                }
+            })
+        }
+    };
     handleClick = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
-        console.log(this.state);
         axios.post('http://127.0.0.1:8080/myapp/member/login', {
             id: this.state.id,
             pw: this.state.pw
         }).then(res => {
             // console.log(res);
+            console.log(this.state.id);
+            console.log(this.state.pw);
             console.log(res.data.message);
-            if (res.data.message == "SUCCESS") {
+            if (res.data.message === "SUCCESS") {
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("nickname", res.data.nickname);
+                sessionStorage.setItem("id", res.data.id);
                 window.location.replace("/");
             } else {
                 alert("아이디와 비밀번호를 확인해주세요.");
@@ -37,6 +71,17 @@ class Login extends React.Component {
             pw: e.target.value,
         });
     };
+
+    handleKeyPress = (e) => {
+        // if(e.charCode === 13) { //  deprecated
+        //   this.handleClick();
+        // }
+    
+        if (e.key === "Enter") {
+          this.handleClick();
+        }
+      };
+
     render() {
 
         return (
@@ -51,7 +96,7 @@ class Login extends React.Component {
                         </div>
                         <div className="password">
                             <p>비밀번호 </p>
-                            <input type="password" className="form-control col-9 margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange}></input>
+                            <input type="password" className="form-control col-9 margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange} onKeyPress={this.handleKeyPress}></input>
                         </div>
                         <div className="col-9 chkbox">
                             <div className="idstore">
@@ -65,7 +110,7 @@ class Login extends React.Component {
                         </div>
                         <div className="loginset">
                             <div className="col-9 defaultlogin" onClick ={this.handleClick}>로 그 인</div>
-                            <div className="col-9 naverlogin">네이버 로그인</div>
+                            <div className="col-9 naverlogin" onClick={this.Naver}>네이버 로그인</div>
                             <div className="col-9 googlelogin" >구글 로그인</div>
                             <div className="col-9 kakaologin" >카카오 계정 로그인</div>
                         </div>
