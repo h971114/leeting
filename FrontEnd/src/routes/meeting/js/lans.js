@@ -1,6 +1,9 @@
 import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
+import { Link } from "react-router-dom";
+import moment from 'moment';
+import 'moment/locale/ko';
 import Lans from "../../../components/meeting/lans"
 
 class lans extends React.Component {
@@ -101,23 +104,35 @@ class lans extends React.Component {
                     <div className="list_view">
                         {data.map((leeting, idx)=> (
                             <Lans
-                                key={idx}
-                                idx={idx}
-                                id={leeting.meetingno}
-                                maintitle={leeting.maintitle}
-                                subtitle={leeting.subtitle}
-                                date={leeting.date}
-                                hostid={leeting.hostid}
-                                detail={leeting.detail}
-                                categoryno={leeting.categoryno}
-                                file={leeting.file}
+                            key={idx}
+                            idx={idx}
+                            id={leeting.meetingno}
+                            maintitle={leeting.maintitle}
+                            subtitle={leeting.subtitle}
+                            date={leeting.date}
+                            hostid={leeting.hostid}
+                            detail={leeting.detail}
+                            categoryno={leeting.categoryno}
+                            file={leeting.file}
+                            meetinglike={leeting.meetinglike}
+                            enddate={leeting.enddate}
+                            participants={leeting.participants}
                             />
                         ))}
                     </div>
                 )}
                 
                 <div id="writeBtn" className="writeBtn">
-                    <button onClick={this.writeBtn}>등록하기</button>
+                    <Link
+                        to={{
+                            pathname: `/meeting/write`,
+                            state: {
+                                date: moment().add(1, 'd')._d
+                            }
+                        }}
+                    >
+                        <button >등록하기</button>
+                    </Link>
                 </div>
             </div>
         );

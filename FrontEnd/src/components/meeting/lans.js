@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
-function Lans({ id, maintitle, subtitle, date, hostid, detail, categoryno, file }) {
+function Lans({ id, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants }) {
     return (
         <div className="itemListView">
             <Link
@@ -16,7 +16,10 @@ function Lans({ id, maintitle, subtitle, date, hostid, detail, categoryno, file 
                         hostid,
                         detail,
                         categoryno,
-                        file
+                        file,
+                        meetinglike,
+                        enddate,
+                        participants
                     }
                 }}
             >
@@ -36,7 +39,10 @@ Lans.propTypes  = {
     hostid: propTypes.string.isRequired,
     detail: propTypes.string.isRequired,
     categoryno: propTypes.number.isRequired,
-    file: propTypes.string.isRequired
+    file: propTypes.string.isRequired,
+    meetinglike: propTypes.number.isRequired,
+    enddate: propTypes.string,
+    participants: propTypes.number.isRequired
 };
  
 export default Lans;

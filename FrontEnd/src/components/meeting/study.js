@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
-function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno, file }) {
+function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants }) {
     
-    console.log(idx);
     return (
         <div className="itemListView">
             <Link
@@ -18,7 +17,10 @@ function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno,
                         hostid,
                         detail,
                         categoryno,
-                        file
+                        file,
+                        meetinglike,
+                        enddate,
+                        participants
                     }
                 }}
             >
@@ -38,7 +40,10 @@ Study.propTypes  = {
     hostid: propTypes.string.isRequired,
     detail: propTypes.string.isRequired,
     categoryno: propTypes.number.isRequired,
-    file: propTypes.string.isRequired
+    file: propTypes.string.isRequired,
+    meetinglike: propTypes.number.isRequired,
+    enddate: propTypes.string,
+    participants: propTypes.number.isRequired
 };
  
 export default Study;

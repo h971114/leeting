@@ -1,6 +1,9 @@
 import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
+import { Link } from "react-router-dom";
+import moment from 'moment';
+import 'moment/locale/ko';
 import Exercise from "../../../components/meeting/exercise"
 
 class exercise extends React.Component {
@@ -12,6 +15,7 @@ class exercise extends React.Component {
     getLeeting = async () => {
         let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/exercise');
         data = data.data;
+        // console.log(data);
         // console.log('data is ' + JSON.stringify(data.categories));
         this.setState({ data, isLoading: false });
     }
@@ -101,23 +105,35 @@ class exercise extends React.Component {
                     <div className="list_view">
                         {data.map((leeting, idx)=> (
                             <Exercise
-                                key={idx}
-                                idx={idx}
-                                id={leeting.meetingno}
-                                maintitle={leeting.maintitle}
-                                subtitle={leeting.subtitle}
-                                date={leeting.date}
-                                hostid={leeting.hostid}
-                                detail={leeting.detail}
-                                categoryno={leeting.categoryno}
-                                file={leeting.file}
+                            key={idx}
+                            idx={idx}
+                            id={leeting.meetingno}
+                            maintitle={leeting.maintitle}
+                            subtitle={leeting.subtitle}
+                            date={leeting.date}
+                            hostid={leeting.hostid}
+                            detail={leeting.detail}
+                            categoryno={leeting.categoryno}
+                            file={leeting.file}
+                            meetinglike={leeting.meetinglike}
+                            enddate={leeting.enddate}
+                            participants={leeting.participants}
                             />
                         ))}
                     </div>
                 )}
                 
                 <div id="writeBtn" className="writeBtn">
-                    <button onClick={this.writeBtn}>등록하기</button>
+                    <Link
+                        to={{
+                            pathname: `/meeting/write`,
+                            state: {
+                                date: moment().add(1, 'd')._d
+                            }
+                        }}
+                    >
+                        <button >등록하기</button>
+                    </Link>
                 </div>
             </div>
         );

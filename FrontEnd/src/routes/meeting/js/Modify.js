@@ -5,6 +5,8 @@ import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import axios from "axios";
+import moment from 'moment';
+import 'moment/locale/ko';
 
 import DatePicker, { registerLocale } from "react-datepicker";
 
@@ -30,7 +32,8 @@ class Modify extends React.Component {
         hostid : "1",
         detail : "1",
         categoryno : "1",
-        file : "1",            
+        file: "1",  
+        enddate:"",
         
         selectedFile: null, //썸네일 파일 첨부
     }
@@ -43,6 +46,11 @@ class Modify extends React.Component {
         if (location.state === undefined) {
             history.push("/");
         }
+        console.log(location.state.enddate);
+        if (location.state.enddate === undefined) {
+            this.state.enddate = location.state.date;
+            console.log("test");
+        }
         this.setState({
             id : location.state.id,
             maintitle : location.state.maintitle,
@@ -52,19 +60,19 @@ class Modify extends React.Component {
             detail : location.state.detail,
             categoryno : location.state.categoryno,
             value : location.state.categoryno,
-            file : location.state.file,
+            file: location.state.file,
         })
 
         document.getElementById('category').value = location.state.categoryno;
         document.getElementById('mainTit').value = location.state.maintitle;
         document.getElementById('subTit').value = subtit;
-        document.getElementById('datepick').value = location.state.date;
+        // document.getElementById('startdatepick').value = location.state.date;
         // this.editorRef;
         //  = location.state.detail;
         // console.log(this.editorRef);
-        // editor.setHtml(location.state.detail);
-        // console.log(subtit);
-        // console.log(document.getElementById('datepick').value);
+        // editor.setHtml();
+        // console.log(location.state.date);
+        // console.log(document.getElementById('startdatepick').value);
     }
 
 
@@ -109,6 +117,90 @@ class Modify extends React.Component {
 
     /* Click 관련 메소드*/
 
+    oneDay = (e) => {
+        this.setState({
+            eDate:0
+        })
+
+        const startDay = document.getElementById('startdatepick').value;
+
+        document.getElementById('enddatepick').setAttribute('style', 'display:none');
+        document.getElementById('enddate').setAttribute('style', 'display:inline-block');
+
+        document.getElementById('enddate').value=startDay;
+        
+    }
+
+    oneWeek = (e) => {
+        this.setState({
+            eDate:1
+        })
+
+        const startDay = document.getElementById('startdatepick').value;
+
+        var sYear = startDay.substring(0,4);
+        var sMonth = startDay.substring(5,7);
+        var sDate = startDay.substring(8,10);
+
+        const nowDate = moment(sYear + '-' + sMonth + '-' + sDate);
+        const nextDate = nowDate.clone().add(7, 'days');
+
+        sYear = nextDate._d.getFullYear();
+        sMonth = nextDate._d.getMonth() + 1;
+        sDate = nextDate._d.getDate();
+
+        sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+        sDate  = sDate > 9 ? sDate : "0" + sDate;
+
+        // console.log(sYear + '-' + sMonth + '-' + sDate);
+
+        document.getElementById('enddatepick').setAttribute('style', 'display:none');
+        document.getElementById('enddate').setAttribute('style', 'display:inline-block');
+        
+        document.getElementById('enddate').value = sYear + '-' + sMonth + '-' + sDate;
+
+        
+    }
+
+    oneMonth = (e) => {
+        this.setState({
+            eDate:1
+        })
+
+        const startDay = document.getElementById('startdatepick').value;
+
+        var sYear = startDay.substring(0,4);
+        var sMonth = startDay.substring(5,7);
+        var sDate = startDay.substring(8,10);
+
+        const nowDate = moment(sYear + '-' + sMonth + '-' + sDate);
+        const nextDate = nowDate.clone().add(1, 'months');
+
+        sYear = nextDate._d.getFullYear();
+        sMonth = nextDate._d.getMonth() + 1;
+        sDate = nextDate._d.getDate();
+
+        sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+        sDate  = sDate > 9 ? sDate : "0" + sDate;
+
+        // console.log(sYear + '-' + sMonth + '-' + sDate);
+
+        document.getElementById('enddatepick').setAttribute('style', 'display:none');
+        document.getElementById('enddate').setAttribute('style', 'display:inline-block');
+        
+        document.getElementById('enddate').value = sYear + '-' + sMonth + '-' + sDate;
+        
+    }
+
+    Free = (e) => {
+        this.setState({
+            eDate:2
+        })
+        
+        document.getElementById('enddatepick').setAttribute('style', 'display:inline-block');
+        document.getElementById('enddate').setAttribute('style', 'display:none');
+    }
+
     handleFileInput(e) {
         this.setState({
             selectedFile : e.target.files[0],
@@ -151,23 +243,44 @@ class Modify extends React.Component {
 
     writeClick = (e) => {
         e.preventDefault();
-        let sId = sessionStorage.getItem('id');
 
         // console.log(document.getElementById("datepick").value);
         this.setState({
-            sDate:document.getElementById("datepick").value
+            sDate:document.getElementById("startdatepick").value
         })
+        var enddate = "";
+        if (this.state.eDate === 0) {
+            enddate = document.getElementById("startdatepick").value;    
+        }
+        else if (this.state.eDate === 1) {
+            enddate = document.getElementById("enddate").value;
+        } else {
+            enddate = document.getElementById("enddatepick").value;
+        }
         axios.put("http://127.0.0.1:8080/myapp/meeting/", {
             meetingno : this.state.id,
             hostid: this.state.hostid,
             maintitle: this.state.maintitle,
             subtitle: this.state.subtitle,
-            date: document.getElementById("datepick").value,
+            date: document.getElementById("startdatepick").value,
             detail: this.state.detail,
             categoryno: this.state.categoryno,
-            file:this.state.file
+            file: this.state.file,
+            enddate : enddate,
         }).then(res => {
                 console.log("성공");
+        })
+    }
+
+    deleteClick = (e) => { 
+        e.preventDefault();
+        let no = this.state.id;
+
+        axios.delete("http://127.0.0.1:8080/myapp/meeting"+"/"+no, {
+            meetingno: this.state.id,
+            no:this.state.id
+        }).then(res => {
+            console.log("삭제 성공");
         })
     }
     
@@ -179,7 +292,91 @@ class Modify extends React.Component {
                     <p className="mainTit">Leeting 관리</p>
                     <p className="subTit">당신이 원하는 Leeting!</p>
                 </div>
-                <div className="writeInput category">
+                <div className="writeInputWrap">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th scope="row">카테고리</th>
+                                <td colSpan="5">
+                                    <select id="category" value={this.state.value} onChange={this.selectChange}>
+                                        <option value="1" defaultValue>운  동</option>
+                                        <option value="2">음  악</option>
+                                        <option value="3">게  임</option>
+                                        <option value="4">D.I.Y</option>
+                                        <option value="5">Lan's Meeting</option>
+                                        <option value="6">스터디</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">제목</th>
+                                <td colSpan="2">
+                                    <input id="mainTit" type="text" onChange={this.mainTitChange}></input>
+                                </td>
+                                <th scope="row">부제목</th>
+                                <td colSpan="2">
+                                    <input id="subTit" type="text" onChange={this.subTitChange}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">썸네일</th>
+                                <td colSpan="5">
+                                <div className="filebox bs3-primary">
+                                    <input className="upload-name" id="upload-name"placeholder="파일선택" disabled="disabled"/>
+                                    <label htmlFor="ex_filename">업로드</label> 
+                                    <input type="file" id="ex_filename" className="upload-hidden" onChange={e => this.handleFileInput(e)}/> 
+                                </div>
+                                    {/* <input type="file" name="file" onChange={e => this.handleFileInput(e)}/>
+                                    <button type="button" onClick={this.uploadImage}>업로드</button> */}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">기간</th>
+                                <td colSpan="5">
+                                    <button id="oneDay" onClick={this.oneDay}>하루</button>
+                                    <button id="oneWeek" onClick={this.oneWeek}>1주</button>
+                                    <button id="oneMonth" onClick={this.oneMonth}>1달</button>
+                                    <button id="Free" onClick={this.Free}>자유</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">시작일</th>
+                                <td colSpan="2">
+                                    <StartDay
+                                        startDates={location.state.date}
+                                    />
+                                </td>
+                                <th scope="row">종료일</th>
+                                <td className="onModified" colSpan="2">
+                                    <input id="enddate" className="displaynone" disabled></input>
+                                    <EndDay
+                                        startDates={location.state.enddate}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">내 용</th>
+                                <td colSpan="5">
+                                    <Editor
+                                        id="editor"
+                                        previewStyle="vertical"
+                                        height="300px"
+                                        initialEditType="wysiwyg"
+                                        placeholder="글쓰기"
+                                        ref={this.editorRef}
+                                        onChange={this.editorChange}
+                                        initialValue={location.state.detail}
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <div className="btndiv">
+                    <button id="join" onClick={this.writeClick}>수정하기</button>
+                    <button id="delete" onClick={this.deleteClick}>삭제하기</button>
+                </div>
+                </div>
+                {/* <div className="writeInput category">
                     <span>카테고리 </span>
                     <select id="category" value={this.state.value} onChange={this.selectChange}>
                         <option value="1" defaultValue>운  동</option>
@@ -189,7 +386,7 @@ class Modify extends React.Component {
                         <option value="5">Lan's Meeting</option>
                         <option value="6">스터디</option>
                     </select>
-                </div>
+                </div> 
                 <div className="writeInput">
                     <span>제 목</span>
                     <input id="mainTit" type="text" onChange={this.mainTitChange}></input>
@@ -205,7 +402,9 @@ class Modify extends React.Component {
                 </div>
                 <div className="writeInput">
                     <span>시작일</span>
-                    <App /> 
+                    <App
+                        startDates={location.state.date}
+                    /> 
                 </div>
                 <div className="editor">
                     <Editor
@@ -218,19 +417,18 @@ class Modify extends React.Component {
                         onChange={this.editorChange}
                         initialValue={location.state.detail}
                     />
-                    {/* <button onClick={this.handleClick}>저장</button> */}
-                </div>
-                <div className="btn">
-                    <button onClick={this.writeClick}>등록하기</button>
-                </div>
+                     <button onClick={this.handleClick}>저장</button> 
+                </div>*/}
             </div>
         );
     }
 }
 
-function App() {
+function StartDay({ startDates }){
     // 달력 날짜 변경 시 기준점이 되는 날짜 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date(startDates));
+
+    const tomorrow = moment().add(1, 'd')._d;
             
     // 요일 반환 
     const getDayName = (date) => {
@@ -253,11 +451,60 @@ function App() {
     return ( 
     <>
             <DatePicker
-                id="datepick"
+                id="startdatepick"
                 locale="ko" // 달력 한글화
                 dateFormat="yyyy-MM-dd"
                 selected={startDate} // 날짜 state
                 onChange={setStartDate} // 날짜 설정 콜백 함수 
+                minDate={tomorrow} // 과거 날짜 disable
+                popperModifiers={{
+                    // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정 
+                    preventOverflow: { enabled: true, },
+                }} popperPlacement="auto" // 화면 중앙에 팝업이 뜨도록 
+                // 토요일, 일요일 색깔 바꾸기 위함
+                dayClassName={
+                    date => getDayName(createDate(date)) === '토' ? "saturday"
+                        :
+                        getDayName(createDate(date)) === '일' ? "sunday" : undefined
+                }
+            />
+        </>
+    );
+}
+
+function EndDay({ startDates }){
+    // 달력 날짜 변경 시 기준점이 되는 날짜 
+    const [startDate, setStartDate] = useState(new Date(startDates));
+
+    const tomorrow = moment().add(1, 'd')._d;
+            
+    // 요일 반환 
+    const getDayName = (date) => {
+        return date.toLocaleDateString('ko-KR', { weekday: 'long', }).substr(0, 1);
+    }
+    
+    // 날짜 비교시 년 월 일까지만 비교하게끔 
+    const createDate = (date) => {
+        return new Date(
+            new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                0,
+                0,
+                0));
+    }
+    
+
+    return ( 
+    <>
+            <DatePicker
+                id="enddatepick"
+                locale="ko" // 달력 한글화
+                dateFormat="yyyy-MM-dd"
+                selected={startDate} // 날짜 state
+                onChange={setStartDate} // 날짜 설정 콜백 함수 
+                minDate={tomorrow} // 과거 날짜 disable
                 popperModifiers={{
                     // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정 
                     preventOverflow: { enabled: true, },

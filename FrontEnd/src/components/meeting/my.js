@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
-function Diy({ id, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants }) {
+function My({ id, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants }) {
     return (
         <div className="itemListView">
             <Link
@@ -31,7 +31,7 @@ function Diy({ id, maintitle, subtitle, date, hostid, detail, categoryno, file, 
     );
 }
 
-Diy.propTypes  = {
+My.propTypes  = {
     id: propTypes.number.isRequired,
     maintitle: propTypes.string.isRequired,
     subtitle: propTypes.string.isRequired,
@@ -45,4 +45,4 @@ Diy.propTypes  = {
     participants: propTypes.number.isRequired
 };
  
-export default Diy;
+export default My;
