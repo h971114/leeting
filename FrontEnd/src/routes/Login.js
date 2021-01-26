@@ -2,13 +2,56 @@ import React from "react";
 import axios from 'axios';
 import "./Login.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { GoogleLogin } from 'react-google-login';
+import  KaKaoLogin  from 'react-kakao-login';
+
+const responseGoogle = (response) => {
+  console.log(response);
+}
+
 
 class Login extends React.Component {
     state ={
         id: "",
         pw: "",
     }
-
+    google(result) {
+        axios.post('http://127.0.0.1:8080/myapp/member/google', {
+            result
+        }).then(res => {
+            // console.log(res);
+            console.log(this.state.id);
+            console.log(this.state.pw);
+            console.log(res.data.message);
+            if (res.data.message === "SUCCESS") {
+                sessionStorage.setItem("token", res.data.token);
+                sessionStorage.setItem("nickname", res.data.nickname);
+                sessionStorage.setItem("id", res.data.id);
+                window.location.replace("/");
+            } else {
+                alert("아이디와 비밀번호를 확인해주세요.");
+            }
+        })
+    }
+    kakao(result) {
+        console.log(result);
+        axios.post('http://127.0.0.1:8080/myapp/member/kakao', {
+            result
+        }).then(res => {
+            // console.log(res);
+            console.log(this.state.id);
+            console.log(this.state.pw);
+            console.log(res.data.message);
+            if (res.data.message === "SUCCESS") {
+                sessionStorage.setItem("token", res.data.token);
+                sessionStorage.setItem("nickname", res.data.nickname);
+                sessionStorage.setItem("id", res.data.id);
+                window.location.replace("/");
+            } else {
+                alert("아이디와 비밀번호를 확인해주세요.");
+            }
+        })
+    }
     Naver = () => {
         var location = this.state.currentLocation;
             var link = 'http://127.0.0.1:8080/myapp/member/naver'
@@ -42,7 +85,6 @@ class Login extends React.Component {
     };
     handleClick = (e) => {
         // e.preventDefault();
-        
         axios.post('http://127.0.0.1:8080/myapp/member/login', {
             id: this.state.id,
             pw: this.state.pw
@@ -85,6 +127,7 @@ class Login extends React.Component {
     render() {
 
         return (
+
             <div className="logincontainer">
                 <h1 className="tit">로 그 인</h1>
                 <hr />
@@ -111,8 +154,32 @@ class Login extends React.Component {
                         <div className="loginset">
                             <div className="col-9 defaultlogin" onClick ={this.handleClick}>로 그 인</div>
                             <div className="col-9 naverlogin" onClick={this.Naver}>네이버 로그인</div>
-                            <div className="col-9 googlelogin" >구글 로그인</div>
-                            <div className="col-9 kakaologin" >카카오 계정 로그인</div>
+                            <GoogleLogin
+                                clientId="214779194973-13gfcp2vgimelc91u2dpop5j3oo788qb.apps.googleusercontent.com"
+                                render={renderProps => (
+                                    <div className="col-9 googlelogin" onClick={renderProps.onClick}> 구글 로그인</div>
+                                  )}
+                            buttonText="Login"
+                            onSuccess={result => this.google(result)}
+                            onFailure={result => console.log(result)}
+                            cookiePolicy={'single_host_origin'}
+                            />
+                                <KaKaoLogin
+                                    token={'e3cd9e3a0f32bc890bacfd0ca81c18e7'}
+                                    onSuccess={result =>this.kakao(result)}
+                                getProfile={true}
+                                render={({ onClick }) => {
+                                    return (
+                                        <div className="col-9 kakaologin" onClick={(e) => {
+                                            e.preventDefault();
+                                            onClick();
+                                          }}>카카오 계정 로그인</div>
+                                        
+                                    )
+                                }}
+                                    >
+                                    
+                                </KaKaoLogin>
                         </div>
                         <div className="col-9 usermenu">
                             <ul>
