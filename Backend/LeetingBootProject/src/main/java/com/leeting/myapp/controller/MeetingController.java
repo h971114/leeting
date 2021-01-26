@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.leeting.myapp.model.MemberDto;
+import com.leeting.myapp.model.ReviewDto;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -233,5 +234,41 @@ public class MeetingController {
 		for(MeetingDto MeetingDto : list)
 			System.out.println(MeetingDto.getHostid());
 		return new ResponseEntity<>(conclusionMap, status);
+	}
+
+	@PostMapping("/postreview")
+	public ResponseEntity<String> postReview(@RequestBody ReviewDto reviewDto, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		String conclusion = "";
+		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		if(meetingService.postReview(reviewDto))
+			conclusion = "SUCCESS";
+		else
+			conclusion = "FAIL";
+		return new ResponseEntity<>(conclusion, httpStatus);
+	}
+
+	@PutMapping("/updatereview")
+	public ResponseEntity<String> updateReview(@RequestBody ReviewDto reviewDto, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		String conclusion = "";
+		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		if(meetingService.updateReview(reviewDto))
+			conclusion = "SUCCESS";
+		else
+			conclusion = "FAIL";
+		return new ResponseEntity<>(conclusion, httpStatus);
+	}
+
+	@DeleteMapping("/deletereview")
+	public ResponseEntity<String> deleteReview(@RequestParam(value = "no") int no, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		String conclusion = "";
+		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		if(meetingService.deleteReview(no))
+			conclusion = "SUCCESS";
+		else
+			conclusion = "FAIL";
+		return new ResponseEntity<>(conclusion, httpStatus);
 	}
 }

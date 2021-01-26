@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.ParticipationDto;
+import com.leeting.myapp.model.ReviewDto;
 
 public interface MeetingDao {
 	public void enrollMeeting(MeetingDto meeting) throws SQLException;
@@ -21,4 +22,7 @@ public interface MeetingDao {
 	public void exitmeeting(ParticipationDto participationDto);
 	List<MeetingDto> searchbytitle(String keyword);
 	List<MeetingDto> searchbyid(String keyword);
+	boolean postReview(ReviewDto reviewDto);
+	boolean updateReview(ReviewDto reviewDto);
+	boolean deleteReview(int no);
 }

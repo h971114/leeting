@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.leeting.myapp.model.ReviewDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -84,5 +85,29 @@ public class MeetingDaoImpl implements MeetingDao {
 	@Override
 	public List<MeetingDto> searchbyid(String keyword) {
 		return sqlSession.selectList("meeting.searchbyid", keyword);
+	}
+
+	@Override
+	public boolean postReview(ReviewDto reviewDto) {
+		int insert = sqlSession.insert("meeting.postreview", reviewDto);
+		if(insert==0)
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean updateReview(ReviewDto reviewDto) {
+		int update = sqlSession.update("meeting.updatereview", reviewDto);
+		if(update==0)
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean deleteReview(int no) {
+		int delete = sqlSession.delete("meeting.deletereview", no);
+		if(delete==0)
+			return false;
+		return true;
 	}
 }

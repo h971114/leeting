@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.leeting.myapp.model.ReviewDto;
 import org.springframework.stereotype.Service;
 
 import com.leeting.myapp.dao.MeetingDao;
@@ -105,4 +106,18 @@ public class MeetingServiceImpl implements MeetingService{
         return meetingDao.searchbyid(keyword);
     }
 
+    @Override
+    public boolean postReview(ReviewDto reviewDto) throws SQLException {
+        return meetingDao.postReview(reviewDto);
+    }
+
+    @Override
+    public boolean updateReview(ReviewDto reviewDto) throws SQLException {
+        return meetingDao.updateReview(reviewDto);
+    }
+
+    @Override
+    public boolean deleteReview(int no) throws SQLException {
+        return meetingDao.deleteReview(no);
+    }
 }

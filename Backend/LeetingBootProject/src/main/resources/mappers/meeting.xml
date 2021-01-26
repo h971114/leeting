@@ -74,4 +74,24 @@
 		SELECT * FROM meeting
 		WHERE hostid like CONCAT('%', #{keyword}, '%')
 	</select>
+
+	<!--리뷰 작성-->
+	<insert id="postreview" parameterType="review">
+		INSERT INTO meeting_review
+		(meetingno, review, writer)
+		VALUES (#{meetingno}, #{review}, #{writer})
+	</insert>
+
+	<!--리뷰 수정-->
+	<insert id="updatereview" parameterType="review">
+		UPDATE meeting_review
+		SET review = #{review}
+		WHERE no = #{no}
+	</insert>
+
+	<!--리뷰 작성-->
+	<insert id="deletereview" parameterType="int">
+		DELETE FROM meeting_review
+		WHERE no = #{no};
+	</insert>
 </mapper>
