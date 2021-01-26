@@ -1,4 +1,4 @@
-import React, {Component } from "react";
+import React from "react";
 import "../css/meeting.css"
 import axios from "axios";
 import Study from "../../../components/meeting/study"
@@ -10,12 +10,18 @@ class study extends React.Component {
         data:[]
     }
     getLeeting = async () => {
-        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/listmeeting');
+        let data = await axios.get('http://127.0.0.1:8080/myapp/meeting/study');
         data = data.data;
-        // console.log('data is ' + JSON.stringify(data.categories));
+        // console.log(data);
         this.setState({ data, isLoading: false });
     }
     componentDidMount() {
+        let sId = sessionStorage.getItem('id');
+
+        if (sId === null) {
+            document.getElementById('writeBtn').setAttribute('style', 'display:none');
+        }
+
         this.getLeeting();
         // console.log(this.state.data);
     }
@@ -42,6 +48,12 @@ class study extends React.Component {
 
     studyPage = (e) => {
         this.props.history.push('/meeting/study');
+    }
+
+    writeBtn = (e) => {
+        e.preventDefault();
+        
+        this.props.history.push("/meeting/write");
     }
 
     render() {
@@ -87,22 +99,30 @@ class study extends React.Component {
                     </div>
                 ) : (
                         <div className="list_view">
-                            {data.map(leeting => (
-                                <Study
-                                    key={leeting.meetingno}
-                                    id={leeting.meetingno}
-                                    maintitle={leeting.maintitle}
-                                    subtitle={leeting.subtitle}
-                                    date={leeting.date}
-                                    hostid={leeting.hostid}
-                                    detail={leeting.detail}
-                                    categoryno={leeting.categoryno}
-                                    file={leeting.file}
-                                />
+                            {
+                                data.map((leeting, idx) => (
+                                    <Study
+                                        key={idx}
+                                        idx={idx}
+                                        id={leeting.meetingno}
+                                        maintitle={leeting.maintitle}
+                                        subtitle={leeting.subtitle}
+                                        date={leeting.date}
+                                        hostid={leeting.hostid}
+                                        detail={leeting.detail}
+                                        categoryno={leeting.categoryno}
+                                        file={leeting.file}
+                                        meetinglike={leeting.meetinglike}
+                                        enddate={leeting.enddate}
+                                        participants={leeting.participants}
+                                    />
                             ))}
                         </div>
                 )}
                 
+                <div id="writeBtn" className="writeBtn">
+                    <button onClick={this.writeBtn}>등록하기</button>
+                </div>
             </div>
         );
     }

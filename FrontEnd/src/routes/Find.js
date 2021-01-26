@@ -170,7 +170,7 @@ class Find extends React.Component {
 
 
     handleChange = (event) => {
-        if (event.target.value != '직접입력') {
+        if (event.target.value !== '직접입력') {
           this.setState({
             value: event.target.value,
             iddomain: event.target.value
@@ -195,7 +195,7 @@ class Find extends React.Component {
     }
 
     pwhandleChange = (event) => {
-        if (event.target.value != '직접입력') {
+        if (event.target.value !== '직접입력') {
           this.setState({
             value: event.target.value,
             pwdomain: event.target.value

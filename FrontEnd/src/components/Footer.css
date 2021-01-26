@@ -48,6 +48,7 @@
     display: inline-block;
     margin: 0 5px;
     cursor: pointer;
+    text-indent: -9999px;
 }
 
 .footerdiv .ftsns li:last-child {

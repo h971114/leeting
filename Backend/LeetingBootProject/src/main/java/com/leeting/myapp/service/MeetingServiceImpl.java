@@ -36,7 +36,7 @@ public class MeetingServiceImpl implements MeetingService{
 	@Override
     public List<MeetingDto> listMeeting(int categoryno) throws SQLException {
 		System.out.println("확인");
-	    	return meetingDao.listMeeting(categoryno);
+		return meetingDao.listMeeting(categoryno);
 
     }
 	
@@ -72,22 +72,26 @@ public class MeetingServiceImpl implements MeetingService{
     @Override
     public List<ParticipationDto> listparticipants(int meetingno){
     	return meetingDao.listparticipants(meetingno);
-
     }
 
     @Override
     public void setlikestatus(ParticipationDto participationDto) throws SQLException {
         meetingDao.setlikestatus(participationDto);
     }
+    @Override
+    public void setmeeinglike(Map<String,Double> scoremap) throws SQLException {
+    	meetingDao.setmeetinglike(scoremap);
+    }
 
     @Override
     public boolean clickmeeting(ParticipationDto participationDto) throws SQLException {
-        ParticipationDto partDto = meetingDao.participationinfo(participationDto);
-        if(partDto==null) {
+	    ParticipationDto partDto = meetingDao.participationinfo(participationDto);
+	    if(partDto==null) {
             meetingDao.clickmeeting(participationDto);
             return true;
         }else{
-            return false;
+        	meetingDao.exitmeeting(participationDto);
+	        return false;
         }
     }
 
@@ -100,4 +104,5 @@ public class MeetingServiceImpl implements MeetingService{
     public List<MeetingDto> searchById(String keyword) throws SQLException {
         return meetingDao.searchbyid(keyword);
     }
+
 }

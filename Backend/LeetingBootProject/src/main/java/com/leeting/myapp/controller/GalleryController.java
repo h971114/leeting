@@ -1,10 +1,12 @@
 package com.leeting.myapp.controller;
 
 import com.leeting.myapp.service.GalleryService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.annotations.ApiOperation;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
 

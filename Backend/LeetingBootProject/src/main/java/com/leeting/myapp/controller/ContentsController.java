@@ -28,7 +28,7 @@ public class ContentsController {
 
     @ApiOperation(value = "컨텐츠 등록", notes = "컨텐츠 등록", response = Map.class)
     @PostMapping("/enroll")
-    public ResponseEntity<String> enrollContents(@RequestBody ContentsDto contentsDto, HttpServletRequest req) {
+    public ResponseEntity<String> enrollcontents(@RequestBody ContentsDto contentsDto, HttpServletRequest req) {
         String conclusion;
         HttpStatus httpStatus = HttpStatus.ACCEPTED;
         System.out.println("post /enroll : 컨텐츠 등록");
@@ -44,7 +44,7 @@ public class ContentsController {
 
     @ApiOperation(value="컨텐츠 조회", notes="특정 컨텐츠 조회", response = Map.class)
     @GetMapping("/find") // 특정 컨텐츠 조회에 필요한 파라미터 추가 필요!
-    public ResponseEntity<List<ContentsDto>> findContents(HttpServletRequest req) {
+    public ResponseEntity<List<ContentsDto>> findcontents(HttpServletRequest req) {
         HttpStatus httpStatus = HttpStatus.ACCEPTED;
         System.out.println("get / : 컨텐츠 조회");
         return new ResponseEntity<>(contentsService.listContent(), httpStatus);
@@ -52,7 +52,7 @@ public class ContentsController {
 
     @ApiOperation(value="컨텐츠 조회", notes="컨텐츠 전체 조회", response = Map.class)
     @GetMapping("/")
-    public ResponseEntity<List<ContentsDto>> listContents(HttpServletRequest req) {
+    public ResponseEntity<List<ContentsDto>> listcontents(HttpServletRequest req) {
         HttpStatus httpStatus = HttpStatus.ACCEPTED;
         System.out.println("get / : 컨텐츠 조회");
         return new ResponseEntity<>(contentsService.listContent(), httpStatus);
@@ -60,7 +60,7 @@ public class ContentsController {
 
     @ApiOperation(value="컨텐츠 삭제", notes="컨텐츠 삭제", response = Map.class)
     @DeleteMapping("/{no}")
-    public ResponseEntity<String> deleteContents(@PathVariable(value = "no") int contentsno , HttpServletRequest req) {
+    public ResponseEntity<String> deletecontents(@PathVariable(value = "no") int contentsno , HttpServletRequest req) {
         String conclusion;
         HttpStatus httpStatus = HttpStatus.ACCEPTED;
         System.out.println("delete /id : 컨텐츠 삭제");
@@ -76,7 +76,7 @@ public class ContentsController {
 
     @ApiOperation(value="컨텐츠 업데이트", notes="컨텐츠 업데이트", response = Map.class)
     @PutMapping("/")
-    public ResponseEntity<String> updateContents(@RequestBody ContentsDto contentsDto, HttpServletRequest req) {
+    public ResponseEntity<String> updatecontents(@RequestBody ContentsDto contentsDto, HttpServletRequest req) {
         String conclusion;
         HttpStatus httpStatus = HttpStatus.ACCEPTED;
         System.out.println("put / : 컨텐츠 수정");

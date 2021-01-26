@@ -86,7 +86,7 @@ public class RecommendController {
     System.out.println("회원정보");
     return new ResponseEntity<MemberDto>(membertmp, status);
   }
-  private Double calculatescore(MeetingDto k) {
+  static Double calculatescore(MeetingDto k) {
 	int likes = k.getmeetinglike();
 	int participants = k.getParticipants();
 	String date = k.getDate();

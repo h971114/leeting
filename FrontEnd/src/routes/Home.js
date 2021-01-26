@@ -1,10 +1,44 @@
 import React from "react";
 import Slider from "react-slick";
+import axios from "axios";
 import "./Slider.css";
 import "./Home.css";
 
+import My from "../components/meeting/my"
+
 class Home extends React.Component {
+
+    state = {
+        isLoading: true,
+        data:[]
+    }
+    getLeeting = async () => {
+        let sId = sessionStorage.getItem('id');
+        let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
+            params: {
+                id : sId
+            }
+        });
+        data = data.data;
+        // console.log(data);
+        this.setState({ data, isLoading: false });
+    }
+    componentDidMount() {
+        let sId = sessionStorage.getItem('id');
+
+        if (sId !== null) {
+            
+            this.getLeeting();
+        } else {
+            document.getElementById('myleetingTit').setAttribute('style', 'display:none');
+            document.getElementById('myleetingList').setAttribute('style', 'display:none');
+        }
+
+        // console.log(this.state.data);
+    }
+
     render() {
+        const { isLoading, data } = this.state;
         const settings = {
             dots: true,
             fade: true,
@@ -68,21 +102,48 @@ class Home extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="favoritetit">
+                <div id="myleetingTit" className="quicktit">
+                    <h2>내가 보고 있는 리팅</h2>
+                    <a className="all" href="/">전체보기</a>
+                </div>
+                <div id="myleetingList">
+                    {isLoading ? (
+                        <div className="loading_view">
+                            <div className="loader loader-7">
+                                <div className="line line1"></div>
+                                <div className="line line2"></div>
+                                <div className="line line3"></div>
+                                <span className="loader_text">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (
+                            <div className="list_view">
+                                {
+                                    data.map((leeting, idx) => (
+                                        <My
+                                            key={idx}
+                                            idx={idx}
+                                            id={leeting.meetingno}
+                                            maintitle={leeting.maintitle}
+                                            subtitle={leeting.subtitle}
+                                            date={leeting.date}
+                                            hostid={leeting.hostid}
+                                            detail={leeting.detail}
+                                            categoryno={leeting.categoryno}
+                                            file={leeting.file}
+                                            meetinglike={leeting.meetinglike}
+                                            enddate={leeting.enddate}
+                                            participants={leeting.participants}
+                                        />
+                                ))}
+                            </div>
+                    )}
+                </div>
+                <div className="quicktit">
                     <h2>지금 가장 인기 있는 리팅 🥇</h2>
                     <a className="all" href="/">전체보기</a>
                 </div>
                 <div className="favoriteleet">
-                    
-                    {/* <div className="favorite">
-                        <div className="favimg">
-                            <a href="/"><img src="img/favimg.png" alt="인기있는 리팅 이미지"></img></a>
-                        </div>
-                        <div className="favtit">
-                            <p className="subtit"><a href="/">#카테고리</a></p>
-                            <p className="maintit"><a href="/">테스트 제목1</a></p>
-                        </div>
-                    </div> */}
                     
                     <div className="favorite">
                         <div className="favimg">
