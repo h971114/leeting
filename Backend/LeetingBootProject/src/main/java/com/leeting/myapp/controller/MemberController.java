@@ -442,16 +442,17 @@ public class MemberController {
 	@PostMapping("/google")
 	public ResponseEntity<Map<String, String>> googlelogin(@RequestBody Map<String, Map> memberbody,
 			HttpServletRequest req) throws SQLException {
-		Map<String, String> membermap = (Map<String, String>) memberbody.get("result").get("Es");
+		System.out.println(memberbody.toString());
+		Map<String, String> membermap = (Map<String, String>) memberbody.get("result").get("profileObj");
 		System.out.println(membermap.toString());
 		MemberDto newmember = new MemberDto();
 		HttpStatus status = HttpStatus.ACCEPTED;
-		newmember.setId("goo_" + membermap.get("KR"));
-		newmember.setPw("goo_" + membermap.get("KR"));
-		newmember.setEmail(membermap.get("kt"));
+		newmember.setId("goo_" + membermap.get("googleId"));
+		newmember.setPw("goo_" + membermap.get("googleId"));
+		newmember.setEmail(membermap.get("email"));
 		newmember.setMobile("googleid");
-		newmember.setNickname(membermap.get("sd"));
-		newmember.setName(membermap.get("sd"));
+		newmember.setNickname(membermap.get("name"));
+		newmember.setName(membermap.get("name"));
 		Map<String, String> conclusionmap = new HashMap<String, String>();
 		if (memberService.sameId(newmember.getId()) && memberService.sameEmail(newmember.getEmail())) {
 			memberService.join(newmember);
