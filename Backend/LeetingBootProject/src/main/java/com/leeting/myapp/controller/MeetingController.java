@@ -236,6 +236,26 @@ public class MeetingController {
 		return new ResponseEntity<>(conclusionMap, status);
 	}
 
+	@GetMapping("/review")
+	public ResponseEntity<Map<String, Object>> getReview(@RequestParam int meetingno, HttpServletRequest req) throws SQLException {
+		System.out.println(req);
+		Map<String, Object> map = new HashMap<>();
+		String conclusion = "";
+		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		List<ReviewDto> list = meetingService.getReview(meetingno);
+		if(list.size()>0) {
+			for(ReviewDto reviewDto : list)
+				System.out.println(reviewDto.toString());
+			map.put("list", list);
+			map.put("conclusion", "SUCCESS");
+		}
+		else {
+			map.put("list", null);
+			map.put("conclusion", "FAIL");
+		}
+		return new ResponseEntity<>(map, httpStatus);
+	}
+
 	@PostMapping("/postreview")
 	public ResponseEntity<String> postReview(@RequestBody ReviewDto reviewDto, HttpServletRequest req) throws SQLException {
 		System.out.println(req);

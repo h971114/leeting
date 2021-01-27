@@ -107,6 +107,11 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
+    public List<ReviewDto> getReview(int meetingno) throws SQLException {
+        return meetingDao.getReview(meetingno);
+    }
+
+    @Override
     public boolean postReview(ReviewDto reviewDto) throws SQLException {
         return meetingDao.postReview(reviewDto);
     }

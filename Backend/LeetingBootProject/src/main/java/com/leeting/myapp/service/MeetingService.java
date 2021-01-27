@@ -21,6 +21,7 @@ public interface MeetingService {
 	boolean clickmeeting(ParticipationDto participationDto) throws SQLException;
 	List<MeetingDto> searchByTitle(String keyword) throws SQLException;
 	List<MeetingDto> searchById(String keyword) throws SQLException;
+	List<ReviewDto> getReview(int meetingno) throws SQLException;
 	boolean postReview(ReviewDto reviewDto) throws SQLException;
 	boolean updateReview(ReviewDto reviewDto) throws SQLException;
 	boolean deleteReview(int no) throws SQLException;

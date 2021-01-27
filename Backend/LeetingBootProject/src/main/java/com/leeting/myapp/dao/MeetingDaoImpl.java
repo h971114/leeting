@@ -88,6 +88,11 @@ public class MeetingDaoImpl implements MeetingDao {
 	}
 
 	@Override
+	public List<ReviewDto> getReview(int meetingno) {
+		return sqlSession.selectList("meeting.getreview", meetingno);
+	}
+
+	@Override
 	public boolean postReview(ReviewDto reviewDto) {
 		int insert = sqlSession.insert("meeting.postreview", reviewDto);
 		if(insert==0)
