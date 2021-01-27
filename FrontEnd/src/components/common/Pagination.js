@@ -1,25 +1,49 @@
-import React from 'react';
-import _ from 'lodash';
+import React from 'react'
 
-const Pagination = (props) => {
-  const { itemsCount, pageSize } = props; // 각각 아이템(영화목록) 개수, 한 페이지에 보여줄 아이템(영화목록) 개수
-  const pageCount = Math.ceil(itemsCount / pageSize); // 몇 페이지가 필요한지 계산
+export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
+  const pageNumbers = [];
+  const lastPage = Math.ceil(totalPosts / postsPerPage);
 
-  if (pageCount === 1) return null; // 1페이지 뿐이라면 페이지 수를 보여주지 않음
-
-  const pages = _.range(1, pageCount + 1); // 마지막 페이지에 보여줄 컨텐츠를 위해 +1, https://lodash.com/docs/#range 참고
-
-  return (
-    <nav> {}
-      <ul className="pagination">
-        {pages.map(page => (
-          <li key={page} className="page-item" style={{ cursor: "pointer" }}>
-            <a className="page-link">{page}</a>
+    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++){
+        pageNumbers.push(i);
+    }
+    return (
+      <nav>
+        <ul className="pagination">
+          <li key="first" className="first page-item pager">
+            <button onClick={() => paginate(1)} className="page-link">
+              <span className="hide">
+                첫 페이지
+              </span>
+            </button>
           </li>
-        ))}
-      </ul>
-    </nav>
-  );
+          <li key="prev" className="prev page-item pager">
+            <button onClick={() => paginate(1)} className="page-link">
+              <span className="hide">
+                이전 페이지
+              </span>
+            </button>
+          </li>
+          {pageNumbers.map(number => (
+            <li key={number} className="page-item">
+              <button onClick={ ()=> paginate(number) } className={number === currentPage ? "page-link active" : "page-link"}>
+                {number}
+              </button>
+            </li>
+          ))}
+          <li key="next" className="page-item next pager">
+            <button onClick={() => paginate(lastPage)} className="page-link">
+            <span className="hide">다음 페이지</span>
+            </button>
+          </li>
+          <li key="last" className="page-item last pager">
+            <button onClick={() => paginate(lastPage)} className="page-link">
+            <span className="hide">마지막 페이지</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    )
 }
 
-export default Pagination;
+export default Pagination

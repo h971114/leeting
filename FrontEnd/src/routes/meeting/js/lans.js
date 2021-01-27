@@ -66,12 +66,24 @@ class lans extends React.Component {
                 <div id="sub_wrap">
                     <div id="sub_menu">
                         <ul>
-                            <li id="exercise" onClick={this.exercisePage}>운 동</li>
-                            <li id="music" onClick={this.musicPage}><a>음 악</a></li>
-                            <li id="game" onClick={this.gamePage}><a>게 임</a></li>
-                            <li id="diy" onClick={this.diyPage}><a>D.I.Y</a></li>
-                            <li id="lans" className="onPage" onClick={this.lansPage}><a>랜선 모임</a></li>
-                            <li id="study" onClick={this.studyPage}><a>스터디</a></li>
+                            <Link to="/meeting/exercise">
+                                <li id="exercise">운 동</li>
+                            </Link>
+                            <Link to="/meeting/music">
+                                <li id="music">음 악</li>
+                            </Link>
+                            <Link to="/meeting/game">
+                                <li id="game">게 임</li>
+                            </Link>
+                            <Link to="/meeting/diy">
+                                <li id="diy">D.I.Y</li>
+                            </Link>
+                            <Link to="/meeting/lans">
+                                <li id="lans" className="onPage">랜선 모임</li>
+                            </Link>
+                            <Link to="/meeting/study">
+                                <li id="study">스터디</li>
+                            </Link>
                         </ul>
                     </div>
                 </div>

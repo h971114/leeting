@@ -5,9 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { GoogleLogin } from 'react-google-login';
 import  KaKaoLogin  from 'react-kakao-login';
 
-const responseGoogle = (response) => {
-  console.log(response);
-}
+// const responseGoogle = (response) => {
+//   console.log(response);
+// }
 
 
 class Login extends React.Component {
@@ -53,7 +53,7 @@ class Login extends React.Component {
         })
     }
     Naver = () => {
-        var location = this.state.currentLocation;
+        // var location = this.state.currentLocation;
             var link = 'http://127.0.0.1:8080/myapp/member/naver'
             window.location.assign(link);
         };

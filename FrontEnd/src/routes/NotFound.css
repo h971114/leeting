@@ -29,12 +29,13 @@
     padding: 0px;
 }
 
-.notFoundCon .btndiv a {
+.notFoundCon .btndiv button {
     display: inline-block;
 
     width: 140px;
     height: 50px;
     border-radius: 5px;
+    border: none;
 
     margin: 0 10px;
 

@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import propTypes  from "prop-types";
  
 function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants }) {
-    
+    var title = maintitle;
+
+    if (title.length > 11) {
+        title = title.substring(0, 10) + "...";
+    }
+    // console.log(title);
+
     return (
         <div className="itemListView">
             <Link
@@ -26,7 +32,7 @@ function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno,
             >
                 <img src={file} alt={maintitle}></img>
                 <p className="subtit">{subtitle}</p>
-                <p className="tit">{maintitle.slice(0, 10)}</p>
+                <p className="tit">{title}</p>
             </Link>
         </div>
     );

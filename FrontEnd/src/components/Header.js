@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 class Header extends Component {
@@ -35,22 +36,52 @@ class Header extends Component {
                         Leeting입니다
                     </a>
                     <div className="topsearch">
-                        <form name="searchForm">
+                            <form name="searchForm">
                             <input type="text" name="searchVal" placeholder="검색어를 입력하세요">
-                            </input>
-                            <a href="#">검색</a>
+                                </input>
+                                <Link
+                                    to={{
+                                        pathname: ``
+                                    }}
+                                >
+                                    검색
+                                </Link>
                         </form>
                     </div>
                     <div id="nologin">
                         <ul>
-                            <li><a href="/join">회원가입</a></li>
-                            <li><a href="/Login">로그인</a></li>
+                            <li>
+                                <Link
+                                    to={{
+                                        pathname: `/join`
+                                    }}
+                                    >
+                                        회원가입
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to={{
+                                        pathname: `/Login`
+                                    }}
+                                    >
+                                        로그인
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div id="login">
                         <ul>
-                            <li><a href="/">{sessionStorage.getItem("nickname")}님 환영합니다</a></li>
-                            <li><a onClick={this.logout}>로그아웃</a></li>
+                            <li>
+                                <Link
+                                    to={{
+                                        pathname: `/`
+                                    }}
+                                    >
+                                        {sessionStorage.getItem("nickname")}님 환영합니다
+                                </Link>
+                            </li>
+                            <li><button onClick={this.logout}>로그아웃</button></li>
                         </ul>
                     </div>
                 </div>
@@ -59,16 +90,40 @@ class Header extends Component {
                     <div className="gnb cB" id="gnb">
                         <ul className="topmenu" id="head-menu">
                             <li className="lnb1">
-                                <a href="/Leeting">Leeting 소개</a>
+                                <Link
+                                    to={{
+                                        pathname: `/Leeting`
+                                    }}
+                                >
+                                    Leeting 소개
+                                </Link>
                             </li>
                             <li className="lnb2">
-                                <a href="/meeting/exercise" >Leeting's</a>
+                                <Link
+                                    to={{
+                                        pathname: `/meeting/exercise`
+                                    }}
+                                >
+                                    Leeting's
+                                </Link>
                             </li>
                             <li className="lnb3">
-                                <a href="#" >메뉴3</a>
+                                <Link
+                                    to={{
+                                        pathname: `/`
+                                    }}
+                                >
+                                    메뉴3
+                                </Link>
                             </li>
                             <li className="lnb4">
-                                <a href="#" >메뉴4</a>
+                                <Link
+                                    to={{
+                                        pathname: `/notice`
+                                    }}
+                                >
+                                    공지사항
+                                </Link>
                             </li>
                         </ul>
                     </div>

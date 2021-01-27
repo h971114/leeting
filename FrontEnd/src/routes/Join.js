@@ -196,6 +196,7 @@ class Join extends React.Component {
     var domainReg = /^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){2,3}$/g;
     if (!domainReg.test(e.target.value)) {
       this.setState({
+        domain:e.target.value,
         checkEmail: false
       });
       // document.getElementById('joinbtn').disabled = true;
@@ -370,12 +371,12 @@ class Join extends React.Component {
         if (res.data === "SUCESS") {
           alert("환영합니다~ 로그인 페이지로 이동합니다.");
           console.log("회원가입 완료");
-          this.props.history.push('/login');
+          window.location.replace("/login");
         }
         else {
           alert("회원가입에 실패하였습니다. 메인 페이지로 이동합니다.");
           console.log("회원가입 실패");
-          this.props.history.push('/');
+          window.location.replace("/");
         }
       })
     }
@@ -384,6 +385,11 @@ class Join extends React.Component {
       console.log("미입력여부");
     }
   };
+
+  goBack = (e) => {
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <div className="joinContainer">
@@ -459,16 +465,15 @@ class Join extends React.Component {
                 <label id="validatePhone"></label>
               </div>
               <br />
-              <div className="form-group">
+              {/* <div className="form-group">
                 <div className="col-12 text-center">
                   <input type="checkbox" id="checkjoin"></input>&nbsp;
                     <label htmlFor="checkjoin"><span></span> Leeting의 이용약관, 개인정보취급방침 및 개인정보3자제공에 동의합니다.</label>
                 </div>
-              </div>
-              <br />
+              </div> */}
               <div className="row form-group">
                 <div className="col-6 text-right">
-                  <a href="" className="btn btn-light">돌아가기</a>
+                  <button onClick={this.goBack} className="btn btn-light">돌아가기</button>
                 </div>
                 <div className="col-6">
                   <button type="submit" id="joinbtn" className="btn btn-primary" onClick={this.handleClick}>가입하기</button>

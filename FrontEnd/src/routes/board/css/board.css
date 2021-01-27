@@ -1,0 +1,145 @@
+.board_list {
+    width: 1200px;
+    height: 950px;
+    margin: 0 auto;
+}
+
+.board_list .notice_list_view table {
+    width: 100%;
+    border-spacing: 0;
+    border-top: 2px solid #2b2b2b;
+    table-layout: fixed;
+}
+
+.board_list .notice_list_view p {
+    display: inline-block;
+}
+
+.board_list .notice_list_view .no {
+    width: 10%;
+}
+
+.board_list .notice_list_view .title {
+    width: 45%;
+}
+
+.board_list .notice_list_view .writer {
+    width: 15%;
+}
+
+.board_list .notice_list_view .date {
+    width: 15%;
+}
+
+.board_list .notice_list_view .hit {
+    width: 8%;
+}
+
+.board_list .notice_list_view .file {
+    width: 7%;
+}
+
+.board_list .notice_list_view .header {
+    padding: 16px 10px;
+    border-top: 2px solid #2b2b2b;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #f9f9f9;
+    font-weight: 400;
+    text-align: center;
+}
+
+.board_list .notice_list_view .content {
+    position: relative;
+    padding: 12px 10px;
+    border-bottom: 1px solid #d8d8d8;
+    font-weight: 200;
+    text-align: center;
+}
+
+.board_list .notice_list_view .content div {
+    display: inline-block;
+}
+
+.board_list .notice_list_view .content .title {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.b-title-box .b-etc-box .b-new {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 12px;
+    color: #f15a08;
+    vertical-align: middle;
+}
+
+.pagination {
+    margin: 10px 0;
+    text-align: center;
+    display: block;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 3px;
+    vertical-align: middle;
+}
+
+.pagination li.pager button {
+    padding: 0px;
+}
+
+.pagination li:not(.pager) button {
+    padding: 7px 0 7px;
+    min-width: 33px;
+}
+
+.pagination li button {
+    display: block;
+    position: relative;
+    border: 1px solid #ccc;
+    font-weight: 300;
+    font-size: 16px;
+    color: #7b7b7b;
+    box-sizing: border-box;
+}
+
+.pagination li button.active {
+    padding: 7px 0 7px;
+    border: 1px solid #999;
+    background: #999;
+    color: #fff;
+}
+
+.pagination li.first button {
+    width: 38px;
+    height: 35px;
+    background: url(../../../img/btn-first-page.gif) no-repeat center;
+}
+
+.pagination li.prev button {
+    width: 38px;
+    height: 35px;
+    background: url(../../../img/btn-prev-page.gif) no-repeat center;
+}
+
+.pagination li.next button {
+    width: 38px;
+    height: 35px;
+    background: url(../../../img/btn-next-page.gif) no-repeat center;
+}
+
+.pagination li.last button {
+    width: 38px;
+    height: 35px;
+    background: url(../../../img/btn-last-page.gif) no-repeat center;
+}
+
+.hide {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    text-indent: -9999999px;
+    overflow: hidden;
+}

@@ -13,21 +13,23 @@ class Detail extends React.Component {
             meetinglike:0,
             likes: false,
             checkJoin: false,
-            btnText : "미팅 참가하기",
+            btnText: "미팅 참가하기",
+            joinMember : ""
         }
     }
 
     componentDidMount() {
         const { location, history } = this.props;
         let sId = sessionStorage.getItem('id');
-        console.log(location.state.enddate);
+        // console.log(location.state.enddate);
+        
         if (location.state === undefined) {
             history.push("/");
         }
         if (sId === null) {
             document.getElementById('likebtn').disabled = true;
             document.getElementById('joinBtn').disabled = true;
-            console.log('test');
+            // console.log('test');
         }
         else {
             document.getElementById('likebtn').disabled = false;
@@ -36,7 +38,7 @@ class Detail extends React.Component {
             this.checkLike();
             this.checkJoin();
             this.checkHost();
-            // console.log(this.state.likes);
+            // console.log(this.state.joinMember);
         }
     }
 
@@ -50,6 +52,7 @@ class Detail extends React.Component {
             document.getElementById('joinBtn').setAttribute("style", "display:none");
             // document.getElementById('joinOutBtn').setAttribute("style", "display:none");
             document.getElementById('modifyBtn').setAttribute("style", "display:block");
+            document.getElementById('viewMember').setAttribute("style", "display:block");
         }
         
     }
@@ -109,19 +112,33 @@ class Detail extends React.Component {
         
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        // console.log(data.data.message);
+        // console.log(data.data.list);
+        var joinmember = "";
+        var cnt = 0;
         if (data.data.message === "SUCCESS") {
             data = data.data.list;
+            this.setState({
+                participant: data
+            })
+            // console.log(data.length);
             for (let i = 0; i < data.length; i++) {
                 // console.log(data[i].userid);
+                joinmember += data[i].userid + ", ";
+                cnt++;
                 if (sId === data[i].userid) {
                     // this.state.checkJoin = true;
+                    // console.log(sId + ", " + data[i].userid);
                     this.setState({
                         checkJoin: true,
                         btnText:"미팅 나가기"
                     })
                 }
             }
+            joinmember = joinmember.substr(0, joinmember.length - 2) + "( "+cnt+"명 )";
+            this.setState({
+                joinMember : joinmember
+            })
+
             // console.log(this.state.checkJoin);
             if (this.state.checkJoin === true) {
                 // document.getElementById('joinBtn').value="미팅 나가기";
@@ -131,6 +148,8 @@ class Detail extends React.Component {
             // data = data.data;
             // this.setState({ data, isLoading: false });
         }
+        else
+            document.getElementById('likebtn').disabled = true;
     }
     
     likeClick = (e) => {
@@ -189,19 +208,19 @@ class Detail extends React.Component {
         })
     }
 
-    // goModify = (e) => {
-    //     e.preventDefault();
-
-    //     const { location, history } = this.props;
-
-    //     let modifyurl = '/meeting/modify/' + location.state.id;
-    //     // console.log(modifyurl);
-    //     history.push(modifyurl);
-    // }
-
   render() {
       const { location } = this.props;
       let codes = location.state.detail;
+
+      var date = location.state.date;
+
+      var sYear = date.substring(0,4);
+      var sMonth = date.substring(5,7);
+      var sDate = date.substring(8,10);
+  
+      var sday = sYear + '-' + sMonth + '-' + sDate;
+
+
     if (location.state) {
         return (
             <div id="meeting_detail">
@@ -210,7 +229,9 @@ class Detail extends React.Component {
                     <div className="titleswrap">
                         <div className="titles">
                             <h1 className="tit">{location.state.maintitle}</h1>
-                            <p className="subtit">{location.state.subtitle}</p>
+                            <p className="subtit">{location.state.subtitle}</p><br/>
+                            <p className="ingDate">진행 기간 : {sday} ~ {location.state.enddate}</p>
+                            <p className="member" id="viewMember">참여인원 : {this.state.joinMember}</p>
                         </div>
                         <div className="like">
                             <button id="likebtn" className="likebtn" onClick={this.likeClick}></button>
@@ -244,7 +265,7 @@ class Detail extends React.Component {
                 <div className="detail_view">
                     <p className="detail_subtit">Leeting 소개</p>
                     <div className="detail_content" dangerouslySetInnerHTML={{ __html: codes} }></div>
-                    </div>
+                </div>
                 
             </div>
             // 
