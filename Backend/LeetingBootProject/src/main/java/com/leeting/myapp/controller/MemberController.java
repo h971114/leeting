@@ -442,9 +442,7 @@ public class MemberController {
 	@PostMapping("/google")
 	public ResponseEntity<Map<String, String>> googlelogin(@RequestBody Map<String, Map> memberbody,
 			HttpServletRequest req) throws SQLException {
-		System.out.println(memberbody.toString());
 		Map<String, String> membermap = (Map<String, String>) memberbody.get("result").get("profileObj");
-		System.out.println(membermap.toString());
 		MemberDto newmember = new MemberDto();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		newmember.setId("goo_" + membermap.get("googleId"));
@@ -474,26 +472,22 @@ public class MemberController {
 	// 카카오로그인
 	@ApiOperation(value = "카카오로그인", notes = "카카오로그인", response = Map.class)
 	@PostMapping("/kakao")
-	public ResponseEntity<Map<String, String>> kakaologin(@RequestBody Map<String, Map> memberbody,
+	public ResponseEntity<Map<String, String>> kakaologin(@RequestBody Map memberbody,
 			HttpServletRequest req) throws SQLException {
-		System.out.println(memberbody.toString());
-		Map<String, Map> membermap = (Map<String, Map>) memberbody.get("result");
-		Map<String, Map> newmembermap = membermap.get("profile");
-		System.out.println(newmembermap.toString());
-		System.out.println(newmembermap.get("id"));
+		Map membermap =  (Map) ((Map) memberbody.get("result")).get("profile");
 		MemberDto newmember = new MemberDto();
-		newmember.setId("kak_" + newmembermap.get("id"));
-		newmember.setPw("kak_" + newmembermap.get("id"));
+		newmember.setId("kak_" + membermap.get("id"));
+		newmember.setPw("kak_" +membermap.get("id"));
 		HttpStatus status = HttpStatus.ACCEPTED;
-		Map<String, Map> foremail = newmembermap.get("kakao_account");
-		System.out.println(foremail);
-		System.out.println(foremail.get("email"));
-		newmember.setEmail(""+foremail.get("email"));
+		membermap =  (Map) membermap.get("kakao_account");
+		newmember.setEmail(""+membermap.get("email"));
+		if(newmember.getEmail().equals("null")) {
+			newmember.setEmail(newmember.getId());
+		}
 		newmember.setMobile("kakaoid");
-		Map<String, String> exmembermap = foremail.get("profile");
-		System.out.println(exmembermap.toString());
-		newmember.setNickname(""+exmembermap.get("nickname"));
-		newmember.setName(""+exmembermap.get("nickname"));
+		membermap = (Map) membermap.get("profile");
+		newmember.setNickname(""+membermap.get("nickname"));
+		newmember.setName(""+membermap.get("nickname"));
 		System.out.println(newmember.toString());
 		Map<String, String> conclusionmap = new HashMap<String, String>();
 		if (memberService.sameId(newmember.getId()) && memberService.sameEmail(newmember.getEmail())) {
