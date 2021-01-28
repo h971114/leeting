@@ -27,9 +27,10 @@ class write extends React.Component {
         super();
         this.state = {
             value: '1',
-            
             thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+            
 
+            categoryno: 1,
             checkCategory: true,
             checkmainTit: false,
             checksubTit: false,
@@ -37,14 +38,13 @@ class write extends React.Component {
         };
     }    
     state = {
-        categoryno: "1",
-            mainTit: "",
-            subTit: "",
-            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
-            sDate: new Date(),
+        categoryno: 1,
+        mainTit: "",
+        subTit: "",
+        thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+        sDate: new Date(),
         content: "",
         eDate:0,
-            
         
         selectedFile: null, //썸네일 파일 첨부
     }
@@ -240,6 +240,7 @@ class write extends React.Component {
         } else {
             enddate = document.getElementById("enddatepick").value;
         }
+        console.log(this.state.categoryno);
 
         axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
             hostid: sId,
@@ -253,6 +254,7 @@ class write extends React.Component {
         }).then(res => {
             if (res.data === "SUCESS") {
                 console.log("성공");
+                console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
                 if (this.state.categoryno === 1)
                     window.location.replace('/meeting/exercise');

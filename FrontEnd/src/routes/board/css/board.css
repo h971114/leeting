@@ -4,6 +4,15 @@
     margin: 0 auto;
 }
 
+.board_list .titles {
+    height: 200px;
+    padding-top: 70px;
+}
+
+.board_list .titles .tit {
+    text-align: center;
+}
+
 .board_list .notice_list_view table {
     width: 100%;
     border-spacing: 0;

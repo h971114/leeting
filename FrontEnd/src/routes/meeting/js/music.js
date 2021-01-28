@@ -42,6 +42,11 @@ const Music = () => {
         setCurrentPage(pageNumber);
     }
 
+    let sId = sessionStorage.getItem('id');
+    if (sId === null) {
+        document.getElementById('writeBtn').setAttribute("style", "display:none");
+    }
+
     return (
         <div id="meeting_list">
                 <div id="sub_wrap">

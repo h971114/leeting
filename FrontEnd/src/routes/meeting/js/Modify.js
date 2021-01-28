@@ -20,6 +20,13 @@ class Modify extends React.Component {
     editorRef = React.createRef();
     dateRef = React.createRef();
     
+    constructor() {
+        super();
+        this.state = {
+            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+        }
+    }
+
     state = {
         value:"1",
         id : "1",
@@ -31,6 +38,7 @@ class Modify extends React.Component {
         categoryno : "1",
         file: "1",  
         enddate:"",
+        thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
         
         selectedFile: null, //썸네일 파일 첨부
     }
@@ -258,10 +266,10 @@ class Modify extends React.Component {
             date: document.getElementById("startdatepick").value,
             detail: this.state.detail,
             categoryno: this.state.categoryno,
-            file: this.state.file,
+            file: this.state.thumb,
             enddate : enddate,
         }).then(res => {
-            if (res.data === "SUCESS") {
+            if (res.data === "SUCCESS") {
                 console.log("성공");
                 alert("수정 완료되었습니다.");
                 if (this.state.categoryno === 1)

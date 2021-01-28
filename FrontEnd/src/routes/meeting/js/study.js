@@ -28,6 +28,13 @@ const Study = () => {
           setLoading(false);
         }
     
+        if (sessionStorage.getItem("token") != null) {
+            document.getElementById('writeBtn').setAttribute("style", "display:inline-block");
+        }
+        else {
+            document.getElementById('writeBtn').setAttribute("style", "display:none");
+        }
+
         fetchPosts();
     }, []);
     

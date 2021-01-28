@@ -19,6 +19,13 @@ const Notice = () => {
           setLoading(false);
         }
     
+        if (sessionStorage.getItem("nickname") === "관리자") {
+            document.getElementById('writeBtn').setAttribute("style", "display:inline-block");
+        }
+        else {
+            document.getElementById('writeBtn').setAttribute("style", "display:none");
+        }
+    
         fetchPosts();
 
     }, []);
@@ -39,8 +46,7 @@ const Notice = () => {
     return (
     <div className="board_list">
         <div className="titles">
-            <h1 className="tit">D.I.Y</h1>
-            <p className="subtit">자세히 보아야 예쁘다 오래 보아야 사랑스럽다 너도 그렇다.<br/>- 나태주</p>
+            <h1 className="tit">공 지 사 항</h1>
         </div>
 
         <Posts posts={currentPosts} loading={loading} />
