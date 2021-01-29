@@ -75,7 +75,7 @@ class Header extends Component {
                             <li>
                                 <Link
                                     to={{
-                                        pathname: `/`
+                                        pathname: `/mypage`
                                     }}
                                     >
                                         {sessionStorage.getItem("nickname")}님 환영합니다

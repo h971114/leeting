@@ -241,6 +241,25 @@ class write extends React.Component {
             enddate = document.getElementById("enddatepick").value;
         }
         console.log(this.state.categoryno);
+        var url = "";
+        if (this.state.categoryno === "1") {
+            url="/meeting/exercise";
+        }
+        else if (this.state.categoryno === "2") {
+            url='/meeting/music'
+        }
+        else if (this.state.categoryno === "3") {
+            url='/meeting/game'
+        }
+        else if (this.state.categoryno === "4") {
+            url='/meeting/diy'
+        }
+        else if (this.state.categoryno === "5") {
+            url='/meeting/lans'
+        }
+        else {
+            url='/meeting/study'
+        }
 
         axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
             hostid: sId,
@@ -256,18 +275,7 @@ class write extends React.Component {
                 console.log("성공");
                 console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
-                if (this.state.categoryno === 1)
-                    window.location.replace('/meeting/exercise');
-                else if (this.state.categoryno === 2)
-                    window.location.replace('/meeting/music');
-                else if (this.state.categoryno === 3)
-                    window.location.replace('/meeting/game');
-                else if (this.state.categoryno === 4)
-                    window.location.replace('/meeting/diy');
-                else if (this.state.categoryno === 5)
-                    window.location.replace('/meeting/lans');
-                else
-                    window.location.replace('/meeting/study');
+                window.location.replace(url);
             }
             else {
                 console.log("실패");

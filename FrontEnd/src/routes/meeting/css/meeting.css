@@ -172,7 +172,7 @@
 
 #meeting_detail .titleset {
     margin-top: 50px;
-    height: 500px;
+    height: 440px;
     display: flex;
     flex-wrap: wrap;
     -webkit-box-pack: justify;
@@ -184,6 +184,14 @@
     height: 400px;
     margin-right: 50px;
     display: inline-block;
+}
+
+.detail_content p {
+    cursor: default;
+}
+
+.detail_content p img {
+    width: 800px;
 }
 
 .titleswrap {
@@ -198,7 +206,7 @@
     display: inline-block;
     padding-top: 0px;
     height: 200px;
-    width: 400px;
+    width: 350px;
 }
 
 #meeting_detail .titleset .titles .tit {

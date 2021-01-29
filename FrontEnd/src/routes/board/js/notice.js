@@ -30,7 +30,7 @@ const Notice = () => {
 
     }, []);
     
-    console.log(posts);
+    // console.log(posts);
     
       // Get current posts
       const indexOfLastPost = currentPage * postsPerPage;
