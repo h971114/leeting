@@ -10,22 +10,17 @@
 
 ![Crews](image/Readme/Crews.png)
 
-**한 진 영**
+**Back-End**
 
+- 한 진 영(Back-End), 천 영 재(Back-End), 현 수 진(Back-End)
 
-**천 영 재**
+**Front-End**
 
+- 이 홍 덕(Front-End), 정 현 모(Front-End)
 
-**현 수 진**
+**사라진 자**
 
-
-**이 홍 덕**
-
-
-**정 현 모**
-
-
-**이 홍 구**
+- 이 홍 구(Back-End)
 
 <br>
 
