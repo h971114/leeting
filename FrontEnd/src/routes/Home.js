@@ -12,6 +12,7 @@ class Home extends React.Component {
         isLoading: true,
         data:[]
     }
+
     getLeeting = async () => {
         let sId = sessionStorage.getItem('id');
         let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
@@ -20,18 +21,26 @@ class Home extends React.Component {
             }
         });
         data = data.data;
-        // console.log(data);
+
         this.setState({ data, isLoading: false });
+
+        if (data.length === 0) {
+            document.getElementById('myleetingList').setAttribute("style", "display:none");
+            document.getElementById('myleetingNo').setAttribute("style", "display:block");
+        } else {
+            document.getElementById('myleetingList').setAttribute("style", "display:block");
+            document.getElementById('myleetingNo').setAttribute("style", "display:none");
+        }
     }
     componentDidMount() {
         let sId = sessionStorage.getItem('id');
 
         if (sId !== null) {
-            
             this.getLeeting();
         } else {
             document.getElementById('myleetingTit').setAttribute('style', 'display:none');
             document.getElementById('myleetingList').setAttribute('style', 'display:none');
+            document.getElementById('myleetingNo').setAttribute('style', 'display:none');
         }
 
         // console.log(this.state.data);
@@ -103,8 +112,11 @@ class Home extends React.Component {
                     </ul>
                 </div>
                 <div id="myleetingTit" className="quicktit">
-                    <h2>내가 보고 있는 리팅</h2>
-                    <a className="all" href="/">전체보기</a>
+                    <h3>내가 보고 있는 리팅</h3>
+                    <a className="all" href="/Login">마이페이지 가기</a>
+                </div>
+                <div id="myleetingNo">
+                    <a href="/meeting/exercise"><img src="img/noMyLeeting.png" alt="참여 리팅 없음"></img></a>
                 </div>
                 <div id="myleetingList">
                     {isLoading ? (
@@ -140,7 +152,7 @@ class Home extends React.Component {
                     )}
                 </div>
                 <div className="quicktit">
-                    <h2>지금 가장 인기 있는 리팅 🥇</h2>
+                    <h3>지금 가장 인기 있는 리팅 🥇</h3>
                     <a className="all" href="/">전체보기</a>
                 </div>
                 <div className="favoriteleet">

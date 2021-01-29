@@ -1,0 +1,118 @@
+.joinContainer {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.joinContainer .tit {
+    text-align: center;
+    height: 150px;
+    padding-top: 60px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.joinContainer .tabcenter {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.joinContainer .tabcenter .tab {
+    position: relative;
+    display: block;
+    padding: .75rem 2rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.joinContainer .formcenter {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#inputId,
+#inputNickName {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#checkId,
+#checkNickName {
+    display: inline-block;
+    background-color: #008ce8;
+    color: white;
+}
+
+#checkId:hover,
+#checkNickName:hover {
+    background-color: #0473bc;
+}
+
+#auth {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#sendtoken {
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: #008ce8;
+}
+
+#sendtoken:hover {
+    background-color: #0473bc;
+}
+
+#checktoken {
+    display: none;
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: hsl(350, 100%, 63%);
+}
+
+#checktoken :hover {
+    background-color: rgb(255, 46, 81);
+}
+
+#email,
+#writedomain,
+#domain {
+    display: inline-block;
+}
+
+#labelId,
+#labelPw,
+#labelCPw,
+#labelName,
+#labelNickName,
+#labelEmail,
+#labelPhone {
+    display: block;
+}
+
+#validateId,
+#validatePw,
+#validateCPw,
+#validateName,
+#validateNickName,
+#validatePhone,
+#validateDomain {
+    display: block;
+    padding-left: 15px;
+    color: #ff3535;
+    font-weight: 600;
+}
+
+
+/* add */
+.user img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.user .userNickname {
+    display: inline-block;
+    font-size: 23px;
+    font-weight: bold;
+}

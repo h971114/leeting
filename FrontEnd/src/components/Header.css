@@ -78,6 +78,11 @@
     cursor: pointer;
 }
 
+#header .gtop #login ul li button {
+    border: none;
+    background-color: transparent;
+}
+
 #header .gtop #login ul li::after,
 #header .gtop #nologin ul li::after {
     content: '';

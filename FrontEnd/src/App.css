@@ -30,6 +30,7 @@ th,
 td {
   margin: 0;
   padding: 0;
+  cursor: default;
 }
 
 html,
@@ -105,4 +106,8 @@ body {
 a:hover {
   text-decoration: none;
   color: black;
+}
+
+.height414 {
+  height: 414px;
 }
