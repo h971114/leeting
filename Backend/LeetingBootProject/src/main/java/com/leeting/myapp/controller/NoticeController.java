@@ -89,7 +89,7 @@ public class NoticeController {
 		    list = noticeService.listNotice();
 		    System.out.println("get to /noticelist done");
 		    System.out.println("공지사항 목록");
-		    System.out.println(list.get(0).toString());
+//		    System.out.println(list.toString());
 		    return new ResponseEntity<List<NoticeDto>>(list,status);
 	  }
 	  //공지사항 상세정보

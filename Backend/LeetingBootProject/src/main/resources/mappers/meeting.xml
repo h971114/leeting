@@ -7,6 +7,9 @@
 		INSERT INTO meeting ( maintitle, subtitle, date, hostid, detail, categoryno, file,enddate)
 		VALUES ( #{maintitle},  #{subtitle}, #{date}, #{hostid},#{detail},#{categoryno},#{file},#{enddate})
 	</insert>
+	<update id="putImage" parameterType="map">
+		UPDATE meeting SET photo=#{photo} WHERE maintitle=#{maintitle}
+	</update>
 	<!-- 미팅 목록 -->
  	<select id="listMeeting" resultType="meeting">
 		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file ,enddate, meetinglike, participants FROM meeting ORDER BY no DESC

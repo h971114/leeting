@@ -10,7 +10,7 @@ import com.leeting.myapp.model.ReviewDto;
 
 public interface MeetingService {
 
-	boolean enrollMeeting(MeetingDto meeting);
+	boolean enrollMeeting(MeetingDto meeting,Map<String, Object> meetingmap);
     List<MeetingDto> listMeeting(int categoryno) throws SQLException;
     MeetingDto getMeetingInfo(int meetingno);
     void delete(int meetingno);
@@ -25,4 +25,5 @@ public interface MeetingService {
 	boolean postReview(ReviewDto reviewDto) throws SQLException;
 	boolean updateReview(ReviewDto reviewDto) throws SQLException;
 	boolean deleteReview(int no) throws SQLException;
+	boolean enrollPhoto(Map<String, Object> meetingmap);
 }

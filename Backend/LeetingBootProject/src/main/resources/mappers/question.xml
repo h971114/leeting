@@ -7,10 +7,9 @@
 		INSERT INTO questions ( type, title, detail, qwriter, date)
 		VALUES (#{type}, #{title},  #{detail}, #{qwriter}, now())
 	</insert>
-	<insert id="putImage" parameterType="map">
-		INSERT INTO questions (file1,file2,file3)
-		VALUES ( #{file1},#{file2},#{file3)
-	</insert>
+	<update id="putImage" parameterType="map">
+		UPDATE questions SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE title=#{title}
+	</update>
 	<!-- 공지사항 목록 -->
 	<select id="listQuestion" resultType="question">
 		SELECT no, title, date, qwriter FROM questions

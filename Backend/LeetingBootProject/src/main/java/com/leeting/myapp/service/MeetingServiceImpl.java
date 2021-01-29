@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.leeting.myapp.model.ReviewDto;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Service;
 
 import com.leeting.myapp.dao.MeetingDao;
@@ -23,10 +24,10 @@ public class MeetingServiceImpl implements MeetingService{
 
 	
 	@Override
-    public boolean enrollMeeting(MeetingDto meeting) {
+    public boolean enrollMeeting(MeetingDto meeting,Map<String, Object> meetingmap) {
 	      try {
 				System.out.println("확인");
-				meetingDao.enrollMeeting(meeting);
+				meetingDao.enrollMeeting(meeting,meetingmap);
 	            return true;
 	        } catch (SQLException throwables) {
 	            throwables.printStackTrace();
@@ -125,4 +126,12 @@ public class MeetingServiceImpl implements MeetingService{
     public boolean deleteReview(int no) throws SQLException {
         return meetingDao.deleteReview(no);
     }
+
+
+	@Override
+	public boolean enrollPhoto(Map<String, Object> meetingmap) {
+		System.out.println("확인");
+		meetingDao.enrollPhoto(meetingmap);
+		return false;
+	}
 }
