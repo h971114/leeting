@@ -11,7 +11,13 @@ import com.leeting.myapp.service.JwtInterceptor;
 public class WebConfig implements WebMvcConfigurer {
     private static final String[] EXCLUDE_PATHS = {
             "/member/**",
-            "/error/**"
+            "/error/**",
+            "/recommend/**",
+            "/meeting/**",
+            "/contents/**",
+            "/gallery/**",
+            "/notice/**",
+            "/question/**"
     };
 
     @Autowired

@@ -1,6 +1,6 @@
 .shortcut {
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .shortcut>ul {
@@ -20,19 +20,19 @@
     height: 150px;
 }
 
-.favoritetit {
+.quicktit {
     position: relative;
     width: 1200px;
     margin: 20px auto;
 }
 
-.favoritetit>h2 {
+.quicktit>h2 {
     display: inline-block;
     vertical-align: middle;
     cursor: default;
 }
 
-.favoritetit .all {
+.quicktit .all {
     position: absolute;
     top: 12px;
     right: 0;

@@ -29,7 +29,7 @@ class Join extends React.Component {
   }
   
   handleChange = (event) => {
-    if (event.target.value != '직접입력') {
+    if (event.target.value !== '직접입력') {
       this.setState({
         value: event.target.value,
         domain: event.target.value,
@@ -89,7 +89,7 @@ class Join extends React.Component {
     }
 
     
-    if (document.getElementById('inputCPw').value != e.target.value) {
+    if (document.getElementById('inputCPw').value !== e.target.value) {
       this.setState({
         checkPw:false
     }); 
@@ -167,7 +167,7 @@ class Join extends React.Component {
   };
 
   nicknameChange = (e) => {
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,10}$/g;
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       this.setState({
         checkNickname: false
@@ -267,7 +267,7 @@ class Join extends React.Component {
     e.preventDefault();
     // console.log(this.state.id);
     
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,10}$/g;
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       axios.post('http://127.0.0.1:8080/myapp/member/samenick', {
         nickname: this.state.nickname
@@ -299,6 +299,7 @@ class Join extends React.Component {
     e.preventDefault();
     console.log(this.state.email + "@" + this.state.domain);
     axios.post('http://127.0.0.1:8080/myapp/member/email', {
+      samecheck:"",
         email: this.state.email + "@" + this.state.domain,
       }).then(res => {
         console.log(res);
@@ -306,9 +307,14 @@ class Join extends React.Component {
         this.setState({
           token: res.data
         })
-        document.getElementById('auth').disabled = false;
-        // document.getElementById('sendtoken').setAttribute('style', 'display:none');
-        document.getElementById('checktoken').setAttribute('style', 'display:inline-block');
+        if (res.data === "FAIL") {
+          document.getElementById('validateDomain').textContent = "이미 가입된 이메일입니다.";
+          document.getElementById('validateDomain').setAttribute('style', 'color: #ff3535');
+        } else {
+          document.getElementById('auth').disabled = false;
+          // document.getElementById('sendtoken').setAttribute('style', 'display:none');
+          document.getElementById('checktoken').setAttribute('style', 'display:inline-block'); 
+        }
       })
   };
 

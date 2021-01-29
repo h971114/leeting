@@ -4,11 +4,99 @@
 <mapper namespace="meeting">
 	<!-- 미팅 등록 -->
 	<insert id="enrollMeeting" parameterType="meeting">
-		INSERT INTO meeting ( maintitle, subtitle, date, hostid, detail, categoryno, file)
-		VALUES ( #{maintitle},  #{subtitle}, #{date}, #{hostid},#{detail},#{categoryno},#{file})
+		INSERT INTO meeting ( maintitle, subtitle, date, hostid, detail, categoryno, file,enddate)
+		VALUES ( #{maintitle},  #{subtitle}, #{date}, #{hostid},#{detail},#{categoryno},#{file},#{enddate})
 	</insert>
 	<!-- 미팅 목록 -->
  	<select id="listMeeting" resultType="meeting">
-		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file FROM meeting ORDER BY no
+		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file ,enddate, meetinglike, participants FROM meeting ORDER BY no DESC
 	</select>
+	<select id="listMeetingCategory" parameterType="int" resultType="meeting">
+		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file  ,enddate, meetinglike, participants FROM meeting WHERE categoryno = #{categoryno} ORDER BY no DESC
+	</select>
+	<!-- 미팅상세정보 -->
+	<select id="meetinginfo" parameterType="int" resultType="meeting">
+		SELECT * FROM meeting WHERE no = #{meetingno}
+	</select>
+	<!-- 미팅 삭제 -->
+	<delete id="meetingdelete" parameterType="int">
+		DELETE FROM participation WHERE meetingno=#{meetingno};
+		DELETE FROM meeting WHERE no=#{meetingno};		
+	</delete>
+	<!-- 미팅 수정 -->
+	<update id="meetingmodify" parameterType="meeting">
+		UPDATE meeting SET maintitle=#{maintitle},subtitle=#{subtitle},date=#{date},hostid=#{hostid},detail=#{detail},categoryno=#{categoryno},file=#{file},enddate=#{enddate} WHERE no=#{meetingno}
+	</update>
+	<!-- 미팅 참여자 정보 -->
+	<select id="listparticipants" parameterType="int" resultType="participation">
+		SELECT * FROM participation WHERE meetingno=#{meetingno}
+	</select>
+	<!-- 좋아요 수정	-->
+	<update id="setlikestatus" parameterType="participation">
+		UPDATE participation
+		SEt likestatus = #{likestatus}
+		where userid = #{userid} and meetingno = #{meetingno}
+	</update>
+	<update id="setmeetinglike" parameterType="map">
+		UPDATE meeting
+		SEt meetinglike = meetinglike+#{score}
+		where no = cast(#{meetingno} as signed Integer)
+	</update>
+	<!-- 미팅 참석-->
+	<insert id="clickmeeting" parameterType="participation">
+		INSERT INTO participation (meetingno, userid, likestatus)
+		VALUES (#{meetingno}, #{userid}, 0)
+	</insert>
+	<update id="plusparticipant" parameterType="participation">
+		UPDATE meeting SET participants = participants+1 WHERE no = #{meetingno}
+	</update>
+	<!--  참여자 정보  -->
+	<select id="participationinfo" parameterType="participation" resultType="participation">
+		SELECT no, meetingno, userid, likestatus
+		FROM participation
+		WHERE userid = #{userid} and meetingno = #{meetingno}
+	</select>
+	<!-- 미팅나가기 -->
+	<delete id="exitmeeting" parameterType="participation">
+		DELETE FROM participation WHERE meetingno=#{meetingno} AND userid = #{userid};		
+	</delete>
+	<update id="minusparticipant" parameterType="participation">
+		UPDATE meeting SET participants = participants-1 WHERE no = #{meetingno}
+	</update>
+
+	<!-- 키워드 검색: 제목(부제목), 아이디-->
+	<select id="searchbytitle" parameterType="String" resultType="meeting">
+		SELECT * FROM meeting
+		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
+		subtitle like CONCAT('%', #{keyword}, '%');
+	</select>
+	<select id="searchbyid" parameterType="String" resultType="meeting">
+		SELECT * FROM meeting
+		WHERE hostid like CONCAT('%', #{keyword}, '%')
+	</select>
+	<!--리뷰 조회	-->
+	<select id="getreview" parameterType="int" resultType="review">
+		SELECT no, meetingno, review, writer, date
+		FROM meeting_review
+		WHERE meetingno = #{meetingno}
+	</select>
+	<!--리뷰 작성-->
+	<insert id="postreview" parameterType="review">
+		INSERT INTO meeting_review
+		(meetingno, review, writer)
+		VALUES (#{meetingno}, #{review}, #{writer})
+	</insert>
+
+	<!--리뷰 수정-->
+	<insert id="updatereview" parameterType="review">
+		UPDATE meeting_review
+		SET review = #{review}
+		WHERE no = #{no}
+	</insert>
+
+	<!--리뷰 작성-->
+	<insert id="deletereview" parameterType="int">
+		DELETE FROM meeting_review
+		WHERE no = #{no};
+	</insert>
 </mapper>

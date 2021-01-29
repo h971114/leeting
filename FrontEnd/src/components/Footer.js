@@ -10,9 +10,9 @@ function Footer() {
                 <li><a href="/">개인정보처리방침</a></li>
             </ul>
             <ul className="ftsns">
-                <li className="insta"><a href="/" target="_blank"></a></li>
-                <li className="youtube"><a href="/" target="_blank"></a></li>
-                <li className="kakao"><a href="/" target="_blank"></a></li>
+                <li className="insta"><a href="/" target="_blank">insta</a></li>
+                <li className="youtube"><a href="/" target="_blank">youtube</a></li>
+                <li className="kakao"><a href="/" target="_blank">kakao</a></li>
             </ul>
             <div className="fttxt">
                 고객센터  02-1234-5678  |  평일 상담시간  09:00 ~ 18:00<br/>

@@ -1,6 +1,7 @@
 package com.leeting.myapp.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.leeting.myapp.model.MemberDto;
 
@@ -14,4 +15,7 @@ public interface MemberDao {
 	int sameNick(String Nickname) throws SQLException;
 	public String findid(MemberDto member) throws SQLException;
 	public String findpw(MemberDto member) throws SQLException;
+	int sameEmail(String email) throws SQLException;
+	List<Object> userMeetingFive(String userid) throws SQLException;
+	void start();
 }

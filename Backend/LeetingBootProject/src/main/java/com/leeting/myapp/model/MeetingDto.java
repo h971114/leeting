@@ -17,9 +17,20 @@ public class MeetingDto {
 	private int categoryno;
 	
 	private String file;
+	
+	private int meetinglike;
+	
+	private String enddate;
+	
+	private int participants;
+	
+
+
+
+
 
 	public MeetingDto(int meetingno, String maintitle, String subtitle, String date, String hostid, String detail,
-			int categoryno, String file) {
+			int categoryno, String file, int meetinglike, String enddate, int participants) {
 		super();
 		this.meetingno = meetingno;
 		this.maintitle = maintitle;
@@ -29,12 +40,15 @@ public class MeetingDto {
 		this.detail = detail;
 		this.categoryno = categoryno;
 		this.file = file;
+		this.meetinglike = meetinglike;
+		this.enddate = enddate;
+		this.participants = participants;
 	}
 
-	
-	
+
+
 	public MeetingDto(String maintitle, String subtitle, String date, String hostid, String detail, int categoryno,
-			String file) {
+			String file, int meetinglike, String enddate, int participants) {
 		super();
 		this.maintitle = maintitle;
 		this.subtitle = subtitle;
@@ -43,6 +57,9 @@ public class MeetingDto {
 		this.detail = detail;
 		this.categoryno = categoryno;
 		this.file = file;
+		this.meetinglike = meetinglike;
+		this.enddate = enddate;
+		this.participants = participants;
 	}
 
 
@@ -117,12 +134,52 @@ public class MeetingDto {
 		this.file = file;
 	}
 
+
+
+	public int getmeetinglike() {
+		return meetinglike;
+	}
+
+
+
+	public void setmeetinglike(int meetinglike) {
+		this.meetinglike = meetinglike;
+	}
+
+
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
+
+
+	public int getParticipants() {
+		return participants;
+	}
+
+
+
+	public void setParticipants(int participants) {
+		this.participants = participants;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "MeetingDto [meetingno=" + meetingno + ", maintitle=" + maintitle + ", subtitle=" + subtitle + ", date="
 				+ date + ", hostid=" + hostid + ", detail=" + detail + ", categoryno=" + categoryno + ", file=" + file
-				+ "]";
+				+ ", meetinglike=" + meetinglike + ", enddate=" + enddate + ", participants=" + participants + "]";
 	}
+
+
 	
 	
 	

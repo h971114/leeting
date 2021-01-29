@@ -3,7 +3,12 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="com.leeting.myapp.model.MemberDto" alias="member"></typeAlias>
- 		<typeAlias type="com.leeting.myapp.model.ExerciseDto" alias="exercise"></typeAlias>
  		<typeAlias type="com.leeting.myapp.model.MeetingDto" alias="meeting"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.ContentsDto" alias="contents"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.GalleryDto" alias="gallery"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.ParticipationDto" alias="participation"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.NoticeDto" alias="notice"></typeAlias>
+ 		<typeAlias type="com.leeting.myapp.model.QuestionDto" alias="question"></typeAlias>
+		<typeAlias type="com.leeting.myapp.model.ReviewDto" alias="review"></typeAlias>
  	</typeAliases>
  </configuration>

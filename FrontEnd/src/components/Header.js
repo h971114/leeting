@@ -59,10 +59,10 @@ class Header extends Component {
                     <div className="gnb cB" id="gnb">
                         <ul className="topmenu" id="head-menu">
                             <li className="lnb1">
-                                <a href="/Leeting">Leeting</a>
+                                <a href="/Leeting">Leeting 소개</a>
                             </li>
                             <li className="lnb2">
-                                <a href="#" >메뉴2</a>
+                                <a href="/meeting/exercise" >Leeting's</a>
                             </li>
                             <li className="lnb3">
                                 <a href="#" >메뉴3</a>
