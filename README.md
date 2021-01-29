@@ -1,6 +1,6 @@
 # Welcome to Leeting
 
-![Leeting].(./images/README/pclogo.png)
+![pclogo](image/README/pclogo.png)
 
 >Leeting 웹 로고
 
