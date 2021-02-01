@@ -66,7 +66,8 @@
 
 	<!-- 키워드 검색: 제목(부제목), 아이디-->
 	<select id="searchAll" parameterType="String" resultType="meeting">
-		SELECT * FROM meeting
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
 		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
 		subtitle like CONCAT('%', #{keyword}, '%') or
 		hostid like CONCAT('%', #{keyword}, '%') or
@@ -74,12 +75,14 @@
 	</select>
 
 	<select id="searchbytitle" parameterType="String" resultType="meeting">
-		SELECT * FROM meeting
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
 		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
 		subtitle like CONCAT('%', #{keyword}, '%');
 	</select>
 	<select id="searchbyid" parameterType="String" resultType="meeting">
-		SELECT * FROM meeting
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
 		WHERE hostid like CONCAT('%', #{keyword}, '%')
 	</select>
 	<!--리뷰 조회	-->

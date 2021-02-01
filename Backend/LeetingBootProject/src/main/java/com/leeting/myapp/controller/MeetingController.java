@@ -236,7 +236,7 @@ public class MeetingController {
 		else conclusionMap.put("message", "FAIL");
 		System.out.println(conclusionMap.get("message"));
 		for(MeetingDto MeetingDto : list)
-			System.out.println(MeetingDto.getHostid());
+			System.out.println(MeetingDto.toString());
 		return new ResponseEntity<>(conclusionMap, status);
 	}
 
