@@ -95,6 +95,10 @@ public class MeetingServiceImpl implements MeetingService{
 	        return false;
         }
     }
+    @Override
+    public List<MeetingDto> searchAll(String keyword) throws SQLException {
+        return meetingDao.searchall(keyword);
+    }
 
     @Override
     public List<MeetingDto> searchByTitle(String keyword) throws SQLException {

@@ -211,7 +211,7 @@ public class MeetingController {
 
 	// 미팅 검색
 	@ApiOperation(value="미팅검색", notes="키워드로 미팅 검색", response = Map.class)
-	@GetMapping("/searchmeeting")
+	@GetMapping("/search")
 	public ResponseEntity<Map<String, Object>> searchMeeting( @RequestParam(value = "condition", defaultValue = "1") int num,
 												 @RequestParam(value = "keyword", defaultValue = "") String keyword,
 												 HttpServletRequest req) throws SQLException {
@@ -220,7 +220,11 @@ public class MeetingController {
 		System.out.println("get to /searchmeeting done");
 		Map<String, Object> conclusionMap = new HashMap<>();
 		List<MeetingDto> list = new ArrayList<>();
-		if(num==1){ // 제목으로 검색
+		if(num==0){
+			list = meetingService.searchAll(keyword);
+			System.out.println("전체 검색");
+		}
+		else if(num==1){ // 제목으로 검색
 			list = meetingService.searchByTitle(keyword);
 			System.out.println("제목 검색");
 		}else { // 아이디로 검색
