@@ -240,16 +240,17 @@ public class MeetingController {
 		return new ResponseEntity<>(conclusionMap, status);
 	}
 
+	// 리뷰 목록
+	@ApiOperation(value="리뷰목록", notes="리뷰목록", response = Map.class)
 	@GetMapping("/review")
 	public ResponseEntity<Map<String, Object>> getReview(@RequestParam int meetingno, HttpServletRequest req) throws SQLException {
-		System.out.println(req);
 		Map<String, Object> map = new HashMap<>();
-		String conclusion = "";
 		HttpStatus httpStatus = HttpStatus.ACCEPTED;
 		List<ReviewDto> list = meetingService.getReview(meetingno);
+		System.out.println("get /review");
 		if(list.size()>0) {
 			for(ReviewDto reviewDto : list)
-				System.out.println(reviewDto.toString());
+				System.out.println("reviewDto.getReview() = " + reviewDto.getReview());
 			map.put("list", list);
 			map.put("conclusion", "SUCCESS");
 		}
@@ -259,36 +260,39 @@ public class MeetingController {
 		}
 		return new ResponseEntity<>(map, httpStatus);
 	}
-
-	@PostMapping("/postreview")
+	// 리뷰 쓰기
+	@ApiOperation(value="리뷰쓰기", notes="리뷰쓰기")
+	@PostMapping("/review")
 	public ResponseEntity<String> postReview(@RequestBody ReviewDto reviewDto, HttpServletRequest req) throws SQLException {
-		System.out.println(req);
 		String conclusion = "";
 		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		System.out.println("post /review");
 		if(meetingService.postReview(reviewDto))
 			conclusion = "SUCCESS";
 		else
 			conclusion = "FAIL";
 		return new ResponseEntity<>(conclusion, httpStatus);
 	}
-
-	@PutMapping("/updatereview")
+	// 리뷰 수정
+	@ApiOperation(value="리뷰수정", notes="리뷰수정")
+	@PutMapping("/review")
 	public ResponseEntity<String> updateReview(@RequestBody ReviewDto reviewDto, HttpServletRequest req) throws SQLException {
-		System.out.println(req);
 		String conclusion = "";
 		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		System.out.println("put /review");
 		if(meetingService.updateReview(reviewDto))
 			conclusion = "SUCCESS";
 		else
 			conclusion = "FAIL";
 		return new ResponseEntity<>(conclusion, httpStatus);
 	}
-
-	@DeleteMapping("/deletereview")
+	// 리뷰 삭제
+	@ApiOperation(value="리뷰삭제", notes="리뷰삭제")
+	@DeleteMapping("/review")
 	public ResponseEntity<String> deleteReview(@RequestParam(value = "no") int no, HttpServletRequest req) throws SQLException {
-		System.out.println(req);
 		String conclusion = "";
 		HttpStatus httpStatus = HttpStatus.ACCEPTED;
+		System.out.println("del /review");
 		if(meetingService.deleteReview(no))
 			conclusion = "SUCCESS";
 		else

@@ -87,7 +87,7 @@
 	</select>
 	<!--리뷰 조회	-->
 	<select id="getreview" parameterType="int" resultType="review">
-		SELECT no, meetingno, review, writer, date
+		SELECT no, meetingno, date, review, writer
 		FROM meeting_review
 		WHERE meetingno = #{meetingno}
 	</select>
@@ -105,7 +105,7 @@
 		WHERE no = #{no}
 	</insert>
 
-	<!--리뷰 작성-->
+	<!--리뷰 삭제-->
 	<insert id="deletereview" parameterType="int">
 		DELETE FROM meeting_review
 		WHERE no = #{no};
