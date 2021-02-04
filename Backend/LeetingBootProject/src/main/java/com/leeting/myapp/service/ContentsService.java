@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ContentsService {
     boolean enrollContent(ContentsDto contentsDto);
-    List<ContentsDto> findContent(); // 특정 컨텐츠 조회, 파라미터 미정
-    List<ContentsDto> listContent(); // 컨텐츠 전체 리스트
+    List<ContentsDto> listContents(String keyword); // 특정 컨텐츠 조회, 파라미터 미정
+    List<ContentsDto> listContents(); // 컨텐츠 전체 리스트
     boolean deleteContent(int contentno);
     boolean updateContent(ContentsDto contentsDto);
 }

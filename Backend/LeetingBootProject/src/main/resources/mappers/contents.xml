@@ -4,25 +4,28 @@
 <mapper namespace="contents">
     <insert id="enrollcontents" parameterType="contents">
        INSERT INTO contents (writer, date, detail, file, category)
-       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno})
+       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno});
+       INSERT INTO contents_info (memberid, date, detail, file, category)
+       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno});
     </insert>
-    <select id="listcontents" resultType="contents">
-        SELECT no, writer, date, detail, file, category
+    <select id="list" resultType="contents">
+        SELECT no as contentsno, writer, date, detail, file, category as categoryno
         FROM contents
     </select>
-    <select id="findcontents" resultType="contents">
-        SELECT no, writer, date, detail, file, category
+    <select id="no" resultType="contents">
+        SELECT no as contentsno, writer, date, detail, file, category as categoryno
         FROM contents
+        WHERE writer like CONCAT('%', #{keyword}, '%') or
+		detail like CONCAT('%', #{keyword}, '%')
     </select>
-    <delete id="deletecontents" parameterType="int">
+    <delete id="delete" parameterType="int">
         DELETE
         FROM contents
         WHERE no = #{contentsno}
     </delete>
-    <update id="updatecontents" parameterType="contents">
+    <update id="update" parameterType="contents">
         UPDATE contents
-        SET date = #{date},
-            detail = #{detail},
+        SET detail = #{detail},
             file = #{file},
             category = #{categoryno}
         WHERE no = #{contentsno}
