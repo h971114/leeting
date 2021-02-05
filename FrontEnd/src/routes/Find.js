@@ -274,6 +274,8 @@ class Find extends React.Component {
     
     render() {
         return (
+            
+        <div id="main_content">   
             <div className="findcontainer">
                 <div className="titles">
                     <h1 className="tit">아이디 / 비밀번호 찾기</h1>
@@ -360,7 +362,8 @@ class Find extends React.Component {
                         </div>
                     </form>
                 </div>
-            </div>
+                </div>
+                </div>
         );
     }
 }

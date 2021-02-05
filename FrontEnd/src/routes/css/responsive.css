@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* pc */
+@media only screen and (max-width:2560px) {
+    .header {
+        max-width: 2400px;
+        padding: 0 20px
+    }
+}
+
+@media only screen and (max-width:1920px) {
+    .header {
+        max-width: 1800px;
+        padding: 0
+    }
+}
+
+@media only screen and (max-width:1799px) {
+    .wide_con {
+        width: 96%
+    }
+}
+
+@media only screen and (max-width:1620px) {
+    .header .nav_wrap {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width:1500px) {
+    .login_nav span {
+        padding-right: 10px
+    }
+}
+
+@media only screen and (max-width:1400px) {
+    .header .nav_wrap {
+        margin-left: 520px;
+    }
+
+    .header .nav_wrap>ul>li {
+        margin-left: 20px;
+    }
+
+    .header .nav_wrap>ul>li>a {
+        font-size: 15px
+    }
+}
+
+@media only screen and (max-width:1300px) {
+    .btn_side {
+        display: block;
+        top: 27px;
+    }
+
+    .header .nav_wrap,
+    .header .login_nav a,
+    .header .login_nav img,
+    .header .login_nav button,
+    #searchBar {
+        display: none;
+    }
+
+    .header .login_nav {
+        top: 3px;
+        right: 50px;
+    }
+}
+
+
+@media only screen and (max-width:1130px) {
+
+    .header .logo_wrap a,
+    .scroll .header .logo_wrap a {
+        height: 70px;
+    }
+
+    #main_content {
+        padding-top: 70px;
+    }
+
+    .header .nav_wrap>ul,
+    .scroll .header .nav_wrap>ul {
+        padding-top: 30px;
+        margin-left: -90px;
+    }
+
+    .header .nav_wrap>ul>li {
+        margin-left: 18px;
+    }
+
+    .header .nav_wrap>ul>li>a {
+        font-size: 14px;
+    }
+
+    .header .login_nav,
+    .scroll .header .login_nav {
+        padding-top: 22px;
+    }
+
+    .header .login_nav a {
+        margin-left: 5px
+    }
+}
+
+
+
+/* tablet */
+@media only screen and (max-width:1024px) {
+    .btn_side {
+        top: 12px;
+    }
+}
+
+
+/* mobile */
+@media only screen and (max-width:768px) {
+    body {
+        font-size: 15px;
+    }
+
+    .btn_side {
+        top: 6px;
+    }
+
+    .header .logo_wrap a,
+    .scroll .header .logo_wrap a {
+        width: 100px;
+        height: 60px;
+        padding: 8px 0;
+    }
+
+    #main_content {
+        padding-top: 60px;
+    }
+}
+
+@media only screen and (max-width:499px) {
+    body {
+        font-size: 14px
+    }
+
+    .btn_side {
+        top: 6px
+    }
+
+    .header .login_nav {
+        padding-top: 21px;
+    }
+
+}

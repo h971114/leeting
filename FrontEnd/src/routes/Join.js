@@ -392,6 +392,8 @@ class Join extends React.Component {
 
   render() {
     return (
+      
+      <div id="main_content">
       <div className="joinContainer">
         <h1 className="tit">회 원 가 입</h1>
         <hr />
@@ -484,7 +486,7 @@ class Join extends React.Component {
           </div>
         </div>
       </div>
-
+    </div>
     );
   }
 }

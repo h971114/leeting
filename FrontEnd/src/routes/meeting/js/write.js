@@ -4,6 +4,8 @@ import "../css/meeting.css"
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+
+
 import axios from "axios";
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -207,6 +209,8 @@ class write extends React.Component {
         // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
+        formData.append('hostid', sessionStorage.getItem('id'));
+        formData.append('dirNum', 1);
         axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
@@ -291,6 +295,8 @@ class write extends React.Component {
     render() {
         const { location } = this.props;
         return (
+            
+      <div id="main_content">
             <div className="writeWrap">
                 <div className="titleset">
                     <p className="mainTit">Leeting 등록</p>
@@ -362,12 +368,12 @@ class write extends React.Component {
                             </tr>
                             <tr>
                                 <th scope="row">내 용</th>
-                                <td colSpan="5">
+                                    <td colSpan="5">
                                     <Editor
                                         previewStyle="vertical"
                                         height="300px"
-                                        initialEditType="wysiwyg"
                                         placeholder="글쓰기"
+                                        initialEditType="wysiwyg"
                                         ref={this.editorRef}
                                         onChange={this.editorChange}
                                     />
@@ -380,7 +386,8 @@ class write extends React.Component {
                     </div>
                 </div>
                 
-            </div>
+                </div>
+                </div>
         );
     }
 }

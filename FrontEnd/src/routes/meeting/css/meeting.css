@@ -148,6 +148,10 @@
     font-weight: bold;
 }
 
+.itemListView a p {
+    cursor: pointer;
+}
+
 .writeBtn {
     position: relative;
     width: 1200px;
@@ -246,6 +250,7 @@
 
 .hosthr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 30px;
 }
 
 #meeting_detail .titleset .host {
@@ -293,6 +298,21 @@
     border: none;
 }
 
+.joinMeeting #boardMeeting {
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto 10px;
+
+    border-radius: 5px;
+    background-color: #008be6;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    display: none;
+}
+
 .joinMeeting #joinOutBtn {
     width: 300px;
     height: 40px;
@@ -325,7 +345,8 @@
     border: none;
 }
 
-.joinMeeting #modifyBtn a {
+.joinMeeting #modifyBtn a,
+.joinMeeting #boardMeeting a {
     color: white;
 }
 
@@ -335,10 +356,11 @@
 
 .detail_hr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    width: 950px;
 }
 
 .detail_view {
-    width: 1200px;
+    width: 950px;
     margin: 0 auto;
 }
 
@@ -567,4 +589,117 @@
 
 .writeInputWrap .onModified .displaynone {
     display: none;
+}
+
+#editWrap {
+    width: 950px;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#editorWrap {
+    width: 800px;
+    margin-right: 20px;
+    display: inline-block;
+
+}
+
+#reviewWriteBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 130px;
+    display: inline-block;
+}
+
+#reviewWriteBtn button {
+    width: 130px;
+    height: 60px;
+
+    background: #656d78;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 17px;
+}
+
+#editorWrap div div .te-toolbar-section {
+    display: none;
+}
+
+#editorWrap .tui-editor-contents {
+    font-size: 16px;
+}
+
+#meeting_detail .formcenter {
+    width: 950px;
+    margin-top: 20px;
+}
+
+#meeting_detail .formcenter .forradio {
+    width: 50%;
+    font-size: 20px;
+}
+
+#meeting_detail input[type="radio"]:checked+label {
+    color: #555;
+    border: none;
+}
+
+#meeting_detail #tab1+label {
+    border: #ccc 1px solid;
+    border-bottom: none;
+}
+
+#meeting_detail #tab2+label {
+    border: #ccc 1px solid;
+    border-left: none;
+    border-bottom: none;
+}
+
+#viewReviews,
+#viewDetails {
+    margin-top: 20px;
+    display: none;
+}
+
+#tab1:checked~#viewDetails,
+#tab2:checked~#viewReviews {
+    display: block;
+}
+
+.te-ww-container>.te-editor {
+    overflow: hidden !important;
+}
+
+.reviewListView {
+    width: 950px;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px #ccc solid;
+}
+
+.reviewListView .reviewWriter {
+    font-size: 18px;
+    color: #008be6;
+    font-weight: bold;
+}
+
+.reviewListView p {
+    cursor: default;
+}
+
+.reviewListView .detail_content {
+    margin: 0;
+}
+
+.reviewWriter,
+.reviewDate {
+    display: inline-block;
+}
+
+.reviewWriter {
+    margin-right: 20px;
 }

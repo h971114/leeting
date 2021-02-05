@@ -30,7 +30,6 @@ th,
 td {
   margin: 0;
   padding: 0;
-  cursor: default;
 }
 
 html,
@@ -108,6 +107,6 @@ a:hover {
   color: black;
 }
 
-.height414 {
-  height: 414px;
+.te-mode-switch-section {
+  display: none !important;
 }

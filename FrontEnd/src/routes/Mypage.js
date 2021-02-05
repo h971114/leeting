@@ -358,6 +358,7 @@ class Mypage extends React.Component {
     // let emailDomain = this.state.email ? this.state.email.split('@') : null 
 
     return (
+      <div id="main_content">
       <div className="joinContainer">
         <h1 className="tit">마이페이지</h1>
         <hr />
@@ -511,7 +512,8 @@ class Mypage extends React.Component {
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+        </div>
     );
   }
 }

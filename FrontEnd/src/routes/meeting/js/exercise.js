@@ -28,7 +28,7 @@ const Exercise = () => {
         }
     
         if (sessionStorage.getItem("token") != null) {
-            document.getElementById('writeBtn').setAttribute("style", "display:inline-block");
+            document.getElementById('writeBtn').setAttribute("style", "display:block");
         }
         else {
             document.getElementById('writeBtn').setAttribute("style", "display:none");
@@ -50,26 +50,28 @@ const Exercise = () => {
     }
 
     return (
+        
+      <div id="main_content">
         <div id="meeting_list">
                 <div id="sub_wrap">
                     <div id="sub_menu">
                         <ul>
-                            <Link to="/meeting/exercise">
+                        <Link to={{pathname: `/meeting/exercise`}}>
                                 <li id="exercise" className="onPage">운 동</li>
                             </Link>
-                            <Link to="/meeting/music">
-                                <li id="music">음 악</li>
+                        <Link to={{ pathname: `/meeting/music` }}>
+                                <li id="music" >음 악</li>
                             </Link>
-                            <Link to="/meeting/game">
+                        <Link to={{ pathname: `/meeting/game` }}>
                                 <li id="game">게 임</li>
                             </Link>
-                            <Link to="/meeting/diy">
+                        <Link to={{ pathname: `/meeting/diy` }}>
                                 <li id="diy">D.I.Y</li>
                             </Link>
-                            <Link to="/meeting/lans">
+                        <Link to={{ pathname: `/meeting/lans` }}>
                                 <li id="lans">랜선 모임</li>
                             </Link>
-                            <Link to="/meeting/study">
+                        <Link to={{ pathname: `/meeting/study` }}>
                                 <li id="study">스터디</li>
                             </Link>
                         </ul>
@@ -87,6 +89,7 @@ const Exercise = () => {
                 totalPosts={posts.length}
                 paginate={paginate}
                 currentPage={currentPage}
+                loading={loading}
             />
 
             <div id="writeBtn" className="writeBtn">
@@ -102,7 +105,8 @@ const Exercise = () => {
                 </Link>
             </div>
 
-        </div>
+            </div>
+            </div>
     )
 }
 

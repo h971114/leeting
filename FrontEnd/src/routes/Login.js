@@ -128,6 +128,7 @@ class Login extends React.Component {
 
         return (
 
+            <div id="main_content">
             <div className="logincontainer">
                 <h1 className="tit">로 그 인</h1>
                 <hr />
@@ -198,6 +199,7 @@ class Login extends React.Component {
                             </ul>
                         </div>
                     </form>
+                </div>
                 </div>
             </div>
         );
