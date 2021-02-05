@@ -3,9 +3,12 @@ package com.leeting.myapp.model;
 public class ReviewDto {
     private int no;
     private int meetingno;
-    private int parent_no;
+    private String date;
     private String writer;
     private String review;
+
+    public ReviewDto() {
+    }
 
     public int getNo() {
         return no;
@@ -23,12 +26,12 @@ public class ReviewDto {
         this.meetingno = meetingno;
     }
 
-    public int getParent_no() {
-        return parent_no;
+    public String getDate() {
+        return date;
     }
 
-    public void setParent_no(int parent_no) {
-        this.parent_no = parent_no;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getWriter() {
@@ -51,7 +54,8 @@ public class ReviewDto {
     public String toString() {
         return "ReviewDto{" +
                 "no=" + no +
-                ", parent_no=" + parent_no +
+                ", meetingno=" + meetingno +
+                ", date='" + date + '\'' +
                 ", writer='" + writer + '\'' +
                 ", review='" + review + '\'' +
                 '}';

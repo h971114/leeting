@@ -8,11 +8,11 @@ public class MemberDto {
 	private String nickname;
 	private String mobile;
 	private String email;
+	private String meetinglink;
 
 	public MemberDto() {
 
 	}
-
 	public MemberDto(String id, String pw, String name, String nickname, String mobile, String email) {
 		super();
 		this.id = id;
@@ -21,6 +21,16 @@ public class MemberDto {
 		this.nickname = nickname;
 		this.mobile = mobile;
 		this.email = email;
+	}
+	public MemberDto(String id, String pw, String name, String nickname, String mobile, String email, String meetinglink) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.nickname = nickname;
+		this.mobile = mobile;
+		this.email = email;
+		this.meetinglink = meetinglink;
 	}
 
 	public String getId() {
@@ -75,6 +85,14 @@ public class MemberDto {
 	public String toString() {
 		return "MemberDto [id=" + id + ", pw=" + pw + ", name=" + name + ", nickname=" + nickname + ", mobile=" + mobile
 				+ ", email=" + email + "]";
+	}
+
+	public String getMeetinglink() {
+		return meetinglink;
+	}
+
+	public void setMeetinglink(String meetinglink) {
+		this.meetinglink = meetinglink;
 	}
 	
 	

@@ -13,6 +13,26 @@ public class NoticeDto {
 	private MultipartFile file1;
 	private MultipartFile file2;
 	private MultipartFile file3;
+	private int meetingno;
+	private boolean head;
+	
+	
+	
+	public NoticeDto(int no, String title, String detail, String date, String writer, int hit, MultipartFile file1,
+			MultipartFile file2, MultipartFile file3, int meetingno, boolean head) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.detail = detail;
+		this.date = date;
+		this.writer = writer;
+		this.hit = hit;
+		this.file1 = file1;
+		this.file2 = file2;
+		this.file3 = file3;
+		this.meetingno = meetingno;
+		this.head = head;
+	}
 	public NoticeDto() {
 		super();
 	}
@@ -28,6 +48,24 @@ public class NoticeDto {
 		this.file1 = file1;
 		this.file2 = file2;
 		this.file3 = file3;
+	}
+	
+	
+	
+	
+	public NoticeDto(int no, String title, String detail, String date, String writer, int hit, MultipartFile file1,
+			MultipartFile file2, MultipartFile file3, int meetingno) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.detail = detail;
+		this.date = date;
+		this.writer = writer;
+		this.hit = hit;
+		this.file1 = file1;
+		this.file2 = file2;
+		this.file3 = file3;
+		this.meetingno = meetingno;
 	}
 	public int getNo() {
 		return no;
@@ -83,10 +121,24 @@ public class NoticeDto {
 	public void setFile3(MultipartFile file3) {
 		this.file3 = file3;
 	}
+	
 	@Override
 	public String toString() {
 		return "NoticeDto [no=" + no + ", title=" + title + ", detail=" + detail + ", date=" + date + ", writer="
-				+ writer + ", hit=" + hit + ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3 + "]";
+				+ writer + ", hit=" + hit + ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3
+				+ ", meetingno=" + meetingno + ", head=" + head + "]";
+	}
+	public int getMeetingno() {
+		return meetingno;
+	}
+	public void setMeetingno(int meetingno) {
+		this.meetingno = meetingno;
+	}
+	public boolean isHead() {
+		return head;
+	}
+	public void setHead(boolean head) {
+		this.head = head;
 	}
 
 	

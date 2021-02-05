@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 import com.leeting.myapp.dao.MeetingDao;
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.MemberDto;
+import com.leeting.myapp.model.NoticeDto;
 import com.leeting.myapp.model.ParticipationDto;
 
 @Service
-public class MeetingServiceImpl implements MeetingService{
+public class MeetingServiceImpl implements MeetingService {
 
 	private final MeetingDao meetingDao;
 	
@@ -24,10 +25,10 @@ public class MeetingServiceImpl implements MeetingService{
 
 	
 	@Override
-    public boolean enrollMeeting(MeetingDto meeting,Map<String, Object> meetingmap) {
+    public boolean enrollMeeting(MeetingDto meeting) {
 	      try {
 				System.out.println("확인");
-				meetingDao.enrollMeeting(meeting,meetingmap);
+				meetingDao.enrollMeeting(meeting);
 	            return true;
 	        } catch (SQLException throwables) {
 	            throwables.printStackTrace();
@@ -98,6 +99,11 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
+    public List<MeetingDto> searchAll(String keyword) throws SQLException {
+        return meetingDao.searchall(keyword);
+    }
+
+    @Override
     public List<MeetingDto> searchByTitle(String keyword) throws SQLException {
         return meetingDao.searchbytitle(keyword);
     }
@@ -133,5 +139,47 @@ public class MeetingServiceImpl implements MeetingService{
 		System.out.println("확인");
 		meetingDao.enrollPhoto(meetingmap);
 		return false;
+	}
+
+
+	@Override
+	public List<MeetingDto> hostMeetinglist(String hostid) {
+		// TODO Auto-generated method stub
+		return meetingDao.hostMeetinglist(hostid);
+	}
+	@Override
+	public List<NoticeDto> meetingnoticelist(int meetingno) {
+		// TODO Auto-generated method stub
+		return meetingDao.meetingnoticelist(meetingno);
+	}
+
+
+	@Override
+	public boolean meetingnoticewrite(NoticeDto notice, Map<String, Object> noticemap) {
+		System.out.println("확인");
+		meetingDao.meetingnoticewrite(notice,noticemap);
+		return true;
+	}
+
+
+	@Override
+	public NoticeDto getNoticeInfo(int meetingnoticeno) {
+		NoticeDto noticeDto = null;
+        noticeDto = meetingDao.noticeinfo(meetingnoticeno);
+        return noticeDto;
+	}
+
+
+	@Override
+	public boolean updatenotice(NoticeDto notice, Map<String, Object> noticemap) {
+		 meetingDao.updatenotice(notice,noticemap);
+		 return true;
+	}
+
+
+	@Override
+	public void deletenotice(int noticeno) {
+		 meetingDao.deletenotice(noticeno);
+		
 	}
 }

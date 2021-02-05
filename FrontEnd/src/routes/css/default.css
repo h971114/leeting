@@ -1,0 +1,251 @@
+@charset "utf-8";
+
+/* font import */
+/* @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;500;700&display=swap');
+
+/* 초기화 */
+html {
+    overflow-y: scroll
+}
+
+/* 
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 16px;
+    font-family: 'Encode Sans', "Noto Sans KR", sans-serif;
+    font-weight: 300;
+    word-break: keep-all;
+} */
+
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+img {
+    margin: 0;
+    padding: 0;
+    border: 0
+}
+
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block
+}
+
+ul,
+ol,
+dl,
+dt,
+dd {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+legend {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999em;
+    overflow: hidden
+}
+
+label,
+input,
+button,
+select,
+img {
+    vertical-align: middle;
+    font-size: 1em
+}
+
+input,
+button {
+    margin: 0;
+    padding: 0;
+    font-size: 1em
+}
+
+input[type="submit"] {
+    cursor: pointer
+}
+
+button {
+    cursor: pointer
+}
+
+textarea {
+    padding: 20px;
+    height: 150px !important;
+    resize: none;
+}
+
+select {
+    margin: 0
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    word-break: keep-all
+}
+
+
+pre {
+    overflow-x: scroll;
+    font-size: 1.1em
+}
+
+a,
+a:hover {
+    color: #666;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
+
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    word-break: keep-all;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top
+}
+
+/* Mobile화면으로 */
+#device_change {
+    display: block;
+    margin: 0.3em;
+    padding: 0.5em 0;
+    border: 1px solid #eee;
+    border-radius: 2em;
+    background: #fff;
+    color: #000;
+    font-size: 2em;
+    text-decoration: none;
+    text-align: center
+}
+
+
+/* 스크롤바 */
+scrollbar,
+[scrollbar],
+[data-scrollbar] {
+    display: block;
+    position: relative;
+    overflow: scroll
+}
+
+scrollbar .scroll-content,
+[scrollbar] .scroll-content,
+[data-scrollbar] .scroll-content {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    will-change: transform
+}
+
+scrollbar.scrolling .scroll-content,
+[scrollbar].scrolling .scroll-content,
+[data-scrollbar].scrolling .scroll-content {
+    pointer-events: none
+}
+
+scrollbar.scrolling .scroll-content .scroll-content,
+[scrollbar].scrolling .scroll-content .scroll-content,
+[data-scrollbar].scrolling .scroll-content .scroll-content {
+    pointer-events: auto
+}
+
+scrollbar .scrollbar-track,
+[scrollbar] .scrollbar-track,
+[data-scrollbar] .scrollbar-track {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    -webkit-transition: opacity .5s 1s ease-out, background .5s ease-out;
+    transition: opacity .5s 1s ease-out, background .5s ease-out;
+    background: 0 0
+}
+
+scrollbar .scrollbar-track.show,
+[scrollbar] .scrollbar-track.show,
+[data-scrollbar] .scrollbar-track.show,
+scrollbar .scrollbar-track:hover,
+[scrollbar] .scrollbar-track:hover,
+[data-scrollbar] .scrollbar-track:hover {
+    opacity: 1;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s
+}
+
+scrollbar .scrollbar-track:hover,
+[scrollbar] .scrollbar-track:hover,
+[data-scrollbar] .scrollbar-track:hover {
+    background: rgba(222, 222, 222, .75)
+}
+
+scrollbar .scrollbar-track-x,
+[scrollbar] .scrollbar-track-x,
+[data-scrollbar] .scrollbar-track-x {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px
+}
+
+scrollbar .scrollbar-track-y,
+[scrollbar] .scrollbar-track-y,
+[data-scrollbar] .scrollbar-track-y {
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100%
+}
+
+scrollbar .scrollbar-thumb,
+[scrollbar] .scrollbar-thumb,
+[data-scrollbar] .scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 4px
+}

@@ -52,5 +52,4 @@ public class NoticeDaoImpl implements NoticeDao{
 	public Map<String, Object> getByteImage() {
 	    return sqlSession.selectOne("notice.getByteImage");
 	}
-
 }

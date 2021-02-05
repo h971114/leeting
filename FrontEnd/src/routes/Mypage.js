@@ -358,10 +358,11 @@ class Mypage extends React.Component {
     // let emailDomain = this.state.email ? this.state.email.split('@') : null 
 
     return (
+      <div id="main_content">
       <div className="joinContainer">
         <h1 className="tit">마이페이지</h1>
         <hr />
-        <div className="d-flex height414">
+        <div className="d-flex">
             <div className="tabcenter col-4">
                 <div className="list-group">
                     <p className="list-group-item list-group-item-action" onClick={this.tabZero}>프로필</p> {/*aria-current="true"*/}
@@ -511,7 +512,8 @@ class Mypage extends React.Component {
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+        </div>
     );
   }
 }

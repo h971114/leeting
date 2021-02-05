@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommend">
+
+	<select id="usermeet" resultType="meeting">select t1.no as meetingno, t1.maintitle, t1.subtitle, t1.date, t1.hostid, t1.detail, t1.categoryno, t1.file, t1.enddate, t1.meetinglike, t1.participants from meeting t1, participation t2 where t1.no=t2.meetingno and t2.userid=#{id} limit 5 
+	</select>
+	<select id = "userinmeet" resultType="String">
+	select meetingno from participation where userid = #{userid}
+	</select>
+	<select id ="meetinuser" resultType = "String">
+	select likestatus from participation where userid =#{id} and meetingno = #{meetingno}
+	</select>
+	<select id ="findmeetuser" resultType = "String">
+	select userid from participation where meetingno = #{meetingno}
+	</select>
+</mapper>

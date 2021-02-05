@@ -1,15 +1,26 @@
 import React from 'react'
 
-export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
+export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, loading, noPosts }) => {
   const pageNumbers = [];
   const lastPage = Math.ceil(totalPosts / postsPerPage);
+
+  if (loading) {
+    return (
+      <div></div>
+    )
+  }
+  if (noPosts) {
+    return (
+      <div></div>
+    )
+  }
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++){
         pageNumbers.push(i);
     }
     return (
       <nav>
-        <ul className="pagination">
+        <ul id="paging" className="pagination">
           <li key="first" className="first page-item pager">
             <button onClick={() => paginate(1)} className="page-link">
               <span className="hide">
@@ -18,7 +29,7 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) 
             </button>
           </li>
           <li key="prev" className="prev page-item pager">
-            <button onClick={() => paginate(1)} className="page-link">
+            <button onClick={() => paginate(currentPage-1)} className="page-link">
               <span className="hide">
                 이전 페이지
               </span>
@@ -32,7 +43,7 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) 
             </li>
           ))}
           <li key="next" className="page-item next pager">
-            <button onClick={() => paginate(lastPage)} className="page-link">
+            <button onClick={() => paginate(currentPage+1)} className="page-link">
             <span className="hide">다음 페이지</span>
             </button>
           </li>

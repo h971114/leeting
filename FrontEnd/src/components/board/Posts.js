@@ -1,7 +1,7 @@
 import React from 'react'
 import List from "./list"
 
-export const Posts = ({ posts, loading }) => {
+export const Posts = ({ posts, loading, noPosts }) => {
     if (loading) {
         return (
             <div className="loading_view">
@@ -14,8 +14,16 @@ export const Posts = ({ posts, loading }) => {
             </div>
         )
     }
+    
+    if (noPosts) {
+        return (
+            <div id="noPosts">
+                <img src="../../img/noPosts.png" alt="글이없어요"></img>
+            </div>
+        )
+    }
     return (
-        <div className="notice_list_view">
+        <div id="notice_list_view" className="notice_list_view">
             <div className="header">
                 <p className="no">NO.</p>
                 <p className="title">제목</p>

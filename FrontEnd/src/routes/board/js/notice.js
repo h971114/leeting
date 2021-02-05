@@ -44,6 +44,8 @@ const Notice = () => {
     
         
     return (
+        
+      <div id="main_content">
     <div className="board_list">
         <div className="titles">
             <h1 className="tit">공 지 사 항</h1>
@@ -56,12 +58,14 @@ const Notice = () => {
                 totalPosts={posts.length}
                 paginate={paginate}
                 currentPage={currentPage}
+                loading={loading} 
             />
 
         <div id="writeBtn" className="writeBtn">
         <button>등록하기</button>
         </div>
-    </div>
+            </div>
+            </div>
     )
 }
 

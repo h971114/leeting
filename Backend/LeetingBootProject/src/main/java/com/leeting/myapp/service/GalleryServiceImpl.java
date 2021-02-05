@@ -2,6 +2,7 @@ package com.leeting.myapp.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.leeting.myapp.dao.GalleryDao;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,17 +29,22 @@ public class GalleryServiceImpl implements GalleryService {
     private String bucket;
 
     @Override
-    public String upload(MultipartFile multipartFile, String dirName) throws IOException, SQLException {
+    public String upload(String dirName, String id, MultipartFile multipartFile) throws IOException, SQLException {
         File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
-        return uploadFile(uploadFile, dirName);
+        return uploadFile(dirName, id, uploadFile);
     }
 
     @Override
-    public String uploadFile(File uploadFile, String dirName) throws SQLException {
-        String fileName = dirName + "/" + uploadFile.getName();
+    public String uploadFile(String dirName, String id, File uploadFile) throws SQLException {
+        String fileName = dirName + "/" + id+"-"+uploadFile.getName();
+
+//        이전 파일 url 주소를 prevFile에 저장할 경우 삭제 가능
+//        String keyName = prevFile.split("amazonaws.com/")[1];
+//        System.out.println("keyName = " + keyName);
+//        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, keyName)); // 기존 등록된 이미지 삭제
+
         String uploadImageUrl = insertAWS(uploadFile, fileName); // aws 업로드
         galleryDao.insertGallery(fileName, uploadImageUrl); // db 업로드
-
         System.out.println("uploadImageUrl = " + uploadImageUrl);
         uploadFile.delete();
         return uploadImageUrl;
@@ -48,6 +54,12 @@ public class GalleryServiceImpl implements GalleryService {
     public String insertAWS(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();
+    }
+
+    @Override
+    public void deleteAWS(String fileName) {
+        String keyName = fileName.split("amazonaws.com/")[1];
+        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, keyName));
     }
 
     @Override

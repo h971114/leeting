@@ -16,6 +16,8 @@ import LansMeeting from "./routes/meeting/js/lans";
 import StudyMeeting from "./routes/meeting/js/study";
 import WriteMeeting from "./routes/meeting/js/write";
 import ModifyMeeting from "./routes/meeting/js/Modify";
+import Result from "./routes/meeting/js/Result";
+import MeetingBoard from "./routes/meeting/js/Board";
 import ListNotice from "./routes/board/js/notice";
 import Mypage from "./routes/Mypage";
 
@@ -23,6 +25,8 @@ import Detail from "./routes/meeting/js/Detail";
 
 import NotFound from "./routes/NotFound";
 import "./App.css";
+import "./routes/css/default.css"
+import "./routes/css/responsive.css"
 
 function App() {
   return (
@@ -48,8 +52,10 @@ function App() {
           
           <Route path="/notice" exact={true} component={ListNotice}/>
 
+          <Route path="/result/:keyword" exact={true} component={Result} />
           <Route path="/meeting/:id" exact={true} component={Detail} />
           <Route path="/meeting/modify/:id" exact={true} component={ModifyMeeting} />
+          <Route path="/meeting/board/:id" exact={true} component={MeetingBoard}/>
           
           <Route component={NotFound}/>
         </Switch>

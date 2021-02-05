@@ -72,7 +72,7 @@ public class NoticeController {
 		    if(notice.getFile3()!=null) noticemap.put("file3", notice.getFile3().getBytes());
 		    
 		    if(noticeService.writeNotice(notice,noticemap)) {
-		    	conclusion = "SUCESS";
+		    	conclusion = "SUCCESS";
 		    }
 		    else {
 		    	conclusion = "FAIL";

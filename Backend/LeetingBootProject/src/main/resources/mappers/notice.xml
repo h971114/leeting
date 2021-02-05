@@ -12,7 +12,7 @@
 	</update>
 	<!-- 공지사항 목록 -->
 	<select id="listNotice" resultType="notice">
-		SELECT * FROM notice ORDER BY no DESC
+		SELECT * FROM notice WHERE meetingno=0 ORDER BY no DESC
 	</select>
 	<!-- 공지사항 상세정보 -->
 	<select id="noticeinfo" parameterType="int" resultType="notice">
@@ -36,4 +36,30 @@
     SELECT file1
     FROM notice where no = 13;
 </select>
+	<select id="meetingnoticelist" parameterType="int" resultType="notice">
+		SELECT * FROM notice WHERE meetingno=#{meetingno} ORDER BY no DESC
+	</select>
+	
+	<insert id="meetingnoticewrite" parameterType="notice">
+		INSERT INTO notice ( title, detail, writer, hit, meetingno)
+		VALUES ( #{title},  #{detail}, #{writer}, 0, #{meetingno})
+	</insert>
+	<!-- 미팅공지사항 상세정보 -->
+	<select id="meetingnoticeinfo" parameterType="int" resultType="notice">
+		SELECT * FROM notice WHERE no = #{meetingnoticeno}
+	</select>
+	<update id="meetingnoticehit" parameterType="int">
+			UPDATE notice SET hit=hit+1 WHERE no = #{meetingnoticeno}
+	</update>
+	<!-- 공지사항 수정 -->
+	<update id="meetingnoticemodify" parameterType="notice">
+		UPDATE notice SET title=#{title},detail=#{detail},date=now() WHERE no=#{meetingnoticeno};
+	</update>
+	<update id="meetingnoticefilemodify" parameterType="map">
+		UPDATE notice SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE no=#{meetingnoticeno};
+	</update>
+	<!-- 공지사항 삭제 -->
+	<delete id="meetingnoticeldelete" parameterType="int">
+		DELETE FROM notice WHERE no=#{meetingnoticeno} 
+	</delete>
 </mapper>

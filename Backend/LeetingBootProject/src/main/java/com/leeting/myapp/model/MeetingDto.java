@@ -1,6 +1,5 @@
 package com.leeting.myapp.model;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class MeetingDto {
 	
@@ -26,57 +25,7 @@ public class MeetingDto {
 	
 	private int participants;
 	
-	private MultipartFile photo;
 
-
-
-
-	public MultipartFile getPhoto() {
-		return photo;
-	}
-
-
-
-	public void setPhoto(MultipartFile photo) {
-		this.photo = photo;
-	}
-
-
-
-	public MeetingDto(int meetingno, String maintitle, String subtitle, String date, String hostid, String detail,
-			int categoryno, String file, int meetinglike, String enddate, int participants, MultipartFile photo) {
-		super();
-		this.meetingno = meetingno;
-		this.maintitle = maintitle;
-		this.subtitle = subtitle;
-		this.date = date;
-		this.hostid = hostid;
-		this.detail = detail;
-		this.categoryno = categoryno;
-		this.file = file;
-		this.meetinglike = meetinglike;
-		this.enddate = enddate;
-		this.participants = participants;
-		this.photo = photo;
-	}
-
-
-
-	public MeetingDto(int meetingno, String maintitle, String subtitle, String date, String hostid, String detail,
-			int categoryno, String file, int meetinglike, String enddate, int participants) {
-		super();
-		this.meetingno = meetingno;
-		this.maintitle = maintitle;
-		this.subtitle = subtitle;
-		this.date = date;
-		this.hostid = hostid;
-		this.detail = detail;
-		this.categoryno = categoryno;
-		this.file = file;
-		this.meetinglike = meetinglike;
-		this.enddate = enddate;
-		this.participants = participants;
-	}
 
 
 

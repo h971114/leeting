@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 import "../css/meeting.css"
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-import propTypes  from "prop-types";
+import propTypes from "prop-types";
+
+import Reviews from "../../../components/meeting/Review"
 
 class Detail extends React.Component {
 
@@ -14,7 +16,18 @@ class Detail extends React.Component {
             likes: false,
             checkJoin: false,
             btnText: "미팅 참가하기",
-            joinMember : ""
+            joinMember: "",
+
+            no:"",
+            hostid: "",
+            maintitle: "",
+            subtitle:"",
+            date: "",
+            detail: "",
+            categoryno:"",
+            file: "",
+            enddate: "",
+            participants:""
         }
     }
 
@@ -23,6 +36,8 @@ class Detail extends React.Component {
         let sId = sessionStorage.getItem('id');
         // console.log(location.state.enddate);
         
+        this.showDetail();
+
         if (location.state === undefined) {
             history.push("/");
         }
@@ -42,6 +57,26 @@ class Detail extends React.Component {
         }
     }
 
+    showDetail = async () => {
+        const { location } = this.props;
+
+        let url = 'http://127.0.0.1:8080/myapp/meeting/data/' + location.state.id;
+                
+        let data = await axios.get(url);
+        this.setState({
+            hostid: data.data.hostid,
+            maintitle: data.data.maintitle,
+            subtitle: data.data.subtitle,
+            date: data.data.date,
+            detail: data.data.detail,
+            categoryno:data.data.categoryno,
+            file: data.data.file,
+            enddate: data.data.enddate,
+            participants:data.data.participants
+        })
+        // console.log(data.data);
+    }
+
     checkHost = async () => {
         const { location } = this.props;
 
@@ -50,7 +85,7 @@ class Detail extends React.Component {
         if (location.state.hostid === sId) {
             document.getElementById('likebtn').disabled = true;
             document.getElementById('joinBtn').setAttribute("style", "display:none");
-            // document.getElementById('joinOutBtn').setAttribute("style", "display:none");
+            document.getElementById('boardMeeting').setAttribute("style","display:block");
             document.getElementById('modifyBtn').setAttribute("style", "display:block");
             document.getElementById('viewMember').setAttribute("style", "display:block");
         }
@@ -130,21 +165,23 @@ class Detail extends React.Component {
                     // console.log(sId + ", " + data[i].userid);
                     this.setState({
                         checkJoin: true,
-                        btnText:"미팅 나가기"
+                        btnText: "미팅 나가기"
                     })
                 }
             }
-            joinmember = joinmember.substr(0, joinmember.length - 2) + "( "+cnt+"명 )";
+            joinmember = joinmember.substr(0, joinmember.length - 2) + "( " + cnt + "명 )";
             this.setState({
-                joinMember : joinmember
+                joinMember: joinmember
             })
 
             // console.log(this.state.checkJoin);
             if (this.state.checkJoin === true) {
+                document.getElementById('boardMeeting').setAttribute("style", "display:block");
                 // document.getElementById('joinBtn').value="미팅 나가기";
                 // document.getElementById('joinOutBtn').setAttribute("style", "display:block");
-            } else
+            } else{
                 document.getElementById('likebtn').disabled = true;
+            }
             // data = data.data;
             // this.setState({ data, isLoading: false });
         }
@@ -194,6 +231,7 @@ class Detail extends React.Component {
                     btnText:"미팅 나가기",
                     checkJoin:true
                 })
+                document.getElementById('boardMeeting').setAttribute("style","display:block");
                 // document.getElementById('joinBtn').setAttribute("style", "display:none");
                 // document.getElementById('joinOutBtn').setAttribute("style", "display:block");
                 document.getElementById('likebtn').disabled = false;
@@ -203,6 +241,7 @@ class Detail extends React.Component {
                     btnText:"미팅 참가하기",
                     checkJoin:false
                 })
+                document.getElementById('boardMeeting').setAttribute("style","display:none");
                 document.getElementById('likebtn').disabled = true;
             }
         })
@@ -210,9 +249,10 @@ class Detail extends React.Component {
 
   render() {
       const { location } = this.props;
-      let codes = location.state.detail;
 
-      var date = location.state.date;
+      var codes = this.state.detail;
+
+      var date = this.state.date;
 
       var sYear = date.substring(0,4);
       var sMonth = date.substring(5,7);
@@ -222,7 +262,9 @@ class Detail extends React.Component {
 
 
     if (location.state) {
-        return (
+    return (
+            
+      <div id="main_content">
             <div id="meeting_detail">
                 <div className="titleset">
                     <img src={location.state.file} alt={location.state.maintitle}></img>
@@ -238,6 +280,11 @@ class Detail extends React.Component {
                             {/* <p className="likecnt">1</p> */}
                             </div>
                         <div className="joinMeeting" >
+                            <GoBoard
+                                id={location.state.id}
+                                hostid={location.state.hostid}
+                                />
+                            {/* <button id="boardMeeting" >미팅 게시판</button> */}
                             <button id="joinBtn" onClick={ this.joinMeetingClick }>{this.state.btnText}</button>
                             {/* <button id="joinOutBtn">미팅 나가기</button> */}
                             <GoModify
@@ -261,13 +308,30 @@ class Detail extends React.Component {
                         </div>
                     </div>
                 </div>
-                <hr className="detail_hr"/>
-                <div className="detail_view">
-                    <p className="detail_subtit">Leeting 소개</p>
-                    <div className="detail_content" dangerouslySetInnerHTML={{ __html: codes} }></div>
+                <div className="formcenter">
+                    <input id="tab1" type="radio" name="tabs" defaultChecked></input>
+                    <label className="forradio" htmlFor="tab1">Leeting 소개</label>
+                    <input id="tab2" type="radio" name="tabs"></input>
+                    <label className="forradio" htmlFor="tab2">Leeting 댓글</label>
+                
+                    <form id="viewReviews">
+                        <Reviews
+                            id={location.state.id}
+                            checkJoin={this.state.checkJoin}
+                            writer={sessionStorage.getItem('id')}
+                        />
+                    </form>
+
+                    <form id="viewDetails">
+                        <div className="detail_view">
+                            <p className="detail_subtit">Leeting 소개</p>
+                            <div className="detail_content" dangerouslySetInnerHTML={{ __html: codes} }></div>
+                        </div>
+                    </form>
                 </div>
                 
-            </div>
+                </div>
+                </div>
             // 
         );            
     } else {
@@ -275,6 +339,7 @@ class Detail extends React.Component {
     }
   }
 }
+
 
 function GoModify({ id, maintitle, subtitle, date, hostid, detail, categoryno, enddate, file }) {
     return (
@@ -309,8 +374,30 @@ GoModify.propTypes = {
     hostid: propTypes.string.isRequired,
     detail: propTypes.string.isRequired,
     categoryno: propTypes.number.isRequired,
-    file: propTypes.string.isRequired,
+    file: propTypes.string,
     enddate: propTypes.string
 };
+
+function GoBoard({ id, hostid }) {
+    return (
+        <div id="boardMeeting">
+            <Link
+                to={{
+                    pathname: `/meeting/board/${id}`,
+                    state: {
+                        id,
+                        hostid
+                    }
+                }}
+            >미팅 게시판
+            </Link>
+        </div>
+    )
+}
     
+GoBoard.propTypes = {
+    id: propTypes.number.isRequired,
+    hostid: propTypes.string.isRequired
+};
+
 export default Detail;

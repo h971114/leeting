@@ -109,6 +109,7 @@ input[type="radio"]:checked+label {
     width: 150px;
     color: white;
     background-color: #008ce8;
+    margin-top: 20px;
 }
 
 #idsendtoken:hover,

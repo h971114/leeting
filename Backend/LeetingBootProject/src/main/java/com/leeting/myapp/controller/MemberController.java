@@ -51,6 +51,7 @@ import com.sun.el.parser.ParseException;
 
 import io.swagger.annotations.ApiOperation;
 
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/member")
@@ -297,13 +298,13 @@ public class MemberController {
 
 	@ApiOperation(value = "참여미팅", notes = "참여미팅메인", response = Map.class)
 	@GetMapping("/usermeet")
-	public ResponseEntity<List<Object>> usermeet(HttpServletRequest req) throws SQLException {
+	public ResponseEntity<List<Object>> usermeet(@RequestParam("id") String memberid,HttpServletRequest req) throws SQLException {
 		System.out.println(req);
 		HttpStatus status = HttpStatus.ACCEPTED;
 		System.out.println("get to /member/usermeet done");
 		System.out.println("참여미팅");
-		System.out.println(memberService.userMeet("prestto").toString());
-		List<Object> meetlist = memberService.userMeet("prestto");
+		System.out.println(memberService.userMeet(memberid).toString());
+		List<Object> meetlist = memberService.userMeet(memberid);
 //    		memberService.userMeet(memberid);
 		return new ResponseEntity<List<Object>>(meetlist, status);
 	}

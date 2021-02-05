@@ -3,10 +3,17 @@ package com.leeting.myapp.controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +32,7 @@ import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.MemberDto;
 import com.leeting.myapp.service.MeetingService;
 import com.leeting.myapp.service.MemberService;
+import com.leeting.myapp.service.RecommendService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -38,10 +46,12 @@ public class RecommendController {
   
   private final MeetingService meetingService;
   
+  private final RecommendService recommendService;
 
   @Autowired
-  public RecommendController(MeetingService meetingService, MemberService memberService) {
-    this.memberService = memberService;
+  public RecommendController(MeetingService meetingService, MemberService memberService, RecommendService recommendService) {
+    this.recommendService = recommendService;
+	this.memberService = memberService;
     this.meetingService = meetingService;
   }
   @ApiOperation(value = "추천미팅", notes = "추천미팅", response = Map.class)
@@ -75,7 +85,119 @@ public class RecommendController {
     System.out.println(returnmap.toString());
     return new ResponseEntity<Map<Integer, MeetingDto>>(returnmap, status);
   }
-  @ApiOperation(value = "회원정보", notes = "회원정보", response = Map.class)
+	@ApiOperation(value = "추천미팅", notes = "개인화추천", response = Map.class)
+	@GetMapping("/reco")
+	public ResponseEntity<List<MeetingDto>> recommend(@RequestParam("id") String memberid,HttpServletRequest req) throws SQLException, InterruptedException {
+		System.out.println(req);
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("get to /member/usermeet done");
+		System.out.println("참여미팅");
+		List<String> meetlist = recommendService.findmeet(memberid);
+		List<String> returnmeetingno = findbyitemsimil(meetlist, memberid);
+		List<MeetingDto> returnmeetinginfo = new ArrayList<MeetingDto>();
+		int count = 0;
+		for(String meetingno : returnmeetingno) {
+			if(count>=5) {
+				break;
+			}
+			returnmeetinginfo.add(meetingService.getMeetingInfo(Integer.parseInt(meetingno)));
+		}
+		Map<Double, MeetingDto> meetingrecommendmap = new TreeMap<Double, MeetingDto>();
+		for(int i=1; i<=6; i++) {
+			List<MeetingDto> meetslist =  meetingService.listMeeting(i);  
+		    for(MeetingDto k : meetslist) {
+		    	double cal = calculatescore(k);
+		    	while(meetingrecommendmap.containsKey(cal)) {
+		    		cal += 0.000000000001;
+		    	}
+		    	meetingrecommendmap.put(cal, k);
+		    }	
+		}
+		Iterator<Double> keyindex = meetingrecommendmap.keySet().iterator();
+		for(;count<4; count++) {
+			returnmeetinginfo.add(meetingrecommendmap.get(keyindex.next()));
+		}
+		return new ResponseEntity<List<MeetingDto>>(returnmeetinginfo, status);
+	}
+
+private List<String> findbyitemsimil(List<String> meetlist, String memberid) {
+	Map<String, Double> similmap = new HashMap<String, Double>();
+		for(String str : meetlist) {
+			Map<String, Set<String>> usermeetmap = new HashMap<String, Set<String>>();
+			List<String> userlist = recommendService.meetinuser(str);
+			for(String user : userlist) {
+				List<String> newmeetinglist = recommendService.findmeet(user);
+				for(String newmeets : newmeetinglist) {
+					if(!newmeets.equals(str)) {
+						if(usermeetmap.containsKey(newmeets)) {
+							usermeetmap.get(newmeets).add(user);
+						}
+						else {
+							usermeetmap.put(newmeets, new HashSet<String>());
+							usermeetmap.get(newmeets).add(user);
+						}
+					}
+				}
+			}
+			for(String findsimmeet : usermeetmap.keySet()) {
+				if(!meetlist.contains(findsimmeet)) {
+					if(usermeetmap.get(findsimmeet).size()>=3) {
+						double calculated = calculate(str, findsimmeet, memberid);
+						if(similmap.containsKey(findsimmeet)) {
+							similmap.put(findsimmeet, similmap.get(findsimmeet)+calculated);
+						}
+						else {
+							similmap.put(findsimmeet, calculated);
+						}
+					}
+				}
+			}
+		}
+		System.out.println(similmap.toString());
+		List<String> keySetList = new ArrayList<>(similmap.keySet());
+		Collections.sort(keySetList, (o1, o2) -> (similmap.get(o2).compareTo(similmap.get(o1))));
+		return keySetList;
+	}
+private double calculate(String str, String newmeets, String memberid) {
+	List<String> userlist = recommendService.meetinuser(str);
+	List<String> userlist2 = recommendService.meetinuser(newmeets);
+	ArrayList<Integer> score1 = new ArrayList<Integer>();
+	ArrayList<Integer> score2 = new ArrayList<Integer>();
+	for(String user : userlist) {
+		if(user.equals(memberid)) {
+			continue;
+		}
+		if(userlist2.contains(user)) {
+			if(recommendService.likestatus(user, str) == "0") {
+				score1.add(4);
+			}
+			else {
+				score1.add(5);
+			}
+			if(recommendService.likestatus(user, newmeets) == "0") {
+				score2.add(4);
+			}
+			else {
+				score2.add(5);
+			}
+		}
+	}
+	double top = 0;
+	double bottom1 = 0;
+	double bottom2 = 0;
+	for(int i =0; i<score1.size(); i++) {
+		int tmp = score1.get(i);
+		int tmp2 = score2.get(i);
+		top+= tmp*tmp2;
+		bottom1 += tmp*tmp;
+		bottom2 += tmp2*tmp2;
+	}
+	bottom1 = Math.sqrt(bottom1);
+	bottom2 = Math.sqrt(bottom2);
+	double conclusion = top/ (bottom1*bottom2);
+	return conclusion;
+}
+@ApiOperation(value = "회원정보", notes = "회원정보", response = Map.class)
   @GetMapping("/{id}")
   public ResponseEntity<MemberDto> getMemberInfo(@PathVariable(value="id") String memberid,HttpServletRequest req) throws SQLException {
 	  System.out.println(memberid);
@@ -106,6 +228,6 @@ public class RecommendController {
 	double score = likes* 10 + participants * 10;
 	long aging = (long) Math.pow(calDatedays, 2);
 	score = score/ aging;
-	return score;
+	return score*(-1);
   }
 }

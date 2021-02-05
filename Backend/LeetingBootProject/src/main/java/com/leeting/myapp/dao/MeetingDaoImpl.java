@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.leeting.myapp.model.MeetingDto;
 import com.leeting.myapp.model.MemberDto;
+import com.leeting.myapp.model.NoticeDto;
 import com.leeting.myapp.model.ParticipationDto;
 
 @Repository
@@ -22,10 +23,8 @@ public class MeetingDaoImpl implements MeetingDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void enrollMeeting(MeetingDto meeting,Map<String, Object> meetingmap)  throws SQLException{
+	public void enrollMeeting(MeetingDto meeting)  throws SQLException{
 		sqlSession.insert("meeting.enrollMeeting",meeting);
-		meetingmap.put("title", meeting.getMaintitle());
-		sqlSession.update("meeting.putImage",meetingmap);
 	}
 	
 	@Override
@@ -52,6 +51,12 @@ public class MeetingDaoImpl implements MeetingDao {
 	public List<ParticipationDto> listparticipants(int meetingno){
 		return sqlSession.selectList("meeting.listparticipants",meetingno);
 	}
+	@Override
+	public List<NoticeDto> meetingnoticelist(int meetingno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("notice.meetingnoticelist",meetingno);
+	}
+
 
 	// 미팅 참여자 중복 검사
 	@Override
@@ -77,6 +82,11 @@ public class MeetingDaoImpl implements MeetingDao {
 	public void exitmeeting(ParticipationDto participationDto) {
 		sqlSession.delete("meeting.exitmeeting", participationDto);
 		sqlSession.update("meeting.minusparticipant",participationDto);
+	}
+
+	@Override
+	public List<MeetingDto> searchall(String keyword) {
+		return sqlSession.selectList("meeting.searchAll", keyword);
 	}
 
 	@Override
@@ -122,5 +132,34 @@ public class MeetingDaoImpl implements MeetingDao {
 	public void enrollPhoto(Map<String, Object> meetingmap) {
 		sqlSession.update("meeting.putImage",meetingmap);
 		
+	}
+
+	@Override
+	public List<MeetingDto> hostMeetinglist(String hostid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("meeting.hostmeeting",hostid);
+	}
+
+	@Override
+	public void meetingnoticewrite(NoticeDto notice, Map<String, Object> noticemap) {
+		sqlSession.insert("notice.meetingnoticewrite",notice);
+		noticemap.put("title", notice.getTitle());
+		if(noticemap.get("file1") != null) sqlSession.update("notice.putImage",noticemap);
+	}
+
+	@Override
+	public NoticeDto noticeinfo(int meetingnoticeno) {
+		return sqlSession.selectOne("notice.meetingnoticeinfo",meetingnoticeno);
+	}
+
+	@Override
+	public void updatenotice(NoticeDto notice, Map<String, Object> noticemap) {
+		sqlSession.update("notice.noticemodify",notice);
+		sqlSession.update("notice.noticefilemodify",noticemap);	
+	}
+
+	@Override
+	public void deletenotice(int noticeno) {
+		sqlSession.delete("notice.noticedelete",noticeno);	
 	}
 }

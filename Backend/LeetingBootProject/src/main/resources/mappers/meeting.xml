@@ -7,9 +7,6 @@
 		INSERT INTO meeting ( maintitle, subtitle, date, hostid, detail, categoryno, file,enddate)
 		VALUES ( #{maintitle},  #{subtitle}, #{date}, #{hostid},#{detail},#{categoryno},#{file},#{enddate})
 	</insert>
-	<update id="putImage" parameterType="map">
-		UPDATE meeting SET photo=#{photo} WHERE maintitle=#{maintitle}
-	</update>
 	<!-- 미팅 목록 -->
  	<select id="listMeeting" resultType="meeting">
 		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file ,enddate, meetinglike, participants FROM meeting ORDER BY no DESC
@@ -24,6 +21,7 @@
 	<!-- 미팅 삭제 -->
 	<delete id="meetingdelete" parameterType="int">
 		DELETE FROM participation WHERE meetingno=#{meetingno};
+		DELETE FROM notice WHERE meetingno=#{meetingno};	
 		DELETE FROM meeting WHERE no=#{meetingno};		
 	</delete>
 	<!-- 미팅 수정 -->
@@ -68,20 +66,32 @@
 	</update>
 
 	<!-- 키워드 검색: 제목(부제목), 아이디-->
+	<select id="searchAll" parameterType="String" resultType="meeting">
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
+		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
+		subtitle like CONCAT('%', #{keyword}, '%') or
+		hostid like CONCAT('%', #{keyword}, '%') or
+		detail like CONCAT('%', #{keyword}, '%');
+	</select>
+
 	<select id="searchbytitle" parameterType="String" resultType="meeting">
-		SELECT * FROM meeting
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
 		WHERE maintitle like CONCAT('%', #{keyword}, '%') or
 		subtitle like CONCAT('%', #{keyword}, '%');
 	</select>
 	<select id="searchbyid" parameterType="String" resultType="meeting">
-		SELECT * FROM meeting
+		SELECT no as meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file, meetinglike, enddate, participants
+		FROM meeting
 		WHERE hostid like CONCAT('%', #{keyword}, '%')
 	</select>
 	<!--리뷰 조회	-->
 	<select id="getreview" parameterType="int" resultType="review">
-		SELECT no, meetingno, review, writer, date
+		SELECT no, meetingno, date, review, writer
 		FROM meeting_review
 		WHERE meetingno = #{meetingno}
+		ORDER BY no DESC
 	</select>
 	<!--리뷰 작성-->
 	<insert id="postreview" parameterType="review">
@@ -97,9 +107,14 @@
 		WHERE no = #{no}
 	</insert>
 
-	<!--리뷰 작성-->
+	<!--리뷰 삭제-->
 	<insert id="deletereview" parameterType="int">
 		DELETE FROM meeting_review
 		WHERE no = #{no};
 	</insert>
+	
+	<!-- 호스트가 만든 미팅 목록 -->
+	<select id="hostmeeting" parameterType="String" resultType="meeting">
+		SELECT * FROM meeting WHERE hostid=#{hostid}
+	</select>
 </mapper>
