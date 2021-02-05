@@ -183,7 +183,7 @@ public class MemberController {
 	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴", response = Map.class)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> deleteMember(@PathVariable(value = "id") String memberid,
-			HttpServletRequest req) {
+															HttpServletRequest req) {
 		System.out.println(req);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
@@ -257,7 +257,7 @@ public class MemberController {
 	@ApiOperation(value = "아이디찾기", notes = "아이디찾기", response = Map.class)
 	@GetMapping("/findid")
 	public ResponseEntity<String> findid(@RequestParam("name") String membername,
-			@RequestParam("email") String memberemail, HttpServletRequest req) throws SQLException {
+										 @RequestParam("email") String memberemail, HttpServletRequest req) throws SQLException {
 		System.out.println(req);
 		String conclusion = "";
 		HttpStatus status = HttpStatus.ACCEPTED;
@@ -278,7 +278,7 @@ public class MemberController {
 	@ApiOperation(value = "비밀번호찾기", notes = "비밀번호찾기", response = Map.class)
 	@GetMapping("/findpw")
 	public ResponseEntity<String> findpw(@RequestParam("name") String membername,
-			@RequestParam("email") String memberemail, @RequestParam("id") String memberid, HttpServletRequest req)
+										 @RequestParam("email") String memberemail, @RequestParam("id") String memberid, HttpServletRequest req)
 			throws SQLException {
 		System.out.println(req);
 		String conclusion = "";
@@ -341,7 +341,7 @@ public class MemberController {
 
 	@GetMapping("/naver/callback1")
 	public ResponseEntity<Map<String, String>> naverCallback1(@RequestParam("code") String code,
-			@RequestParam("state") String state, HttpSession session)
+															  @RequestParam("state") String state, HttpSession session)
 			throws IOException, ParseException, org.apache.tomcat.util.json.ParseException, URISyntaxException {
 		session.setAttribute("state", state);
 		HttpStatus status = HttpStatus.ACCEPTED;
@@ -442,7 +442,7 @@ public class MemberController {
 	@ApiOperation(value = "구글로그인", notes = "구글로그인", response = Map.class)
 	@PostMapping("/google")
 	public ResponseEntity<Map<String, String>> googlelogin(@RequestBody Map<String, Map> memberbody,
-			HttpServletRequest req) throws SQLException {
+														   HttpServletRequest req) throws SQLException {
 		Map<String, String> membermap = (Map<String, String>) memberbody.get("result").get("profileObj");
 		MemberDto newmember = new MemberDto();
 		HttpStatus status = HttpStatus.ACCEPTED;
@@ -474,7 +474,7 @@ public class MemberController {
 	@ApiOperation(value = "카카오로그인", notes = "카카오로그인", response = Map.class)
 	@PostMapping("/kakao")
 	public ResponseEntity<Map<String, String>> kakaologin(@RequestBody Map memberbody,
-			HttpServletRequest req) throws SQLException {
+														  HttpServletRequest req) throws SQLException {
 		Map membermap =  (Map) ((Map) memberbody.get("result")).get("profile");
 		MemberDto newmember = new MemberDto();
 		newmember.setId("kak_" + membermap.get("id"));
