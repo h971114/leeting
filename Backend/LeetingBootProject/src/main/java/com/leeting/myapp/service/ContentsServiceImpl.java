@@ -29,11 +29,11 @@ public class ContentsServiceImpl implements ContentsService {
     }
 
     @Override
-    public List<ContentsDto> findContent() {
+    public List<ContentsDto> listContents(String keyword) {
         List<ContentsDto> contentsDtos = null;
         try {
             System.out.println("조회");
-            contentsDtos = contentsDao.listContents();
+            contentsDtos = contentsDao.listContents(keyword);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -41,7 +41,7 @@ public class ContentsServiceImpl implements ContentsService {
     }
 
     @Override
-    public List<ContentsDto> listContent() {
+    public List<ContentsDto> listContents() {
         List<ContentsDto> contentsDtos = null;
         try {
             System.out.println("조회");

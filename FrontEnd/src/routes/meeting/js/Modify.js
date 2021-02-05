@@ -228,6 +228,8 @@ class Modify extends React.Component {
         // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
+        formData.append('hostid', this.state.hostid);
+        formData.append('dirNum', 1);
         axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',

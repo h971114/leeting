@@ -80,6 +80,11 @@ public class MeetingDaoImpl implements MeetingDao {
 	}
 
 	@Override
+	public List<MeetingDto> searchall(String keyword) {
+		return sqlSession.selectList("meeting.searchAll", keyword);
+	}
+
+	@Override
 	public List<MeetingDto> searchbytitle(String keyword) {
 		return sqlSession.selectList("meeting.searchbytitle", keyword);
 	}

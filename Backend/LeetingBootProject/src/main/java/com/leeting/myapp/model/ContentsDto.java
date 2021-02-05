@@ -78,4 +78,16 @@ public class ContentsDto {
     public void setCategoryno(int categoryno) {
         this.categoryno = categoryno;
     }
+
+    @Override
+    public String toString() {
+        return "ContentsDto{" +
+                "contentsno=" + contentsno +
+                ", writer='" + writer + '\'' +
+                ", date='" + date + '\'' +
+                ", detail='" + detail + '\'' +
+                ", file='" + file + '\'' +
+                ", categoryno=" + categoryno +
+                '}';
+    }
 }
