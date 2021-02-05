@@ -68,7 +68,7 @@ class Find extends React.Component {
     idauthCheck = (e) => {
         e.preventDefault();
         console.log(this.state.idemail + "@" + this.state.iddomain);
-        axios.post('http://127.0.0.1:8080/myapp/member/email', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
             email: this.state.idemail + "@" + this.state.iddomain,
         }).then(res => {
             console.log(res);
@@ -85,7 +85,7 @@ class Find extends React.Component {
     pwauthCheck = (e) => {
         e.preventDefault();
         console.log(this.state.pwemail + "@" + this.state.pwdomain);
-        axios.post('http://127.0.0.1:8080/myapp/member/email', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
             email: this.state.pwemail + "@" + this.state.pwdomain,
         }).then(res => {
             console.log(res);
@@ -115,7 +115,7 @@ class Find extends React.Component {
         console.log(this.state.idauth);
         console.log(this.state.idtoken);
 
-        axios.post('http://127.0.0.1:8080/myapp/member/auth', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/auth', {
         token: this.state.idtoken,
         auth: this.state.idauth,      
         }).then(res => {
@@ -144,7 +144,7 @@ class Find extends React.Component {
         console.log(this.state.pwauth);
         console.log(this.state.pwtoken);
 
-        axios.post('http://127.0.0.1:8080/myapp/member/auth', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/auth', {
         token: this.state.pwtoken,
         auth: this.state.pwauth,      
         }).then(res => {
@@ -223,7 +223,7 @@ class Find extends React.Component {
         e.preventDefault();
 
         if (this.state.checkIdEmail === true) {
-            axios.get('http://127.0.0.1:8080/myapp/member/findid', {
+            axios.get('http://i4a304.p.ssafy.io/myapp/member/findid', {
                 params: {
                     name: this.state.idname,
                     email: this.state.idemail + "@" + this.state.iddomain,
@@ -249,7 +249,7 @@ class Find extends React.Component {
         e.preventDefault();
 
         if (this.state.checkPwEmail === true) {
-            axios.get('http://127.0.0.1:8080/myapp/member/findpw', {
+            axios.get('http://i4a304.p.ssafy.io/myapp/member/findpw', {
                 params: {
                     name: this.state.pwname,
                     id: this.state.pwid,

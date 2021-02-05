@@ -16,7 +16,7 @@ class Home extends React.Component {
 
     getLeeting = async () => {
         let sId = sessionStorage.getItem('id');
-        let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
+        let data = await axios.get('http://i4a304.p.ssafy.io/myapp/member/usermeet', {
             params: {
                 id : sId
             }

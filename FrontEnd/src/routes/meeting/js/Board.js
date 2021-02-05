@@ -16,7 +16,7 @@ const Board = (props) => {
         const fetchPosts = async () => {
             const meetingno = location.state.id;
             setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/meetingnotice/'+meetingno);
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meetingnotice/'+meetingno);
             setPosts(res.data);
             if (res.data.length === 0) {
                 setVPost(true);

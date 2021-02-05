@@ -22,7 +22,7 @@ const Study = () => {
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/study');
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/study');
             
           setPosts(res.data);
           setLoading(false);

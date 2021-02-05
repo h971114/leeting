@@ -21,7 +21,7 @@ const Exercise = () => {
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/exercise');
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/exercise');
             
           setPosts(res.data);
           setLoading(false);

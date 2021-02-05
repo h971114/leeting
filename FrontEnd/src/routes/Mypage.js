@@ -40,7 +40,7 @@ class Mypage extends React.Component {
 
     getUserInfo = (e) => {
       // e.preventDefault();
-      axios.get(`http://127.0.0.1:8080/myapp/member/${sessionStorage.getItem("id")}`, {
+      axios.get(`http://i4a304.p.ssafy.io/myapp/member/${sessionStorage.getItem("id")}`, {
         id: sessionStorage.getItem("id")
       }).then(res => {
         console.log(res);
@@ -58,7 +58,7 @@ class Mypage extends React.Component {
     getLeeting = async () => {
       
       let sId = sessionStorage.getItem('id');
-      let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
+      let data = await axios.get('http://i4a304.p.ssafy.io/myapp/member/usermeet', {
         params: {
           id : sId
         }
@@ -255,7 +255,7 @@ class Mypage extends React.Component {
         document.getElementById('validateNickName').setAttribute('style', 'color:blue');
       }
       else if (!nickNameReg.test(e.target.value)) {
-        axios.post('http://127.0.0.1:8080/myapp/member/samenick', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
           nickname: this.state.nickname
         }).then(res => {
           if (res.data === "SUCESS") {
@@ -279,7 +279,7 @@ class Mypage extends React.Component {
     authCheck = (e) => {
       e.preventDefault();
       console.log(this.state.email + "@" + this.state.domain);
-      axios.post('http://127.0.0.1:8080/myapp/member/email', {
+      axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
         samecheck:"",
           email: this.state.email + "@" + this.state.domain,
         }).then(res => {
@@ -315,7 +315,7 @@ class Mypage extends React.Component {
       e.preventDefault();
       console.log(this.state);
       if (this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
-        axios.put('http://127.0.0.1:8080/myapp/member', {
+        axios.put('http://i4a304.p.ssafy.io/myapp/member', {
           id: this.state.id,
           pw: this.state.pw,
           nickname: this.state.nickname,

@@ -211,7 +211,7 @@ class write extends React.Component {
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 1);
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -265,7 +265,7 @@ class write extends React.Component {
             url='/meeting/study'
         }
 
-        axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
+        axios.post("http://i4a304.p.ssafy.io/myapp/meeting/enrollmeeting", {
             hostid: sId,
             maintitle: this.state.mainTit,
             subtitle: this.state.subTit,

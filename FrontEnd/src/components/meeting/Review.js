@@ -28,7 +28,7 @@ const Review = (props) => {
 
             setReviewBool(false);
 
-            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/review', {
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/review', {
                 params: {
                     meetingno:props.id
                 }
@@ -79,7 +79,7 @@ const Review = (props) => {
         let sNickName = sessionStorage.getItem('nickname');
     
         if (content.length > 10 && content.length < 140) {
-            axios.post('http://127.0.0.1:8080/myapp/meeting/review', {
+            axios.post('http://i4a304.p.ssafy.io/myapp/meeting/review', {
                 meetingno: props.id,
                 review: content,
                 writer: sNickName,

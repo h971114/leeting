@@ -238,7 +238,7 @@ class Join extends React.Component {
     
     var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
-      axios.post('http://127.0.0.1:8080/myapp/member/same', {
+      axios.post('http://i4a304.p.ssafy.io/myapp/member/same', {
         id: this.state.id
       }).then(res => {
         // console.log(res.data);
@@ -270,7 +270,7 @@ class Join extends React.Component {
     
     var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
-      axios.post('http://127.0.0.1:8080/myapp/member/samenick', {
+      axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
         // console.log(res.data);
@@ -299,7 +299,7 @@ class Join extends React.Component {
   authCheck = (e) => {
     e.preventDefault();
     console.log(this.state.email + "@" + this.state.domain);
-    axios.post('http://127.0.0.1:8080/myapp/member/email', {
+    axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
       samecheck:"",
         email: this.state.email + "@" + this.state.domain,
       }).then(res => {
@@ -330,7 +330,7 @@ class Join extends React.Component {
     console.log(this.state.auth);
     console.log(this.state.token);
 
-    axios.post('http://127.0.0.1:8080/myapp/member/auth', {
+    axios.post('http://i4a304.p.ssafy.io/myapp/member/auth', {
       token: this.state.token,
       auth: this.state.auth,      
       }).then(res => {
@@ -358,7 +358,7 @@ class Join extends React.Component {
     e.preventDefault();
     // console.log(this.state);
     if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
-      axios.post('http://127.0.0.1:8080/myapp/member/join', {
+      axios.post('http://i4a304.p.ssafy.io/myapp/member/join', {
         id: this.state.id,
         pw: this.state.pw,
         nickname: this.state.nickname,
