@@ -10,7 +10,7 @@ import 'moment/locale/ko';
 
 import Posts from "./reviewPosts"
 
-import Pagination from '../common/Pagination'
+import Pagination from './meetingPagination'
 
 const Review = (props) => {
     const [posts, setPosts] = useState([]);
