@@ -61,3 +61,8 @@
 > Leeting을 알리고 싶을 때 사용하는 컨텐츠 페이지
 
 - 개발 진행 중
+
+<br>
+
+## 🏆 기술스택
+![tech](image/Readme/tech.JPG)
