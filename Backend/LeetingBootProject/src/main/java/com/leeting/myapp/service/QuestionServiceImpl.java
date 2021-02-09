@@ -30,12 +30,13 @@ public class QuestionServiceImpl implements QuestionService{
 	            return false;
 	        }
     }
-	
+
 	@Override
-	public List<QuestionDto> listQuestion() {
+	public List<QuestionDto> listQuestion(String writer) {
 		System.out.println("확인");
-    	return questionDao.listQuestion();
+		return questionDao.listQuestion(writer);
 	}
+
 	@Override
 	public QuestionDto getQuestionInfo(int questionno) throws SQLException {
 		QuestionDto questionDto = null;
