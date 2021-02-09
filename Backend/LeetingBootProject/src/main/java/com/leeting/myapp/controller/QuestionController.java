@@ -59,16 +59,23 @@ public class QuestionController {
 	}
 	@ApiOperation(value = "문의사항 목록", notes = "문의사항 목록", response = List.class)
 	@GetMapping("/listquestion")
-	public ResponseEntity<List<QuestionDto>> listquestion(@RequestParam("writer") String writer, HttpServletRequest req) throws SQLException {
+	public ResponseEntity<Map<String, Object>> listquestion(@RequestParam("writer") String writer, HttpServletRequest req) throws SQLException {
 		System.out.println(req);
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
-		List<QuestionDto> list = questionService.listQuestion(writer);
 		System.out.println("get to /questionlist done");
 		System.out.println("문의사항 목록");
-		for(QuestionDto questionDto : list)
-			System.out.println("questionDto.toString() = " + questionDto.toString());
-		return new ResponseEntity<List<QuestionDto>>(list,status);
+		List<QuestionDto> list = questionService.listQuestion(writer);
+		if(list.size()>0) {
+			for (QuestionDto questionDto : list)
+				System.out.println("questionDto.toString() = " + questionDto.toString());
+			resultMap.put("list", list);
+			resultMap.put("conclusion", "SUCCESS");
+		}else{
+			resultMap.put("list",null);
+			resultMap.put("conclusion", "FAIL");
+		}
+		return new ResponseEntity<>(resultMap, status);
 	}
 	//문의사항 상세정보
 	@ApiOperation(value = "문의사항 상세정보", notes = "문의사항 상세정보", response = Map.class)
