@@ -101,6 +101,7 @@ public class RecommendController {
 				break;
 			}
 			returnmeetinginfo.add(meetingService.getMeetingInfo(Integer.parseInt(meetingno)));
+			count++;
 		}
 		Map<Double, MeetingDto> meetingrecommendmap = new TreeMap<Double, MeetingDto>();
 		for(int i=1; i<=6; i++) {
@@ -114,8 +115,28 @@ public class RecommendController {
 		    }	
 		}
 		Iterator<Double> keyindex = meetingrecommendmap.keySet().iterator();
-		for(;count<4; count++) {
-			returnmeetinginfo.add(meetingrecommendmap.get(keyindex.next()));
+		for(;count<5; count++) {
+			boolean check = false;
+			MeetingDto tmpmeeting = meetingrecommendmap.get(keyindex.next());
+			for(MeetingDto i : returnmeetinginfo) {
+				if(i.getMaintitle().equals(tmpmeeting.getMaintitle())) {
+					check = true;
+				}
+			}
+			for(String i : meetlist) {
+				if(Integer.parseInt(i) == (tmpmeeting.getMeetingno())) {
+					check = true;
+				}
+			}
+			if(!check) {
+				returnmeetinginfo.add(tmpmeeting);
+			}
+			else {
+				count--;
+			}
+		}
+		for(MeetingDto i : returnmeetinginfo) {
+			System.out.println(i.getMaintitle());
 		}
 		return new ResponseEntity<List<MeetingDto>>(returnmeetinginfo, status);
 	}
