@@ -56,7 +56,7 @@ public class RecommendController {
   }
   @ApiOperation(value = "추천미팅", notes = "추천미팅", response = Map.class)
   @GetMapping("/cate/{categoryno}")
-  public ResponseEntity<Map<Integer, MeetingDto>> recommendmeets(@PathVariable(value = "categoryno") int categoryno, HttpServletRequest req) throws SQLException {
+  public ResponseEntity<List<MeetingDto>> recommendmeets(@PathVariable(value = "categoryno") int categoryno, HttpServletRequest req) throws SQLException {
     System.out.println(req);
     HttpStatus status = HttpStatus.ACCEPTED;
     System.out.println("get to /recommend/cate done");
@@ -71,11 +71,12 @@ public class RecommendController {
     	meetingrecommendmap.put(cal, k);
     }
     int i = 1;
+    List<MeetingDto> returnlist = new ArrayList<MeetingDto>();
     Map<Integer, MeetingDto> returnmap = new TreeMap<Integer, MeetingDto>();
     for(Double k : meetingrecommendmap.keySet()) {
     	if(i<=5) {
-    		returnmap.put(i, meetingrecommendmap.get(k));
-    		System.out.println(k);
+//    		returnmap.put(i, meetingrecommendmap.get(k));
+    		returnlist.add(meetingrecommendmap.get(k));
     	}
     	else {
     		break;
@@ -83,7 +84,8 @@ public class RecommendController {
     	i++;
     }
     System.out.println(returnmap.toString());
-    return new ResponseEntity<Map<Integer, MeetingDto>>(returnmap, status);
+//    return new ResponseEntity<List>(returnmap, status);
+    return new ResponseEntity<List<MeetingDto>>(returnlist, status);
   }
 	@ApiOperation(value = "추천미팅", notes = "개인화추천", response = Map.class)
 	@GetMapping("/reco")
