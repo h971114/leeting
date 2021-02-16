@@ -51,11 +51,10 @@ class Modify extends React.Component {
         if (location.state === undefined) {
             history.push("/");
         }
-        // console.log(location.state.enddate);
 
         if (sessionStorage.getItem('id') === null || sessionStorage.getItem('id')!==location.state.hostid) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
         
         if (document.getElementById('side_wrap').classList.contains('open')) {
@@ -88,13 +87,6 @@ class Modify extends React.Component {
         document.getElementById('subTit').value = subtit;
         document.getElementById('m_mainTit').value = location.state.maintitle;
         document.getElementById('m_subTit').value = subtit;
-        // document.getElementById('startdatepick').value = location.state.date;
-        // this.editorRef;
-        //  = location.state.detail;
-        // console.log(this.editorRef);
-        // editor.setHtml();
-        // console.log(location.state.date);
-        // console.log(document.getElementById('startdatepick').value);
     }
 
 

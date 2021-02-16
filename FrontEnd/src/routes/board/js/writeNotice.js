@@ -17,7 +17,7 @@ class WriteNotice extends React.Component {
     componentDidMount() {
         if (sessionStorage.getItem('id') === null || sessionStorage.getItem('id')!=='leetingadmin') {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
         const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
         this.setState({

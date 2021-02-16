@@ -18,7 +18,7 @@ class WriteNotice extends React.Component {
 
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
 
         const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');

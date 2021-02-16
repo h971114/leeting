@@ -15,7 +15,8 @@ class write extends React.Component {
     componentDidMount() {
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('test');
+            window.location.replace("/WrongPage");
           }
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');

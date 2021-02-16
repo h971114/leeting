@@ -13,7 +13,6 @@ function List({ no,rownum, title, detail, date, writer, hit, file1, file2, file3
     if (t3 < 3) {
         newsign = "NEW";
     }
-    // console.log(rownum);
 
     var sYear = date.substring(0,4);
     var sMonth = date.substring(5,7);

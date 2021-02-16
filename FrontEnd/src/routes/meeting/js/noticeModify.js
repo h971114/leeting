@@ -24,7 +24,7 @@ class WriteNotice extends React.Component {
 
         if (sessionStorage.getItem('id') === null || sessionStorage.getItem('id') !== location.state.writer) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
         document.getElementById('title').value = location.state.title;
 

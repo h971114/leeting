@@ -21,7 +21,6 @@ const Report = () => {
             window.location.replace("/login");
           }
         if (sId === "leetingadmin") {
-            console.log('test');
             document.getElementById('adminLog').setAttribute("style", "display:inline-block");
         }
         else {

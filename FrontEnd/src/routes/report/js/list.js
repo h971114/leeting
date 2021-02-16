@@ -20,9 +20,9 @@ const List = () => {
     }];
     
     useEffect(() => {
-        if (sessionStorage.getItem('id') === null || sessionStorage.getItem('id')!=='leetingadmin') {
+        if (sessionStorage.getItem('id') !== 'leetingadmin') {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
         const fetchPosts = async () => {
             setLoading(true);

@@ -23,8 +23,8 @@ class write extends React.Component {
 
     componentDidMount() {
         if (sessionStorage.getItem('id') === null) {
-            document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('로그인 후 이용가능한 서비스입니다.');
+            window.location.replace("/login");
         }
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');

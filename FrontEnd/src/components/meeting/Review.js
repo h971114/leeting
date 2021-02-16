@@ -59,6 +59,7 @@ const Review = (props) => {
         else {
             document.getElementById('editWrap').setAttribute('style', 'display:none');
         }
+        
         fetchPosts();
 
         // eslint-disable-next-line

@@ -58,6 +58,11 @@ const OtOList = () => {
                 setLoading(false);
             }
         }
+        
+        if (sessionStorage.getItem('id') === null) {
+            alert('로그인 후 이용가능한 서비스입니다.');
+            window.location.assign("/login");
+        }
 
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');

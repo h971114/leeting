@@ -30,12 +30,15 @@ const OtoDetail = (props) => {
             const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/' + location.state.no);
             if (sessionStorage.getItem('id') === null) {
                 document.getElementById('root').setAttribute('style', 'display:none');
-                window.location.replace("/404");
+                window.location.replace("/WrongPage");
             }
-            // if (sessionStorage.getItem('id') !== res.data.qwriter || sessionStorage.getItem('id') !== 'leetingadmin') {
-            //     document.getElementById('root').setAttribute('style', 'display:none');
-            //     window.location.replace("/404");
-            // }
+            console.log(res.data.qwriter);
+            if (sessionStorage.getItem('id') !== res.data.qwriter) {
+                if (sessionStorage.getItem('id') !== 'leetingadmin') {
+                    document.getElementById('root').setAttribute('style', 'display:none');
+                    window.location.replace("/WrongPage");   
+                }
+            }
             setNo(res.data.no);
             setType(res.data.type);
             setTitle(res.data.title);

@@ -356,7 +356,7 @@ class Detail extends React.Component {
                         date={location.state.date}
                         enddate={location.state.enddate}
                         hostid={location.state.hostid}
-                        detail={location.state.detail}
+                        detail={this.state.detail}
                         categoryno={location.state.categoryno}
                         file={location.state.file}
                     />
@@ -404,6 +404,7 @@ GoModify.propTypes = {
     date: propTypes.string.isRequired,
     hostid: propTypes.string.isRequired,
     categoryno: propTypes.number.isRequired,
+    detail:propTypes.string.isRequired,
     file: propTypes.string,
     enddate: propTypes.string
 };
