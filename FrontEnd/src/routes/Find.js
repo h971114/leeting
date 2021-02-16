@@ -25,6 +25,10 @@ class Find extends React.Component {
         pwauth:""
     }
     componentDidMount() {
+        if (sessionStorage.getItem('id') !== null) {
+          document.getElementById('root').setAttribute('style', 'display:none');
+          window.location.replace("/WrongPage");
+        }
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');
             document.getElementById('side_wrap').classList.add('close');

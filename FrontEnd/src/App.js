@@ -58,7 +58,6 @@ function App() {
       <div>
         <Header/>
         <Switch>
-          {/* <ErrorBoundary> */}
             <Route path="/" exact={true} component={Home} />
             <Route path="/Leeting" exact={true} component={Leeting} />
             <Route path="/join" exact={true} component={Join} />
@@ -72,8 +71,6 @@ function App() {
             <Route path="/sc/faq" exact={true} component={Faq} />
             <Route path="/sc/onetoone" exact={true} component={OtO} />
             <Route path="/sc/otowrite" exact={true} component={OtOWrite}/>
-            <Route path="/sc/otomodify/:id" exact={true} component={OtoModify} />
-            <Route path="/sc/onetoone/:id" exact={true} component={OtoDetail}/>
             
             <Route path="/meeting/exercise" exact={true} component={ExcerciseMeeting} />
             <Route path="/meeting/music" exact={true} component={MusicMeeting} />
@@ -83,26 +80,29 @@ function App() {
             <Route path="/meeting/study" exact={true} component={StudyMeeting} />
             <Route path="/meeting/write" exact={true} component={WriteMeeting} />
             <Route path="/meeting/board/write" exact={true} component={WriteMeetingBoard} />
-            <Route path="/meeting/board/modify/:no" exact={true} component={ModifyMeetingBoard} />
             
             <Route path="/notice" exact={true} component={ListNotice}/>
             <Route path="/notice/write" exact={true} component={WriteNotice}/>
-            <Route path="/board/:id" exact={true} component={DetailNotice}/>
-            <Route path="/board/modify/:no" exact={true} component={ModifyNotice}/>
             
             <Route path="/timeline" exact={true} component={Timeline}/>
             <Route path="/timeline/write" exact={true} component={TimelineWrite}/>
-            <Route path="/timeline/modify/:id" exact={true} component={TimelineModify} />
-            
             <Route path="/result/:keyword" exact={true} component={Result} />
-            <Route path="/meeting/:id" exact={true} component={Detail} />
-            <Route path="/meeting/modify/:id" exact={true} component={ModifyMeeting} />
-            <Route path="/meeting/board/:id" exact={true} component={MeetingBoard}/>
-            <Route path="/report/detail/:id" exact={true} component={ReportDetail}/>
-            <Route path="/404/" component={NotFound404}/>
-
-            {/* </ErrorBoundary> */}
+            <Route path="/WrongPage" component={NotFound404}/>
+            
+            <ErrorBoundary>
+              <Route path="/sc/otomodify/:id" exact={true} component={OtoModify} />
+              <Route path="/sc/onetoone/:id" exact={true} component={OtoDetail}/>  
+              <Route path="/meeting/board/modify/:no" exact={true} component={ModifyMeetingBoard} />
+              <Route path="/board/:id" exact={true} component={DetailNotice}/>
+              <Route path="/board/modify/:no" exact={true} component={ModifyNotice}/>
+              <Route path="/timeline/modify/:id" exact={true} component={TimelineModify} />
+              <Route path="/meeting/:id" exact={true} component={Detail} />
+              <Route path="/meeting/modify/:id" exact={true} component={ModifyMeeting} />
+              <Route path="/meeting/board/:id" exact={true} component={MeetingBoard}/>
+              <Route path="/report/detail/:id" exact={true} component={ReportDetail}/>
             <Route component={NotFound} />
+            </ErrorBoundary>
+
         </Switch>
         <Footer/>
       </div>

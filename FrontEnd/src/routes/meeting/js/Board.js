@@ -30,7 +30,7 @@ const Board = (props) => {
 
             if (sessionStorage.getItem('id') === null) {
                 document.getElementById('root').setAttribute('style', 'display:none');
-                window.location.replace("/404");
+                window.location.replace("/WrongPage");
             }
             
             if (res.data.conclusion === "FAIL") {

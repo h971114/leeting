@@ -75,7 +75,7 @@ class Mypage extends React.Component {
 
       if (sessionStorage.getItem('id') === null) {
         document.getElementById('root').setAttribute('style', 'display:none');
-        window.location.replace("/404");
+        window.location.replace("/WrongPage");
       }
       if (document.getElementById('side_wrap').classList.contains('open')) {
         document.getElementById('side_wrap').classList.remove('open');

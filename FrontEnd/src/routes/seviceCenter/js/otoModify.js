@@ -20,11 +20,13 @@ const OtOModify = (props) => {
         setType(location.type);
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('test');
+            window.location.replace("/WrongPage");
         }
         if (sessionStorage.getItem('id') !== location.qwriter) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('test');
+            window.location.replace("/WrongPage");
         }
 
         document.getElementById('title').value = title;

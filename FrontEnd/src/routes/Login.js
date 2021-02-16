@@ -84,7 +84,7 @@ class Login extends React.Component {
         }
         if (sessionStorage.getItem('id') !== null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            window.location.replace("/WrongPage");
         }
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');
@@ -152,7 +152,7 @@ class Login extends React.Component {
                             <p>비밀번호 </p>
                             <input type="password" className="form-control margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange} onKeyPress={this.handleKeyPress}></input>
                         </div>
-                        <div className=" chkbox">
+                        {/* <div className=" chkbox">
                             <div className="idstore">
                                 <input type="checkbox" id="idcheck"></input>&nbsp;
                             <label htmlFor="idcheck"><span></span>아이디 저장</label>
@@ -161,7 +161,7 @@ class Login extends React.Component {
                                 <input type="checkbox" id="autocheck"></input>&nbsp;
                             <label htmlFor="autocheck"><span></span>자동 로그인</label>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="loginset">
                             <div className=" defaultlogin" onClick ={this.handleClick}>로 그 인</div>
                             <div className=" naverlogin" onClick={this.Naver}>네이버 로그인</div>

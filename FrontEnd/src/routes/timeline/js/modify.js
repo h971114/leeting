@@ -13,14 +13,16 @@ class write extends React.Component {
     componentDidMount() {
         const { location } = this.props;
 
-        if (sessionStorage.getItem('id') !== null) {
+        if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('test');
+            window.location.replace("/WrongPage");
         }
-
-        if (sessionStorage.getItem('id') !== location.state.id) {
+        
+        if (sessionStorage.getItem('id') !== location.state.writer) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            window.location.replace("/404");
+            alert('test');
+            window.location.replace("/WrongPage");
           }
         
 

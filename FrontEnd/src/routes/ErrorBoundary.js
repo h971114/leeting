@@ -17,10 +17,11 @@ class ErrorBoundary extends React.Component {
   
   render() {
     if (this.state.errorInfo) {
-      window.location.replace('/404');
+      window.location.replace('/404/');
       // Error path
       return (
         <div>
+          <div>adsaf</div>
         </div>
       );
     }
