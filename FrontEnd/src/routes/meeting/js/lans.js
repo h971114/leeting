@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/ko';
 
+import RecoPosts from "../../../components/meeting/reco"
+
 import Posts from "../../../components/meeting/Posts"
 
 import Pagination from '../../../components/common/Pagination'
@@ -17,6 +19,8 @@ const Lans = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
+    const [recoPosts, setRecoPosts] = useState([]);
+    const [recoLoading, setRecoLoading] = useState(false);
     
     useEffect(() => {
         const fetchPosts = async () => {
@@ -27,6 +31,24 @@ const Lans = () => {
           setLoading(false);
         }
     
+        const recoPosts = async () => {
+            setRecoLoading(true);
+
+            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/5');
+            // console.log(data.data);
+            data = data.data;
+            setRecoPosts(data);
+            setRecoLoading(false);
+        }
+
+
+        if (document.getElementById('side_wrap').classList.contains('open')) {
+            document.getElementById('side_wrap').classList.remove('open');
+            document.getElementById('side_wrap').classList.add('close');
+            document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+            document.getElementById('bg').setAttribute('style', 'display:none');
+        }
+        
         if (sessionStorage.getItem("token") != null) {
             document.getElementById('writeBtn').setAttribute("style", "display:block");
         }
@@ -34,6 +56,7 @@ const Lans = () => {
             document.getElementById('writeBtn').setAttribute("style", "display:none");
         }
     
+        recoPosts();
         fetchPosts();
     }, []);
     
@@ -83,6 +106,17 @@ const Lans = () => {
                     <h1 className="tit">Leeting</h1>
                 <p className="subtit">운명에는 우연이 없다 인간은 어떤 운명을 만나기 전에 스스로 그것을 만든다.
                     <br />- 토마스 윌슨</p>
+                </div>
+                
+                <div className="quicktit">
+                    <h3>추천하는 랜선 모임 리팅 👍</h3>
+                </div>
+                <div className="favoriteleet">
+                    <RecoPosts posts={recoPosts} loading={recoLoading} />
+                </div>
+                
+                <div className="quicktit">
+                    <h3>전체 목록</h3>
                 </div>
             <Posts posts={currentPosts} loading={loading} />
 

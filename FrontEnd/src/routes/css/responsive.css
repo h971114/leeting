@@ -35,49 +35,145 @@
 }
 
 @media only screen and (max-width:1400px) {
-    .header .nav_wrap {
-        margin-left: 520px;
-    }
-
-    .header .nav_wrap>ul>li {
-        margin-left: 20px;
-    }
-
-    .header .nav_wrap>ul>li>a {
-        font-size: 15px
-    }
-}
-
-@media only screen and (max-width:1300px) {
-    .btn_side {
-        display: block;
-        top: 27px;
-    }
 
     .header .nav_wrap,
     .header .login_nav a,
     .header .login_nav img,
     .header .login_nav button,
+    .header .login_nav,
     #searchBar {
+        display: none !important;
+    }
+
+    .btn_side {
+        display: block;
+    }
+
+    #meeting_list #sub_menu ul li {
+        width: 150px;
+    }
+
+    #leetings1280 {
         display: none;
     }
 
-    .header .login_nav {
-        top: 3px;
-        right: 50px;
+    #leetings768 {
+        display: block;
     }
 }
 
+@media only screen and (max-width:1230px) {
+
+    .reportWrap,
+    .otoInput,
+    .otoWrap,
+    #oneToOneNoPosts,
+    .scWrap,
+    .shortcut,
+    #meeting_list #sub_menu,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset,
+    .board_list {
+        width: 1000px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .reportWrap #reportImage {
+        background-size: 1000px 250px;
+        width: 1000px;
+        height: 250px;
+    }
+
+    .reportBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background: url(../../img/oneToone.png);
+        background-size: 1000px 250px;
+        width: 1000px;
+        height: 250px;
+    }
+
+    .otoInput input {
+        width: 300px;
+    }
+
+    .scWrap #sub_wrap #subImg {
+        background: url(../../img/faq1000.png);
+        width: 1000px;
+    }
+
+    .scWrap #sub_wrap #subImg button {
+        right: 150px;
+    }
+
+    .scWrap #sub_wrap #subImg button#goWrite {
+        right: 300px;
+    }
+
+    .shortcut ul li {
+        margin: 0 15px;
+    }
+
+    .shortcut ul li a img {
+        width: 130px;
+        height: 130px;
+    }
+
+    #slide ul {
+        width: 500%;
+        height: 100%;
+        transition: 1s;
+    }
+
+    #pos1:checked~ul {
+        margin-left: 0%;
+    }
+
+    #pos2:checked~ul {
+        margin-left: -100%;
+    }
+
+    #pos3:checked~ul {
+        margin-left: -200%;
+    }
+
+    #pos4:checked~ul {
+        margin-left: -300%;
+    }
+
+    #pos5:checked~ul {
+        margin-left: -400%;
+    }
+
+    .timeline {
+        max-width: 770px;
+    }
+}
 
 @media only screen and (max-width:1130px) {
 
     .header .logo_wrap a,
     .scroll .header .logo_wrap a {
-        height: 70px;
+        height: 65px;
+        margin-bottom: 5px;
     }
 
     #main_content {
-        padding-top: 70px;
+        padding-top: 85px;
     }
 
     .header .nav_wrap>ul,
@@ -102,15 +198,280 @@
     .header .login_nav a {
         margin-left: 5px
     }
+
+    .main_visual {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .slider1 {
+        background: #fadcdd url(../../img/slider01.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 355px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider2 {
+        background: #efefef url(../../img/slider02.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 355px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider3 {
+        background: #ebebeb url(../../img/slider03.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 355px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
 }
-
-
 
 /* tablet */
 @media only screen and (max-width:1024px) {
-    .btn_side {
-        top: 12px;
+
+    .reportWrap,
+    .otoInput,
+    .otoWrap,
+    #oneToOneNoPosts,
+    .scWrap,
+    .shortcut,
+    #meeting_list #sub_menu,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset,
+    .board_list {
+        width: 800px;
     }
+
+    .reportWrap #reportImage {
+        background-size: 800px 200px;
+        width: 800px;
+        height: 200px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background-size: 800px 230px;
+        width: 800px;
+        height: 230px;
+    }
+
+    .otoInput input {
+        width: 230px;
+    }
+
+    .scWrap #sub_wrap #subImg {
+        background: url(../../img/faq800.png);
+        width: 800px;
+    }
+
+    .scWrap #sub_wrap #subImg button {
+        right: 90px;
+    }
+
+    .scWrap #sub_wrap #subImg button#goWrite {
+        right: 250px;
+    }
+
+    .shortcut ul li {
+        margin: 0 65px;
+    }
+
+    #meeting_list #sub_menu ul li {
+        width: 120px;
+    }
+
+    .itemListView {
+        width: 220px;
+    }
+
+    .itemListView img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .itemListView .tit {
+        font-size: 18px;
+    }
+
+    .itemListView .subtit {
+        font-size: 16px;
+    }
+
+    #meeting_detail .titleset {
+        height: 350px;
+    }
+
+    #meeting_detail .titleset img {
+        width: 300px;
+        height: 300px;
+    }
+
+    #meeting_detail .titleset .host {
+        width: 300px;
+    }
+
+    .titleswrap {
+        width: 300px;
+        height: 300px;
+    }
+
+    #meeting_detail .formcenter,
+    .detail_subtit,
+    .detail_content,
+    #viewReviews #noPosts img,
+    #editWrap,
+    .reviewListView {
+        width: 700px;
+    }
+
+    #editorWrap {
+        width: 550px;
+    }
+}
+
+@media only screen and (max-width:820px) {
+    #meeting_list #sub_menu {
+        width: 600px;
+        height: 200px;
+    }
+
+    #meeting_list #sub_menu ul li {
+        width: 200px;
+    }
+
+    .itemListView {
+        width: 150px;
+        margin: 20px 40px;
+    }
+
+    .favoriteleet {
+        width: 140px;
+    }
+
+    .itemListView img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .itemListView .tit {
+        font-size: 16px;
+    }
+
+    .itemListView .subtit {
+        font-size: 14px;
+    }
+
+    .reportWrap,
+    .otoInput,
+    .otoWrap,
+    #oneToOneNoPosts,
+    .scWrap,
+    .shortcut,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset,
+    .board_list {
+        width: 700px;
+    }
+
+    .reportWrap #reportImage {
+        background-size: 700px 200px;
+        width: 700px;
+        height: 200px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background-size: 700px 230px;
+        width: 700px;
+        height: 230px;
+    }
+
+    .otoInput input {
+        width: 200px;
+    }
+
+    .oto_PC {
+        display: none;
+    }
+
+    .oto_Mobile {
+        display: table-row;
+    }
+
+    .scWrap #sub_wrap #subImg {
+        background: url(../../img/faq700.png);
+        width: 700px;
+    }
+
+    .scWrap #sub_wrap #subImg button {
+        right: 90px;
+    }
+
+    .scWrap #sub_wrap #subImg button#goWrite {
+        right: 250px;
+    }
+
+    .shortcut ul li {
+        margin: 10px 50px;
+        font-size: 18px;
+    }
+
+    .footerdiv li {
+        font-size: 14px;
+    }
+
+    .footerdiv .fttxt {
+        font-size: 13px;
+    }
+
+    .timeline {
+        max-width: 630px;
+    }
+
+    .timelineListView {
+        max-width: 590px;
+        margin: 0 auto;
+        border-left: none;
+        border-right: none;
+    }
+
+    .timelineListView img.timelineThumb {
+        width: 590px;
+        height: 590px;
+    }
+
 }
 
 
@@ -118,10 +479,6 @@
 @media only screen and (max-width:768px) {
     body {
         font-size: 15px;
-    }
-
-    .btn_side {
-        top: 6px;
     }
 
     .header .logo_wrap a,
@@ -132,21 +489,610 @@
     }
 
     #main_content {
-        padding-top: 60px;
+        padding-top: 80px;
+    }
+
+    .itemListView {
+        width: 150px;
+        margin: 20px 75px;
+
+    }
+
+    .itemListView img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .itemListView .tit {
+        font-size: 16px;
+    }
+
+    .itemListView .subtit {
+        font-size: 14px;
+    }
+
+    .reportWrap,
+    .otoInput,
+    .otoWrap,
+    #oneToOneNoPosts,
+    .shortcut,
+    .board_list,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset {
+        width: 600px;
+    }
+
+    .reportWrap #reportImage {
+        background-size: 600px 180px;
+        width: 600px;
+        height: 180px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background-size: 600px 180px;
+        width: 600px;
+        height: 180px;
+    }
+
+    .otoInput input {
+        width: 90%;
+    }
+
+    .scWrap {
+        width: 100%;
+    }
+
+    .scWrap #sub_wrap #subImg {
+        background: #7dcdee url(../../img/faqmin.png) 50% no-repeat;
+        width: 100%;
+        height: 600px;
+    }
+
+    .scWrap #sub_wrap #subImg button {
+        right: 20%;
+    }
+
+    .scWrap #sub_wrap #subImg button#goWrite {
+        right: 60%;
+    }
+
+    .accordion {
+        padding: 0 20px;
+    }
+
+
+    .shortcut ul li {
+        margin: 10px 35px;
+        font-size: 17px;
+    }
+
+    .footerdiv li {
+        font-size: 14px;
+    }
+
+    .footerdiv .fttxt {
+        font-size: 13px;
+    }
+
+    .writeInputWrap input,
+    .writeInputWrap #startdatepick,
+    .writeInputWrap #enddatepick {
+        width: 170px;
+    }
+
+    .notice_list_view .header,
+    .list-group .content div.no,
+    .list-group .content div.writer,
+    .list-group .content div.date,
+    .list-group .content div.hit,
+    .list-group .content div.id,
+    .list-group .content div.reportdate {
+        display: none;
+    }
+
+    .board_list .notice_list_view .title,
+    .report .notice_list_view .list-group .content .reportid {
+        width: 100%;
+        text-align: left;
+    }
+
+    .notice_list_view .list-group .content:first-child {
+        border-top: 2px solid #2b2b2b;
+    }
+
+    .title .b-title-box div.b-m-con,
+    .reportid .b-title-box div.b-m-con {
+        display: block;
+        padding: 5px 0 0 0;
+    }
+
+    .title .b-title-box div.b-m-con span,
+    .reportid .b-title-box div.b-m-con span {
+        position: relative;
+        margin: 0 7px 0 0;
+        padding: 0 8px 0 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .title .b-title-box div.b-m-con span:after,
+    .reportid .b-title-box div.b-m-con span:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 3px;
+        right: 0;
+        width: 1px;
+        height: 12px;
+        background-color: #8c8c8c;
+    }
+
+    .title .b-title-box div.b-m-con span:last-of-type,
+    .reportid .b-title-box div.b-m-con span:last-of-type {
+        padding: 0;
+    }
+
+    .title .b-title-box div.b-m-con span:last-of-type:after,
+    .reportid .b-title-box div.b-m-con span:last-of-type:after {
+        display: none;
+    }
+
+    #leetings768 {
+        display: none;
+    }
+
+    #leetings481 {
+        display: block;
+    }
+
+    .main_visual {
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .slider1 {
+        background: #fadcdd url(../../img/slider01.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 255px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider2 {
+        background: #efefef url(../../img/slider02.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 255px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider3 {
+        background: #ebebeb url(../../img/slider03.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 255px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    #meeting_detail .titleset {
+        padding-top: 0;
+        margin: 0;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    #meeting_detail .titleset img {
+        width: 100%;
+        height: auto;
+    }
+
+    .titleswrap {
+        width: 95%;
+        height: 250px;
+        margin: 10px auto;
+    }
+
+    #meeting_detail .titleset .host {
+        width: 100%;
+    }
+
+    #meeting_detail .titleset .like {
+        right: 20px;
+    }
+
+    #meeting_detail .formcenter,
+    .detail_subtit,
+    .detail_content,
+    #viewReviews #noPosts img,
+    #editWrap,
+    .reviewListView {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .M_PC {
+        display: none;
+    }
+
+    .M_Mobile {
+        display: table-row;
+    }
+
+    div[id *="bottom_wrap"] #Btns {
+        width: 500px;
     }
 }
 
-@media only screen and (max-width:499px) {
-    body {
-        font-size: 14px
+
+@media only screen and (max-width:650px) {
+    #meeting_list #sub_menu {
+        width: 450px;
     }
 
-    .btn_side {
-        top: 6px
+    #meeting_list #sub_menu ul li {
+        width: 150px;
+    }
+
+    .reportWrap,
+    .otoWrap,
+    .otoInput,
+    #oneToOneNoPosts,
+    .shortcut,
+    .board_list,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset {
+        width: 550px;
+    }
+
+    .reportWrap #reportImage {
+        background: url(../../img/reportmin.png);
+        background-size: 550px 180px;
+        width: 550px;
+        height: 180px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background: url(../../img/otoWritemin.png);
+        background-size: 550px 180px;
+        width: 550px;
+        height: 180px;
+    }
+
+    .otoInput input {
+        width: 90%;
+    }
+
+    .itemListView {
+        margin: 20px 15px;
+    }
+
+    .shortcut ul li {
+        margin: 10px 30px;
+        font-size: 17px;
+    }
+
+    .shortcut ul li a img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .id>p,
+    .password>p {
+        font-size: 16px;
+    }
+
+    .logininput,
+    .passinput {
+        font-size: 16px;
+    }
+
+    .loginset div {
+        height: 30px;
+        font-size: 16px;
+        line-height: 30px;
+        background-size: cover;
+    }
+
+    .timeline {
+        max-width: 100%;
+    }
+
+    .timelineListView {
+        max-width: 100%;
+        margin: 0 auto;
+        border-left: none;
+        border-right: none;
+    }
+
+    .timelineListView img.timelineThumb {
+        width: 100%;
+        height: auto;
+    }
+
+    #timelineWriteBtn {
+        right: 10px;
+        z-index: 999;
+    }
+
+    div[id *="bottom_wrap"] #Btns {
+        width: 350px;
+    }
+
+}
+
+@media only screen and (max-width:570px) {
+
+    .reportWrap,
+    .otoWrap,
+    .otoInput,
+    #oneToOneNoPosts,
+    .shortcut,
+    .board_list,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset {
+        width: 450px;
+    }
+
+    .reportWrap #reportImage {
+        background-size: 450px 160px;
+        width: 450px;
+        height: 160px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .otoWrap .otoTitle {
+        background: url(../../img/otoWritemin.png);
+        background-size: 450px 160px;
+        width: 450px;
+        height: 160px;
+    }
+
+    .itemListView {
+        margin: 20px 35px;
+    }
+
+
+    .shortcut ul li {
+        margin: 10px 20px;
+        font-size: 17px;
+    }
+
+    .shortcut ul li a img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .logincontainer .formcenter {
+        width: 300px;
+    }
+
+    #slide {
+        height: 220px;
+    }
+
+    .recoListView img {
+        width: 170px;
+        height: 170px;
+        border-radius: 20px;
+    }
+
+    .recoListView .intro {
+        display: inline-block;
+        margin: 10px;
+        margin-bottom: 0px;
+    }
+
+    .recoListView .intro .tit {
+        font-size: 20px;
+        color: black;
+    }
+
+    .recoListView .intro .subtit {
+        font-size: 17px;
+    }
+
+}
+
+@media only screen and (max-width:510px) {
+    #meeting_detail .formcenter .forradio {
+        font-size: 15px;
+    }
+
+    .reviewListView .reviewWriter {
+        font-size: 15px;
+    }
+
+    .joinMeeting #boardMeeting,
+    .joinMeeting button,
+    .joinMeeting #modifyBtn {
+        font-size: 15px;
+        width: 120px;
+    }
+}
+
+@media only screen and (max-width:470px) {
+    body {
+        font-size: 14px
     }
 
     .header .login_nav {
         padding-top: 21px;
     }
 
+    .quicktit h3 {
+        font-size: 20px;
+    }
+
+    #meeting_list #sub_menu {
+        width: 300px;
+    }
+
+    #meeting_list #sub_menu ul li {
+        width: 100px;
+    }
+
+    .reportWrap,
+    .otoWrap,
+    .otoInput,
+    #oneToOneNoPosts,
+    .shortcut,
+    .board_list,
+    #meeting_list .titles,
+    .quicktit,
+    .list_view,
+    .main_loading_view,
+    .loading_view,
+    .favoriteleet,
+    #paging,
+    #writeBtn,
+    .footerdiv,
+    .writeInputWrap,
+    .titleset {
+        width: 350px;
+    }
+
+    .otoBtns {
+        height: 20px;
+    }
+
+    .reportWrap #reportImage,
+    .otoWrap .otoTitle {
+        background-size: 350px 140px;
+        width: 350px;
+        height: 140px;
+    }
+
+    .itemListView {
+        width: 140px;
+        margin: 20px 15px;
+    }
+
+    .itemListView img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .itemListView .tit {
+        font-size: 15px;
+    }
+
+    .itemListView .subtit {
+        font-size: 13px;
+    }
+
+    .shortcut ul li {
+        margin: 10px 10px;
+        font-size: 17px;
+    }
+
+    .shortcut ul li a img {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    .main_visual {
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .slider1 {
+        background: #fadcdd url(../../img/slider01.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 155px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider2 {
+        background: #efefef url(../../img/slider02.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 155px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    .slider3 {
+        background: #ebebeb url(../../img/slider03.png) no-repeat 50%;
+        padding-top: 50px;
+        height: 155px;
+        box-sizing: border-box;
+        background-size: contain;
+        border: none;
+    }
+
+    #slide {
+        height: 200px;
+    }
+
+    .recoListView img {
+        width: 100px;
+        height: 100px;
+        border-radius: 20px;
+    }
+
+    .recoListView .intro .tit {
+        font-size: 16px;
+        color: black;
+    }
+
+    .recoListView .intro .subtit {
+        font-size: 13px;
+    }
+
+    .filebox .upload-name {
+        width: 100px;
+    }
+
+    .writeInputWrap #oneDay,
+    .writeInputWrap #oneWeek,
+    .writeInputWrap #oneMonth,
+    .writeInputWrap #Free {
+        width: 50px;
+        font-size: 15px;
+    }
 }

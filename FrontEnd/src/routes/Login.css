@@ -1,5 +1,4 @@
 .logincontainer {
-    width: 1200px;
     height: 780px;
     margin: 0 auto;
 }
@@ -13,9 +12,8 @@
 }
 
 .logincontainer .formcenter {
-    width: 600px;
+    width: 400px;
     margin: 0 auto;
-    padding-left: 130px;
 }
 
 .id {
@@ -94,17 +92,17 @@ input[type="checkbox"]:checked+label span {
 }
 
 .naverlogin {
-    background: url(../img/naverlogin.png);
+    background: url(../img/naverlogin.png) 50% no-repeat;
     color: white;
 }
 
 .googlelogin {
-    background: url(../img/googlelogin.png);
+    background: url(../img/googlelogin.png) 50% no-repeat;
     border: #d4d4d4 1px solid;
 }
 
 .kakaologin {
-    background: url(../img/kakaologin.png);
+    background: url(../img/kakaologin.png) 50% no-repeat;
     color: #3c1e1e;
 }
 

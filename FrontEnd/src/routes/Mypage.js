@@ -26,6 +26,7 @@ class Mypage extends React.Component {
       email: "",
       domain: "",
       mobile: "",
+      photo: "",
       token:"",
       auth:"",
       isLoading: true,
@@ -36,6 +37,7 @@ class Mypage extends React.Component {
       backupnickname: "",
       backuppw: "",
       backupmobile: "",
+      selectedFile: null,
     }
 
     getUserInfo = (e) => {
@@ -51,6 +53,7 @@ class Mypage extends React.Component {
           nickname: res.data.nickname,
           email: res.data.email,
           mobile: res.data.mobile,
+          photo: res.data.photo,
         })
       });
     };
@@ -70,27 +73,50 @@ class Mypage extends React.Component {
     componentDidMount() {
       let sId = sessionStorage.getItem('id');
 
+      if (sessionStorage.getItem('id') === null) {
+        document.getElementById('root').setAttribute('style', 'display:none');
+        window.location.replace("/404");
+      }
+      if (document.getElementById('side_wrap').classList.contains('open')) {
+        document.getElementById('side_wrap').classList.remove('open');
+        document.getElementById('side_wrap').classList.add('close');
+        document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+        document.getElementById('bg').setAttribute('style', 'display:none');
+    }
+
       if (sId !== null) {
           
         this.getLeeting();
         this.getUserInfo();
+        this.tabZero();
 
-      } else {
+      }
+      else {
           document.getElementById('myleetingTit').setAttribute('style', 'display:none');
           document.getElementById('myleetingList').setAttribute('style', 'display:none');
       }
+      
     }
 
     tabZero = (e) => {
       this.getLeeting();
-      this.setState({
-        tab: 0,
-      })
+      this.setState({ tab: 0, })
+      document.getElementById('tabZero').setAttribute("style", "background-color:#0275d8; color:white;");
+      document.getElementById('tabOne').setAttribute("style", "background-color:white; color:black;");
+      document.getElementById('tabTwo').setAttribute("style", "background-color:white; color:black;");
     }
-    tabOne = (e) => { this.setState({tab: 1,}) }
-    tabTwo = (e) => { 
+    tabOne = (e) => {
       this.backupUserInfo();
-      this.setState({tab: 2,}) 
+      this.setState({tab: 1,})
+      document.getElementById('tabZero').setAttribute("style", "background-color:white; color:black;");
+      document.getElementById('tabOne').setAttribute("style", "background-color:#0275d8; color:white;");
+      document.getElementById('tabTwo').setAttribute("style", "background-color:white; color:black;");
+    }
+    tabTwo = (e) => { 
+      this.setState({tab: 2,})
+      document.getElementById('tabZero').setAttribute("style", "background-color:white; color:black;");
+      document.getElementById('tabOne').setAttribute("style", "background-color:white; color:black;");
+      document.getElementById('tabTwo').setAttribute("style", "background-color:#0275d8; color:white;");
     }
 
     pwReconfirm = (e) => {
@@ -321,7 +347,8 @@ class Mypage extends React.Component {
           nickname: this.state.nickname,
           name: this.state.name,
           email: this.state.email,
-          mobile : this.state.mobile
+          mobile : this.state.mobile,
+          photo: this.state.photo,
         }).then(res => {
           if (res.data === "SUCCESS") {
             alert("회원정보 수정이 완료되었습니다.");
@@ -342,7 +369,6 @@ class Mypage extends React.Component {
     };
 
     // Join End
-
     returnUserInfo = (e) => {
       this.setState({
         pw: this.state.backuppw,
@@ -353,9 +379,39 @@ class Mypage extends React.Component {
       this.tabZero();
     };
 
+    handlePhotoInput(e) {
+      this.setState({
+          selectedFile : e.target.files[0],
+      })      
+      var file = e.target.files[0];
+      var formData = new FormData();
+      formData.append('data', file);
+      formData.append('hostid', sessionStorage.getItem('id'));
+      formData.append('dirNum', 2);
+      axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+          headers: {
+              'content-type': 'multipart/form-data',
+          },
+      }).then(res => {
+        console.log(res)
+        this.setState({
+          photo: res.data
+        })
+      })
+    }
+
+    leaveLeeting = (e) => {
+      axios.delete(`http://127.0.0.1:8080/myapp/member/${sessionStorage.getItem("id")}`, {
+        id: this.state.id,
+      }).then(res => {
+        alert("회원탈퇴가 완료되었습니다.");
+        this.logout();
+      })
+    }
+    
+
   render() {
     const { isLoading, data, reconfirm } = this.state
-    // let emailDomain = this.state.email ? this.state.email.split('@') : null 
 
     return (
       <div id="main_content">
@@ -365,9 +421,9 @@ class Mypage extends React.Component {
         <div className="d-flex">
             <div className="tabcenter col-4">
                 <div className="list-group">
-                    <p className="list-group-item list-group-item-action" onClick={this.tabZero}>프로필</p> {/*aria-current="true"*/}
-                    <p className="list-group-item list-group-item-action" onClick={this.tabOne}>일정</p>
-                    <p className="list-group-item list-group-item-action" onClick={this.tabTwo}>계정 설정</p>
+                    <p className="list-group-item list-group-item-action" id="tabZero" onClick={this.tabZero}>프로필</p>
+                    <p className="list-group-item list-group-item-action" id="tabOne" onClick={this.tabOne}>계정 설정</p>
+                    <p className="list-group-item list-group-item-action" id="tabTwo" onClick={this.tabTwo}>회원탈퇴</p>
                 </div>
             </div>
             <div className="formcenter col-8">
@@ -375,7 +431,10 @@ class Mypage extends React.Component {
                   {!this.state.tab && (
                     <Fragment>
                     <div className="user row align-items-end">
-                            <img onClick={this.profileClick} src="../img\noProfile.png" alt="프로필사진"></img>
+                          {this.state.photo ? (
+                              <img src={this.state.photo} alt="프로필사진"></img>
+                          ) : (<img src="../img\noProfile.png" alt="프로필사진"></img>)}
+                            
                             <div>
                             <p className="userNickname"> {this.state.nickname} </p>
                             <p>{this.state.id}</p>
@@ -415,7 +474,7 @@ class Mypage extends React.Component {
                               </div>
                             </div>
                           ) : (
-                            <div className="list_view">
+                            <div className="myPage_list_view">
                                 {data.map((leeting, idx) => (
                                   <My
                                     key={idx}
@@ -440,11 +499,6 @@ class Mypage extends React.Component {
                     </Fragment>)}
                   {this.state.tab === 1 && (
                     <Fragment>
-                      <p>달력을 넣고 싶다</p>
-                    </Fragment>
-                  )}
-                  {this.state.tab === 2 && (
-                    <Fragment>
                       {!reconfirm ? (
                         <Fragment>
                           <div className="col-9">
@@ -459,11 +513,26 @@ class Mypage extends React.Component {
                           <div className="form-group">
                             <div className="form-group">
                               <div className="col-9">
+                                <form className="user row align-items-end filebox"  encType="multipart/form-data">
+                                  <div className="user row align-items-end">
+                                    {this.state.photo ? (
+                                        <img src={this.state.photo} alt="프로필사진"></img>
+                                    ) : (<img src="../img\noProfile.png" alt="프로필사진"></img>)}                      
+                                    </div>
+                                  <label className="forProfile" htmlFor="ex_filename">사진 변경</label> 
+                                  <input type="file" accept="image/*"id="ex_filename" className="upload-hidden" onChange={e => this.handlePhotoInput(e)}/> 
+                                </form>
+                              </div>
+                              <label id="validateName"></label>
+                            </div>
+                            <div className="form-group">
+                              <div className="col-9">
                                 <label className="font-weight-bold" id="labelName" htmlFor="inputName">성명</label>
                                 <input type="text" id="inputName" className="form-control margin-bottom-20" placeholder="한글 이름을 입력해주세요" onChange ={this.nameChange} defaultValue={this.state.name}></input>
                               </div>
                               <label id="validateName"></label>
                             </div>
+                            
                             <div className="form-group">
                               <div className="col-12">
                                 <label className="font-weight-bold" id="labelNickName" htmlFor="inputNickName">닉네임</label>
@@ -501,10 +570,30 @@ class Mypage extends React.Component {
                             <br />
                             <div className="row form-group">
                               <div className="col-12 text-center">
-                                <button type="button" id="cancelbtn" className="btn" onClick={this.returnUserInfo}>수정취소</button>
+                                <button type="button" id="cancelbtn" className="btn border-1px" onClick={this.returnUserInfo}>수정취소</button>
                                 <button type="submit" id="joinbtn" className="btn btn-primary" onClick={this.handleClick}>수정완료</button>
                               </div>
                             </div>
+                        </div>
+                      )}
+                    </Fragment>
+                  )}
+                  {this.state.tab === 2 && (
+                    <Fragment>
+                      {!reconfirm ? (
+                        <Fragment>
+                          <div className="col-9">
+                            <label id="labelReconfirmPw" className="font-weight-bold" htmlFor="reconfirmPw">비밀번호 확인</label>
+                            <input type="password" id="reconfirmPw" className="form-control mb-2" placeholder="비밀번호를 입력해주세요"></input>
+                            <button id="checkPw" className="btn btn-primary mt-2 mr-2" onClick={this.pwReconfirm}>확인</button>
+                            <label id="checkPwBeforeEditProfile"></label><br/>
+                          </div>
+                        </Fragment>
+                      ) : (
+                        <div>
+                          <p>정말 탈퇴하시겠습니까?</p>
+                          <p>지금까지 사용한 사이트의 모든 기록이 삭제됩니다.</p>
+                          <button id="leaveLeeting" className="btn btn-warning mt-2" onClick={this.leaveLeeting}>탈퇴</button>
                         </div>
                       )}
                     </Fragment>

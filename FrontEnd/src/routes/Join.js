@@ -13,7 +13,8 @@ class Join extends React.Component {
       checkName: false,
       checkNickname: false,
       checkEmail: false,
-      checkMobile: false
+      checkMobile: false,
+      photo:""
     };
   }
   state ={
@@ -25,7 +26,21 @@ class Join extends React.Component {
     domain: "",
     mobile: "",
     token:"",
-    auth:"",
+    auth: "",
+    photo:"",
+  }
+
+  componentDidMount() {
+    if (sessionStorage.getItem('id') !== null) {
+      document.getElementById('root').setAttribute('style', 'display:none');
+      window.location.replace("/404");
+    }
+    if (document.getElementById('side_wrap').classList.contains('open')) {
+      document.getElementById('side_wrap').classList.remove('open');
+      document.getElementById('side_wrap').classList.add('close');
+      document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+      document.getElementById('bg').setAttribute('style', 'display:none');
+  }
   }
   
   handleChange = (event) => {
@@ -364,11 +379,12 @@ class Join extends React.Component {
         nickname: this.state.nickname,
         name: this.state.name,
         email: this.state.email + "@" + this.state.domain,
-        mobile : this.state.mobile
+        mobile: this.state.mobile,
+        photo: this.state.photo
       }).then(res => {
         //console.log(res);
         // console.log(res.data);
-        if (res.data === "SUCESS") {
+        if (res.data === "SUCCESS") {
           alert("환영합니다~ 로그인 페이지로 이동합니다.");
           console.log("회원가입 완료");
           window.location.replace("/login");
@@ -390,6 +406,28 @@ class Join extends React.Component {
     this.props.history.goBack();
   }
 
+  handlePhotoInput(e) {
+    this.setState({
+        selectedFile : e.target.files[0],
+    })      
+    var file = e.target.files[0];
+    var formData = new FormData();
+    formData.append('data', file);
+    formData.append('hostid', sessionStorage.getItem('id'));
+    formData.append('dirNum', 2);
+    axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        headers: {
+            'content-type': 'multipart/form-data',
+        },
+    }).then(res => {
+      this.setState({
+        photo: res.data
+      })
+      console.log(this.state.photo);
+      
+    })
+  }
+
   render() {
     return (
       
@@ -401,6 +439,20 @@ class Join extends React.Component {
           <div>
             {/* <form action="submit" className="signupcustom" > */}
               
+            <div className="form-group">
+                <div className="col-9">
+                  <label className="font-weight-bold" >프로필 사진</label>
+                  <form className="user row align-items-end filebox"  encType="multipart/form-data">
+                    <div className="user row align-items-end">
+                      {this.state.photo ? (
+                          <img src={this.state.photo} alt="프로필사진"></img>
+                      ) : (<img src="../img\noProfile.png" alt="프로필사진"></img>)}                      
+                      </div>
+                    <label className="forProfile"  htmlFor="ex_filename">사진 변경</label> 
+                    <input type="file" accept="image/*"id="ex_filename" className="upload-hidden" onChange={e => this.handlePhotoInput(e)}/> 
+                  </form>
+                </div>
+              </div>
               <div className="form-group">
                 <div className="col-12">
                   <label id="labelId" className="font-weight-bold" htmlFor="inputId">아이디</label>

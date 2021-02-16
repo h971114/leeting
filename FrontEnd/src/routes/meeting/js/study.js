@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/ko';
 
+import RecoPosts from "../../../components/meeting/reco"
+
 import Posts from "../../../components/meeting/Posts"
 
 import Pagination from '../../../components/common/Pagination'
@@ -18,16 +20,35 @@ const Study = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
+    const [recoPosts, setRecoPosts] = useState([]);
+    const [recoLoading, setRecoLoading] = useState(false);
     
     useEffect(() => {
         const fetchPosts = async () => {
-          setLoading(true);
+            setLoading(true);
             const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/study');
             
-          setPosts(res.data);
-          setLoading(false);
+            setPosts(res.data);
+            setLoading(false);
         }
     
+        const recoPosts = async () => {
+            setRecoLoading(true);
+
+            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/6');
+            // console.log(data.data);
+            data = data.data;
+            setRecoPosts(data);
+            setRecoLoading(false);
+        }
+
+        if (document.getElementById('side_wrap').classList.contains('open')) {
+            document.getElementById('side_wrap').classList.remove('open');
+            document.getElementById('side_wrap').classList.add('close');
+            document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+            document.getElementById('bg').setAttribute('style', 'display:none');
+        }
+
         if (sessionStorage.getItem("token") != null) {
             document.getElementById('writeBtn').setAttribute("style", "display:block");
         }
@@ -35,6 +56,7 @@ const Study = () => {
             document.getElementById('writeBtn').setAttribute("style", "display:none");
         }
 
+        recoPosts();
         fetchPosts();
     }, []);
     
@@ -82,6 +104,16 @@ const Study = () => {
                 <h1 className="tit">스 터 디</h1>
                 <p className="subtit">지금 자면 꿈을 꾸지만, 지금 공부하면 꿈을 이룬다.<br/>- 하버드대학 도서관</p>
             </div>
+                <div className="quicktit">
+                    <h3>추천하는 공부 리팅 👍</h3>
+                </div>
+                <div className="favoriteleet">
+                    <RecoPosts posts={recoPosts} loading={recoLoading} />
+                </div>
+                
+                <div className="quicktit">
+                    <h3>전체 목록</h3>
+                </div>
             <Posts posts={currentPosts} loading={loading} />
 
             <Pagination

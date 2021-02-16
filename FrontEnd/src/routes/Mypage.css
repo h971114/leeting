@@ -20,7 +20,7 @@
     position: relative;
     display: block;
     padding: .75rem 2rem;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
 }
 
 .joinContainer .formcenter {
@@ -109,10 +109,19 @@
     width: 100px;
     height: 100px;
     margin-right: 10px;
+    margin-left: 30px;
 }
 
 .user .userNickname {
     display: inline-block;
     font-size: 23px;
     font-weight: bold;
+}
+
+.forProfile {
+    margin-left: 20px;
+}
+
+.list-group-item {
+    cursor: pointer;
 }

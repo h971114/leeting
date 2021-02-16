@@ -24,6 +24,14 @@ class Find extends React.Component {
         pwtoken: "",
         pwauth:""
     }
+    componentDidMount() {
+        if (document.getElementById('side_wrap').classList.contains('open')) {
+            document.getElementById('side_wrap').classList.remove('open');
+            document.getElementById('side_wrap').classList.add('close');
+            document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+            document.getElementById('bg').setAttribute('style', 'display:none');
+        }
+    }
 
     idemailChange = (e) => {
         this.setState({

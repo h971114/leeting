@@ -82,6 +82,16 @@ class Login extends React.Component {
                 }
             })
         }
+        if (sessionStorage.getItem('id') !== null) {
+            document.getElementById('root').setAttribute('style', 'display:none');
+            window.location.replace("/404");
+        }
+        if (document.getElementById('side_wrap').classList.contains('open')) {
+            document.getElementById('side_wrap').classList.remove('open');
+            document.getElementById('side_wrap').classList.add('close');
+            document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+            document.getElementById('bg').setAttribute('style', 'display:none');
+        }
     };
     handleClick = (e) => {
         // e.preventDefault();
@@ -136,13 +146,13 @@ class Login extends React.Component {
                     <form action="get" className="loginform">
                         <div className="id">
                             <p>아이디 </p>
-                            <input type="text" className="form-control col-9 margin-bottom-20 logininput" placeholder="아이디를 입력해주세요" onChange={this.idChange}></input>
+                            <input type="text" className="form-control margin-bottom-20 logininput" placeholder="아이디를 입력해주세요" onChange={this.idChange}></input>
                         </div>
                         <div className="password">
                             <p>비밀번호 </p>
-                            <input type="password" className="form-control col-9 margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange} onKeyPress={this.handleKeyPress}></input>
+                            <input type="password" className="form-control margin-bottom-20 passinput" placeholder="비밀번호를 입력해주세요" onChange={this.pwChange} onKeyPress={this.handleKeyPress}></input>
                         </div>
-                        <div className="col-9 chkbox">
+                        <div className=" chkbox">
                             <div className="idstore">
                                 <input type="checkbox" id="idcheck"></input>&nbsp;
                             <label htmlFor="idcheck"><span></span>아이디 저장</label>
@@ -153,12 +163,12 @@ class Login extends React.Component {
                             </div>
                         </div>
                         <div className="loginset">
-                            <div className="col-9 defaultlogin" onClick ={this.handleClick}>로 그 인</div>
-                            <div className="col-9 naverlogin" onClick={this.Naver}>네이버 로그인</div>
+                            <div className=" defaultlogin" onClick ={this.handleClick}>로 그 인</div>
+                            <div className=" naverlogin" onClick={this.Naver}>네이버 로그인</div>
                             <GoogleLogin
                                 clientId="214779194973-13gfcp2vgimelc91u2dpop5j3oo788qb.apps.googleusercontent.com"
                                 render={renderProps => (
-                                    <div className="col-9 googlelogin" onClick={renderProps.onClick}> 구글 로그인</div>
+                                    <div className=" googlelogin" onClick={renderProps.onClick}> 구글 로그인</div>
                                   )}
                             buttonText="Login"
                             onSuccess={result => this.google(result)}
@@ -171,7 +181,7 @@ class Login extends React.Component {
                                 getProfile={true}
                                 render={({ onClick }) => {
                                     return (
-                                        <div className="col-9 kakaologin" onClick={(e) => {
+                                        <div className=" kakaologin" onClick={(e) => {
                                             e.preventDefault();
                                             onClick();
                                           }}>카카오 계정 로그인</div>
@@ -182,7 +192,7 @@ class Login extends React.Component {
                                     
                                 </KaKaoLogin>
                         </div>
-                        <div className="col-9 usermenu">
+                        <div className=" usermenu">
                             <ul>
                                 <li>
                                     <a href="/find">

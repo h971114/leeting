@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/ko';
 
+import RecoPosts from "../../../components/meeting/reco"
+
 import Posts from "../../../components/meeting/Posts"
 
 import Pagination from '../../../components/common/Pagination'
@@ -17,6 +19,8 @@ const Diy = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
+    const [recoPosts, setRecoPosts] = useState([]);
+    const [recoLoading, setRecoLoading] = useState(false);
     
     useEffect(() => {
         const fetchPosts = async () => {
@@ -27,6 +31,23 @@ const Diy = () => {
           setLoading(false);
         }
     
+        const recoPosts = async () => {
+            setRecoLoading(true);
+
+            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/4');
+            // console.log(data.data);
+            data = data.data;
+            setRecoPosts(data);
+            setRecoLoading(false);
+        }
+
+
+        if (document.getElementById('side_wrap').classList.contains('open')) {
+            document.getElementById('side_wrap').classList.remove('open');
+            document.getElementById('side_wrap').classList.add('close');
+            document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
+            document.getElementById('bg').setAttribute('style', 'display:none');
+        }
         if (sessionStorage.getItem("token") != null) {
             document.getElementById('writeBtn').setAttribute("style", "display:block");
         }
@@ -34,6 +55,7 @@ const Diy = () => {
             document.getElementById('writeBtn').setAttribute("style", "display:none");
         }
     
+        recoPosts();
         fetchPosts();
     }, []);
     
@@ -81,6 +103,17 @@ const Diy = () => {
                 <div className="titles">
                     <h1 className="tit">D.I.Y</h1>
                     <p className="subtit">자세히 보아야 예쁘다 오래 보아야 사랑스럽다 너도 그렇다.<br/>- 나태주</p>
+                </div>
+                
+                <div className="quicktit">
+                    <h3>추천하는 D.I.Y 리팅 👍</h3>
+                </div>
+                <div className="favoriteleet">
+                    <RecoPosts posts={recoPosts} loading={recoLoading} />
+                </div>
+                
+                <div className="quicktit">
+                    <h3>전체 목록</h3>
                 </div>
             <Posts posts={currentPosts} loading={loading} />
 

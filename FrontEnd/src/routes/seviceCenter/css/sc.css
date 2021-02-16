@@ -1,0 +1,273 @@
+.scWrap {
+    width: 1200px;
+    margin: 0 auto 30px;
+}
+
+.scWrap #sub_wrap #subImg {
+    width: 1200px;
+    background: url(../../../img/faq.png);
+    height: 300px;
+    position: relative;
+}
+
+.scWrap #sub_wrap #subImg button {
+    position: absolute;
+    right: 180px;
+    bottom: 80px;
+    border-radius: 3px;
+    border: none;
+    width: 130px;
+    height: 35px;
+}
+
+.scWrap #sub_wrap #subImg button#goWrite {
+    right: 340px;
+}
+
+.faq_Q {
+    position: relative;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.faq_Q .Q {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #96cdd4;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.faq_Q .question {
+    background-color: #96cdd4;
+    border-radius: 10px;
+    margin-left: 25px;
+    padding-left: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.faq_Q .question label {
+    display: block;
+    cursor: pointer;
+}
+
+.faq_A {
+    position: relative;
+    margin-top: 20px;
+    z-index: -100;
+}
+
+.faq_A .A {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #f8d49a;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.faq_A .answer {
+    background-color: #f8d49a;
+    border-radius: 10px;
+    margin-left: 25px;
+    padding-left: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input[id*="que"] {
+    display: none;
+}
+
+input[id*="que"]+div {
+    display: block;
+    cursor: pointer;
+}
+
+input[id*="que"]+div em {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    display: inline-block;
+    background: url(../../../img/arrow.png) 0 0px no-repeat;
+}
+
+input[id*="que"]+div+div {
+    max-height: 0;
+    transition: all .7s;
+    overflow: hidden;
+}
+
+input[id*="que"]:checked+div+div {
+    max-height: 500px;
+}
+
+input[id*="que"]:checked+div em {
+    background-position: 0 -30px;
+}
+
+
+.otoWrap {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto 70px;
+}
+
+.otoTitle {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.otoInput {
+    margin: 0 auto;
+}
+
+.otoInput table {
+    margin-top: 20px;
+    width: 100%;
+    border-spacing: 0;
+    border-top: 2px solid #2b2b2b;
+    table-layout: fixed;
+}
+
+.otoInput table tbody th {
+    padding: 12px 15px;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fafafa;
+    font-weight: 200;
+    text-align: left;
+}
+
+.otoInput table tbody td {
+    position: relative;
+    padding: 12px 15px;
+    border-bottom: 1px solid #d8d8d8;
+    font-weight: 200;
+}
+
+.otoInput input {
+    border: 1px solid #ccc;
+    width: 350px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.otoInput .tui-editor-contents {
+    font-size: 16px;
+}
+
+.oto_Mobile {
+    display: none;
+}
+
+.otoBtns button {
+    position: absolute;
+    right: 13px;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid;
+}
+
+.otoInput .reportTitle {
+    text-indent: -9999px;
+    background: url(../../../img/reportDetail.png);
+    background-size: 1200px 300px;
+    width: 1200px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.otoInput table tbody tr td div.reportDetail {
+    height: 195px;
+    overflow-y: scroll;
+}
+
+.otoInput select {
+    padding-left: 10px;
+    width: 200px;
+    height: 40px;
+    background: url('../../../img/btn-sel-open01.png') no-repeat 95% 50%;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#oneToOneNoPosts {
+    width: 1200px;
+    height: 300px;
+}
+
+.otoWrap {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto 70px;
+}
+
+.otoWrap .otoTitle {
+    text-indent: -9999px;
+    background: url(../../../img/oneToone.png);
+    background-size: 1200px 300px;
+    width: 1200px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.otoInput table tbody tr td div.otoDetail {
+    height: 195px;
+    overflow-y: scroll;
+}
+
+.otoDetailModify {
+    display: none;
+}
+
+.otoBtns #userModify,
+.otoBtns #adminWrite,
+.otoBtns #adminModify,
+.otoBtns #writeCancle,
+.otoBtns #modifyCancle {
+    right: 130px;
+}
+
+.otoBtns #adminModified,
+.otoBtns #adminWrited {
+    right: 250px;
+}
+
+.otoBtns #adminModified,
+.otoBtns #adminWrited,
+.otoBtns #writeCancle,
+.otoBtns #modifyCancle {
+    display: none;
+}
+
+
+
+#adminAnswer {
+    display: none;
+}

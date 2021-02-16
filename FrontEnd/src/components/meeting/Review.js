@@ -20,6 +20,13 @@ const Review = (props) => {
     const [postsPerPage] = useState(10);
     const [content, setContent] = useState();
     const [reviewBool, setReviewBool] = useState(false);
+    const nullpost = [{
+        date: "2021-01-01 00:00:00",
+        meetingno: 0,
+        no: 0,
+        review: "<p>test</p>↵",
+        writer: "test"
+    }];
     const editorRef = React.createRef();
     const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -34,27 +41,29 @@ const Review = (props) => {
                 }
             });
             
-            setPosts(res.data.list);
-            if (res.data.length === 0) {
+            if (res.data.conclusion === "FAIL") {
                 setVPost(true);
                 setLoading(false);
+                setPosts([nullpost]);
             }
-            else
+            else {
+                setPosts(res.data.list);
                 setLoading(false);
+            }
         }
-    
+        
+        
         if (props.checkJoin === true) {
             document.getElementById('editWrap').setAttribute('style', 'display:block');
-            // console.log('Success');
         }
         else {
             document.getElementById('editWrap').setAttribute('style', 'display:none');
-            // console.log('Fail');
         }
         fetchPosts();
-    }, [props.checkJoin, reviewBool]);
+
+        // eslint-disable-next-line
+    }, [props.checkJoin, reviewBool, noPosts]);
     
-    // console.log(posts);
     
     // Get current posts
     const indexOfLastPost = currentPage * postsPerPage;
@@ -70,7 +79,6 @@ const Review = (props) => {
 
     const editorChange = (e) => { 
         setContent(editorRef.current.getInstance().getHtml());
-        // console.log(content.length);
     }
 
     const reviewAdd = (e) => {
@@ -87,7 +95,13 @@ const Review = (props) => {
             }).then(res => {
                 if (res.data === "SUCCESS") {
                     alert('등록에 성공하셨습니다.');
-                    setReviewBool(true);
+                    if (noPosts) {
+                        window.location.replace('/meeting/' + props.id);
+                    } else {
+                        editorRef.current.getInstance().setHtml("");
+                        setVPost(false);
+                        setReviewBool(true);
+                    }
                 } else {
                     alert('잠시후 다시 시도해주세요');
                 }
@@ -103,7 +117,6 @@ const Review = (props) => {
             <div id="editWrap">
                 <div id="editorWrap">
                     <Editor
-                        id="editorReview"
                         className="editorr"
                         previewStyle="vertical"
                         height="60px"
@@ -111,7 +124,9 @@ const Review = (props) => {
                         initialEditType="wysiwyg"
                         ref={editorRef}
                         onChange={editorChange}
-                    />
+                        initialValue={content}
+                    /> 
+                    <div id="editor"></div>
                 </div>
                 <div id="reviewWriteBtn">
                     <button onClick={reviewAdd}>
@@ -119,7 +134,7 @@ const Review = (props) => {
                     </button>
                 </div>
             </div>
-            <Posts posts={currentPosts} loading={loading} />
+            <Posts posts={currentPosts} loading={loading} noPosts={noPosts} /> 
 
             <Pagination
                 postsPerPage={postsPerPage}
@@ -133,6 +148,7 @@ const Review = (props) => {
 
         </div>
     )
+    
 
 }
 export default Review;

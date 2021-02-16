@@ -16,26 +16,26 @@ public class ContentsDaoImpl implements ContentsDao{
 
     @Override
     public void enrollContents(ContentsDto contentsDto) throws SQLException {
-        sqlSession.insert("contents.enroll", contentsDto);
+        sqlSession.insert("contents.enrollcontents", contentsDto);
     }
 
     @Override
-    public List<ContentsDto> listContents(String keyword) throws SQLException {
-        return sqlSession.selectList("contents.listbykeyword", keyword);
+    public List<ContentsDto> findContents() throws SQLException {
+        return sqlSession.selectList("contents.listcontents");
     }
 
     @Override
     public List<ContentsDto> listContents() throws SQLException {
-        return sqlSession.selectList("contents.list");
+        return sqlSession.selectList("contents.listcontents");
     }
 
     @Override
     public void deleteContents(int contentsno) throws SQLException {
-        sqlSession.delete("contents.delete", contentsno);
+        sqlSession.delete("contents.deletecontents", contentsno);
     }
 
     @Override
     public void updateContents(ContentsDto contentsDto) throws SQLException {
-        sqlSession.update("contents.update", contentsDto);
+        sqlSession.update("updatecontents", contentsDto);
     }
 }

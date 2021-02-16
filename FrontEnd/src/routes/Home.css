@@ -1,5 +1,7 @@
 #main_content {
     padding-top: 101px;
+    min-height: calc(100vh - 170px);
+    margin-bottom: 30px;
 }
 
 .shortcut {
@@ -38,7 +40,7 @@
 
 .quicktit .all {
     position: absolute;
-    top: 12px;
+    bottom: 0;
     right: 0;
 }
 
@@ -46,10 +48,6 @@
     display: block;
     width: 1200px;
     margin: 0 auto;
-}
-
-#myleetingList {
-    display: none;
 }
 
 .favoriteleet {
@@ -85,4 +83,16 @@
     font-size: 22px;
     color: black;
     font-weight: bold;
+}
+
+.main_loading_view {
+    height: 319px;
+    padding-bottom: 100px;
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main_loading_view .loader {
+    height: 150px;
 }

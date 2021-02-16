@@ -52,7 +52,7 @@ public class ReportController {
 //		    report.setReportid("test");
 //		    report.setDetail("test");
 		    if(reportService.writeReport(report)) {
-		    	conclusion = "SUCESS";
+		    	conclusion = "SUCCESS";
 		    }
 		    else {
 		    	conclusion = "FAIL";

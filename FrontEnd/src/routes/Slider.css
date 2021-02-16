@@ -1,4 +1,5 @@
 .main_visual {
+    width: 100%;
     height: 500px;
     margin-bottom: 20px;
     overflow: hidden;
@@ -9,6 +10,7 @@
     padding-top: 50px;
     height: 455px;
     box-sizing: border-box;
+    background-size: contain;
     border: none;
 }
 
@@ -17,6 +19,7 @@
     padding-top: 50px;
     height: 455px;
     box-sizing: border-box;
+    background-size: contain;
     border: none;
 }
 
@@ -25,5 +28,6 @@
     padding-top: 50px;
     height: 455px;
     box-sizing: border-box;
+    background-size: contain;
     border: none;
 }

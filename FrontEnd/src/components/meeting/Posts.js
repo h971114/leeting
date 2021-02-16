@@ -1,7 +1,7 @@
 import React from 'react'
 import List from "./list"
 
-export const Posts = ({ posts, loading }) => {
+export const Posts = ({ posts, loading, noPosts }) => {
     if (loading) {
         return (
             <div className="loading_view">
@@ -12,6 +12,13 @@ export const Posts = ({ posts, loading }) => {
                     <span className="loader_text">Loading...</span>
                 </div>
             </div>
+        )
+    }
+    if (noPosts) {
+        return (
+            <div id="myleetingNo">
+                <img src="img/noMyLeeting.png" alt="참여 리팅 없음"></img>
+        </div>
         )
     }
     return (
@@ -25,7 +32,6 @@ export const Posts = ({ posts, loading }) => {
                         subtitle={post.subtitle}
                         date={post.date}
                         hostid={post.hostid}
-                        detail={post.detail}
                         categoryno={post.categoryno}
                         file={post.file}
                         meetinglike={post.meetinglike}

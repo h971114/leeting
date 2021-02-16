@@ -4,7 +4,7 @@ import propTypes  from "prop-types";
 import moment from 'moment';
 import 'moment/locale/ko';
  
-function List({ no, title, detail, date, writer, hit, file1, file2, file3 }) {
+function List({ no,rownum, title, detail, date, writer, hit, file1, file2, file3 }) {
     var t1 = moment(date);
     var t2 = moment();
     var t3 = moment.duration(t2.diff(t1)).asDays();
@@ -13,12 +13,7 @@ function List({ no, title, detail, date, writer, hit, file1, file2, file3 }) {
     if (t3 < 3) {
         newsign = "NEW";
     }
-    // var filecheck = false;
-    // if (file1 === null && file2 === null && file3 === null) {
-    //     filecheck = false;
-    // } else {
-    //     filecheck = true;
-    // }
+    // console.log(rownum);
 
     var sYear = date.substring(0,4);
     var sMonth = date.substring(5,7);
@@ -28,7 +23,9 @@ function List({ no, title, detail, date, writer, hit, file1, file2, file3 }) {
     
     return (
         <div className="content">
-            <div className="no">{no}</div>
+            <div className="no">
+                {rownum}
+            </div>
             <div className="title">
                 <div className="b-title-box">
                     <Link
@@ -49,16 +46,16 @@ function List({ no, title, detail, date, writer, hit, file1, file2, file3 }) {
                     >
                         <span title="자세히 보기">{title+"  "}</span>
                     </Link>
-                        <div className="b-etc-box">
-                            <sup className="b-new" id="b-new"><span>{newsign}</span></sup>
-                        </div>
+                    <div className="b-etc-box">
+                        <sup className="b-new" id="b-new"><span>{newsign}</span></sup>
+                    </div>
+                    <div className="b-m-con">
+                        <span className="b-writer">{writer}</span><span className="b-date">{dateformat}</span>
+                    </div>
                 </div>
             </div>
             <div className="writer">{writer}</div>
             <div className="date">{dateformat}</div>
-            <div className="hit">{hit}</div>
-            <div className="file"></div>
-            
         </div>
             
     );
@@ -66,6 +63,7 @@ function List({ no, title, detail, date, writer, hit, file1, file2, file3 }) {
 
 List.propTypes  = {
     no: propTypes.number.isRequired,
+    rownum: propTypes.number.isRequired,
     title: propTypes.string.isRequired,
     detail: propTypes.string.isRequired,
     date: propTypes.string.isRequired,

@@ -146,3 +146,14 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+#leetings1280 img,
+#leetings768 img,
+#leetings481 img {
+    width: 100%;
+}
+
+#leetings768,
+#leetings481 {
+    display: none;
+}

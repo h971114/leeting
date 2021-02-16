@@ -51,45 +51,7 @@
     text-indent: -9999px;
 }
 
-.footerdiv .ftsns li:last-child {
-    margin-right: 0px;
-}
 
-.insta {
-    letter-spacing: -1px;
-    padding-left: 34px;
-    width: auto;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    color: #666666;
-    background: url(../img/insta.png) no-repeat;
-    background-size: auto;
-}
-
-.youtube {
-    letter-spacing: -1px;
-    padding-left: 34px;
-    width: auto;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    color: #666666;
-    background: url(../img/youtube.png) no-repeat;
-    background-size: auto;
-}
-
-.kakao {
-    letter-spacing: -1px;
-    padding-left: 34px;
-    width: auto;
-    height: 34px;
-    line-height: 34px;
-    font-size: 14px;
-    color: #666666;
-    background: url(../img/kakao.png) no-repeat;
-    background-size: auto;
-}
 
 .footerdiv .fttxt {
     position: absolute;

@@ -1,0 +1,142 @@
+.reportWrap {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto 70px;
+}
+
+#reportImage {
+    position: relative;
+    background: url(../../../img/report.png);
+    background-size: 1200px 300px;
+    width: 1200px;
+    height: 300px;
+}
+
+#reportImage button {
+    position: absolute;
+    margin-top: 10px;
+    width: 120px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#reportImage #adminLog {
+    right: 150px;
+    bottom: 30px;
+    display: none;
+}
+
+#reportImage #myLog {
+    right: 150px;
+    bottom: 30px;
+}
+
+.reportInput table {
+    margin-top: 20px;
+    width: 100%;
+    border-spacing: 0;
+    border-top: 2px solid #2b2b2b;
+    table-layout: fixed;
+}
+
+.reportInput table tbody th {
+    padding: 12px 15px;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fafafa;
+    font-weight: 200;
+    text-align: left;
+}
+
+.reportInput table tbody td {
+    position: relative;
+    padding: 12px 15px;
+    border-bottom: 1px solid #d8d8d8;
+    font-weight: 200;
+}
+
+.reportInput input {
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.reportInput .tui-editor-contents {
+    font-size: 16px;
+}
+
+.reportBtns button {
+    position: absolute;
+    right: 13px;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid;
+}
+
+.reportBtns button#adminLog {
+    right: 130px;
+}
+
+.board_list .titles #Admin {
+    display: none;
+}
+
+.report .notice_list_view .header .reportid {
+    width: 33%;
+}
+
+.report .notice_list_view .header .id {
+    width: 33%;
+    margin-bottom: 0px;
+}
+
+.report .notice_list_view .header .reportdate {
+    width: 33%;
+    margin-bottom: 0px;
+}
+
+.report .notice_list_view .list-group .content .id {
+    width: 33%;
+    margin-bottom: 0px;
+}
+
+.report .notice_list_view .list-group .content .reportid {
+    width: 33%;
+}
+
+.report .notice_list_view .list-group .content .reportdate {
+    width: 33%;
+}
+
+.reportInput .reportTitle {
+    text-indent: -9999px;
+    background: url(../../../img/reportDetail.png);
+    background-size: 1200px 300px;
+    width: 1200px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.reportInput table tbody tr td div.reportDetail {
+    height: 195px;
+    overflow-y: scroll;
+}
+
+.reportBtns .Delete {
+    position: absolute;
+    right: 13px;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(233, 70, 70);
+    color: white;
+    border: 1px solid #000;
+}
+
+#reportNoPosts {
+    height: 300px;
+}

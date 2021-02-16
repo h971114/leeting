@@ -1,0 +1,31 @@
+.contents {
+    margin: 0 auto;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.detail_content {
+    width: 100%;
+    padding: 26px 29px;
+}
+
+.enclosed_files {
+    width: 100%;
+    padding: 26px 29px;
+    background-color: lightgray;
+}
+
+.notice_button {
+    margin-top: 10px;
+    margin-left: 15px;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid;
+}
+
+.test {
+    margin-bottom: 200px;
+}

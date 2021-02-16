@@ -2,6 +2,7 @@ import React from 'react'
 import List from "./list"
 
 export const Posts = ({ posts, loading, noPosts }) => {
+    
     if (loading) {
         return (
             <div className="loading_view">
@@ -25,12 +26,10 @@ export const Posts = ({ posts, loading, noPosts }) => {
     return (
         <div id="notice_list_view" className="notice_list_view">
             <div className="header">
-                <p className="no">NO.</p>
+                <p className="no">No.</p>
                 <p className="title">제목</p>
                 <p className="writer">작성자</p>
                 <p className="date">등록일</p>
-                <p className="hit">조회</p>
-                <p className="file">파일</p>
             </div>
 
 
@@ -39,6 +38,7 @@ export const Posts = ({ posts, loading, noPosts }) => {
                     <List
                         key={post.no}
                         no={post.no}
+                        rownum={post.rownum}
                         title={post.title}
                         detail={post.detail}
                         date={post.date}

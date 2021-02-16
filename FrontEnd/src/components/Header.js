@@ -139,7 +139,7 @@ class Header extends Component {
                                     <li className="lnb3">
                                         <Link
                                             to={{
-                                                pathname: `/`
+                                                pathname: `/timeline`
                                             }}
                                         >
                                             TIMELINES
@@ -157,16 +157,16 @@ class Header extends Component {
                                 <li className="lnb4">
                                         <Link
                                             to={{
-                                                pathname: `/notice`
+                                                pathname: `/sc/faq`
                                             }}
                                         >
-                                            JOIN LEETING
+                                            SERVICE CENTER
                                         </Link>
                                 </li>
                                 <li className="report">
                                         <Link
                                             to={{
-                                                pathname: `/notice`
+                                                pathname: `/report`
                                             }}
                                         >
                                             REPORT 119
@@ -210,10 +210,12 @@ class Header extends Component {
                         <div id="login" className="login_nav">
                             <ul>
                                 <li id="beforeSearch" onClick={this.searchOpen}>
+                                    {/* eslint-disable-next-line*/}
                                     <a className="searchico">검색열기</a>
                                     {/* <img className="searchico" src="./img/ico-search.png" alt="검색"></img> */}
                                 </li>
                                 <li id="afterSearch" onClick={this.searchClose}>
+                                    {/* eslint-disable-next-line*/}
                                     <a className="searchico">검색닫기</a>
                                     {/* <img className="searchico"src="./img/ico-search-active.png" alt="검색"></img> */}
                                 </li>
@@ -256,6 +258,7 @@ class Header extends Component {
                 </div>
                 {/* side menu */}
                 <div className="btn_side" onClick={this.sidebtn}>
+                    {/* eslint-disable-next-line*/}
                     <a href="#" >
                         <span></span>
                         <span></span>
@@ -284,7 +287,7 @@ class Header extends Component {
                         <li>
                             <Link
                                 to={{
-                                    pathname: `/`
+                                    pathname: `/timeline`
                                 }}
                             >
                                 TIMELINES
@@ -302,16 +305,16 @@ class Header extends Component {
                         <li>
                             <Link
                                 to={{
-                                    pathname: `/`
+                                    pathname: `/sc/faq`
                                 }}
                             >
-                                JOIN LEETING
+                                SERVICE CENTER
                                 </Link>
                         </li>
                         <li className="report">
                             <Link
                                 to={{
-                                    pathname: `/`
+                                    pathname: `/report`
                                 }}
                             >
                                 REPORT 119

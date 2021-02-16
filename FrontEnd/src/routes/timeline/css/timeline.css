@@ -1,0 +1,232 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1155px;
+    margin: 0px auto;
+}
+
+.timeline_titles {
+    text-align: center;
+    height: 200px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.timeline_titles h1 {
+    height: 200px;
+    line-height: 200px;
+}
+
+.timeline_list_view {
+    width: auto;
+    height: auto;
+    transition: opacity 200ms ease-in-out 0s;
+    min-width: 0px;
+    min-height: 1px;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.timeline_list_view ul {
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.timelineListView {
+    max-width: 385px;
+    width: 100%;
+    padding: 30px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-left: 1px solid rgb(238, 238, 238);
+    margin-left: -1px;
+}
+
+.contentTit {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.contentTit .writerProfile {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    margin-right: 10px;
+}
+
+.contentTit .writerDateWrap {
+    display: inline-block;
+}
+
+.contentTit .bottomOpen {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.timelineListView img.timelineThumb {
+    border-radius: 15px;
+    width: 345px;
+    height: 345px;
+}
+
+.timelineListView button.likeBtn {
+    background: url(../../../img/nolike.svg) no-repeat;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    border: none;
+}
+
+.timelineListView button.like {
+    background: url(../../../img/like.svg) no-repeat;
+    background-size: 20px 20px;
+}
+
+
+.timelineListView .detailView {
+    margin-top: 18px;
+    margin-bottom: 21px;
+    letter-spacing: -0.4px;
+}
+
+.timelineListView .detailView .detail {
+    /* display: block; */
+    margin-top: 18px;
+    margin-bottom: 21px;
+    letter-spacing: -0.4px;
+}
+
+.timelineListView .detailView .detailhide {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 48px;
+}
+
+.timelineListView .detailView button {
+    padding: 0px;
+    color: rgb(171, 182, 196);
+    background-color: transparent;
+    border-style: none;
+    font-size: 1em;
+    margin: 0;
+}
+
+.timelineListView .detailView .etchide {
+    display: none;
+}
+
+div[id *="bottom_wrap"] {
+    position: fixed;
+    bottom: -400px;
+    z-index: 9999;
+    width: 100%;
+    height: 100px;
+
+    /* bottom: 0px; */
+    left: 0px;
+}
+
+div[id *="bottom_wrap"] #Btns {
+    width: 700px;
+    height: 100px;
+    margin: 0 auto;
+    z-index: 10000;
+
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: white;
+    text-align: center;
+
+}
+
+div[id *="bottom_wrap"] #Btns button {
+    background-color: rgb(0, 117, 239);
+    border: none;
+    border-radius: 15px;
+    /* height: 100px; */
+    width: 100px;
+    height: 50px;
+    margin: 25px 0;
+    font-size: 18px;
+    color: white;
+}
+
+div[id *="bottom_wrap"] #Btns button div a {
+    color: white;
+}
+
+div[id *="bottom_wrap"] #Btns button:first-child {
+    margin-right: 50px;
+}
+
+@keyframes bottomopen {
+    0% {
+        -webkit-transform: translateY(200px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0px);
+    }
+}
+
+.bottomopen {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: bottomopen;
+    animation-name: bottomopen;
+}
+
+@keyframes bottomclose {
+    0% {
+        -webkit-transform: translateY(-200px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0px);
+    }
+}
+
+.bottomclose {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: bottomclose;
+    animation-name: bottomclose;
+}
+
+#bg2 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    display: none;
+    z-index: 1000;
+}
+
+#timelineWriteBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+#timelineWriteBtn button {
+    text-indent: -9999px;
+    border-radius: 50%;
+    /* background-color: #9deeff; */
+    box-shadow: 3px 3px 3px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: #9deeff url(../../../img/plus.svg) 50% no-repeat;
+    background-size: 25px 25px;
+}
