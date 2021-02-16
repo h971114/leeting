@@ -86,7 +86,19 @@ public class MemberController {
 		System.out.println("회원정보");
 		return new ResponseEntity<MemberDto>(membertmp, status);
 	}
-
+	// 회원탈퇴
+	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴", response = Map.class)
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deletemember(@RequestParam("id") String memberid, HttpServletRequest req)
+			throws SQLException {
+		System.out.println(memberid);
+		System.out.println(req);
+		memberService.delete(memberid);
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("delete to /member done");
+		System.out.println("회원탈퇴");
+		return new ResponseEntity<String>("SUCCESS", status);
+	}
 	// 로그인
 	@ApiOperation(value = "로그인", notes = "로그인", response = Map.class)
 	@PostMapping("/login")
