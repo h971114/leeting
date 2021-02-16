@@ -92,7 +92,7 @@ class write extends React.Component {
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -119,7 +119,7 @@ class write extends React.Component {
     writeClick = (e) => {
         e.preventDefault();
 
-        axios.put("http://127.0.0.1:8080/myapp/contents/", {
+        axios.put("http://i4a304.p.ssafy.io/myapp/contents/", {
             detail: this.state.detail,
             file: this.state.thumb,
             categoryno: 1,

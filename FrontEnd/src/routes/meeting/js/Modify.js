@@ -245,7 +245,7 @@ class Modify extends React.Component {
         formData.append('data', file);
         formData.append('hostid', this.state.hostid);
         formData.append('dirNum', 1);
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -275,7 +275,7 @@ class Modify extends React.Component {
         } else {
             enddate = document.getElementById("enddatepick").value;
         }
-        axios.put("http://127.0.0.1:8080/myapp/meeting/", {
+        axios.put("http://i4a304.p.ssafy.io/myapp/meeting/", {
             meetingno : this.state.id,
             hostid: this.state.hostid,
             maintitle: this.state.maintitle,
@@ -314,7 +314,7 @@ class Modify extends React.Component {
     deleteClick = (e) => { 
         e.preventDefault();
         let no = this.state.id;
-        var url = "http://127.0.0.1:8080/myapp/meeting/" + no;
+        var url = "http://i4a304.p.ssafy.io/myapp/meeting/" + no;
         axios.delete(url, {
             meetingno: this.state.id,
             no:this.state.id

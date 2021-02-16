@@ -71,7 +71,7 @@ class Detail extends React.Component {
         const { location } = this.props;
         const writerId = location.state.hostid;
         // e.preventDefault();
-        axios.get(`http://127.0.0.1:8080/myapp/member/`+writerId, {
+        axios.get(`http://i4a304.p.ssafy.io/myapp/member/`+writerId, {
           id: writerId
         }).then(res => {
           this.setState({
@@ -83,7 +83,7 @@ class Detail extends React.Component {
     showDetail = async () => {
         const { location } = this.props;
 
-        let url = 'http://127.0.0.1:8080/myapp/meeting/data/' + location.state.id;
+        let url = 'http://i4a304.p.ssafy.io/myapp/meeting/data/' + location.state.id;
                 
         let data = await axios.get(url);
         this.setState({
@@ -132,7 +132,7 @@ class Detail extends React.Component {
         else
             category = 'study';
             
-        let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
+        let url = 'http://i4a304.p.ssafy.io/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
         if (data.data.message === "SUCCESS") {
             data = data.data.list;
@@ -166,7 +166,7 @@ class Detail extends React.Component {
         else
             category = 'study';
         
-        let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
+        let url = 'http://i4a304.p.ssafy.io/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
         // console.log(data.data.list);
         var joinmember = "";
@@ -221,7 +221,7 @@ class Detail extends React.Component {
         }
         let sId = sessionStorage.getItem('id');
 
-        axios.put('http://127.0.0.1:8080/myapp/meeting/setlike', {
+        axios.put('http://i4a304.p.ssafy.io/myapp/meeting/setlike', {
             likestatus: !(this.state.likes),
             userid: sId,
             meetingno: location.state.id
@@ -242,7 +242,7 @@ class Detail extends React.Component {
         const { location } = this.props;
         let sId = sessionStorage.getItem('id');
         
-        axios.post('http://127.0.0.1:8080/myapp/meeting/participation', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/meeting/participation', {
             meetingno: location.state.id,
             userid: sId
         }).then(res => {

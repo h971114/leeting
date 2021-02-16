@@ -38,7 +38,7 @@ const OtOWrite = () => {
         e.preventDefault();
         const nowTime = moment();
         
-        axios.post("http://127.0.0.1:8080/myapp/question/writequestion", {
+        axios.post("http://i4a304.p.ssafy.io/myapp/question/writequestion", {
             qwriter: sId,
             title: title,
             detail: content,

@@ -24,7 +24,7 @@ const Home = () => {
         }
         const fetchPosts = async () => {
             setLoading(true);
-            let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
+            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/member/usermeet', {
                 params: {
                     id : sId
                 }
@@ -47,7 +47,7 @@ const Home = () => {
                 // eslint-disable-next-line
                 sId = "";
             }
-            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/reco', {
+            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/recommend/reco', {
                 params: {
                     id: sId
                 }
