@@ -26,7 +26,7 @@ function Study({ idx, id, maintitle, subtitle, date, hostid, detail, categoryno,
             >
                 <img src={file} alt={maintitle}></img>
                 <p className="subtit">{subtitle}</p>
-                <p className="tit">{maintitle.slice(0,12)}</p>
+                <p className="tit">{maintitle.slice(0, 10)}</p>
             </Link>
         </div>
     );

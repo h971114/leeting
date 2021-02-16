@@ -58,7 +58,7 @@ function App() {
       <div>
         <Header/>
         <Switch>
-          <ErrorBoundary>
+          {/* <ErrorBoundary> */}
             <Route path="/" exact={true} component={Home} />
             <Route path="/Leeting" exact={true} component={Leeting} />
             <Route path="/join" exact={true} component={Join} />
@@ -101,7 +101,7 @@ function App() {
             <Route path="/report/detail/:id" exact={true} component={ReportDetail}/>
             <Route path="/404/" component={NotFound404}/>
 
-            </ErrorBoundary>
+            {/* </ErrorBoundary> */}
             <Route component={NotFound} />
         </Switch>
         <Footer/>

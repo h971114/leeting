@@ -32,10 +32,10 @@ const OtoDetail = (props) => {
                 document.getElementById('root').setAttribute('style', 'display:none');
                 window.location.replace("/404");
             }
-            if (sessionStorage.getItem('id') !== res.data.qwriter || sessionStorage.getItem('id') !== 'leetingadmin') {
-                document.getElementById('root').setAttribute('style', 'display:none');
-                window.location.replace("/404");
-            }
+            // if (sessionStorage.getItem('id') !== res.data.qwriter || sessionStorage.getItem('id') !== 'leetingadmin') {
+            //     document.getElementById('root').setAttribute('style', 'display:none');
+            //     window.location.replace("/404");
+            // }
             setNo(res.data.no);
             setType(res.data.type);
             setTitle(res.data.title);
