@@ -9,10 +9,10 @@
 	</insert>
 	<!-- 미팅 목록 -->
  	<select id="listMeeting" resultType="meeting">
-		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file ,enddate, meetinglike, participants FROM meeting ORDER BY no DESC
+		SELECT no AS meetingno, maintitle, subtitle, date, hostid, categoryno, file ,enddate, meetinglike, participants FROM meeting ORDER BY no DESC
 	</select>
 	<select id="listMeetingCategory" parameterType="int" resultType="meeting">
-		SELECT no AS meetingno, maintitle, subtitle, date, hostid, detail, categoryno, file  ,enddate, meetinglike, participants FROM meeting WHERE categoryno = #{categoryno} ORDER BY no DESC
+		SELECT no AS meetingno, maintitle, subtitle, date, hostid, categoryno, file  ,enddate, meetinglike, participants FROM meeting WHERE categoryno = #{categoryno} ORDER BY no DESC
 	</select>
 	<!-- 미팅상세정보 -->
 	<select id="meetinginfo" parameterType="int" resultType="meeting">

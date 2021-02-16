@@ -3,6 +3,8 @@ package com.leeting.myapp.model;
 import org.springframework.web.multipart.MultipartFile;
 
 public class QuestionDto {
+	
+	private int ROWNUM;
 	private int no;
 	private int type;
 	private String title;
@@ -30,6 +32,13 @@ public class QuestionDto {
 		this.file3 = file3;
 	}
 
+	public int getROWNUM() {
+		return ROWNUM;
+	}
+	public void setROWNUM(int rOWNUM) {
+		ROWNUM = rOWNUM;
+	}
+	
 	public String getqwriter() {
 		return qwriter;
 	}
@@ -90,8 +99,9 @@ public class QuestionDto {
 	}
 	@Override
 	public String toString() {
-		return "QuestionDto [no=" + no + ", type=" + type + ", title=" + title + ", detail=" + detail + ", file1="
-				+ file1 + ", file2=" + file2 + ", file3=" + file3 + "]";
+		return "QuestionDto [ROWNUM=" + ROWNUM + ", no=" + no + ", type=" + type + ", title=" + title + ", detail="
+				+ detail + ", qwriter=" + qwriter + ", date=" + date + ", file1=" + file1 + ", file2=" + file2
+				+ ", file3=" + file3 + "]";
 	}
 	
 	

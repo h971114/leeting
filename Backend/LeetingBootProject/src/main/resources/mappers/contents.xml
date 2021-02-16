@@ -2,29 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="contents">
-    <insert id="enrollcontents" parameterType="contents">
+    <insert id="enroll" parameterType="contents">
        INSERT INTO contents (writer, date, detail, file, category)
-       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno})
+       VALUES (#{writer}, #{date}, #{detail}, #{file}, #{categoryno});
     </insert>
-    <select id="listcontents" resultType="contents">
-        SELECT no, writer, date, detail, file, category
-        FROM contents
+    <select id="list" parameterType="String" resultType="map">
+        SELECT no, writer, date, detail, file, category, contentslike,
+            CASE
+                WHEN c.no in (select contentsno FROM contents_info WHERE userid = #{id}) then true
+                ELSE false END
+            AS likestatus
+        FROM contents as c
+        ORDER BY no DESC;
     </select>
-    <select id="findcontents" resultType="contents">
-        SELECT no, writer, date, detail, file, category
-        FROM contents
-    </select>
-    <delete id="deletecontents" parameterType="int">
-        DELETE
-        FROM contents
-        WHERE no = #{contentsno}
+    <delete id="delete" parameterType="int">
+        DELETE FROM contents_info WHERE contentsno = #{contentsno};
+        DELETE FROM contents WHERE no = #{contentsno};
     </delete>
-    <update id="updatecontents" parameterType="contents">
+    <update id="update" parameterType="contents">
         UPDATE contents
-        SET date = #{date},
-            detail = #{detail},
+        SET detail = #{detail},
             file = #{file},
             category = #{categoryno}
         WHERE no = #{contentsno}
     </update>
+    <update id="setcontentslike" parameterType="contents">
+		UPDATE contents
+		SET contentslike = contentslike + #{contentslike}
+		where no = cast(#{contentsno} as signed Integer)
+	</update>
+    <insert id="setlike" parameterType="contents">
+        INSERT contents_info
+        (userid, contentsno, likestatus) VALUES(#{writer}, #{contentsno}, 1)
+    </insert>
+    <delete id="dellike" parameterType="contents">
+        DELETE FROM contents_info
+        WHERE contentsno = #{contentsno} and userid = #{writer}
+    </delete>
 </mapper>

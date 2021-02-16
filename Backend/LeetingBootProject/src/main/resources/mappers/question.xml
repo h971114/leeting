@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="question">
-	<!-- 공지사항 등록 -->
+	<!-- 문의사항 등록 -->
 	<insert id="writeQuestion" parameterType="question">
 		INSERT INTO questions ( type, title, detail, qwriter, date)
 		VALUES (#{type}, #{title},  #{detail}, #{qwriter}, now())
@@ -10,23 +10,32 @@
 	<update id="putImage" parameterType="map">
 		UPDATE questions SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE title=#{title}
 	</update>
-	<!-- 공지사항 목록 -->
-	<select id="listQuestion" resultType="question">
-		SELECT no, title, date, qwriter FROM questions
+	<!-- 문의사항 목록 -->
+	<select id="listQuestion" parameterType="String" resultType="question">
+		select @ROWNUM := @ROWNUM + 1 AS ROWNUM, q.* 
+		from questions q,(select @ROWNUM:=0) tmp
+		WHERE qwriter = #{writer} ORDER BY ROWNUM DESC
 	</select>
-	<!-- 공지사항 상세정보 -->
+	<!-- 문의사항 전체목록 -->
+	<select id="listAllQuestion" parameterType="String" resultType="question">
+		select @ROWNUM := @ROWNUM + 1 AS ROWNUM, q.* 
+		from questions q,(select @ROWNUM:=0) tmp
+		ORDER BY ROWNUM DESC
+	</select>
+	<!-- 문의사항 상세정보 -->
 	<select id="questioninfo" parameterType="int" resultType="question">
 		SELECT * FROM questions WHERE no = #{questionno}
 	</select>
-	<!-- 공지사항 수정 -->
+	<!-- 문의사항 수정 -->
 	<update id="questionmodify" parameterType="question">
-		UPDATE questions SET title=#{title},detail=#{detail},date=now() WHERE no=#{no};
+		UPDATE questions SET title=#{title},type=#{type},detail=#{detail},date=now() WHERE no=#{no};
 	</update>
 	<update id="questionfilemodify" parameterType="map">
 		UPDATE questions SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE no=#{no};
 	</update>
-	<!-- 공지사항 삭제 -->
+	<!-- 문의사항 삭제 -->
 	<delete id="nquestionldelete" parameterType="int">
-		DELETE FROM questions WHERE no=#{questionno} 
+		DELETE FROM answer WHERE questionno=#{questionno};
+		DELETE FROM questions WHERE no=#{questionno};
 	</delete>
 </mapper>

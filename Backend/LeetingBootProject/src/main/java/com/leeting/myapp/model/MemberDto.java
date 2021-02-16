@@ -9,7 +9,8 @@ public class MemberDto {
 	private String mobile;
 	private String email;
 	private String meetinglink;
-
+	private String photo;
+	
 	public MemberDto() {
 
 	}
@@ -33,6 +34,25 @@ public class MemberDto {
 		this.meetinglink = meetinglink;
 	}
 
+	public MemberDto(String id, String pw, String name, String nickname, String mobile, String email,
+			String meetinglink, String photo) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.nickname = nickname;
+		this.mobile = mobile;
+		this.email = email;
+		this.meetinglink = meetinglink;
+		this.photo = photo;
+	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public String getId() {
 		return id;
 	}

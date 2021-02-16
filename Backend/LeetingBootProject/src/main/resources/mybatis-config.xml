@@ -11,5 +11,7 @@
  		<typeAlias type="com.leeting.myapp.model.QuestionDto" alias="question"></typeAlias>
 		<typeAlias type="com.leeting.myapp.model.ReviewDto" alias="review"></typeAlias>
 		<typeAlias type="com.leeting.myapp.model.ReportDto" alias="report"></typeAlias>
+		<typeAlias type="com.leeting.myapp.model.AnswerDto" alias="answer"></typeAlias>
+		<typeAlias type="com.leeting.myapp.model.ContentsInfoDto" alias="contentsinfo"></typeAlias>
  	</typeAliases>
  </configuration>

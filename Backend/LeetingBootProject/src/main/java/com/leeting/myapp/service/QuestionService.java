@@ -8,11 +8,14 @@ import com.leeting.myapp.model.QuestionDto;
 
 public interface QuestionService {
 	boolean writeQuestion(QuestionDto question,Map<String, Object> questionmap);
-	List<QuestionDto> listQuestion();
+
+	List<QuestionDto> listQuestion(String writer);
 
 	QuestionDto getQuestionInfo(int questionno) throws SQLException;
 
 	boolean update(QuestionDto question, Map<String,Object> questionmap)  throws SQLException;
 
-	void delete(int questionno);
+	boolean delete(int questionno);
+
+	List<QuestionDto> listAllQuestion();
 }

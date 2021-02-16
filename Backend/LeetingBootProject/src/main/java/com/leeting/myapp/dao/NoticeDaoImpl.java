@@ -19,8 +19,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Override
 	public void writeNotice(NoticeDto notice, Map<String,Object> noticemap)  throws SQLException{
 		sqlSession.insert("notice.writeNotice",notice);
-		noticemap.put("title", notice.getTitle());
-		if(noticemap.get("file1") != null) sqlSession.update("notice.putImage",noticemap);
+	//	noticemap.put("title", notice.getTitle());
+	//	if(noticemap.get("file1") != null) sqlSession.update("notice.putImage",noticemap);
 	//	if(noticemap.get("file2") != null) sqlSession.insert("notice.putImage2",noticemap);
 	//	if(noticemap.get("file3") != null) sqlSession.insert("notice.putImage3",noticemap);
 	}
@@ -40,7 +40,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Override
 	public void update(NoticeDto notice, Map<String,Object> noticemap) {
 		sqlSession.update("notice.noticemodify",notice);
-		sqlSession.update("notice.noticefilemodify",noticemap);
+	//	sqlSession.update("notice.noticefilemodify",noticemap);
 	}
 
 	@Override

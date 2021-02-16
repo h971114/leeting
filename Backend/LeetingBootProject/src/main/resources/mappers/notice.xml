@@ -4,15 +4,14 @@
 <mapper namespace="notice">
 	<!-- 공지사항 등록 -->
 	<insert id="writeNotice" parameterType="notice">
-		INSERT INTO notice ( title, detail, writer, hit)
-		VALUES ( #{title},  #{detail}, #{writer}, 0)
+		INSERT INTO notice ( title, detail, writer, file1,file2,file3,hit)
+		VALUES ( #{title},  #{detail}, #{writer}, #{file1},#{file2},#{file3},0)
 	</insert>
-	<update id="putImage" parameterType="map">
-		UPDATE notice SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE title=#{title}
-	</update>
 	<!-- 공지사항 목록 -->
 	<select id="listNotice" resultType="notice">
-		SELECT * FROM notice WHERE meetingno=0 ORDER BY no DESC
+		select @ROWNUM := @ROWNUM + 1 AS ROWNUM, n.* 
+		from notice n,(select @ROWNUM:=0) tmp
+		WHERE meetingno=0 ORDER BY ROWNUM DESC
 	</select>
 	<!-- 공지사항 상세정보 -->
 	<select id="noticeinfo" parameterType="int" resultType="notice">
@@ -23,26 +22,25 @@
 	</update>
 	<!-- 공지사항 수정 -->
 	<update id="noticemodify" parameterType="notice">
-		UPDATE notice SET title=#{title},detail=#{detail},date=now() WHERE no=#{no};
+		UPDATE notice SET title=#{title},detail=#{detail},date=now(), file1=#{file1},file2=#{file2},file3=#{file3} WHERE no=#{no};
 	</update>
-	<update id="noticefilemodify" parameterType="map">
+<!--  <update id="noticefilemodify" parameterType="map">
 		UPDATE notice SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE no=#{no};
-	</update>
+	</update>-->	
 	<!-- 공지사항 삭제 -->
-	<delete id="noticeldelete" parameterType="int">
+	<delete id="noticedelete" parameterType="int">
 		DELETE FROM notice WHERE no=#{noticeno} 
 	</delete>
-	<select id="getByteImage" resultType="java.util.Map">
-    SELECT file1
-    FROM notice where no = 13;
-</select>
+	<!-- 미팅공지사항 -->
 	<select id="meetingnoticelist" parameterType="int" resultType="notice">
-		SELECT * FROM notice WHERE meetingno=#{meetingno} ORDER BY no DESC
+		select @ROWNUM := @ROWNUM + 1 AS ROWNUM, n.* 
+		from notice n,(select @ROWNUM:=0) tmp
+		WHERE meetingno=#{meetingno}  ORDER BY ROWNUM DESC
 	</select>
 	
 	<insert id="meetingnoticewrite" parameterType="notice">
-		INSERT INTO notice ( title, detail, writer, hit, meetingno)
-		VALUES ( #{title},  #{detail}, #{writer}, 0, #{meetingno})
+		INSERT INTO notice ( title, detail, writer, hit,file1,file2,file3, meetingno)
+		VALUES ( #{title},  #{detail}, #{writer}, 0, #{file1},#{file2},#{file3},#{meetingno})
 	</insert>
 	<!-- 미팅공지사항 상세정보 -->
 	<select id="meetingnoticeinfo" parameterType="int" resultType="notice">
@@ -53,10 +51,7 @@
 	</update>
 	<!-- 공지사항 수정 -->
 	<update id="meetingnoticemodify" parameterType="notice">
-		UPDATE notice SET title=#{title},detail=#{detail},date=now() WHERE no=#{meetingnoticeno};
-	</update>
-	<update id="meetingnoticefilemodify" parameterType="map">
-		UPDATE notice SET file1=#{file1},file2=#{file2},file3=#{file3} WHERE no=#{meetingnoticeno};
+		UPDATE notice SET title=#{title},detail=#{detail},date=now(),file1=#{file1},file2=#{file2},file3=#{file3}  WHERE no=#{meetingnoticeno};
 	</update>
 	<!-- 공지사항 삭제 -->
 	<delete id="meetingnoticeldelete" parameterType="int">

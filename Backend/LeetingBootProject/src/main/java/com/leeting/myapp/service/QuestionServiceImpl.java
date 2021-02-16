@@ -32,9 +32,9 @@ public class QuestionServiceImpl implements QuestionService{
     }
 	
 	@Override
-	public List<QuestionDto> listQuestion() {
+	public List<QuestionDto> listQuestion(String writer) {
 		System.out.println("확인");
-    	return questionDao.listQuestion();
+    	return questionDao.listQuestion(writer);
 	}
 	@Override
 	public QuestionDto getQuestionInfo(int questionno) throws SQLException {
@@ -50,9 +50,22 @@ public class QuestionServiceImpl implements QuestionService{
 		
 	}
 	@Override
-	public void delete(int questionno) {
-		questionDao.delete(questionno);
-		
+	public boolean delete(int questionno) {
+		  try {
+				System.out.println("확인");
+				questionDao.delete(questionno);
+	            return true;
+	        } catch (SQLException throwables) {
+	            throwables.printStackTrace();
+	            return false;
+	        }
+	}
+
+
+	@Override
+	public List<QuestionDto> listAllQuestion() {
+		// TODO Auto-generated method stub
+		return questionDao.listAllQuestion();
 	}
 
 }

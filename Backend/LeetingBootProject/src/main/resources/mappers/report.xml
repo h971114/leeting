@@ -9,7 +9,9 @@
 	</insert>
 	<!-- 공지사항 목록 -->
 	<select id="listReport" resultType="report">
-		SELECT * FROM report ORDER BY no DESC
+		select @ROWNUM := @ROWNUM + 1 AS ROWNUM, r.* 
+		from report r,(select @ROWNUM:=0) tmp
+		ORDER BY ROWNUM DESC
 	</select>
 	<!-- 공지사항 상세정보 -->
 	<select id="reportinfo" parameterType="int" resultType="report">
