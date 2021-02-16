@@ -22,14 +22,16 @@ public class QuestionDaoImpl implements QuestionDao{
 		if(questionmap.get("file1") != null) sqlSession.insert("question.putImage",questionmap);
 	}
 	@Override
-	public List<QuestionDto> listQuestion() {
+	public List<QuestionDto> listQuestion(String writer) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("notice.listQuestion");
+		List<QuestionDto> objects = sqlSession.selectList("question.listQuestion", writer);
+		System.out.println("objects.size() = " + objects.size());
+		return objects;
 	}
 
 	@Override
 	public QuestionDto questioninfo(int questionno) {
-		return sqlSession.selectOne("question.noticeinfo",questionno);
+		return sqlSession.selectOne("question.questioninfo",questionno);
 	}
 
 	@Override
@@ -39,8 +41,13 @@ public class QuestionDaoImpl implements QuestionDao{
 	}
 
 	@Override
-	public void delete(int questionno) {
-		sqlSession.delete("question.questiondelete",questionno);
+	public void delete(int questionno) throws SQLException{
+		sqlSession.delete("question.nquestionldelete",questionno);
 		
+	}
+	@Override
+	public List<QuestionDto> listAllQuestion() {
+		List<QuestionDto> objects = sqlSession.selectList("question.listAllQuestion");
+		return objects;
 	}
 }

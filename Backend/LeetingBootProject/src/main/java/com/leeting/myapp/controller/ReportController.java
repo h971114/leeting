@@ -47,10 +47,6 @@ public class ReportController {
 		    HttpStatus status = HttpStatus.ACCEPTED;
 		    System.out.println("post to /report done");
 		    System.out.println("신고 등록");
-//		    ReportDto report = new ReportDto();
-//		    report.setId("sujinn");
-//		    report.setReportid("test");
-//		    report.setDetail("test");
 		    if(reportService.writeReport(report)) {
 		    	conclusion = "SUCCESS";
 		    }
@@ -61,16 +57,21 @@ public class ReportController {
 	 }
 	 @ApiOperation(value = "신고 목록", notes = "신고 목록", response = List.class)
 	  @GetMapping("/listreport")
-	  public ResponseEntity<List<ReportDto>> listReport(HttpServletRequest req) throws SQLException {
-		   System.out.println(req);
+	  public ResponseEntity<Map<String, Object>> listReport(HttpServletRequest req) throws SQLException {
+		 	String conclusion = "";
 		    Map<String, Object> resultMap = new HashMap<>();
 		    HttpStatus status = HttpStatus.ACCEPTED;
 		    List<ReportDto> list = new ArrayList<>();
 		    list = reportService.listReport();
 		    System.out.println("get to /reportlist done");
 		    System.out.println("신고 목록");
-		    System.out.println(list.get(0).toString());
-		    return new ResponseEntity<List<ReportDto>>(list,status);
+		    if(!list.isEmpty()) {
+		    	resultMap.put("message","SUCCESS");
+			    resultMap.put("list",list);
+		    }
+		    else resultMap.put("message","FAIL");
+		    System.out.println(resultMap.get("message"));
+		    return new ResponseEntity<Map<String, Object>>(resultMap,status);
 	  }
 	  //신고 상세정보
 	  @ApiOperation(value = "신고 상세정보", notes = "신고 상세정보", response = Map.class)

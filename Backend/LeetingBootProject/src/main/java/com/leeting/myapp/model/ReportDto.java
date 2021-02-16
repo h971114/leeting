@@ -2,6 +2,7 @@ package com.leeting.myapp.model;
 
 public class ReportDto {
 
+	private int ROWNUM;
 	private int no;
 	private String id;
 	private String reportid;
@@ -9,6 +10,12 @@ public class ReportDto {
 	private String date;
 	public ReportDto() {
 		super();
+	}
+	public int getROWNUM() {
+		return ROWNUM;
+	}
+	public void setROWNUM(int rOWNUM) {
+		ROWNUM = rOWNUM;
 	}
 	public ReportDto(int no, String id, String reportid, String detail, String date) {
 		super();
@@ -58,8 +65,8 @@ public class ReportDto {
 	}
 	@Override
 	public String toString() {
-		return "ReportDto [no=" + no + ", id=" + id + ", reportid=" + reportid + ", detail=" + detail + ", date=" + date
-				+ "]";
+		return "ReportDto [ROWNUM=" + ROWNUM + ", no=" + no + ", id=" + id + ", reportid=" + reportid + ", detail="
+				+ detail + ", date=" + date + "]";
 	}
 	
 	

@@ -52,26 +52,12 @@ public class NoticeController {
 	}
 	
 	 @ApiOperation(value = "공지사항 등록", notes = "공지사항 등록", response = Map.class)
-	  @PostMapping(value = ("/writenotice"), headers = ("content-type=multipart/form-data"))
+	  @PostMapping(value = ("/writenotice"))
 	 public ResponseEntity<String> writeNotice(@RequestBody NoticeDto notice,HttpServletRequest req) throws IOException {
 		 String conclusion = "";
 		    HttpStatus status = HttpStatus.ACCEPTED;
-		    System.out.println("post to /writenotice done");
-		    System.out.println("공지사항 등록");
 		    Map<String, Object> noticemap = new HashMap<String, Object>();
-//		    NoticeDto notice = new NoticeDto();
-//		    notice.setDetail("test");
-//		    notice.setTitle("test12");
-//		    notice.setWriter("test");
-//		    File file = new File("C:/Users/multicampus/Desktop/AKR20201201068200005_01_i_P2.jpg");
-//		     byte[] fileContent = Files.readAllBytes(file.toPath());
-//		    noticemap.put("file1", fileContent);
-		//    System.out.println(noticemap.get("file1"));
-		    if(notice.getFile1()!=null)noticemap.put("file1", notice.getFile1().getBytes());
-		    if(notice.getFile2()!=null)noticemap.put("file2", notice.getFile2().getBytes());
-		    if(notice.getFile3()!=null) noticemap.put("file3", notice.getFile3().getBytes());
-		    
-		    if(noticeService.writeNotice(notice,noticemap)) {
+		     if(noticeService.writeNotice(notice,noticemap)) {
 		    	conclusion = "SUCCESS";
 		    }
 		    else {
@@ -87,30 +73,14 @@ public class NoticeController {
 		    HttpStatus status = HttpStatus.ACCEPTED;
 		    List<NoticeDto> list = new ArrayList<>();
 		    list = noticeService.listNotice();
-		    System.out.println("get to /noticelist done");
-		    System.out.println("공지사항 목록");
-//		    System.out.println(list.toString());
 		    return new ResponseEntity<List<NoticeDto>>(list,status);
 	  }
 	  //공지사항 상세정보
 	  @ApiOperation(value = "공지사항 상세정보", notes = "공지사항 상세정보", response = Map.class)
 	  @GetMapping("/{no}")
 	  public ResponseEntity<NoticeDto> getNoticeInfo(@PathVariable(value="no") int noticeno, HttpServletRequest req) throws SQLException, IOException {
-		  System.out.println(noticeno); 
-		  System.out.println(req);
 		  NoticeDto noticetmp = noticeService.getNoticeInfo(noticeno);
 		    HttpStatus status = HttpStatus.ACCEPTED;
-		    System.out.println(noticetmp.toString());
-		    System.out.println("get to /noticedetail done");
-		    System.out.println("공지사항상세정보");
-//		    Map<String, Object> map = noticeService.getByteImage();
-//		       byte[] imageContent = (byte[]) map.get("file1");
-//	    		byte[] encodeBase64 = Base64.encodeBase64(imageContent);
-//	    		String base64DataString = new String(encodeBase64 , "UTF-8");
-//		    System.out.println(imageContent);
-//		    System.out.println(base64DataString);
-//		    final HttpHeaders headers = new HttpHeaders();
-//		       headers.setContentType(MediaType.IMAGE_PNG);
 		    return new ResponseEntity<NoticeDto>(noticetmp, HttpStatus.OK);
 	  }
 	  //공지사항정보수정
@@ -124,16 +94,8 @@ public class NoticeController {
 	    System.out.println("미팅수정");
 	    System.out.println(notice.toString());
 	    Map<String, Object> noticemap = new HashMap<String, Object>();
-//	    NoticeDto notice = new NoticeDto();
-//	    notice.setDetail("test");
-//	    notice.setTitle("test");
-//	    notice.setWriter("test");
-	    if(notice.getFile1()!=null) noticemap.put("file1", notice.getFile1().getBytes());
-	    System.out.println(noticemap.get("file1"));
-	    if(notice.getFile2()!=null)noticemap.put("file2", notice.getFile2().getBytes());
-	    if(notice.getFile3()!=null) noticemap.put("file3", notice.getFile3().getBytes());
 	    if(noticeService.update(notice,noticemap)) {
-	    	conclusion = "SUCESS";
+	    	conclusion = "SUCCESS";
 	    }
 	    else {
 	    	conclusion = "FAIL";

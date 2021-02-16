@@ -56,7 +56,7 @@ public class RecommendController {
   }
   @ApiOperation(value = "추천미팅", notes = "추천미팅", response = Map.class)
   @GetMapping("/cate/{categoryno}")
-  public ResponseEntity<Map<Integer, MeetingDto>> recommendmeets(@PathVariable(value = "categoryno") int categoryno, HttpServletRequest req) throws SQLException {
+  public ResponseEntity<List<MeetingDto>> recommendmeets(@PathVariable(value = "categoryno") int categoryno, HttpServletRequest req) throws SQLException {
     System.out.println(req);
     HttpStatus status = HttpStatus.ACCEPTED;
     System.out.println("get to /recommend/cate done");
@@ -71,11 +71,12 @@ public class RecommendController {
     	meetingrecommendmap.put(cal, k);
     }
     int i = 1;
+    List<MeetingDto> returnlist = new ArrayList<MeetingDto>();
     Map<Integer, MeetingDto> returnmap = new TreeMap<Integer, MeetingDto>();
     for(Double k : meetingrecommendmap.keySet()) {
     	if(i<=5) {
-    		returnmap.put(i, meetingrecommendmap.get(k));
-    		System.out.println(k);
+//    		returnmap.put(i, meetingrecommendmap.get(k));
+    		returnlist.add(meetingrecommendmap.get(k));
     	}
     	else {
     		break;
@@ -83,7 +84,8 @@ public class RecommendController {
     	i++;
     }
     System.out.println(returnmap.toString());
-    return new ResponseEntity<Map<Integer, MeetingDto>>(returnmap, status);
+//    return new ResponseEntity<List>(returnmap, status);
+    return new ResponseEntity<List<MeetingDto>>(returnlist, status);
   }
 	@ApiOperation(value = "추천미팅", notes = "개인화추천", response = Map.class)
 	@GetMapping("/reco")
@@ -101,6 +103,7 @@ public class RecommendController {
 				break;
 			}
 			returnmeetinginfo.add(meetingService.getMeetingInfo(Integer.parseInt(meetingno)));
+			count++;
 		}
 		Map<Double, MeetingDto> meetingrecommendmap = new TreeMap<Double, MeetingDto>();
 		for(int i=1; i<=6; i++) {
@@ -114,8 +117,28 @@ public class RecommendController {
 		    }	
 		}
 		Iterator<Double> keyindex = meetingrecommendmap.keySet().iterator();
-		for(;count<4; count++) {
-			returnmeetinginfo.add(meetingrecommendmap.get(keyindex.next()));
+		for(;count<5; count++) {
+			boolean check = false;
+			MeetingDto tmpmeeting = meetingrecommendmap.get(keyindex.next());
+			for(MeetingDto i : returnmeetinginfo) {
+				if(i.getMaintitle().equals(tmpmeeting.getMaintitle())) {
+					check = true;
+				}
+			}
+			for(String i : meetlist) {
+				if(Integer.parseInt(i) == (tmpmeeting.getMeetingno())) {
+					check = true;
+				}
+			}
+			if(!check) {
+				returnmeetinginfo.add(tmpmeeting);
+			}
+			else {
+				count--;
+			}
+		}
+		for(MeetingDto i : returnmeetinginfo) {
+			System.out.println(i.getMaintitle());
 		}
 		return new ResponseEntity<List<MeetingDto>>(returnmeetinginfo, status);
 	}

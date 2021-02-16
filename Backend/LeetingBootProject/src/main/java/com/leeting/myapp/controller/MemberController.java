@@ -86,7 +86,19 @@ public class MemberController {
 		System.out.println("회원정보");
 		return new ResponseEntity<MemberDto>(membertmp, status);
 	}
-
+	// 회원탈퇴
+	@ApiOperation(value = "회원탈퇴", notes = "회원탈퇴", response = Map.class)
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deletemember(@RequestParam("id") String memberid, HttpServletRequest req)
+			throws SQLException {
+		System.out.println(memberid);
+		System.out.println(req);
+		memberService.delete(memberid);
+		HttpStatus status = HttpStatus.ACCEPTED;
+		System.out.println("delete to /member done");
+		System.out.println("회원탈퇴");
+		return new ResponseEntity<String>("SUCCESS", status);
+	}
 	// 로그인
 	@ApiOperation(value = "로그인", notes = "로그인", response = Map.class)
 	@PostMapping("/login")
@@ -98,6 +110,7 @@ public class MemberController {
 		HttpStatus status = HttpStatus.ACCEPTED;
 		System.out.println("post to /member/login done");
 		System.out.println("로그인");
+		System.out.println(memberbody);
 		if (memberService.login(memberbody)) {
 			conclusion = "SUCESS";
 			MemberDto tmpmember = memberService.getMemberInfo(memberbody.getId());
@@ -172,7 +185,7 @@ public class MemberController {
 		System.out.println("post to /member done");
 		System.out.println("회원가입");
 		if (memberService.join(memberbody)) {
-			conclusion = "SUCESS";
+			conclusion = "SUCCESS";
 		} else {
 			conclusion = "FAIL";
 		}
@@ -325,7 +338,7 @@ public class MemberController {
 
 	@RequestMapping("/naver")
 	public ResponseEntity<Object> testNaver(HttpSession session, Model model) throws IOException, URISyntaxException {
-		String redirectURI = URLEncoder.encode("http://localhost:3000/login", "UTF-8");
+		String redirectURI = URLEncoder.encode("http://i4a304.p.ssafy.io/Login", "UTF-8");
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 		String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -345,7 +358,7 @@ public class MemberController {
 			throws IOException, ParseException, org.apache.tomcat.util.json.ParseException, URISyntaxException {
 		session.setAttribute("state", state);
 		HttpStatus status = HttpStatus.ACCEPTED;
-		String redirectURI = URLEncoder.encode("http://localhost:3000/login", "UTF-8");
+		String redirectURI = URLEncoder.encode("http://i4a304.p.ssafy.io/Login", "UTF-8");
 		String apiURL;
 		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 		apiURL += "client_id=" + naver_CLIENT_ID;
