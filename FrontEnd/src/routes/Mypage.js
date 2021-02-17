@@ -143,7 +143,7 @@ class Mypage extends React.Component {
 
     // Join.js
     pwChange = (e) => {
-      var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+      var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&|\S]{8,}$/g;
       
       if (!pwReg.test(e.target.value)) {
         this.setState({
@@ -202,7 +202,7 @@ class Mypage extends React.Component {
     };
  
     nameChange = (e) => {
-      var nameReg = /^[가-힣]{2,4}$/g;
+      var nameReg = /^[가-힣|\S]{2,4}$/g;
       if (!nameReg.test(e.target.value)) {
         this.setState({
           checkName: false
@@ -220,7 +220,7 @@ class Mypage extends React.Component {
     };
 
     nicknameChange = (e) => {
-      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
       if (!nickNameReg.test(e.target.value)) {
         
         this.setState({
@@ -242,7 +242,7 @@ class Mypage extends React.Component {
       });
     };
     domainChange = (e) => {
-      var domainReg = /^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){2,3}$/g;
+      var domainReg = /^([0-9a-zA-Z_-|\S]+)(\.[0-9a-zA-Z_-|\S]+){2,3}$/g;
       if (!domainReg.test(e.target.value)) {
         this.setState({
           checkEmail: false
@@ -274,7 +274,7 @@ class Mypage extends React.Component {
     sameNickClick = (e) => {
       e.preventDefault();
       
-      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
       console.log(e.target.value)
       if (e.target.value !== this.backupnickname) {
         document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
