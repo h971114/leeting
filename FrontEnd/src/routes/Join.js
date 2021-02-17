@@ -40,7 +40,10 @@ class Join extends React.Component {
       document.getElementById('side_wrap').classList.add('close');
       document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
       document.getElementById('bg').setAttribute('style', 'display:none');
-  }
+    }
+    
+    document.getElementById('checkNickName').disabled = true;
+    document.getElementById('checkId').disabled = true;
   }
   
   handleChange = (event) => {
@@ -292,13 +295,13 @@ class Join extends React.Component {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data === "SUCESS") {
+          document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
+          document.getElementById('validateNickName').setAttribute('style', 'color:blue');
           this.setState({
             checkNickname: true
           });
-          document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
-          document.getElementById('validateNickName').setAttribute('style', 'color:blue');
           // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
           //   document.getElementById('joinbtn').disabled = false;
           // }
@@ -463,7 +466,7 @@ class Join extends React.Component {
                 <div className="col-12">
                   <label id="labelId" className="font-weight-bold" htmlFor="inputId">아이디</label>
                 <input type="text" name="uid" id="inputId" className="col-9 form-control margin-bottom-20" placeholder="아이디를 입력해주세요" onChange={this.idChange}></input>
-                <button id="checkId" className="btn" onClick={this.sameClick} disabled>중복 확인</button>
+                <button id="checkId" className="btn" onClick={this.sameClick}>중복 확인</button>
                 </div>
                 <label id="validateId"></label>
               </div>
@@ -492,7 +495,7 @@ class Join extends React.Component {
                 <div className="col-12">
                   <label className="font-weight-bold" id="labelNickName" htmlFor="inputNickName">닉네임</label>
                 <input type="text" id="inputNickName" className="col-9 form-control margin-bottom-20" placeholder="닉네임을 입력해주세요" onChange={this.nicknameChange}></input>
-                <button id="checkNickName" className="btn" onClick={this.sameNickClick} disabled>중복 확인</button>
+                <button id="checkNickName" className="btn" onClick={this.sameNickClick}>중복 확인</button>
                 </div>
                 <label id="validateNickName"></label>
               </div>
