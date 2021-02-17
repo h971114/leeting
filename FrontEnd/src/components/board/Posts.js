@@ -18,7 +18,7 @@ export const Posts = ({ posts, loading, noPosts }) => {
     
     if (noPosts) {
         return (
-            <div id="noPosts">
+            <div id="meetingnoPosts">
                 <img src="../../img/noPosts.png" alt="글이없어요"></img>
             </div>
         )
