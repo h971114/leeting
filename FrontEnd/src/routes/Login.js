@@ -16,7 +16,7 @@ class Login extends React.Component {
         pw: "",
     }
     google(result) {
-        axios.post('http://127.0.0.1:8080/myapp/member/google', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/google', {
             result
         }).then(res => {
             // console.log(res);
@@ -35,7 +35,7 @@ class Login extends React.Component {
     }
     kakao(result) {
         console.log(result);
-        axios.post('http://127.0.0.1:8080/myapp/member/kakao', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/kakao', {
             result
         }).then(res => {
             // console.log(res);
@@ -54,7 +54,7 @@ class Login extends React.Component {
     }
     Naver = () => {
         // var location = this.state.currentLocation;
-            var link = 'http://127.0.0.1:8080/myapp/member/naver'
+            var link = 'http://i4a304.p.ssafy.io/myapp/member/naver'
             window.location.assign(link);
         };
     componentDidMount() {
@@ -65,7 +65,7 @@ class Login extends React.Component {
         console.log(code);
         console.log(state);
         if (code != null && state != null) {
-            axios.get('http://127.0.0.1:8080/myapp/member/naver/callback1', {
+            axios.get('http://i4a304.p.ssafy.io/myapp/member/naver/callback1', {
                 params: {
                     code: code,
                     state : state
@@ -95,7 +95,7 @@ class Login extends React.Component {
     };
     handleClick = (e) => {
         // e.preventDefault();
-        axios.post('http://127.0.0.1:8080/myapp/member/login', {
+        axios.post('http://i4a304.p.ssafy.io/myapp/member/login', {
             id: this.state.id,
             pw: this.state.pw
         }).then(res => {

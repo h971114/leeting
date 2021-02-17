@@ -25,7 +25,7 @@ const Diy = () => {
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/diy');
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/diy');
             
           setPosts(res.data);
           setLoading(false);
@@ -34,7 +34,7 @@ const Diy = () => {
         const recoPosts = async () => {
             setRecoLoading(true);
 
-            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/4');
+            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/recommend/cate/4');
             // // console.log(data.data);
             data = data.data;
             setRecoPosts(data);

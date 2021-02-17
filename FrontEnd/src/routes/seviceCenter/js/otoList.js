@@ -25,7 +25,7 @@ const OtOList = () => {
     useEffect(() => {
         const fetchWriterPosts = async () => {
             setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/question/listquestion', {
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/listquestion', {
                 params: {
                     writer: sId
                 }
@@ -45,7 +45,7 @@ const OtOList = () => {
         }
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('http://127.0.0.1:8080/myapp/question/listAllquestion', {
+            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/listAllquestion', {
             });
             if (res.data.conclusion === "FAIL") {
                 setVPost(true);

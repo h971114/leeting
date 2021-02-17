@@ -16,7 +16,7 @@ const Notice = () => {
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-          const res = await axios.get('http://127.0.0.1:8080/myapp/notice/listnotice');
+          const res = await axios.get('http://i4a304.p.ssafy.io/myapp/notice/listnotice');
             // console.log(res);
             setPosts(res.data);
           setLoading(false);

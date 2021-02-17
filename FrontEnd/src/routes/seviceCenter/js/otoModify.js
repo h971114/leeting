@@ -53,7 +53,7 @@ const OtOModify = (props) => {
 
     const updateReport = (e) => { 
         e.preventDefault();
-        axios.put("http://127.0.0.1:8080/myapp/question", {
+        axios.put("http://i4a304.p.ssafy.io/myapp/question", {
             no: no,
             title: title,
             detail: content,

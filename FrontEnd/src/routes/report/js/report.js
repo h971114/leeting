@@ -50,7 +50,7 @@ const Report = () => {
         e.preventDefault();
         const nowTime = moment();
         
-        axios.post("http://127.0.0.1:8080/myapp/report/writereport", {
+        axios.post("http://i4a304.p.ssafy.io/myapp/report/writereport", {
             id: sId,
             reportid: reportid,
             detail: content,

@@ -82,7 +82,7 @@ class WriteNotice extends React.Component {
     /* Click 관련 메소드*/
 
     fileUpload = (file) => {
-        const url = 'http://127.0.0.1:8080/myapp/gallery/upload';
+        const url = 'http://i4a304.p.ssafy.io/myapp/gallery/upload';
         const formData = new FormData();
         formData.append('file', file)
         const config = {
@@ -113,7 +113,7 @@ class WriteNotice extends React.Component {
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
 
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -146,7 +146,7 @@ class WriteNotice extends React.Component {
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -182,7 +182,7 @@ class WriteNotice extends React.Component {
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
-        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
+        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -236,7 +236,7 @@ class WriteNotice extends React.Component {
             return (alert('안돼 돌아가 내용'));
         }
 
-        axios.post("http://127.0.0.1:8080/myapp/meetingnotice/"+this.state.meetingno, {
+        axios.post("http://i4a304.p.ssafy.io/myapp/meetingnotice/"+this.state.meetingno, {
             meetingno:this.state.meetingno,
             detail: this.state.detail,
             writer: sId,

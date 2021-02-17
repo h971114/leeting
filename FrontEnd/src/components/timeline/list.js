@@ -50,7 +50,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     useEffect(() => {
         const getWriterInfo = async () => {
             // e.preventDefault();
-            axios.get(`http://127.0.0.1:8080/myapp/member/`+writer, {
+            axios.get(`http://i4a304.p.ssafy.io/myapp/member/`+writer, {
               id: writer
             }).then(res => {
                 if (res.data.photo !== null) {
@@ -115,7 +115,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const deleteTimeline = (e) => {
         e.preventDefault();
 
-        axios.delete('http://127.0.0.1:8080/myapp/contents/' + id, {
+        axios.delete('http://i4a304.p.ssafy.io/myapp/contents/' + id, {
             no:id
         }).then(res => {
             if (res.data === "SUCCESS") {
@@ -145,7 +145,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
             setReviewBool(!reviewBool);
             
             document.getElementById(likeId).classList.toggle('like');
-            axios.put('http://127.0.0.1:8080/myapp/contents/setlike', {
+            axios.put('http://i4a304.p.ssafy.io/myapp/contents/setlike', {
                 contentsno : id,
                 userid: sId,
                 likestatus: likeState
