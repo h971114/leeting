@@ -72,11 +72,13 @@ class Join extends React.Component {
   idChange = (e) => {
     var idReg = /^[a-z]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
+      document.getElementById('checkId').disabled = true;
       document.getElementById('validateId').textContent = "아이디는 영어 소문자로 시작하는 6~20자 영어 소문자 또는 숫자이어야 합니다.";
       document.getElementById('validateId').setAttribute('style', 'color: #ff3535');
     }
     else {
       document.getElementById('validateId').textContent = "";
+      document.getElementById('checkId').disabled = false;
       this.setState({
           id: e.target.value,
       });
@@ -188,10 +190,12 @@ class Join extends React.Component {
         checkNickname: false
       });
       // document.getElementById('joinbtn').disabled = true;
+      document.getElementById('checkNickName').disabled = true;
       document.getElementById('validateNickName').textContent = "닉네임은 2~10자 사이의 한국어, 영어, 숫자로 이루어져 있습니다.";
     }
     else {
       document.getElementById('validateNickName').textContent = "";
+      document.getElementById('checkNickName').disabled = false;
       this.setState({
         nickname: e.target.value,
       });
@@ -249,9 +253,8 @@ class Join extends React.Component {
   };
   sameClick = (e) => {
     e.preventDefault();
-    // console.log(this.state.id);
     
-    var idReg = /^[a-z]+[a-z0-9|\S]{5,19}$/g;
+    var idReg = /^[a-z|\S]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/same', {
         id: this.state.id
@@ -285,7 +288,7 @@ class Join extends React.Component {
     
     // if()
     var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
-    if (!nickNameReg.test(this.state.nickname)) {
+    if (!nickNameReg.test(e.target.value)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
@@ -460,7 +463,7 @@ class Join extends React.Component {
                 <div className="col-12">
                   <label id="labelId" className="font-weight-bold" htmlFor="inputId">아이디</label>
                 <input type="text" name="uid" id="inputId" className="col-9 form-control margin-bottom-20" placeholder="아이디를 입력해주세요" onChange={this.idChange}></input>
-                <button id="checkId" className="btn" onClick={this.sameClick}>중복 확인</button>
+                <button id="checkId" className="btn" onClick={this.sameClick} disabled>중복 확인</button>
                 </div>
                 <label id="validateId"></label>
               </div>
@@ -489,7 +492,7 @@ class Join extends React.Component {
                 <div className="col-12">
                   <label className="font-weight-bold" id="labelNickName" htmlFor="inputNickName">닉네임</label>
                 <input type="text" id="inputNickName" className="col-9 form-control margin-bottom-20" placeholder="닉네임을 입력해주세요" onChange={this.nicknameChange}></input>
-                <button id="checkNickName" className="btn" onClick={this.sameNickClick}>중복 확인</button>
+                <button id="checkNickName" className="btn" onClick={this.sameNickClick} disabled>중복 확인</button>
                 </div>
                 <label id="validateNickName"></label>
               </div>
