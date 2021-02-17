@@ -27,7 +27,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const contentslikeId = id + 'contentslikeId';
 
     // console.log(date);
-    var t1 = moment(date).subtract(9,'h');
+    var t1 = moment(date);
     var t2 = moment();
     var t3 = moment.duration(t2.diff(t1)).asHours();
     var min = moment.duration(t2.diff(t1)).asMinutes();
