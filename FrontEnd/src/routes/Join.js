@@ -70,7 +70,7 @@ class Join extends React.Component {
       }
   }
   idChange = (e) => {
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+    var idReg = /^[a-z]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
       document.getElementById('validateId').textContent = "아이디는 영어 소문자로 시작하는 6~20자 영어 소문자 또는 숫자이어야 합니다.";
       document.getElementById('validateId').setAttribute('style', 'color: #ff3535');
@@ -84,7 +84,7 @@ class Join extends React.Component {
   };
   
   pwChange = (e) => {
-    var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+    var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&|\S]{8,}$/g;
     
     if (!pwReg.test(e.target.value)) {
       this.setState({
@@ -160,7 +160,7 @@ class Join extends React.Component {
   };
 
   nameChange = (e) => {
-    var nameReg = /^[가-힣]{2,4}$/g;
+    var nameReg = /^[가-힣|\S]{2,4}$/g;
     if (!nameReg.test(e.target.value)) {
       this.setState({
         checkName: false
@@ -182,7 +182,7 @@ class Join extends React.Component {
   };
 
   nicknameChange = (e) => {
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       this.setState({
         checkNickname: false
@@ -208,7 +208,7 @@ class Join extends React.Component {
     });
   };
   domainChange = (e) => {
-    var domainReg = /^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){2,3}$/g;
+    var domainReg = /^([0-9a-zA-Z_-|\S]+)(\.[0-9a-zA-Z_-|\S]+){2,3}$/g;
     if (!domainReg.test(e.target.value)) {
       this.setState({
         domain:e.target.value,
@@ -223,7 +223,7 @@ class Join extends React.Component {
     }
   };
   mobileChange = (e) => {
-    var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+    var phoneReg = /^\d{3|\S}-\d{3,4|\S}-\d{4|\S}$/;
     if (!phoneReg.test(e.target.value)) {
       this.setState({
         checkMobile: false
@@ -251,7 +251,7 @@ class Join extends React.Component {
     e.preventDefault();
     // console.log(this.state.id);
     
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+    var idReg = /^[a-z]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/same', {
         id: this.state.id
@@ -283,7 +283,7 @@ class Join extends React.Component {
     e.preventDefault();
     // console.log(this.state.id);
     
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
@@ -372,6 +372,8 @@ class Join extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
     // console.log(this.state);
+
+
     if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/join', {
         id: this.state.id,
