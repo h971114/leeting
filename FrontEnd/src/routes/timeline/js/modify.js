@@ -53,11 +53,11 @@ class write extends React.Component {
     constructor() {
         super();
         this.state = {
-            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+            // thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
         };
     }    
     state = {
-        thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+        // thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
         content: "",
         
         selectedFile: null, //썸네일 파일 첨부
@@ -100,9 +100,9 @@ class write extends React.Component {
             },
         }).then(res => {
             this.setState({
-                thumb: res.data
+                file: res.data
             })
-            console.log(this.state.thumb);
+            console.log(this.state.file);
         }).catch(err => {
             alert('이미지 용량이 초과하였습니다! \n1MB용량 이하의 이미지를 선택해주세요.');
         })
@@ -123,7 +123,7 @@ class write extends React.Component {
 
         axios.put("http://i4a304.p.ssafy.io/myapp/contents/", {
             detail: this.state.detail,
-            file: this.state.thumb,
+            file: this.state.file,
             categoryno: 1,
             contentsno:this.state.id,
         }).then(res => { 
