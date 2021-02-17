@@ -80,7 +80,7 @@ class write extends React.Component {
             })
             // console.log(this.state.thumb);
         }).catch(err => {
-            // console.log(err);
+            alert('이미지 용량이 초과하였습니다! \n1MB용량 이하의 이미지를 선택해주세요.');
         })
     }
 
