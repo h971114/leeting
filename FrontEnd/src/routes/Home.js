@@ -24,7 +24,7 @@ const Home = () => {
         }
         const fetchPosts = async () => {
             setLoading(true);
-            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/member/usermeet', {
+            let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
                 params: {
                     id : sId
                 }
@@ -42,18 +42,18 @@ const Home = () => {
 
         const recoPosts = async () => {
             setRecoLoading(true);
-            console.log(sId);
+            // console.log(sId);
             if (sId === null) {
                 // eslint-disable-next-line
                 sId = "";
             }
-            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/recommend/reco', {
+            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/reco', {
                 params: {
                     id: sId
                 }
             });
             data = data.data;
-            console.log(data);
+            // console.log(data);
             setRecoPosts(data);
             setRecoLoading(false);
         }

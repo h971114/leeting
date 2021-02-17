@@ -36,7 +36,7 @@ function ReviewList({ id, review, writer, date }) {
         let result = window.confirm("수정하시겠습니까?");
         if (result) {
             if (content.length > 10 && content.length < 140) {
-                axios.put('http://i4a304.p.ssafy.io/myapp/meeting/review', {
+                axios.put('http://127.0.0.1:8080/myapp/meeting/review', {
                     review: content,
                     no:id
                 }).then(res => {
@@ -79,7 +79,7 @@ function ReviewList({ id, review, writer, date }) {
             let result = window.confirm("삭제하시겠습니까?");
     
             if (result) {
-                axios.delete('http://i4a304.p.ssafy.io/myapp/meeting/review', {
+                axios.delete('http://127.0.0.1:8080/myapp/meeting/review', {
                     params: {
                         no:id
                     }
@@ -92,7 +92,7 @@ function ReviewList({ id, review, writer, date }) {
                     }
                 })
             } else {
-                console.log('잠시후 다시 시도해주시기 바랍니다.');
+                // console.log('잠시후 다시 시도해주시기 바랍니다.');
             }            
         }
         else {

@@ -2,7 +2,7 @@ import React from 'react'
 import List from "./list"
 
 export const Posts = ({ posts, loading, noPosts }) => {
-    // console.log(posts);
+    // // console.log(posts);
     
     if (noPosts) {
         return (

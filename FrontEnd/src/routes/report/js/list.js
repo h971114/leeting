@@ -26,14 +26,14 @@ const List = () => {
         }
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/report/listreport');
+            const res = await axios.get('http://127.0.0.1:8080/myapp/report/listreport');
             if (res.data.message === "FAIL") {
                 setVPost(true);
                 setLoading(false);
                 setPosts([nullpost]);
             }
             else {
-                console.log(res.data.list);
+                // console.log(res.data.list);
                 setPosts(res.data.list);
                 setLoading(false);
             }

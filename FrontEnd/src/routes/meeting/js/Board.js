@@ -25,8 +25,8 @@ const Board = (props) => {
         const fetchPosts = async () => {
             const meetingno = location.state.id;
             setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meetingnotice/'+meetingno);
-            console.log(res);
+            const res = await axios.get('http://127.0.0.1:8080/myapp/meetingnotice/'+meetingno);
+            // console.log(res);
 
             if (sessionStorage.getItem('id') === null) {
                 document.getElementById('root').setAttribute('style', 'display:none');
@@ -58,7 +58,7 @@ const Board = (props) => {
         }
         
         fetchPosts();
-        // console.log(noPosts);
+        // // console.log(noPosts);
         // eslint-disable-next-line
     }, []);
     

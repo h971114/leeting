@@ -33,10 +33,10 @@ class Detail extends React.Component {
     showDetail = async () => {
         const { location } = this.props;
 
-        let url = 'http://i4a304.p.ssafy.io/myapp/report/' + location.state.no;
+        let url = 'http://127.0.0.1:8080/myapp/report/' + location.state.no;
                 
         let data = await axios.get(url);
-        // console.log(data);
+        // // console.log(data);
         this.setState({
             no : data.data.no,
             id:data.data.id,
@@ -56,12 +56,12 @@ class Detail extends React.Component {
         let result = window.confirm("삭제하시겠습니까?");
 
         if (result) {
-            axios.delete('http://i4a304.p.ssafy.io/myapp/report/'+this.state.no, {
+            axios.delete('http://127.0.0.1:8080/myapp/report/'+this.state.no, {
                 params: {
                     no:this.state.no
                 }
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 window.location.replace('/report/list');
             })
         } else {

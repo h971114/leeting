@@ -35,7 +35,7 @@ const Review = (props) => {
 
             setReviewBool(false);
 
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/review', {
+            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/review', {
                 params: {
                     meetingno:props.id
                 }
@@ -88,7 +88,7 @@ const Review = (props) => {
         let sNickName = sessionStorage.getItem('nickname');
     
         if (content.length > 10 && content.length < 140) {
-            axios.post('http://i4a304.p.ssafy.io/myapp/meeting/review', {
+            axios.post('http://127.0.0.1:8080/myapp/meeting/review', {
                 meetingno: props.id,
                 review: content,
                 writer: sNickName,
@@ -109,7 +109,7 @@ const Review = (props) => {
             })
         }
         else {
-            alert('양식에 맞게 입력해주세요');
+            alert('댓글은 5글자 이상 150자 이하로 입력해주세요');
         }
     }
 

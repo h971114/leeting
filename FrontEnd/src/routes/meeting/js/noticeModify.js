@@ -89,7 +89,7 @@ class WriteNotice extends React.Component {
             title: event.target.value,
             checkmainTit:true
         })
-        // console.log(this.state.mainTit);
+        // // console.log(this.state.mainTit);
     }
 
     editorChange = (e) => { 
@@ -97,13 +97,13 @@ class WriteNotice extends React.Component {
             detail: this.editorRef.current.getInstance().getHtml(),
             checkcontent:true
         })
-        // console.log(this.state.content);
+        // // console.log(this.state.content);
     }
 
     /* Click 관련 메소드*/
 
     fileUpload = (file) => {
-        const url = 'http://i4a304.p.ssafy.io/myapp/gallery/upload';
+        const url = 'http://127.0.0.1:8080/myapp/gallery/upload';
         const formData = new FormData();
         formData.append('file', file)
         const config = {
@@ -115,7 +115,7 @@ class WriteNotice extends React.Component {
     }
 
     file1Change = (e) => {
-        // console.log(e)
+        // // console.log(e)
         this.setState({
             file1 : e.target.files[0],
         })
@@ -134,22 +134,22 @@ class WriteNotice extends React.Component {
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
 
-        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
+        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({
                 file1: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     file2Change = (e) => {
-        // console.log(e)
+        // // console.log(e)
         this.setState({
             file2 : e.target.files[0],
         })
@@ -167,7 +167,7 @@ class WriteNotice extends React.Component {
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
-        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
+        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -176,12 +176,12 @@ class WriteNotice extends React.Component {
                 file2: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     file3Change = (e) => {
-        // console.log(e)
+        // // console.log(e)
         this.setState({
             file3 : e.target.files[0],
         })
@@ -191,19 +191,19 @@ class WriteNotice extends React.Component {
         } else {
             filename = e.target.val().split('/').pop().split('\\').pop();
         }
-        // console.log(e.target.files[0]);
-        // console.log(filename);
+        // // console.log(e.target.files[0]);
+        // // console.log(filename);
 
         document.getElementById('upload-file3').value = filename;
         
         var file = e.target.files[0];
-        // console.log(this.state.startDay);
-        // console.log(file);
+        // // console.log(this.state.startDay);
+        // // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
         formData.append('dirNum', 0);
-        axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
+        axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
             headers: {
                 'content-type': 'multipart/form-data',
             },
@@ -212,7 +212,7 @@ class WriteNotice extends React.Component {
                 file3: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
@@ -247,7 +247,7 @@ class WriteNotice extends React.Component {
     }
 
     writeClick = (e) => {
-        // console.log(e)
+        // // console.log(e)
         e.preventDefault();
 
         var file1Url = this.state.file1,
@@ -263,7 +263,7 @@ class WriteNotice extends React.Component {
             if (file3Url !== null) {
                 file2Url = file3Url;
                 file3Url = null;
-                console.log('2는없고 3은 있음');
+                // console.log('2는없고 3은 있음');
             }
         } else {
             file2Url = this.state.file2;
@@ -272,12 +272,12 @@ class WriteNotice extends React.Component {
             if (file2Url !== null) {
                 file1Url = file2Url;
                 file2Url = null;
-                console.log('1은없고 2는 있음');
+                // console.log('1은없고 2는 있음');
             }
             else if (file3Url !== null) {
                 file1Url = file3Url;
                 file3Url = null;
-                console.log('1은없고 3은 있음');
+                // console.log('1은없고 3은 있음');
             }
         } else {
             file1Url = this.state.file1;
@@ -291,7 +291,7 @@ class WriteNotice extends React.Component {
             return (alert('안돼 돌아가 내용'));
         }
 
-        axios.put("http://i4a304.p.ssafy.io/myapp/notice/", {
+        axios.put("http://127.0.0.1:8080/myapp/notice/", {
             no:this.state.no,
             detail: this.state.detail,
             title: this.state.title,
@@ -300,12 +300,12 @@ class WriteNotice extends React.Component {
             file3: file3Url,
         }).then(res => {
             if (res.data === "SUCCESS") {
-                console.log("성공");
+                // console.log("성공");
                 alert("글 수정이 완료되었습니다.")
                 window.location.replace('/notice');
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("글 작성에 실패하셨습니다. 다시 작성해 주세요!");
                 window.location.replace('/notice/writenotice');
             }

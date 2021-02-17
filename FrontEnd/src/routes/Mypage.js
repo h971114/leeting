@@ -42,10 +42,11 @@ class Mypage extends React.Component {
 
     getUserInfo = (e) => {
       // e.preventDefault();
-      axios.get(`http://i4a304.p.ssafy.io/myapp/member/${sessionStorage.getItem("id")}`, {
+      axios.get(`http://127.0.0.1:8080/myapp/member/${sessionStorage.getItem("id")}`, {
         id: sessionStorage.getItem("id")
       }).then(res => {
-        console.log(res);
+        // console.log(res);
+        // document.getElementById('checkNickName').disabled = true;
         this.setState({
           id: res.data.id,
           pw: res.data.pw,
@@ -61,7 +62,7 @@ class Mypage extends React.Component {
     getLeeting = async () => {
       
       let sId = sessionStorage.getItem('id');
-      let data = await axios.get('http://i4a304.p.ssafy.io/myapp/member/usermeet', {
+      let data = await axios.get('http://127.0.0.1:8080/myapp/member/usermeet', {
         params: {
           id : sId
         }
@@ -72,7 +73,7 @@ class Mypage extends React.Component {
     
     componentDidMount() {
       let sId = sessionStorage.getItem('id');
-
+      
       if (sessionStorage.getItem('id') === null) {
         document.getElementById('root').setAttribute('style', 'display:none');
         window.location.replace("/WrongPage");
@@ -143,7 +144,7 @@ class Mypage extends React.Component {
 
     // Join.js
     pwChange = (e) => {
-      var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&|\S]{8,}$/g;
+      var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
       
       if (!pwReg.test(e.target.value)) {
         this.setState({
@@ -175,7 +176,14 @@ class Mypage extends React.Component {
         document.getElementById('validateCPw').textContent = "확인되었습니다.";
         document.getElementById('validateCPw').setAttribute('style', 'color:blue');
       }
-    };
+  };
+
+  handleKeyPress = (e) => {
+
+    if (e.key === "Enter") {
+      this.pwReconfirm();
+    }
+  };
 
     cpwChange = (e) => {
       if (e.target.value === '') {
@@ -202,7 +210,7 @@ class Mypage extends React.Component {
     };
  
     nameChange = (e) => {
-      var nameReg = /^[가-힣|\S]{2,4}$/g;
+      var nameReg = /^[가-힣]{2,4}$/g;
       if (!nameReg.test(e.target.value)) {
         this.setState({
           checkName: false
@@ -220,15 +228,17 @@ class Mypage extends React.Component {
     };
 
     nicknameChange = (e) => {
-      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
+      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
       if (!nickNameReg.test(e.target.value)) {
         
         this.setState({
           checkNickname: false
         });
+        document.getElementById('checkNickName').disabled = true;
         document.getElementById('validateNickName').textContent = "닉네임은 2~10자 사이의 한국어, 영어, 숫자로 이루어져 있습니다.";
       }
       else {
+        document.getElementById('checkNickName').disabled = false;
         document.getElementById('validateNickName').textContent = "";
         this.setState({
           nickname: e.target.value,
@@ -242,7 +252,7 @@ class Mypage extends React.Component {
       });
     };
     domainChange = (e) => {
-      var domainReg = /^([0-9a-zA-Z_-|\S]+)(\.[0-9a-zA-Z_-|\S]+){2,3}$/g;
+      var domainReg = /^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){2,3}$/g;
       if (!domainReg.test(e.target.value)) {
         this.setState({
           checkEmail: false
@@ -271,46 +281,46 @@ class Mypage extends React.Component {
       };
     };
 
-    sameNickClick = (e) => {
-      e.preventDefault();
-      
+  sameNickClick = (e) => {
+    e.preventDefault();
+    
+    // console.log('test');
       var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
-      console.log(e.target.value)
-      if (e.target.value !== this.backupnickname) {
-        document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
-        document.getElementById('validateNickName').setAttribute('style', 'color:blue');
-      }
-      else if (!nickNameReg.test(e.target.value)) {
-        axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
-          nickname: this.state.nickname
-        }).then(res => {
-          if (res.data === "SUCESS") {
-            this.setState({
-              checkNickname: true
-            });
-            document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
-            document.getElementById('validateNickName').setAttribute('style', 'color:blue');
-          }
-          else {
-            this.setState({
-              checkNickname: false
-            });
-            document.getElementById('validateNickName').textContent = "이미 존재하는 닉네임입니다.";
-            document.getElementById('validateNickName').setAttribute('style', 'color: #ff3535');
-          }
-        });
-      }
+    if (!nickNameReg.test(e.target.value)) {
+      axios.post('http://127.0.0.1:8080/myapp/member/samenick', {
+        nickname: this.state.nickname
+      }).then(res => {
+        // console.log(res.data);
+        if (res.data === "SUCESS") {
+          this.setState({
+            checkNickname: true
+          });
+          document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
+          document.getElementById('validateNickName').setAttribute('style', 'color:blue');
+          // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
+          //   document.getElementById('joinbtn').disabled = false;
+          // }
+        }
+        else {
+          this.setState({
+            checkNickname: false
+          });
+          document.getElementById('validateNickName').textContent = "이미 존재하는 닉네임입니다.";
+          document.getElementById('validateNickName').setAttribute('style', 'color: #ff3535');
+        }
+      });
+    }
     };
 
     authCheck = (e) => {
       e.preventDefault();
-      console.log(this.state.email + "@" + this.state.domain);
-      axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
+      // console.log(this.state.email + "@" + this.state.domain);
+      axios.post('http://127.0.0.1:8080/myapp/member/email', {
         samecheck:"",
           email: this.state.email + "@" + this.state.domain,
         }).then(res => {
-          console.log(res);
-          console.log(res.data);
+          // console.log(res);
+          // console.log(res.data);
           this.setState({
             token: res.data
           })
@@ -339,9 +349,9 @@ class Mypage extends React.Component {
 
     handleClick = (e) => {
       e.preventDefault();
-      console.log(this.state);
+      // console.log(this.state);
       if (this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
-        axios.put('http://i4a304.p.ssafy.io/myapp/member', {
+        axios.put('http://127.0.0.1:8080/myapp/member', {
           id: this.state.id,
           pw: this.state.pw,
           nickname: this.state.nickname,
@@ -351,20 +361,20 @@ class Mypage extends React.Component {
           photo: this.state.photo,
         }).then(res => {
           if (res.data === "SUCCESS") {
-            alert("회원정보 수정이 완료되었습니다.");
-            console.log("회원정보수정 완료<br/>재 로그인 해주세요!");
+            alert("회원정보 수정이 완료되었습니다.\n원활한 이용을 위해 재 로그인 해주세요!");
+            // ("회원정보수정 완료<br/>");
             this.logout();
           }
           else {
-            console.log(res.data)
+            // console.log(res.data)
             alert("회원정보 수정에 실패하였습니다.");
-            console.log("회원가입 실패");
+            // console.log("회원가입 실패");
           }
         })
       }
       else {
         alert("입력 정보를 확인해주세요!");
-        console.log("미입력여부");
+        // console.log("미입력여부");
       }
     };
 
@@ -388,12 +398,12 @@ class Mypage extends React.Component {
       formData.append('data', file);
       formData.append('hostid', sessionStorage.getItem('id'));
       formData.append('dirNum', 2);
-      axios.post('http://i4a304.p.ssafy.io/myapp/gallery/upload', formData,{
+      axios.post('http://127.0.0.1:8080/myapp/gallery/upload', formData,{
           headers: {
               'content-type': 'multipart/form-data',
           },
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.setState({
           photo: res.data
         })
@@ -401,7 +411,7 @@ class Mypage extends React.Component {
     }
 
     leaveLeeting = (e) => {
-      axios.delete(`http://i4a304.p.ssafy.io/myapp/member/${sessionStorage.getItem("id")}`, {
+      axios.delete(`http://127.0.0.1:8080/myapp/member/${sessionStorage.getItem("id")}`, {
         id: this.state.id,
       }).then(res => {
         alert("회원탈퇴가 완료되었습니다.");
@@ -503,7 +513,7 @@ class Mypage extends React.Component {
                         <Fragment>
                           <div className="col-9">
                             <label id="labelReconfirmPw" className="font-weight-bold" htmlFor="reconfirmPw">비밀번호 확인</label>
-                            <input type="password" id="reconfirmPw" className="form-control mb-2" placeholder="비밀번호를 입력해주세요"></input>
+                            <input type="password" id="reconfirmPw" className="form-control mb-2" placeholder="비밀번호를 입력해주세요" onKeyPress={this.handleKeyPress}></input>
                             <button id="checkPw" className="btn btn-primary mt-2 mr-2" onClick={this.pwReconfirm}>확인</button>
                             <label id="checkPwBeforeEditProfile"></label><br/>
                           </div>

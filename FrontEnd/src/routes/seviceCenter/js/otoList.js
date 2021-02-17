@@ -25,27 +25,27 @@ const OtOList = () => {
     useEffect(() => {
         const fetchWriterPosts = async () => {
             setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/listquestion', {
+            const res = await axios.get('http://127.0.0.1:8080/myapp/question/listquestion', {
                 params: {
                     writer: sId
                 }
             });
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.conclusion === "FAIL") {
                 setVPost(true);
                 setLoading(false);
                 setPosts([nullpost]);
             }
             else {
-                console.log(sId);
-                console.log(res.data.list);
+                // console.log(sId);
+                // console.log(res.data.list);
                 setPosts(res.data.list);
                 setLoading(false);
             }
         }
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/listAllquestion', {
+            const res = await axios.get('http://127.0.0.1:8080/myapp/question/listAllquestion', {
             });
             if (res.data.conclusion === "FAIL") {
                 setVPost(true);
@@ -53,7 +53,7 @@ const OtOList = () => {
                 setPosts([nullpost]);
             }
             else {
-                console.log(res.data.list);
+                // console.log(res.data.list);
                 setPosts(res.data.list);
                 setLoading(false);
             }
@@ -74,13 +74,13 @@ const OtOList = () => {
             document.getElementById('Admin').setAttribute('style', 'display:block');
             document.getElementById('noAdmin').setAttribute('style', 'display:none');
             fetchPosts();
-            console.log('관리자');
+            // console.log('관리자');
         } else {
             document.getElementById('Admin').setAttribute('style', 'display:none');
             document.getElementById('noAdmin').setAttribute('style', 'display:block');
             fetchWriterPosts();
-            console.log('사용자');
-            console.log(posts);
+            // console.log('사용자');
+            // console.log(posts);
         }
         
         // eslint-disable-next-line

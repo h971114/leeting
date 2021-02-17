@@ -22,7 +22,7 @@ const Result = (props) => {
             setLoading(true);
             
             const res=
-                await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/search', {
+                await axios.get('http://127.0.0.1:8080/myapp/meeting/search', {
                     params: {
                         condition: location.state.selectoption,
                         keyword: location.state.keyWord
@@ -42,7 +42,7 @@ const Result = (props) => {
         // eslint-disable-next-line
     }, [location.state.keyWord]);
 
-    console.log(posts);
+    // console.log(posts);
 
     
       // Get current posts

@@ -12,7 +12,7 @@ const OtOModify = (props) => {
 // eslint-disable-next-line
     useEffect(() => {
         const location = props.location.state;
-        console.log(location.qwriter);
+        // console.log(location.qwriter);
 
         setNo(location.no);
         setTitle(location.title);
@@ -48,24 +48,24 @@ const OtOModify = (props) => {
 
     const editorChange = (e) => {
         setContent(editorRef.current.getInstance().getHtml());
-        // console.log(content);
+        // // console.log(content);
     }
 
     const updateReport = (e) => { 
         e.preventDefault();
-        axios.put("http://i4a304.p.ssafy.io/myapp/question", {
+        axios.put("http://127.0.0.1:8080/myapp/question", {
             no: no,
             title: title,
             detail: content,
             type: type
         }).then(res => {
             if (res.data === "SUCCESS") {
-                console.log("성공");
+                // console.log("성공");
                 alert("문의 완료되었습니다.");
                 window.location.replace('/sc/onetoone/');
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("문의에 실패하셨습니다. 잠시후 다시 시도해주세요!");
                 // window.location.replace('/meeting/write');
             }

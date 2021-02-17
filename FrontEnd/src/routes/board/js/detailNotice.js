@@ -29,10 +29,10 @@ class DetailNotice extends React.Component {
             document.getElementById('goDelete').setAttribute('style', 'display:none');
         }
 
-        axios.get(`http://i4a304.p.ssafy.io/myapp/notice/${location.state.no}`, {
+        axios.get(`http://127.0.0.1:8080/myapp/notice/${location.state.no}`, {
             meetingno: location.state.no
           }).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({
                 no: location.state.no,
                 title: res.data.title,
@@ -90,14 +90,14 @@ class DetailNotice extends React.Component {
     }
 
     noticedelete = () => {
-        axios.delete(`http://i4a304.p.ssafy.io/myapp/notice/${this.state.no}`, {
+        axios.delete(`http://127.0.0.1:8080/myapp/notice/${this.state.no}`, {
             noticeno: this.state.no
           }).then(res => {
-            //   console.log(res)
+            //   // console.log(res)
               alert('삭제 완료되었습니다!');
               window.location.replace('/notice');
           }).catch(err => {
-              console.log(err)
+              // console.log(err)
           })
     }
 

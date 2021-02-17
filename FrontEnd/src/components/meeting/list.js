@@ -8,7 +8,7 @@ function Study({ idx, id, maintitle, subtitle, date, hostid, categoryno, file, m
     if (title.length > 11) {
         title = title.substring(0, 10) + "...";
     }
-    // console.log(title);
+    // // console.log(title);
 
     return (
         <div className="itemListView">

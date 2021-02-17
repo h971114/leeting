@@ -27,12 +27,12 @@ const OtoDetail = (props) => {
         
         const showDetail = async () => {
             setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/question/' + location.state.no);
+            const res = await axios.get('http://127.0.0.1:8080/myapp/question/' + location.state.no);
             if (sessionStorage.getItem('id') === null) {
                 document.getElementById('root').setAttribute('style', 'display:none');
                 window.location.replace("/WrongPage");
             }
-            console.log(res.data.qwriter);
+            // console.log(res.data.qwriter);
             if (sessionStorage.getItem('id') !== res.data.qwriter) {
                 if (sessionStorage.getItem('id') !== 'leetingadmin') {
                     document.getElementById('root').setAttribute('style', 'display:none');
@@ -48,7 +48,7 @@ const OtoDetail = (props) => {
         }
         
         const showAnswer = async () => {
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/answer/' + location.state.no);
+            const res = await axios.get('http://127.0.0.1:8080/myapp/answer/' + location.state.no);
             
             setLoading(false);
             
@@ -106,7 +106,7 @@ const OtoDetail = (props) => {
     const adminWrited = (e) => {
         e.preventDefault();
         
-        axios.post('http://i4a304.p.ssafy.io/myapp/answer/writeanswer', {
+        axios.post('http://127.0.0.1:8080/myapp/answer/writeanswer', {
             questionno: no,
             detail: content,
             date:moment()
@@ -142,7 +142,7 @@ const OtoDetail = (props) => {
     const adminModified = (e) => {
         e.preventDefault();
         
-        axios.put('http://i4a304.p.ssafy.io/myapp/answer/modify/'+no, {
+        axios.put('http://127.0.0.1:8080/myapp/answer/modify/'+no, {
             questionno: no,
             detail: content,
             date:moment()
@@ -169,7 +169,7 @@ const OtoDetail = (props) => {
     const deleteQ = (e) => {
         e.preventDefault();
         
-        axios.delete('http://i4a304.p.ssafy.io/myapp/question/delete/'+no, {
+        axios.delete('http://127.0.0.1:8080/myapp/question/delete/'+no, {
             questionno: no,
             no: no
         }).then(res => {

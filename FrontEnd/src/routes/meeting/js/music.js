@@ -25,7 +25,7 @@ const Music = () => {
     useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
-            const res = await axios.get('http://i4a304.p.ssafy.io/myapp/meeting/music');
+            const res = await axios.get('http://127.0.0.1:8080/myapp/meeting/music');
             
           setPosts(res.data);
           setLoading(false);
@@ -34,8 +34,8 @@ const Music = () => {
         const recoPosts = async () => {
             setRecoLoading(true);
 
-            let data = await axios.get('http://i4a304.p.ssafy.io/myapp/recommend/cate/2');
-            // console.log(data.data);
+            let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/2');
+            // // console.log(data.data);
             data = data.data;
             setRecoPosts(data);
             setRecoLoading(false);
@@ -58,7 +58,7 @@ const Music = () => {
         fetchPosts();
     }, []);
     
-    // console.log(posts);
+    // // console.log(posts);
     
       // Get current posts
       const indexOfLastPost = currentPage * postsPerPage;

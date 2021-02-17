@@ -19,7 +19,7 @@ class Header extends Component {
     componentDidMount() {
         // nologin = React.createRef();
     if (sessionStorage.getItem("token") != null) {
-        console.log("로그인");
+        // console.log("로그인");
         // this.nologin.Attribute('style', 'display:none');
         document.getElementById('nologin').setAttribute('style', 'display:none');
         document.getElementById('login').setAttribute('style', 'display:block');
@@ -27,7 +27,7 @@ class Header extends Component {
         document.getElementById('loginSide').setAttribute('style', 'display:block'); 
     }
     else {
-        console.log("노로그인");
+        // console.log("노로그인");
         document.getElementById('login').setAttribute('style', 'display:none');
         document.getElementById('nologin').setAttribute('style', 'display:block');
         document.getElementById('loginSide').setAttribute('style', 'display:none');
@@ -40,7 +40,7 @@ class Header extends Component {
             selectoption: event.target.value
         })
         document.getElementById('selectoption').value = event.target.value;
-        // console.log(this.state.categoryno);
+        // // console.log(this.state.categoryno);
     }
 
     keyWordChange = (event) => {
