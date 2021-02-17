@@ -10,7 +10,7 @@ class Mypage extends React.Component {
       super(props);
       this.state = {
         value: '선택하세요',
-        checkPw: false,
+        checkPw: true,
         checkName: true,
         checkNickname: true,
         checkEmail: true,
@@ -228,9 +228,9 @@ class Mypage extends React.Component {
     };
 
     nicknameChange = (e) => {
-      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|/S]{2,10}$/g;
+
       if (!nickNameReg.test(e.target.value)) {
-        
         this.setState({
           checkNickname: false
         });
@@ -238,6 +238,12 @@ class Mypage extends React.Component {
         document.getElementById('validateNickName').textContent = "닉네임은 2~10자 사이의 한국어, 영어, 숫자로 이루어져 있습니다.";
       }
       else {
+        if (this.state.nickname === this.state.backupnickname) {
+          this.setState({
+            checkNickname: true
+          });
+          // document.getElementById('validateNickName').textContent = "이전과 다른 닉네임을 선택해주세요";
+        }
         document.getElementById('checkNickName').disabled = false;
         document.getElementById('validateNickName').textContent = "";
         this.setState({
@@ -285,8 +291,16 @@ class Mypage extends React.Component {
     e.preventDefault();
     
     // console.log('test');
-      var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
-    if (!nickNameReg.test(e.target.value)) {
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
+    
+    if (this.state.nickname === this.state.backupnickname) {
+      this.setState({
+        checkNickname: true
+      });
+      document.getElementById('validateNickName').textContent = "이전과 다른 닉네임을 선택해주세요";
+    }
+    
+    else if (!nickNameReg.test(e.target.value)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
