@@ -32,8 +32,8 @@ const Faq = () => {
                     <input type="checkbox" id="que01"></input>
                     <div className="faq_Q first">
                         <div className="Q">Q</div>
-                        <div className="question"><label htmlFor="que01">닉네임을 어떻게 설정해야하나요?</label></div>
-                        <em></em>
+                        <div className="question"><label htmlFor="que01">닉네임을 어떻게 설정해야하나요?<em></em></label></div>
+                        
                     </div>
                     <div className="faq_A" >
                         <div className="A">A</div>
@@ -42,8 +42,8 @@ const Faq = () => {
                     <input type="checkbox" id="que02"></input>
                     <div className="faq_Q second">
                         <div className="Q">Q</div>
-                        <div className="question"><label htmlFor="que02">Leeting은 어떻게 등록하나요?</label></div>
-                        <em></em>
+                        <div className="question"><label htmlFor="que02">Leeting은 어떻게 등록하나요?<em></em></label></div>
+                        
                     </div>
                     <div className="faq_A" id="second">
                         <div className="A">A</div>
@@ -52,8 +52,8 @@ const Faq = () => {
                     <input type="checkbox" id="que03"></input>
                     <div className="faq_Q third">
                         <div className="Q">Q</div>
-                        <div className="question"><label htmlFor="que03">어떤 유저를 신고해야 하나요?</label></div>
-                        <em></em>
+                        <div className="question"><label htmlFor="que03">어떤 유저를 신고해야 하나요?<em></em></label></div>
+                        
                     </div>
                     <div className="faq_A" id="third">
                         <div className="A">A</div>

@@ -327,6 +327,7 @@ class Join extends React.Component {
       }).then(res => {
         // console.log(res);
         // console.log(res.data);
+        alert('인증 메일이 발송되었습니다!!');
         this.setState({
           token: res.data
         })
