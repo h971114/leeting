@@ -223,7 +223,7 @@ class Join extends React.Component {
     }
   };
   mobileChange = (e) => {
-    var phoneReg = /^\d{3|\S}-\d{3,4|\S}-\d{4|\S}$/;
+    var phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
     if (!phoneReg.test(e.target.value)) {
       this.setState({
         checkMobile: false
@@ -283,8 +283,9 @@ class Join extends React.Component {
     e.preventDefault();
     // console.log(this.state.id);
     
+    // if()
     var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
-    if (!nickNameReg.test(e.target.value)) {
+    if (!nickNameReg.test(this.state.nickname)) {
       axios.post('http://i4a304.p.ssafy.io/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
