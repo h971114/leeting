@@ -16,8 +16,8 @@ const OtOWrite = () => {
     useEffect(() => {
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
-            window.location.replace("/WrongPage");
+            alert('로그인하셔야 사용가능한 서비스입니다');
+            window.location.replace("/login");
         }
         if (document.getElementById('side_wrap').classList.contains('open')) {
             document.getElementById('side_wrap').classList.remove('open');
