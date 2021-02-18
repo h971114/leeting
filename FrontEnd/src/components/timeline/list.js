@@ -179,8 +179,10 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
                 <p id={ellipsisid} className="detailhide" dangerouslySetInnerHTML={{ __html: codes }}></p>
                 <button id={etcid} className="etc" onClick={ellip}>더보기</button>
             </div>
-            <button id={likeId} onClick={timeline_like} className="likeBtn"></button>
-            <span className="likeCnt" id={contentslikeId}>{likeCnt}</span>
+            <div className="likeWrap">
+                <button id={likeId} onClick={timeline_like} className="likeBtn"></button>
+                <span className="likeCnt" id={contentslikeId}>{likeCnt}</span>
+            </div>
             
             <div id={bottom_wrapid}>
                 <div id="Btns">
