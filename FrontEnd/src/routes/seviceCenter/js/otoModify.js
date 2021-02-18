@@ -16,7 +16,6 @@ const OtOModify = (props) => {
 
         setNo(location.no);
         setTitle(location.title);
-        setContent(location.detail);
         setType(location.type);
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
@@ -48,11 +47,11 @@ const OtOModify = (props) => {
 
     const editorChange = (e) => {
         setContent(editorRef.current.getInstance().getHtml());
-        // // console.log(content);
     }
 
     const updateReport = (e) => { 
         e.preventDefault();
+
         axios.put("http://i4a304.p.ssafy.io/myapp/question", {
             no: no,
             title: title,
@@ -76,6 +75,7 @@ const OtOModify = (props) => {
         setType(e.target.value);
     }
 
+    const location = props.location.state;
     return (
         <div id="main_content">
             <div className="otoWrap">
@@ -120,7 +120,7 @@ const OtOModify = (props) => {
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">신고 내용</th>
+                                <th scope="row">문의 내용</th>
                                     <td colSpan="5">
                                     <Editor
                                         previewStyle="vertical"
@@ -129,7 +129,7 @@ const OtOModify = (props) => {
                                         initialEditType="wysiwyg"
                                         ref={editorRef}
                                         onChange={editorChange}
-                                        initialValue={content}
+                                        initialValue={location.detail}
                                     />
                                 </td>
                             </tr>
