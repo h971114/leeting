@@ -120,7 +120,7 @@ class Detail extends React.Component {
         }
 
         t1 = moment(data.data.enddate);
-        var t3 = moment.duration(t2.diff(t1)).asDays();
+        t3 = moment.duration(t2.diff(t1)).asDays();
         
         if (t3 >= 0) {
             this.setState({
