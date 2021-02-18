@@ -5,6 +5,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import propTypes from "prop-types";
 
+import moment from 'moment';
+import 'moment/locale/ko';
+
 import Reviews from "../../../components/meeting/Review"
 
 class Detail extends React.Component {
@@ -28,17 +31,25 @@ class Detail extends React.Component {
             file: "",
             enddate: "",
             participants: "",
-            photo:""
+            photo: "",
+            endMeeting:false,
         }
     }
 
     componentDidMount() {
         const { location, history } = this.props;
         let sId = sessionStorage.getItem('id');
-        // console.log(location.state.enddate);
+        // // console.log(location.state.enddate);
         
         this.showDetail();
         this.getWriterInfo();
+
+        
+        // // console.log(startday);
+
+        // if (this.state.date > today) {
+        //     // console.log('asdf');
+        //  }
 
         if (location.state === undefined) {
             history.push("/");
@@ -46,7 +57,7 @@ class Detail extends React.Component {
         if (sId === null) {
             document.getElementById('likebtn').disabled = true;
             document.getElementById('joinBtn').disabled = true;
-            // console.log('test');
+            // // console.log('test');
         }
         else {
             document.getElementById('likebtn').disabled = false;
@@ -55,7 +66,7 @@ class Detail extends React.Component {
             this.checkLike();
             this.checkJoin();
             this.checkHost();
-            // console.log(this.state.joinMember);
+            // // console.log(this.state.joinMember);
         }
         
 
@@ -97,7 +108,17 @@ class Detail extends React.Component {
             enddate: data.data.enddate,
             participants:data.data.participants
         })
-        // console.log(data.data);
+        var t1 = moment(data.data.date);
+        var t2 = moment();
+        var t3 = moment.duration(t2.diff(t1)).asDays();
+        
+        if (t3 >= 0) {
+            this.setState({
+                btnText: "종료된 미팅입니다.",
+                endMeeting:true
+            })
+        }
+        // // console.log(data.data);
     }
 
     checkHost = async () => {
@@ -168,7 +189,7 @@ class Detail extends React.Component {
         
         let url = 'http://127.0.0.1:8080/myapp/meeting/' + category + '/' + location.state.id;
         let data = await axios.get(url);
-        // console.log(data.data.list);
+        // // console.log(data.data.list);
         var joinmember = "";
         var cnt = 0;
         if (data.data.message === "SUCCESS") {
@@ -176,14 +197,14 @@ class Detail extends React.Component {
             this.setState({
                 participant: data
             })
-            // console.log(data.length);
+            // // console.log(data.length);
             for (let i = 0; i < data.length; i++) {
-                // console.log(data[i].userid);
+                // // console.log(data[i].userid);
                 joinmember += data[i].userid + ", ";
                 cnt++;
                 if (sId === data[i].userid) {
                     // this.state.checkJoin = true;
-                    // console.log(sId + ", " + data[i].userid);
+                    // // console.log(sId + ", " + data[i].userid);
                     this.setState({
                         checkJoin: true,
                         btnText: "미팅 나가기"
@@ -195,7 +216,7 @@ class Detail extends React.Component {
                 joinMember: joinmember
             })
 
-            // console.log(this.state.checkJoin);
+            // // console.log(this.state.checkJoin);
             if (this.state.checkJoin === true) {
                 document.getElementById('boardMeeting').setAttribute("style", "display:inline-block");
                 // document.getElementById('joinBtn').value="미팅 나가기";
@@ -241,13 +262,13 @@ class Detail extends React.Component {
 
         const { location } = this.props;
         let sId = sessionStorage.getItem('id');
-        
-        axios.post('http://127.0.0.1:8080/myapp/meeting/participation', {
+        if (this.state.endMeeting === false) {
+            axios.post('http://127.0.0.1:8080/myapp/meeting/participation', {
             meetingno: location.state.id,
             userid: sId
         }).then(res => {
             if (res.data === "SUCESS") {
-                console.log("미팅 참여");
+                // console.log("미팅 참여");
                 this.setState({
                     btnText:"미팅 나가기",
                     likestatus: false,
@@ -258,7 +279,7 @@ class Detail extends React.Component {
                 // document.getElementById('joinOutBtn').setAttribute("style", "display:block");
                 document.getElementById('likebtn').disabled = false;
             } else {
-                console.log("미팅 나감");
+                // console.log("미팅 나감");
                 document.getElementById('likebtn').classList.remove('ilike');
                 this.setState({
                     btnText: "미팅 참가하기",
@@ -269,6 +290,8 @@ class Detail extends React.Component {
                 document.getElementById('likebtn').disabled = true;
             }
         })
+        }
+        
     }
 
   render() {

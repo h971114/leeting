@@ -32,7 +32,7 @@ const OtoDetail = (props) => {
                 document.getElementById('root').setAttribute('style', 'display:none');
                 window.location.replace("/WrongPage");
             }
-            console.log(res.data.qwriter);
+            // console.log(res.data.qwriter);
             if (sessionStorage.getItem('id') !== res.data.qwriter) {
                 if (sessionStorage.getItem('id') !== 'leetingadmin') {
                     document.getElementById('root').setAttribute('style', 'display:none');

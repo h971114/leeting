@@ -93,7 +93,7 @@ function ReviewList({ id, review, writer, date }) {
                     }
                 })
             } else {
-                console.log('잠시후 다시 시도해주시기 바랍니다.');
+                // console.log('잠시후 다시 시도해주시기 바랍니다.');
             }            
         }
         else {

@@ -67,7 +67,7 @@ class Modify extends React.Component {
             this.setState({
                 enddate: location.state.date
             })
-            console.log("test");
+            // console.log("test");
         }
         this.setState({
             id : location.state.id,
@@ -98,35 +98,35 @@ class Modify extends React.Component {
             value:event.target.value
         })
         document.getElementById('category').value = event.target.value;
-        // console.log(this.state.categoryno);
+        // // console.log(this.state.categoryno);
     }
 
     mainTitChange = (event) => {
         this.setState({
             maintitle: event.target.value
         })
-        // console.log(this.state.mainTit);
+        // // console.log(this.state.mainTit);
     }
 
     subTitChange = (event) => {
         this.setState({
             subtitle: "#"+event.target.value
         })
-        // console.log(this.state.subTit);
+        // // console.log(this.state.subTit);
     }
 
     setStartDate = (event) => { 
         this.setState({
             date: event.target.value,
         })
-        // console.log(this.state.sDate);
+        // // console.log(this.state.sDate);
     }
 
     editorChange = (e) => { 
         this.setState({
             detail: this.editorRef.current.getInstance().getHtml()
         })
-        // console.log(this.state.content);
+        // // console.log(this.state.content);
     }
 
     /* Click 관련 메소드*/
@@ -166,7 +166,7 @@ class Modify extends React.Component {
         sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
         sDate  = sDate > 9 ? sDate : "0" + sDate;
 
-        // console.log(sYear + '-' + sMonth + '-' + sDate);
+        // // console.log(sYear + '-' + sMonth + '-' + sDate);
 
         document.getElementById('enddatepick').setAttribute('style', 'display:none');
         document.getElementById('enddate').setAttribute('style', 'display:inline-block');
@@ -197,7 +197,7 @@ class Modify extends React.Component {
         sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
         sDate  = sDate > 9 ? sDate : "0" + sDate;
 
-        // console.log(sYear + '-' + sMonth + '-' + sDate);
+        // // console.log(sYear + '-' + sMonth + '-' + sDate);
 
         document.getElementById('enddatepick').setAttribute('style', 'display:none');
         document.getElementById('enddate').setAttribute('style', 'display:inline-block');
@@ -225,14 +225,14 @@ class Modify extends React.Component {
         } else {
             filename = e.target.val().split('/').pop().split('\\').pop();
         }
-        // console.log(e.target.files[0]);
-        // console.log(filename);
+        // // console.log(e.target.files[0]);
+        // // console.log(filename);
 
         document.getElementById('upload-name').value = filename;
         
         var file = e.target.files[0];
-        // console.log(this.state.startDay);
-        // console.log(file);
+        // // console.log(this.state.startDay);
+        // // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
         formData.append('hostid', this.state.hostid);
@@ -245,16 +245,16 @@ class Modify extends React.Component {
             this.setState({
                 file: res.data
             })
-            // console.log(this.state.thumb);
+            // // console.log(this.state.thumb);
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     writeClick = (e) => {
         e.preventDefault();
 
-        console.log(this.state.file);
+        // console.log(this.state.file);
         this.setState({
             sDate:document.getElementById("startdatepick").value
         })
@@ -279,7 +279,7 @@ class Modify extends React.Component {
             enddate : enddate,
         }).then(res => {
             if (res.data === "SUCCESS") {
-                console.log("성공");
+                // console.log("성공");
                 alert("수정 완료되었습니다.");
                 if (this.state.categoryno === 1)
                     window.location.replace('/meeting/exercise');
@@ -295,7 +295,7 @@ class Modify extends React.Component {
                     window.location.replace('/meeting/study');
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("수정 실패하셨습니다. 다시 작성해 주세요!");
                 var url = "/meeting/modify/" + this.state.id;
                 window.location.replace(url);

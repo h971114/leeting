@@ -40,7 +40,10 @@ class Join extends React.Component {
       document.getElementById('side_wrap').classList.add('close');
       document.getElementById('side_wrap').setAttribute('style', 'right:-400px');
       document.getElementById('bg').setAttribute('style', 'display:none');
-  }
+    }
+    
+    document.getElementById('checkNickName').disabled = true;
+    document.getElementById('checkId').disabled = true;
   }
   
   handleChange = (event) => {
@@ -53,7 +56,7 @@ class Join extends React.Component {
       // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
       //   document.getElementById('joinbtn').disabled = false;
       // }
-      // console.log(event.target.value);
+      // // console.log(event.target.value);
       document.getElementById('validateDomain').textContent = "";
           document.getElementById('writedomain').value = event.target.value;
           document.getElementById('writedomain').readOnly=true;
@@ -70,13 +73,15 @@ class Join extends React.Component {
       }
   }
   idChange = (e) => {
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+    var idReg = /^[a-z]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
+      document.getElementById('checkId').disabled = true;
       document.getElementById('validateId').textContent = "아이디는 영어 소문자로 시작하는 6~20자 영어 소문자 또는 숫자이어야 합니다.";
       document.getElementById('validateId').setAttribute('style', 'color: #ff3535');
     }
     else {
       document.getElementById('validateId').textContent = "";
+      document.getElementById('checkId').disabled = false;
       this.setState({
           id: e.target.value,
       });
@@ -84,7 +89,7 @@ class Join extends React.Component {
   };
   
   pwChange = (e) => {
-    var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+    var pwReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&|\S]{8,}$/g;
     
     if (!pwReg.test(e.target.value)) {
       this.setState({
@@ -126,7 +131,7 @@ class Join extends React.Component {
     // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
     //   document.getElementById('joinbtn').disabled = false;
     // }
-    // console.log(this.state.checkPw);
+    // // console.log(this.state.checkPw);
   };
 
   cpwChange = (e) => {
@@ -156,11 +161,11 @@ class Join extends React.Component {
       document.getElementById('validateCPw').textContent = "비밀번호가 다릅니다.";
       document.getElementById('validateCPw').setAttribute('style', 'color: #ff3535');
     }
-    // console.log(this.state.checkPw);
+    // // console.log(this.state.checkPw);
   };
 
   nameChange = (e) => {
-    var nameReg = /^[가-힣]{2,4}$/g;
+    var nameReg = /^[가-힣|\S]{2,4}$/g;
     if (!nameReg.test(e.target.value)) {
       this.setState({
         checkName: false
@@ -182,24 +187,26 @@ class Join extends React.Component {
   };
 
   nicknameChange = (e) => {
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       this.setState({
         checkNickname: false
       });
       // document.getElementById('joinbtn').disabled = true;
+      document.getElementById('checkNickName').disabled = true;
       document.getElementById('validateNickName').textContent = "닉네임은 2~10자 사이의 한국어, 영어, 숫자로 이루어져 있습니다.";
     }
     else {
       document.getElementById('validateNickName').textContent = "";
+      document.getElementById('checkNickName').disabled = false;
       this.setState({
         nickname: e.target.value,
       });
-      // console.log(e.target.value);
+      // // console.log(e.target.value);
       // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
       //   document.getElementById('joinbtn').disabled = false;
       // }
-      // console.log(this.state.checkNickname);
+      // // console.log(this.state.checkNickname);
     }
   };
   emailChange = (e) => {
@@ -208,7 +215,7 @@ class Join extends React.Component {
     });
   };
   domainChange = (e) => {
-    var domainReg = /^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){2,3}$/g;
+    var domainReg = /^([0-9a-zA-Z_-|\S]+)(\.[0-9a-zA-Z_-|\S]+){2,3}$/g;
     if (!domainReg.test(e.target.value)) {
       this.setState({
         domain:e.target.value,
@@ -233,30 +240,29 @@ class Join extends React.Component {
       document.getElementById('validatePhone').setAttribute('style', 'color: #ff3535');
     }
     else {
-      // console.log(this.state.checkMobile);
+      // // console.log(this.state.checkMobile);
       this.setState({
         mobile: e.target.value,
         checkMobile:true
       });
-      // console.log('test1 : ' + e.target.value);
+      // // console.log('test1 : ' + e.target.value);
       document.getElementById('validatePhone').textContent = "";
       // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
       //   document.getElementById('joinbtn').disabled = false;
       // }
-      // console.log(this.state.checkMobile);
+      // // console.log(this.state.checkMobile);
     }
     
   };
   sameClick = (e) => {
     e.preventDefault();
-    // console.log(this.state.id);
     
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+    var idReg = /^[a-z|\S]+[a-z0-9|\S]{5,19}$/g;
     if (!idReg.test(e.target.value)) {
       axios.post('http://127.0.0.1:8080/myapp/member/same', {
         id: this.state.id
       }).then(res => {
-        // console.log(res.data);
+        // // console.log(res.data);
         if (res.data === "SUCESS") {
           this.setState({
             checkId: true
@@ -281,20 +287,21 @@ class Join extends React.Component {
 
   sameNickClick = (e) => {
     e.preventDefault();
-    // console.log(this.state.id);
+    // // console.log(this.state.id);
     
-    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9]{2,10}$/g;
+    // if()
+    var nickNameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\S]{2,10}$/g;
     if (!nickNameReg.test(e.target.value)) {
       axios.post('http://127.0.0.1:8080/myapp/member/samenick', {
         nickname: this.state.nickname
       }).then(res => {
         // console.log(res.data);
         if (res.data === "SUCESS") {
+          document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
+          document.getElementById('validateNickName').setAttribute('style', 'color:blue');
           this.setState({
             checkNickname: true
           });
-          document.getElementById('validateNickName').textContent = "사용가능한 닉네임입니다.";
-          document.getElementById('validateNickName').setAttribute('style', 'color:blue');
           // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
           //   document.getElementById('joinbtn').disabled = false;
           // }
@@ -313,13 +320,14 @@ class Join extends React.Component {
   /*인증번호 전송*/
   authCheck = (e) => {
     e.preventDefault();
-    console.log(this.state.email + "@" + this.state.domain);
+    // console.log(this.state.email + "@" + this.state.domain);
     axios.post('http://127.0.0.1:8080/myapp/member/email', {
       samecheck:"",
         email: this.state.email + "@" + this.state.domain,
       }).then(res => {
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
+        alert('인증 메일이 발송되었습니다!!');
         this.setState({
           token: res.data
         })
@@ -342,15 +350,15 @@ class Join extends React.Component {
   emailtokenCheck = (e) => {
     e.preventDefault();
 
-    console.log(this.state.auth);
-    console.log(this.state.token);
+    // console.log(this.state.auth);
+    // console.log(this.state.token);
 
     axios.post('http://127.0.0.1:8080/myapp/member/auth', {
       token: this.state.token,
       auth: this.state.auth,      
       }).then(res => {
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
         if (res.data === "SUCCESS") {
           this.setState({
             checkEmail: true
@@ -371,7 +379,9 @@ class Join extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    // console.log(this.state);
+    // // console.log(this.state);
+
+
     if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
       axios.post('http://127.0.0.1:8080/myapp/member/join', {
         id: this.state.id,
@@ -382,23 +392,23 @@ class Join extends React.Component {
         mobile: this.state.mobile,
         photo: this.state.photo
       }).then(res => {
-        //console.log(res);
-        // console.log(res.data);
+        //// console.log(res);
+        // // console.log(res.data);
         if (res.data === "SUCCESS") {
           alert("환영합니다~ 로그인 페이지로 이동합니다.");
-          console.log("회원가입 완료");
+          // console.log("회원가입 완료");
           window.location.replace("/login");
         }
         else {
           alert("회원가입에 실패하였습니다. 메인 페이지로 이동합니다.");
-          console.log("회원가입 실패");
+          // console.log("회원가입 실패");
           window.location.replace("/");
         }
       })
     }
     else {
       alert("입력 정보를 확인해주세요!");
-      console.log("미입력여부");
+      // console.log("미입력여부");
     }
   };
 
@@ -423,7 +433,7 @@ class Join extends React.Component {
       this.setState({
         photo: res.data
       })
-      console.log(this.state.photo);
+      // console.log(this.state.photo);
       
     })
   }

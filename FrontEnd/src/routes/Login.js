@@ -20,9 +20,9 @@ class Login extends React.Component {
             result
         }).then(res => {
             // console.log(res);
-            console.log(this.state.id);
-            console.log(this.state.pw);
-            console.log(res.data.message);
+            // console.log(this.state.id);
+            // console.log(this.state.pw);
+            // console.log(res.data.message);
             if (res.data.message === "SUCCESS") {
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("nickname", res.data.nickname);
@@ -34,14 +34,14 @@ class Login extends React.Component {
         })
     }
     kakao(result) {
-        console.log(result);
+        // console.log(result);
         axios.post('http://127.0.0.1:8080/myapp/member/kakao', {
             result
         }).then(res => {
             // console.log(res);
-            console.log(this.state.id);
-            console.log(this.state.pw);
-            console.log(res.data.message);
+            // console.log(this.state.id);
+            // console.log(this.state.pw);
+            // console.log(res.data.message);
             if (res.data.message === "SUCCESS") {
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("nickname", res.data.nickname);
@@ -62,8 +62,8 @@ class Login extends React.Component {
         const params = new URLSearchParams(search);
         const code = params.get('code');
         const state = params.get('state');
-        console.log(code);
-        console.log(state);
+        // console.log(code);
+        // console.log(state);
         if (code != null && state != null) {
             axios.get('http://127.0.0.1:8080/myapp/member/naver/callback1', {
                 params: {
@@ -71,7 +71,7 @@ class Login extends React.Component {
                     state : state
                 }
             }).then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.message === "SUCCESS") {
                     sessionStorage.setItem("token", res.data.token);
                     sessionStorage.setItem("nickname", res.data.nickname);
@@ -100,9 +100,9 @@ class Login extends React.Component {
             pw: this.state.pw
         }).then(res => {
             // console.log(res);
-            console.log(this.state.id);
-            console.log(this.state.pw);
-            console.log(res.data.message);
+            // console.log(this.state.id);
+            // console.log(this.state.pw);
+            // console.log(res.data.message);
             if (res.data.message === "SUCCESS") {
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("nickname", res.data.nickname);
@@ -146,7 +146,7 @@ class Login extends React.Component {
                     <form action="get" className="loginform">
                         <div className="id">
                             <p>아이디 </p>
-                            <input type="text" className="form-control margin-bottom-20 logininput" placeholder="아이디를 입력해주세요" onChange={this.idChange}></input>
+                            <input type="text" className="form-control margin-bottom-20 logininput" placeholder="아이디를 입력해주세요" onChange={this.idChange} onKeyPress={this.handleKeyPress}></input>
                         </div>
                         <div className="password">
                             <p>비밀번호 </p>

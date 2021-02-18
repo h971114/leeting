@@ -35,7 +35,7 @@ const Music = () => {
             setRecoLoading(true);
 
             let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/2');
-            // console.log(data.data);
+            // // console.log(data.data);
             data = data.data;
             setRecoPosts(data);
             setRecoLoading(false);
@@ -58,7 +58,7 @@ const Music = () => {
         fetchPosts();
     }, []);
     
-    // console.log(posts);
+    // // console.log(posts);
     
       // Get current posts
       const indexOfLastPost = currentPage * postsPerPage;

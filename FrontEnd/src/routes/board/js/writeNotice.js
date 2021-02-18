@@ -63,7 +63,7 @@ class WriteNotice extends React.Component {
             title: event.target.value,
             checkmainTit:true
         })
-        // console.log(this.state.mainTit);
+        // // console.log(this.state.mainTit);
     }
 
     editorChange = (e) => { 
@@ -71,7 +71,7 @@ class WriteNotice extends React.Component {
             detail: this.editorRef.current.getInstance().getHtml(),
             checkcontent:true
         })
-        // console.log(this.state.content);
+        // // console.log(this.state.content);
     }
 
     /* Click 관련 메소드*/
@@ -89,7 +89,7 @@ class WriteNotice extends React.Component {
     }
 
     file1Change = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             file1 : e.target.files[0],
         })
@@ -113,17 +113,17 @@ class WriteNotice extends React.Component {
                 'content-type': 'multipart/form-data',
             },
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({
                 file1: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     file2Change = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             file2 : e.target.files[0],
         })
@@ -150,12 +150,12 @@ class WriteNotice extends React.Component {
                 file2: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     file3Change = (e) => {
-        console.log(e)
+        // console.log(e)
         this.setState({
             file3 : e.target.files[0],
         })
@@ -165,14 +165,14 @@ class WriteNotice extends React.Component {
         } else {
             filename = e.target.val().split('/').pop().split('\\').pop();
         }
-        // console.log(e.target.files[0]);
-        // console.log(filename);
+        // // console.log(e.target.files[0]);
+        // // console.log(filename);
 
         document.getElementById('upload-file3').value = filename;
         
         var file = e.target.files[0];
-        // console.log(this.state.startDay);
-        // console.log(file);
+        // // console.log(this.state.startDay);
+        // // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
@@ -186,12 +186,12 @@ class WriteNotice extends React.Component {
                 file3: res.data
             })
         }).catch(err => {
-            // console.log(err);
+            // // console.log(err);
         })
     }
 
     writeClick = (e) => {
-        console.log(e)
+        // console.log(e)
         e.preventDefault();
         let sId = sessionStorage.getItem('nickname');
 
@@ -199,7 +199,7 @@ class WriteNotice extends React.Component {
 
         if (this.state.file2 !== null) {
             if (this.state.file1 === null) {
-                console.log('1은없고 2는 있음');
+                // console.log('1은없고 2는 있음');
                 this.setState({
                     file1: this.state.file2,
                     file2:null
@@ -209,14 +209,14 @@ class WriteNotice extends React.Component {
 
         if (this.state.file3 !== null) {
             if (this.state.file1 === null) {
-                console.log('1은없고 3은 있음');
+                // console.log('1은없고 3은 있음');
                 this.setState({
                     file1: this.state.file3,
                     file3:null
                 })
             }
             else if (this.state.file2 === null) {
-                console.log('2는없고 3은 있음');
+                // console.log('2는없고 3은 있음');
                 this.setState({
                     file2: this.state.file3,
                     file3:null
@@ -241,13 +241,13 @@ class WriteNotice extends React.Component {
             file3: this.state.file3,
         }).then(res => {
             if (res.data === "SUCCESS") {
-                console.log("성공");
-                console.log(this.state.categoryno);
+                // console.log("성공");
+                // console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
                 window.location.replace(url);
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("글 작성에 실패하셨습니다. 다시 작성해 주세요!");
                 window.location.replace('/notice/writenotice');
             }

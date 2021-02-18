@@ -57,12 +57,12 @@ const Report = () => {
             date: nowTime
         }).then(res => {
             if (res.data === "SUCCESS") {
-                console.log("성공");
+                // console.log("성공");
                 alert("신고가 완료되었습니다.");
                 window.location.replace('/report');
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("신고에 실패하셨습니다. 잠시후 다시 시도해주세요!");
                 // window.location.replace('/meeting/write');
             }

@@ -79,12 +79,12 @@ class Find extends React.Component {
     /*인증번호 전송*/
     idauthCheck = (e) => {
         e.preventDefault();
-        console.log(this.state.idemail + "@" + this.state.iddomain);
+        // console.log(this.state.idemail + "@" + this.state.iddomain);
         axios.post('http://127.0.0.1:8080/myapp/member/email', {
             email: this.state.idemail + "@" + this.state.iddomain,
         }).then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             this.setState({
                 idtoken: res.data
             })
@@ -96,12 +96,12 @@ class Find extends React.Component {
     /*인증번호 전송*/
     pwauthCheck = (e) => {
         e.preventDefault();
-        console.log(this.state.pwemail + "@" + this.state.pwdomain);
+        // console.log(this.state.pwemail + "@" + this.state.pwdomain);
         axios.post('http://127.0.0.1:8080/myapp/member/email', {
             email: this.state.pwemail + "@" + this.state.pwdomain,
         }).then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             this.setState({
                 pwtoken: res.data
             })
@@ -124,15 +124,15 @@ class Find extends React.Component {
     idemailtokenCheck = (e) => {
         e.preventDefault();
 
-        console.log(this.state.idauth);
-        console.log(this.state.idtoken);
+        // console.log(this.state.idauth);
+        // console.log(this.state.idtoken);
 
         axios.post('http://127.0.0.1:8080/myapp/member/auth', {
         token: this.state.idtoken,
         auth: this.state.idauth,      
         }).then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             if (res.data === "SUCCESS") {
             this.setState({
                 checkIdEmail: true
@@ -153,15 +153,15 @@ class Find extends React.Component {
     pwemailtokenCheck = (e) => {
         e.preventDefault();
 
-        console.log(this.state.pwauth);
-        console.log(this.state.pwtoken);
+        // console.log(this.state.pwauth);
+        // console.log(this.state.pwtoken);
 
         axios.post('http://127.0.0.1:8080/myapp/member/auth', {
         token: this.state.pwtoken,
         auth: this.state.pwauth,      
         }).then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             if (res.data === "SUCCESS") {
             this.setState({
                 checkPwEmail: true
@@ -190,7 +190,7 @@ class Find extends React.Component {
           // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
           //   document.getElementById('joinbtn').disabled = false;
           // }
-          // console.log(event.target.value);
+          // // console.log(event.target.value);
           document.getElementById('idvalidateDomain').textContent = "";
               document.getElementById('idwritedomain').value = event.target.value;
               document.getElementById('idwritedomain').readOnly=true;
@@ -215,7 +215,7 @@ class Find extends React.Component {
           // if (this.state.checkId === true && this.state.checkEmail === true && this.state.checkMobile === true && this.state.checkName === true && this.state.checkNickname === true && this.state.checkPw === true) {
           //   document.getElementById('joinbtn').disabled = false;
           // }
-          // console.log(event.target.value);
+          // // console.log(event.target.value);
           document.getElementById('pwvalidateDomain').textContent = "";
               document.getElementById('pwwritedomain').value = event.target.value;
               document.getElementById('pwwritedomain').readOnly=true;
@@ -241,8 +241,8 @@ class Find extends React.Component {
                     email: this.state.idemail + "@" + this.state.iddomain,
                 }
             }).then(res => {
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 if (res.data === "FAIL") {
                     alert("찾으시는 정보가 없습니다.");
                     window.location.replace("/find");
@@ -268,8 +268,8 @@ class Find extends React.Component {
                     email: this.state.pwemail + "@" + this.state.pwdomain,
                 }
             }).then(res => {
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 if (res.data === "FAIL") {
                     alert("찾으시는 정보가 없습니다.");
                     window.location.replace("/find");

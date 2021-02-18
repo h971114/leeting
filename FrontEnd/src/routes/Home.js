@@ -42,7 +42,7 @@ const Home = () => {
 
         const recoPosts = async () => {
             setRecoLoading(true);
-            console.log(sId);
+            // console.log(sId);
             if (sId === null) {
                 // eslint-disable-next-line
                 sId = "";
@@ -53,7 +53,7 @@ const Home = () => {
                 }
             });
             data = data.data;
-            console.log(data);
+            // console.log(data);
             setRecoPosts(data);
             setRecoLoading(false);
         }

@@ -53,11 +53,11 @@ class write extends React.Component {
     constructor() {
         super();
         this.state = {
-            thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+            // thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
         };
     }    
     state = {
-        thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
+        // thumb: "https://leeting.s3.ap-northeast-2.amazonaws.com/static/noimage.png",
         content: "",
         
         selectedFile: null, //썸네일 파일 첨부
@@ -68,7 +68,7 @@ class write extends React.Component {
             detail: this.editorRef.current.getInstance().getHtml(),
             checkcontent:true
         })
-        // console.log(this.state.content);
+        // // console.log(this.state.content);
     }
 
 
@@ -82,14 +82,14 @@ class write extends React.Component {
         } else {
             filename = e.target.val().split('/').pop().split('\\').pop();
         }
-        // console.log(e.target.files[0]);
-        // console.log(filename);
+        // // console.log(e.target.files[0]);
+        // // console.log(filename);
 
         document.getElementById('upload-name').value = filename;
         
         var file = e.target.files[0];
-        // console.log(this.state.startDay);
-        // console.log(file);
+        // // console.log(this.state.startDay);
+        // // console.log(file);
         var formData = new FormData();
         formData.append('data', file);
         formData.append('hostid', sessionStorage.getItem('id'));
@@ -100,9 +100,9 @@ class write extends React.Component {
             },
         }).then(res => {
             this.setState({
-                thumb: res.data
+                file: res.data
             })
-            console.log(this.state.thumb);
+            // console.log(this.state.file);
         }).catch(err => {
             alert('이미지 용량이 초과하였습니다! \n1MB용량 이하의 이미지를 선택해주세요.');
         })
@@ -123,18 +123,18 @@ class write extends React.Component {
 
         axios.put("http://127.0.0.1:8080/myapp/contents/", {
             detail: this.state.detail,
-            file: this.state.thumb,
+            file: this.state.file,
             categoryno: 1,
             contentsno:this.state.id,
         }).then(res => { 
             if (res.data === "SUCCESS") {
-                console.log("성공");
-                console.log(this.state.categoryno);
+                // console.log("성공");
+                // console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
                 window.location.replace('/timeline');
             }
             else {
-                console.log("실패");
+                // console.log("실패");
                 alert("글 작성에 실패하셨습니다. 다시 작성해 주세요!");
                 window.location.replace('/meeting/write');
             }

@@ -42,7 +42,7 @@ const Result = (props) => {
         // eslint-disable-next-line
     }, [location.state.keyWord]);
 
-    console.log(posts);
+    // console.log(posts);
 
     
       // Get current posts

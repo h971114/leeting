@@ -36,7 +36,7 @@ class Detail extends React.Component {
         let url = 'http://127.0.0.1:8080/myapp/report/' + location.state.no;
                 
         let data = await axios.get(url);
-        // console.log(data);
+        // // console.log(data);
         this.setState({
             no : data.data.no,
             id:data.data.id,
@@ -61,7 +61,7 @@ class Detail extends React.Component {
                     no:this.state.no
                 }
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 window.location.replace('/report/list');
             })
         } else {

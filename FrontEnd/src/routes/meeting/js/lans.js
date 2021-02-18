@@ -35,7 +35,7 @@ const Lans = () => {
             setRecoLoading(true);
 
             let data = await axios.get('http://127.0.0.1:8080/myapp/recommend/cate/5');
-            // console.log(data.data);
+            // // console.log(data.data);
             data = data.data;
             setRecoPosts(data);
             setRecoLoading(false);
@@ -60,7 +60,7 @@ const Lans = () => {
         fetchPosts();
     }, []);
     
-    // console.log(posts);
+    // // console.log(posts);
     
       // Get current posts
       const indexOfLastPost = currentPage * postsPerPage;

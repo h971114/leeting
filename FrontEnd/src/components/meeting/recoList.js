@@ -9,7 +9,7 @@ function RecoList({ idx, id, maintitle, subtitle, date, hostid, categoryno, file
         title = title.substring(0, 10) + "...";
     }
     date = date.substring(0, 10);
-    // console.log(title);
+    // // console.log(title);
 
     return (
         <li className="recoListView">

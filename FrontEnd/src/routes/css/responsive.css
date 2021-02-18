@@ -727,6 +727,14 @@
         padding: 0 20px;
     }
 
+    #viewReviews #noPosts {
+        width: 100%;
+    }
+
+    #viewReviews #noPosts img {
+        padding: 0px;
+    }
+
     .M_PC {
         display: none;
     }

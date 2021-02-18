@@ -33,7 +33,7 @@ const List = () => {
                 setPosts([nullpost]);
             }
             else {
-                console.log(res.data.list);
+                // console.log(res.data.list);
                 setPosts(res.data.list);
                 setLoading(false);
             }
