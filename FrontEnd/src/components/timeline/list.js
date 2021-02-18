@@ -25,9 +25,10 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const forAllId = id + 'forAll';
     const likeId = id + 'likeBtn';
     const contentslikeId = id + 'contentslikeId';
+    const bottomopenWrap = id + 'bottomOpen';
 
     // // console.log(date);
-    var t1 = moment(date).subtract(9,'h');
+    var t1 = moment(date);
     var t2 = moment();
     var t3 = moment.duration(t2.diff(t1)).asHours();
     var min = moment.duration(t2.diff(t1)).asMinutes();
@@ -48,6 +49,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     }
 
     useEffect(() => {
+
         const getWriterInfo = async () => {
             // e.preventDefault();
             axios.get(`http://i4a304.p.ssafy.io/myapp/member/`+writer, {
@@ -55,10 +57,16 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
             }).then(res => {
                 if (res.data.photo !== null) {
                     setPhoto(res.data.photo);
+                    setNickname(res.data.nickname);
                 }
-                setNickname(res.data.nickname);
+                if (writer !== uid) {
+                    if (uid !== '관리자') {
+                        document.getElementById(bottomopenWrap).setAttribute('style', 'display:none');
+                    }
+                }
             });
-          };
+        };
+        
 
         if (first === true) {
             setLikeCnt(contentslike);
@@ -164,7 +172,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
                     <p className="writer">{nickname}</p>
                     <p className="date">{dateformat}</p>
                 </div>
-                <img className="bottomOpen" onClick={bottomOpen} alt="관리 오픈" src="../../img/timelineBtn.svg"/>
+                <img id={bottomopenWrap} className="bottomOpen" onClick={bottomOpen} alt="관리 오픈" src="../../img/timelineBtn.svg"/>
             </div>
             <img className="timelineThumb" src={file} alt={id}></img>
             <div className="detailView">
