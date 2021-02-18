@@ -250,7 +250,8 @@ class WriteNotice extends React.Component {
                 // console.log("성공");
                 // console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
-                window.location.replace(url);
+                // window.location.replace(url);
+                this.goBack();
             }
             else {
                 // console.log("실패");
@@ -262,6 +263,9 @@ class WriteNotice extends React.Component {
 
     }
 
+    goBack = (e) => {
+        this.props.history.goBack();
+      }
     
     render() {
         return (
