@@ -27,7 +27,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const contentslikeId = id + 'contentslikeId';
 
     // // console.log(date);
-    var t1 = moment(date);
+    var t1 = moment(date).subtract(9,'h');
     var t2 = moment();
     var t3 = moment.duration(t2.diff(t1)).asHours();
     var min = moment.duration(t2.diff(t1)).asMinutes();
@@ -138,10 +138,11 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
             const sId = sessionStorage.getItem('id');
             if (likeState === true) {
                 setLikeCnt(likeCnt + 1);
+                setLikeState(false);
             } else {
                 setLikeCnt(likeCnt - 1);
+                setLikeState(true);
             }
-            setLikeState(!setLikeState);
             setReviewBool(!reviewBool);
             
             document.getElementById(likeId).classList.toggle('like');
@@ -171,7 +172,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
                 <button id={etcid} className="etc" onClick={ellip}>더보기</button>
             </div>
             <button id={likeId} onClick={timeline_like} className="likeBtn"></button>
-            <span id={contentslikeId} >{likeCnt}</span>
+            <span className="likeCnt" id={contentslikeId}>{likeCnt}</span>
             
             <div id={bottom_wrapid}>
                 <div id="Btns">

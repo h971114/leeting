@@ -104,7 +104,7 @@ const Exercise = () => {
                     <h1 className="tit">운 동</h1>
                     <p className="subtit">운동은 하루를 짧게 하지만, 운동은 인생을 길게 한다.<br/>- 다니엘 W. 조스린</p>
                 </div>
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 운동 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

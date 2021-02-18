@@ -1,9 +1,13 @@
 #meeting_list {
     width: 100%;
     margin: 0 auto;
+    position: relative;
 }
 
 #meeting_list #sub_wrap {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
     background: linear-gradient(279deg, rgb(98, 201, 255), rgb(51, 151, 255));
 }
 
@@ -28,6 +32,13 @@
     color: white !important;
 }
 
+.leetingQuicktit {
+    position: relative;
+    width: 1200px;
+    margin: 20px auto;
+    margin-top: 80px;
+}
+
 #meeting_list #sub_menu ul li.onPage {
     border-bottom: 2px solid rgb(255, 255, 255);
     font-weight: 700;
@@ -38,6 +49,7 @@
     height: 200px;
     text-align: center;
     margin: 0 auto;
+    padding-top: 150px;
 }
 
 .loading_view {

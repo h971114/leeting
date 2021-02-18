@@ -44,6 +44,7 @@ import OtoModify from "./routes/seviceCenter/js/otoModify";
 
 import NotFound from "./routes/NotFound";
 import NotFound404 from "./routes/NotFound404";
+import ScrolltoTop from "./components/common/ScrollToTop";
 
 // import ErrorBoundary from "./routes/ErrorBoundary";
 
@@ -55,8 +56,9 @@ function App() {
 
   return (
     <Router>
+    {/* <ScrolltoTop> */}
       <div>
-        <Header/>
+        <Header />
         <Switch>
             <Route path="/" exact={true} component={Home} />
             <Route path="/Leeting" exact={true} component={Leeting} />
@@ -104,8 +106,9 @@ function App() {
             {/* </ErrorBoundary> */}
             <Route component={NotFound} />
         </Switch>
-        <Footer/>
+        <Footer />
       </div>
+      {/* </ScrolltoTop> */}
     </Router>
     
   );

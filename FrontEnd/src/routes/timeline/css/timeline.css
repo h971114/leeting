@@ -80,6 +80,7 @@
     height: 20px;
     background-size: 20px 20px;
     border: none;
+    margin-right: 7px;
 }
 
 .timelineListView button.like {
@@ -87,6 +88,9 @@
     background-size: 20px 20px;
 }
 
+.timelineListView span.likeCnt {
+    font-size: 16px;
+}
 
 .timelineListView .detailView {
     margin-top: 18px;

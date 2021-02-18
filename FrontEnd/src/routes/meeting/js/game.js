@@ -105,7 +105,7 @@ const Game = () => {
                     <h1 className="tit">게 임</h1>
                     <p className="subtit">세상에 없던 게임! 이 있을까...?<br/>- Prestto</p>
                 </div>
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 게임 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

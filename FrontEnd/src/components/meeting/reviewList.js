@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import propTypes from "prop-types";
 
@@ -12,6 +12,15 @@ function ReviewList({ id, review, writer, date }) {
     let reviewWrapId = id +"_"+ writer;
     let reviewModifyId = writer +"_"+ id;
     let reviewTxtId = writer + "_" + id + "txt";
+    // eslint-disable-next-line 
+    let reviewBtnsWrapId = id + "_" + "reviewBtnsWrap";
+    const nickName = sessionStorage.getItem('nickname');
+
+    useEffect(() => {
+        if (nickName !== writer) {
+            document.getElementById(reviewBtnsWrapId).setAttribute('style', 'display:none');
+        }
+    }, )
 
     const Modify = (e) => {
         e.preventDefault();
@@ -122,7 +131,7 @@ function ReviewList({ id, review, writer, date }) {
                     initialValue={review}
                 />
             </div>
-            <div className="reviewBtns">
+            <div id={reviewBtnsWrapId} className="reviewBtns">
                 <button id="reviewConfirmModify" onClick={confirmModify}>수정</button>
                 <button id="reviewModifyCancle"onClick={cancleModify}>취소</button>
                 <button id="reviewModify" onClick={Modify}>수정</button>
