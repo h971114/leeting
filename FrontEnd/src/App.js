@@ -42,6 +42,8 @@ import OtOWrite from "./routes/seviceCenter/js/otoWrite";
 import OtoDetail from "./routes/seviceCenter/js/otoDetail";
 import OtoModify from "./routes/seviceCenter/js/otoModify"; 
 
+import Security from "./routes/common/Security";
+
 import NotFound from "./routes/NotFound";
 import NotFound404 from "./routes/NotFound404";
 import ScrolltoTop from "./components/common/ScrollToTop";
@@ -96,6 +98,8 @@ function App() {
             <Route path="/board/:id" exact={true} component={DetailNotice}/>
             <Route path="/meeting/:id" exact={true} component={Detail} />
             
+            <Route path="/security" exact={true} component={Security}/>
+
             {/* <ErrorBoundary> */}
               <Route path="/sc/otomodify/:id" exact={true} component={OtoModify} />
               <Route path="/sc/onetoone/:id" exact={true} component={OtoDetail}/>  
