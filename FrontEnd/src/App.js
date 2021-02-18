@@ -52,11 +52,13 @@ import "./App.css";
 import "./routes/css/default.css"
 import "./routes/css/responsive.css"
 
+
+
 function App() {
 
   return (
     <Router>
-    {/* <ScrolltoTop> */}
+      <ScrolltoTop />
       <div>
         <Header />
         <Switch>
@@ -108,7 +110,6 @@ function App() {
         </Switch>
         <Footer />
       </div>
-      {/* </ScrolltoTop> */}
     </Router>
     
   );
