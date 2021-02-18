@@ -114,6 +114,16 @@ class Detail extends React.Component {
         
         if (t3 >= 0) {
             this.setState({
+                btnText: "이미 시작된 미팅입니다.",
+                endMeeting:true
+            })
+        }
+
+        t1 = moment(data.data.enddate);
+        var t3 = moment.duration(t2.diff(t1)).asDays();
+        
+        if (t3 >= 0) {
+            this.setState({
                 btnText: "종료된 미팅입니다.",
                 endMeeting:true
             })
