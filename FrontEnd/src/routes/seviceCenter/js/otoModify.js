@@ -19,12 +19,13 @@ const OtOModify = (props) => {
         setType(location.type);
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('로그인하셔야 사용가능한 서비스입니다');
+            window.location.replace("/login");
             window.location.replace("/WrongPage");
         }
         if (sessionStorage.getItem('id') !== location.qwriter) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('잘못된 접근입니다.');
             window.location.replace("/WrongPage");
         }
 
