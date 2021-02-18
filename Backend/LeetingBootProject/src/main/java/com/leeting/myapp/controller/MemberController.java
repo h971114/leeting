@@ -185,7 +185,7 @@ public class MemberController {
 		System.out.println("post to /member done");
 		System.out.println("회원가입");
 		if (memberService.join(memberbody)) {
-			conclusion = "SUCCESS";
+			conclusion = "SUCESS";
 		} else {
 			conclusion = "FAIL";
 		}
@@ -347,7 +347,6 @@ public class MemberController {
 		model.addAttribute("apiURL", apiURL);
 		URI redirecUri = new URI(apiURL);
 		org.springframework.http.HttpHeaders httpHeaders = new org.springframework.http.HttpHeaders();
-		System.out.println(redirecUri.toString());
 		httpHeaders.setLocation(redirecUri);
 		return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 	}
@@ -366,9 +365,7 @@ public class MemberController {
 		apiURL += "&redirect_uri=" + redirectURI;
 		apiURL += "&code=" + code;
 		apiURL += "&state=" + state;
-		System.out.println("apiURL=" + apiURL);
 		String res = requestToServer(apiURL);
-		System.out.println(res);
 		if (res != null && !res.equals("")) {
 			Map<String, Object> parsedJson = new JSONParser(res).parseObject();
 			System.out.println(parsedJson);
@@ -382,7 +379,6 @@ public class MemberController {
 		Map<String, String> conclusionmap = new HashMap<String, String>();
 		if (infoMap.get("message").equals("success")) {
 			Map<String, Object> infoResp = (Map<String, Object>) infoMap.get("response");
-			System.out.println(infoResp);
 			String uniqueid = "nav_" + infoResp.get("id");
 			MemberDto newmember = new MemberDto(uniqueid, uniqueid, infoResp.get("name").toString(),
 					infoResp.get("nickname").toString(), infoResp.get("mobile").toString(),
@@ -414,13 +410,11 @@ public class MemberController {
 		URL url = new URL(apiURL);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
-		System.out.println("header Str: " + headerStr);
 		if (headerStr != null && !headerStr.equals("")) {
 			con.setRequestProperty("Authorization", headerStr);
 		}
 		int responseCode = con.getResponseCode();
 		BufferedReader br;
-		System.out.println("responseCode=" + responseCode);
 		if (responseCode == 200) { // 정상 호출
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		} else { // 에러 발생

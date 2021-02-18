@@ -60,7 +60,7 @@ public class RecommendController {
     System.out.println(req);
     HttpStatus status = HttpStatus.ACCEPTED;
     System.out.println("get to /recommend/cate done");
-    System.out.println("참여미팅");
+    System.out.println("추천미팅");
     List<MeetingDto> meetslist =  meetingService.listMeeting(categoryno);
     Map<Double, MeetingDto> meetingrecommendmap = new TreeMap<Double, MeetingDto>();
     for(MeetingDto k : meetslist) {
@@ -92,12 +92,13 @@ public class RecommendController {
 	public ResponseEntity<List<MeetingDto>> recommend(@RequestParam("id") String memberid,HttpServletRequest req) throws SQLException, InterruptedException {
 		System.out.println(req);
 		HttpStatus status = HttpStatus.ACCEPTED;
-		System.out.println("get to /member/usermeet done");
-		System.out.println("참여미팅");
+		System.out.println("get to /recommend/reco done");
+		System.out.println("추천미팅");
 		List<String> meetlist = recommendService.findmeet(memberid);
 		List<String> returnmeetingno = findbyitemsimil(meetlist, memberid);
 		List<MeetingDto> returnmeetinginfo = new ArrayList<MeetingDto>();
 		int count = 0;
+		System.out.println(meetlist.toString());
 		for(String meetingno : returnmeetingno) {
 			if(count>=5) {
 				break;
@@ -137,9 +138,7 @@ public class RecommendController {
 				count--;
 			}
 		}
-		for(MeetingDto i : returnmeetinginfo) {
-			System.out.println(i.getMaintitle());
-		}
+
 		return new ResponseEntity<List<MeetingDto>>(returnmeetinginfo, status);
 	}
 
@@ -220,17 +219,6 @@ private double calculate(String str, String newmeets, String memberid) {
 	double conclusion = top/ (bottom1*bottom2);
 	return conclusion;
 }
-@ApiOperation(value = "회원정보", notes = "회원정보", response = Map.class)
-  @GetMapping("/{id}")
-  public ResponseEntity<MemberDto> getMemberInfo(@PathVariable(value="id") String memberid,HttpServletRequest req) throws SQLException {
-	  System.out.println(memberid);
-    System.out.println(req);
-    MemberDto membertmp = memberService.getMemberInfo(memberid);
-    HttpStatus status = HttpStatus.ACCEPTED;
-    System.out.println("get to /member done");
-    System.out.println("회원정보");
-    return new ResponseEntity<MemberDto>(membertmp, status);
-  }
   static Double calculatescore(MeetingDto k) {
 	int likes = k.getmeetinglike();
 	int participants = k.getParticipants();
