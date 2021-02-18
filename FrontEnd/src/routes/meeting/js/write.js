@@ -255,19 +255,19 @@ class write extends React.Component {
         }
         // console.log(this.state.categoryno);
         var url = "";
-        if (this.state.categoryno === "1") {
+        if (this.state.categoryno === 1) {
             url="/meeting/exercise";
         }
-        else if (this.state.categoryno === "2") {
+        else if (this.state.categoryno === 2) {
             url='/meeting/music'
         }
-        else if (this.state.categoryno === "3") {
+        else if (this.state.categoryno === 3) {
             url='/meeting/game'
         }
-        else if (this.state.categoryno === "4") {
+        else if (this.state.categoryno === 4) {
             url='/meeting/diy'
         }
-        else if (this.state.categoryno === "5") {
+        else if (this.state.categoryno === 5) {
             url='/meeting/lans'
         }
         else {
