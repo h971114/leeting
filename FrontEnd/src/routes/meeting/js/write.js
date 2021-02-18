@@ -284,7 +284,7 @@ class write extends React.Component {
             file: this.state.thumb,
             enddate: enddate
         }).then(res => {
-            if (res.data === "SUCESS") {
+            if (res.data === "SUCCESS") {
                 // console.log("성공");
                 // console.log(this.state.categoryno);
                 alert("글 작성이 완료되었습니다.");
