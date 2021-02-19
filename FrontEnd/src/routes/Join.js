@@ -397,12 +397,12 @@ class Join extends React.Component {
         if (res.data === "SUCCESS") {
           alert("환영합니다~ 로그인 페이지로 이동합니다.");
           // console.log("회원가입 완료");
-          window.location.replace("/login");
+          // window.location.replace("/login");
         }
         else {
           alert("회원가입에 실패하였습니다. 메인 페이지로 이동합니다.");
           // console.log("회원가입 실패");
-          window.location.replace("/");
+          // window.location.replace("/");
         }
       })
     }
@@ -516,8 +516,8 @@ class Join extends React.Component {
               </div>
               <div className="col-12">
                 <input type="text" id="auth" className="form-control col-4 margin-bottom-20" onChange={this.authChange} disabled></input>
-                <button id="sendtoken" className="btn" onClick={this.authCheck}>인증번호 전송</button>
                 <button id="checktoken" className="btn" onClick={this.emailtokenCheck}>인증번호 확인</button>
+                <button id="sendtoken" className="btn" onClick={this.authCheck}>인증번호 전송</button>
               </div>
                 <label id="validateDomain"></label>
               </div>

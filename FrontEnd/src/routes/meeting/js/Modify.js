@@ -267,40 +267,49 @@ class Modify extends React.Component {
         } else {
             enddate = document.getElementById("enddatepick").value;
         }
-        axios.put("http://127.0.0.1:8080/myapp/meeting/", {
-            meetingno : this.state.id,
-            hostid: this.state.hostid,
-            maintitle: this.state.maintitle,
-            subtitle: this.state.subtitle,
-            date: document.getElementById("startdatepick").value,
-            detail: this.state.detail,
-            categoryno: this.state.categoryno,
-            file: this.state.file,
-            enddate : enddate,
-        }).then(res => {
-            if (res.data === "SUCCESS") {
-                // console.log("성공");
-                alert("수정 완료되었습니다.");
-                if (this.state.categoryno === 1)
-                    window.location.replace('/meeting/exercise');
-                else if (this.state.categoryno === 2)
-                    window.location.replace('/meeting/music');
-                else if (this.state.categoryno === 3)
-                    window.location.replace('/meeting/game');
-                else if (this.state.categoryno === 4)
-                    window.location.replace('/meeting/diy');
-                else if (this.state.categoryno === 5)
-                    window.location.replace('/meeting/lans');
-                else
-                    window.location.replace('/meeting/study');
-            }
-            else {
-                // console.log("실패");
-                alert("수정 실패하셨습니다. 다시 작성해 주세요!");
-                var url = "/meeting/modify/" + this.state.id;
-                window.location.replace(url);
-            }
-        })
+        var t1 = moment(document.getElementById("startdatepick").value);
+        var t2 = moment(enddate);
+        var t3 = moment.duration(t2.diff(t1)).asDays();
+
+        if (t3 < 0) {
+            alert('종료일은 시작일보다 늦어야합니다!!');
+        }
+        else {
+            axios.put("http://127.0.0.1:8080/myapp/meeting/", {
+                meetingno: this.state.id,
+                hostid: this.state.hostid,
+                maintitle: this.state.maintitle,
+                subtitle: this.state.subtitle,
+                date: document.getElementById("startdatepick").value,
+                detail: this.state.detail,
+                categoryno: this.state.categoryno,
+                file: this.state.file,
+                enddate: enddate,
+            }).then(res => {
+                if (res.data === "SUCCESS") {
+                    // console.log("성공");
+                    alert("수정 완료되었습니다.");
+                    if (this.state.categoryno === 1)
+                        window.location.replace('/meeting/exercise');
+                    else if (this.state.categoryno === 2)
+                        window.location.replace('/meeting/music');
+                    else if (this.state.categoryno === 3)
+                        window.location.replace('/meeting/game');
+                    else if (this.state.categoryno === 4)
+                        window.location.replace('/meeting/diy');
+                    else if (this.state.categoryno === 5)
+                        window.location.replace('/meeting/lans');
+                    else
+                        window.location.replace('/meeting/study');
+                }
+                else {
+                    // console.log("실패");
+                    alert("수정 실패하셨습니다. 다시 작성해 주세요!");
+                    var url = "/meeting/modify/" + this.state.id;
+                    window.location.replace(url);
+                }
+            })
+        }
     }
 
     deleteClick = (e) => { 

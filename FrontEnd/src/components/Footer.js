@@ -6,8 +6,8 @@ function Footer() {
     <div id="footer">
         <div className="footerdiv">
             <ul className="fnb">
-                <li><a href="/">이용약관</a></li>
-                <li><a href="/">개인정보처리방침</a></li>
+                <li><a href="/using">이용약관</a></li>
+                <li><a href="/security">개인정보처리방침</a></li>
             </ul>
             <div className="fttxt">
                 고객센터  02-1234-5678  |  평일 상담시간  09:00 ~ 18:00<br/>

@@ -1,0 +1,45 @@
+.securityh2 {
+    font-size: 28px;
+    color: #000;
+    padding: 10px 0px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.securityh2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #333;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.top_box {
+    background: #f6f8fa;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.SsubTit {
+    padding-left: 25px;
+    background: url(../../img/btn-security.png) no-repeat 0 9px;
+    font-weight: 600;
+    color: #333;
+    font-size: 24px;
+    line-height: 34px;
+    margin-bottom: 5px;
+}
+
+ol.number {
+    margin-bottom: 30px;
+}
+
+ol.number>li {
+    padding-left: 20px;
+    position: relative;
+    color: #666;
+    margin-bottom: 5px;
+}

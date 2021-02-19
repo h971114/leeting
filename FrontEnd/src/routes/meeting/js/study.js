@@ -104,7 +104,7 @@ const Study = () => {
                 <h1 className="tit">스 터 디</h1>
                 <p className="subtit">지금 자면 꿈을 꾸지만, 지금 공부하면 꿈을 이룬다.<br/>- 하버드대학 도서관</p>
             </div>
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 공부 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

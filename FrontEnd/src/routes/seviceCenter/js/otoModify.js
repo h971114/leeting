@@ -16,16 +16,16 @@ const OtOModify = (props) => {
 
         setNo(location.no);
         setTitle(location.title);
-        setContent(location.detail);
         setType(location.type);
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('로그인하셔야 사용가능한 서비스입니다');
+            window.location.replace("/login");
             window.location.replace("/WrongPage");
         }
         if (sessionStorage.getItem('id') !== location.qwriter) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('잘못된 접근입니다.');
             window.location.replace("/WrongPage");
         }
 
@@ -48,11 +48,11 @@ const OtOModify = (props) => {
 
     const editorChange = (e) => {
         setContent(editorRef.current.getInstance().getHtml());
-        // // console.log(content);
     }
 
     const updateReport = (e) => { 
         e.preventDefault();
+
         axios.put("http://127.0.0.1:8080/myapp/question", {
             no: no,
             title: title,
@@ -76,6 +76,7 @@ const OtOModify = (props) => {
         setType(e.target.value);
     }
 
+    const location = props.location.state;
     return (
         <div id="main_content">
             <div className="otoWrap">
@@ -120,7 +121,7 @@ const OtOModify = (props) => {
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">신고 내용</th>
+                                <th scope="row">문의 내용</th>
                                     <td colSpan="5">
                                     <Editor
                                         previewStyle="vertical"
@@ -129,7 +130,7 @@ const OtOModify = (props) => {
                                         initialEditType="wysiwyg"
                                         ref={editorRef}
                                         onChange={editorChange}
-                                        initialValue={content}
+                                        initialValue={location.detail}
                                     />
                                 </td>
                             </tr>

@@ -25,6 +25,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const forAllId = id + 'forAll';
     const likeId = id + 'likeBtn';
     const contentslikeId = id + 'contentslikeId';
+    const bottomopenWrap = id + 'bottomOpen';
 
     // // console.log(date);
     var t1 = moment(date).subtract(9,'h');
@@ -48,17 +49,24 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     }
 
     useEffect(() => {
+
         const getWriterInfo = async () => {
             // e.preventDefault();
-            axios.get(`http://127.0.0.1:8080/myapp/member/`+writer, {
+            axios.get(`http://i4a304.p.ssafy.io/myapp/member/`+writer, {
               id: writer
             }).then(res => {
                 if (res.data.photo !== null) {
                     setPhoto(res.data.photo);
+                    setNickname(res.data.nickname);
                 }
-                setNickname(res.data.nickname);
+                if (writer !== uid) {
+                    if (uid !== '관리자') {
+                        document.getElementById(bottomopenWrap).setAttribute('style', 'display:none');
+                    }
+                }
             });
-          };
+        };
+        
 
         if (first === true) {
             setLikeCnt(contentslike);
@@ -115,7 +123,7 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
     const deleteTimeline = (e) => {
         e.preventDefault();
 
-        axios.delete('http://127.0.0.1:8080/myapp/contents/' + id, {
+        axios.delete('http://i4a304.p.ssafy.io/myapp/contents/' + id, {
             no:id
         }).then(res => {
             if (res.data === "SUCCESS") {
@@ -138,14 +146,15 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
             const sId = sessionStorage.getItem('id');
             if (likeState === true) {
                 setLikeCnt(likeCnt + 1);
+                setLikeState(false);
             } else {
                 setLikeCnt(likeCnt - 1);
+                setLikeState(true);
             }
-            setLikeState(!setLikeState);
             setReviewBool(!reviewBool);
             
             document.getElementById(likeId).classList.toggle('like');
-            axios.put('http://127.0.0.1:8080/myapp/contents/setlike', {
+            axios.put('http://i4a304.p.ssafy.io/myapp/contents/setlike', {
                 contentsno : id,
                 userid: sId,
                 likestatus: likeState
@@ -163,15 +172,17 @@ function List({ id, writer, date, detail, file, contentslike, likestatus }) {
                     <p className="writer">{nickname}</p>
                     <p className="date">{dateformat}</p>
                 </div>
-                <img className="bottomOpen" onClick={bottomOpen} alt="관리 오픈" src="../../img/timelineBtn.svg"/>
+                <img id={bottomopenWrap} className="bottomOpen" onClick={bottomOpen} alt="관리 오픈" src="../../img/timelineBtn.svg"/>
             </div>
             <img className="timelineThumb" src={file} alt={id}></img>
             <div className="detailView">
                 <p id={ellipsisid} className="detailhide" dangerouslySetInnerHTML={{ __html: codes }}></p>
                 <button id={etcid} className="etc" onClick={ellip}>더보기</button>
             </div>
-            <button id={likeId} onClick={timeline_like} className="likeBtn"></button>
-            <span id={contentslikeId} >{likeCnt}</span>
+            <div className="likeWrap">
+                <button id={likeId} onClick={timeline_like} className="likeBtn"></button>
+                <span className="likeCnt" id={contentslikeId}>{likeCnt}</span>
+            </div>
             
             <div id={bottom_wrapid}>
                 <div id="Btns">

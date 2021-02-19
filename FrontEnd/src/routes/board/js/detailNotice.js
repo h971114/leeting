@@ -144,6 +144,7 @@ class DetailNotice extends React.Component {
     }
     if (location.state) {
         return (
+            <div id="main_content">
             <div id="notice_detail">
                 <div className="titles text-center">
                     <h1>공 지 사 항</h1>
@@ -198,7 +199,8 @@ class DetailNotice extends React.Component {
                         </button>
                     </div>
                 </div>
-            </div>
+                </div>
+                </div>
         );            
     } else {
       return null;

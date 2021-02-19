@@ -4,10 +4,15 @@
 
 <mapper namespace="recommend">
 
-	<select id="usermeet" resultType="meeting">select t1.no as meetingno, t1.maintitle, t1.subtitle, t1.date, t1.hostid, t1.detail, t1.categoryno, t1.file, t1.enddate, t1.meetinglike, t1.participants from meeting t1, participation t2 where t1.no=t2.meetingno and t2.userid=#{id} limit 5 
+	<select id="usermeet" resultType="meeting">select t1.no as meetingno, t1.maintitle, t1.subtitle, t1.date, t1.hostid, t1.detail, t1.categoryno, t1.file, t1.enddate, t1.meetinglike, t1.participants from meeting t1, participation t2 where t1.no=t2.meetingno and t2.userid=#{id}  <![CDATA[
+        AND t1.enddate >= #{today}
+        ]]> limit 5 
 	</select>
 	<select id = "userinmeet" resultType="String">
-	select meetingno from participation where userid = #{userid}
+	select t2.meetingno from meeting t1, participation t2 where userid = #{userid} and t1.no=t2.meetingno 
+	<![CDATA[
+        AND t1.enddate >= #{today}
+        ]]>
 	</select>
 	<select id ="meetinuser" resultType = "String">
 	select likestatus from participation where userid =#{id} and meetingno = #{meetingno}

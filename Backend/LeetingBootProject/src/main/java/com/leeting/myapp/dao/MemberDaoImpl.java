@@ -1,6 +1,8 @@
 package com.leeting.myapp.dao;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +73,12 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	@Override
 	public List<Object> userMeetingFive(String userid)  throws SQLException{
+		Map<String,String> map = new HashMap<>();
+		map.put("id", userid);
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String date = simpleDateFormat.format(new Date());
+		map.put("today", date);
 		return sqlSession.selectList("member.usermeet",userid);
 	}
 	@Override

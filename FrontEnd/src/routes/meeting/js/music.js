@@ -103,7 +103,7 @@ const Music = () => {
                     <h1 className="tit">음 악</h1>
                     <p className="subtit">음악은 우리에게 사랑을 가져다주는 분위기 좋은 음식이다.<br/>- 셰익스피어</p>
                 </div>
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 음악 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

@@ -15,13 +15,13 @@ class write extends React.Component {
 
         if (sessionStorage.getItem('id') === null) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('잘못된 접근입니다.');
             window.location.replace("/WrongPage");
         }
         
         if (sessionStorage.getItem('id') !== location.state.writer) {
             document.getElementById('root').setAttribute('style', 'display:none');
-            alert('test');
+            alert('잘못된 접근입니다.');
             window.location.replace("/WrongPage");
           }
         

@@ -108,7 +108,7 @@ const Lans = () => {
                     <br />- 토마스 윌슨</p>
                 </div>
                 
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 랜선 모임 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

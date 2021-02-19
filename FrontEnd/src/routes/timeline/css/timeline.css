@@ -42,6 +42,12 @@
     border-bottom: 1px solid rgb(238, 238, 238);
     border-left: 1px solid rgb(238, 238, 238);
     margin-left: -1px;
+    position: relative;
+}
+
+.likeWrap {
+    position: absolute;
+    bottom: 10px;
 }
 
 .contentTit {
@@ -80,6 +86,7 @@
     height: 20px;
     background-size: 20px 20px;
     border: none;
+    margin-right: 7px;
 }
 
 .timelineListView button.like {
@@ -87,6 +94,9 @@
     background-size: 20px 20px;
 }
 
+.timelineListView span.likeCnt {
+    font-size: 16px;
+}
 
 .timelineListView .detailView {
     margin-top: 18px;

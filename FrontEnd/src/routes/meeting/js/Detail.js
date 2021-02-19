@@ -108,7 +108,8 @@ class Detail extends React.Component {
             enddate: data.data.enddate,
             participants:data.data.participants
         })
-        var t1 = moment(data.data.date);
+        
+        var t1 = moment(data.data.enddate);
         var t2 = moment();
         var t3 = moment.duration(t2.diff(t1)).asDays();
         

@@ -253,7 +253,7 @@ class write extends React.Component {
         } else {
             enddate = document.getElementById("enddatepick").value;
         }
-        // console.log(this.state.categoryno);
+
         var url = "";
         if (this.state.categoryno === 1) {
             url = "/meeting/exercise";
@@ -274,30 +274,37 @@ class write extends React.Component {
             url='/meeting/study'
         }
 
-        axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
-            hostid: sId,
-            maintitle: this.state.mainTit,
-            subtitle: this.state.subTit,
-            date: document.getElementById("startdatepick").value,
-            detail: this.state.content,
-            categoryno: this.state.categoryno,
-            file: this.state.thumb,
-            enddate: enddate
-        }).then(res => {
-            if (res.data === "SUCCESS") {
-                // console.log("성공");
-                // console.log(this.state.categoryno);
-                alert("글 작성이 완료되었습니다.");
-                window.location.replace(url);
-            }
-            else {
-                // console.log("실패");
-                alert("글 작성에 실패하셨습니다. 다시 작성해 주세요!");
-                window.location.replace('/meeting/write');
-            }
-        })
+        var t1 = moment(document.getElementById("startdatepick").value);
+        var t2 = moment(enddate);
+        var t3 = moment.duration(t2.diff(t1)).asDays();
 
-
+        if (t3 < 0) {
+            alert('종료일은 시작일보다 늦어야합니다!!');
+        }
+        else {
+            axios.post("http://127.0.0.1:8080/myapp/meeting/enrollmeeting", {
+                hostid: sId,
+                maintitle: this.state.mainTit,
+                subtitle: this.state.subTit,
+                date: document.getElementById("startdatepick").value,
+                detail: this.state.content,
+                categoryno: this.state.categoryno,
+                file: this.state.thumb,
+                enddate: enddate
+            }).then(res => {
+                if (res.data === "SUCCESS") {
+                    // console.log("성공");
+                    // console.log(this.state.categoryno);
+                    alert("글 작성이 완료되었습니다.");
+                    window.location.replace(url);
+                }
+                else {
+                    // console.log("실패");
+                    alert("글 작성에 실패하셨습니다. 다시 작성해 주세요!");
+                    window.location.replace('/meeting/write');
+                }
+            })
+        }
     }
 
     

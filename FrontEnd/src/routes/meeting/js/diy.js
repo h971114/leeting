@@ -105,7 +105,7 @@ const Diy = () => {
                     <p className="subtit">자세히 보아야 예쁘다 오래 보아야 사랑스럽다 너도 그렇다.<br/>- 나태주</p>
                 </div>
                 
-                <div className="quicktit">
+                <div className="leetingQuicktit">
                     <h3>추천하는 D.I.Y 리팅 👍</h3>
                 </div>
                 <div className="favoriteleet">

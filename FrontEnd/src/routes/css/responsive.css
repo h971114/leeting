@@ -64,6 +64,7 @@
 
 @media only screen and (max-width:1230px) {
 
+    .leetingQuicktit,
     .reportWrap,
     .otoInput,
     .otoWrap,
@@ -237,6 +238,7 @@
 /* tablet */
 @media only screen and (max-width:1024px) {
 
+    .leetingQuicktit,
     .reportWrap,
     .otoInput,
     .otoWrap,
@@ -350,6 +352,15 @@
 }
 
 @media only screen and (max-width:820px) {
+
+    #meeting_list .titles {
+        padding-top: 280px;
+    }
+
+    .leetingQuicktit {
+        padding-top: 100px;
+    }
+
     #meeting_list #sub_menu {
         width: 600px;
         height: 200px;
@@ -381,6 +392,7 @@
         font-size: 14px;
     }
 
+    .leetingQuicktit,
     .reportWrap,
     .otoInput,
     .otoWrap,
@@ -511,6 +523,7 @@
         font-size: 14px;
     }
 
+    .leetingQuicktit,
     .reportWrap,
     .otoInput,
     .otoWrap,
@@ -758,6 +771,7 @@
         width: 150px;
     }
 
+    .leetingQuicktit,
     .reportWrap,
     .otoWrap,
     .otoInput,
@@ -860,6 +874,7 @@
 
 @media only screen and (max-width:570px) {
 
+    .leetingQuicktit,
     .reportWrap,
     .otoWrap,
     .otoInput,
@@ -969,6 +984,7 @@
         padding-top: 21px;
     }
 
+    .leetingQuicktit h3,
     .quicktit h3 {
         font-size: 20px;
     }
@@ -981,6 +997,7 @@
         width: 100px;
     }
 
+    .leetingQuicktit,
     .reportWrap,
     .otoWrap,
     .otoInput,
