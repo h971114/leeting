@@ -79,6 +79,7 @@ class Find extends React.Component {
     /*인증번호 전송*/
     idauthCheck = (e) => {
         e.preventDefault();
+        // console.log("a");
         // console.log(this.state.idemail + "@" + this.state.iddomain);
         axios.post('http://i4a304.p.ssafy.io/myapp/member/email', {
             email: this.state.idemail + "@" + this.state.iddomain,
@@ -91,6 +92,8 @@ class Find extends React.Component {
             document.getElementById('idauth').disabled = false;
             // document.getElementById('idsendtoken').setAttribute('style', 'display:none');
             document.getElementById('idchecktoken').setAttribute('style', 'display:inline-block');
+        }).catch(err => {
+            alert('이메일 형식을 맞춰주세요!!');
         })
     };
     /*인증번호 전송*/
@@ -108,6 +111,8 @@ class Find extends React.Component {
             document.getElementById('pwauth').disabled = false;
             // document.getElementById('idsendtoken').setAttribute('style', 'display:none');
             document.getElementById('pwchecktoken').setAttribute('style', 'display:inline-block');
+        }).catch(err => {
+            alert('이메일 형식을 맞춰주세요!!');
         })
     };
 
