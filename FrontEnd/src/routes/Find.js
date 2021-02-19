@@ -79,6 +79,7 @@ class Find extends React.Component {
     /*인증번호 전송*/
     idauthCheck = (e) => {
         e.preventDefault();
+        // console.log("a");
         // console.log(this.state.idemail + "@" + this.state.iddomain);
         axios.post('http://127.0.0.1:8080/myapp/member/email', {
             email: this.state.idemail + "@" + this.state.iddomain,
@@ -91,6 +92,8 @@ class Find extends React.Component {
             document.getElementById('idauth').disabled = false;
             // document.getElementById('idsendtoken').setAttribute('style', 'display:none');
             document.getElementById('idchecktoken').setAttribute('style', 'display:inline-block');
+        }).catch(err => {
+            alert('이메일 형식을 맞춰주세요!!');
         })
     };
     /*인증번호 전송*/
@@ -108,6 +111,8 @@ class Find extends React.Component {
             document.getElementById('pwauth').disabled = false;
             // document.getElementById('idsendtoken').setAttribute('style', 'display:none');
             document.getElementById('pwchecktoken').setAttribute('style', 'display:inline-block');
+        }).catch(err => {
+            alert('이메일 형식을 맞춰주세요!!');
         })
     };
 
@@ -320,8 +325,8 @@ class Find extends React.Component {
                         </div>
                         <div className="col-12">
                             <input type="text" id="idauth" className="form-control col-4 margin-bottom-20" onChange={this.idauthChange} disabled></input>
-                            <button id="idsendtoken" className="btn" onClick={this.idauthCheck}>인증번호 전송</button>
                             <button id="idchecktoken" className="btn" onClick={this.idemailtokenCheck}>인증번호 확인</button>
+                            <button id="idsendtoken" className="btn" onClick={this.idauthCheck}>인증번호 전송</button>
                         </div>
                         <div className="col-12">
                             <label id="idvalidateDomain"></label>
@@ -329,7 +334,7 @@ class Find extends React.Component {
 
                     
                         <div className="btndiv">
-                            <button className="btn goback">돌아가기</button>
+                            {/* <button className="btn goback">돌아가기</button> */}
                             <button className="btn find" onClick={this.findid}>아이디 찾기</button>
                         </div>
                     </form>
@@ -361,15 +366,15 @@ class Find extends React.Component {
                         </div>
                         <div className="col-12">
                             <input type="text" id="pwauth" className="form-control col-4 margin-bottom-20" onChange={this.pwauthChange} disabled></input>
-                            <button id="pwsendtoken" className="btn" onClick={this.pwauthCheck}>인증번호 전송</button>
                             <button id="pwchecktoken" className="btn" onClick={this.pwemailtokenCheck}>인증번호 확인</button>
+                            <button id="pwsendtoken" className="btn" onClick={this.pwauthCheck}>인증번호 전송</button>
                         </div>
                         <div className="col-12">
                         <label id="pwvalidateDomain"></label>
                         </div>
                     
                         <div className="btndiv">
-                            <button className="btn goback">돌아가기</button>
+                            {/* <button className="btn goback">돌아가기</button> */}
                             <button  className="btn find" onClick={this.findPw}>비밀번호 찾기</button>
                         </div>
                     </form>
